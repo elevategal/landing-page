@@ -451,49 +451,154 @@
 
         /* ===== STEPS ===== */
         .steps-section { padding: 20px 0 50px; }
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            margin-bottom: 50px;
+        .steps-flow {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
         }
-        .step-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 36px 28px;
-            transition: all 0.3s;
-            border-top: 3px solid var(--accent);
+        /* Vertical connecting line */
+        .steps-flow::before {
+            content: '';
+            position: absolute;
+            right: 31px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent), var(--purple), var(--accent));
+            opacity: 0.3;
         }
-        .step-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(43,143,212,0.3);
-            background: var(--bg-card-hover);
+        /* Animated pulse traveling down the line */
+        .steps-flow::after {
+            content: '';
+            position: absolute;
+            right: 27px;
+            top: 0;
+            width: 11px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+            border-radius: 6px;
+            animation: line-pulse 3s ease-in-out infinite;
         }
-        .step-number {
-            width: 48px; height: 48px;
-            background: linear-gradient(135deg, var(--accent), var(--purple));
+        @keyframes line-pulse {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: calc(100% - 60px); opacity: 0; }
+        }
+        .step-flow-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            margin-bottom: 0;
+            padding-bottom: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .step-flow-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .step-flow-item:nth-child(2) { transition-delay: 0.2s; }
+        .step-flow-item:nth-child(3) { transition-delay: 0.4s; }
+        .step-flow-item:last-child { padding-bottom: 0; }
+        /* Number circle */
+        .step-flow-num {
+            width: 64px; height: 64px;
             border-radius: 50%;
+            background: var(--bg-card);
+            border: 3px solid var(--accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: 900;
-            margin-bottom: 20px;
+            color: var(--accent);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(124,92,252,0.2);
+            transition: all 0.4s;
         }
-        .step-card h3 { margin-bottom: 12px; font-size: 1.15rem; }
-        .step-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
+        .step-flow-item.visible .step-flow-num {
+            animation: num-pop 0.5s ease forwards;
+        }
+        @keyframes num-pop {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .step-flow-item:hover .step-flow-num {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 30px rgba(124,92,252,0.4);
+        }
+        /* Content card */
+        .step-flow-content {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .step-flow-content::before {
+            content: '';
+            position: absolute;
+            top: 22px; right: -8px;
+            width: 16px; height: 16px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            transform: rotate(45deg);
+        }
+        .step-flow-item:hover .step-flow-content {
+            border-color: rgba(124,92,252,0.3);
+            box-shadow: 0 8px 30px rgba(124,92,252,0.1);
+        }
+        .step-flow-content h3 { margin-bottom: 8px; font-size: 1.15rem; }
+        .step-flow-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
+
+        /* Connector arrow between steps */
+        .step-connector {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 8px 88px;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.5;
+            animation: arrow-bounce 2s ease-in-out infinite;
+        }
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(4px); }
+        }
 
         .bottom-line {
             text-align: center;
-            background: linear-gradient(135deg, rgba(43,143,212,0.1), rgba(86,54,209,0.1));
-            border: 1px solid rgba(43,143,212,0.2);
+            background: linear-gradient(135deg, rgba(124,92,252,0.1), rgba(124,92,252,0.05));
+            border: 1px solid rgba(124,92,252,0.2);
             border-radius: var(--radius-lg);
             padding: 36px;
+            position: relative;
+            overflow: hidden;
         }
-        .bottom-line h3 { font-size: 1.3rem; font-weight: 800; }
+        .bottom-line::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(124,92,252,0.05), transparent);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        .bottom-line h3 { font-size: 1.3rem; font-weight: 800; position: relative; }
         .bottom-line .highlight-number {
-            font-size: 2rem; font-weight: 900; color: var(--accent);
+            font-size: 2rem; font-weight: 900; color: var(--accent); position: relative;
         }
 
         /* ===== FIRST WEEK TIMELINE ===== */
@@ -782,14 +887,15 @@
             }
             .pain-card { padding: 24px 20px; }
 
-            .steps-grid {
-                grid-template-columns: 1fr;
-                gap: 14px;
-            }
-            .step-card { padding: 22px 18px; }
-            .step-card h3 { font-size: 1rem; margin-bottom: 8px; }
-            .step-card p { font-size: 0.85rem; }
-            .step-number { width: 40px; height: 40px; font-size: 1.1rem; margin-bottom: 14px; }
+            .step-flow-num { width: 50px; height: 50px; font-size: 1.2rem; }
+            .step-flow-content { padding: 18px 16px; }
+            .step-flow-content h3 { font-size: 1rem; }
+            .step-flow-content p { font-size: 0.85rem; }
+            .steps-flow::before { right: 24px; }
+            .steps-flow::after { right: 20px; }
+            .step-flow-item { gap: 16px; padding-bottom: 30px; }
+            .step-flow-content::before { top: 18px; }
+            .step-connector { padding-left: 66px; }
             .bottom-line { padding: 22px 16px; }
             .bottom-line h3 { font-size: 1.1rem; }
             .bottom-line .highlight-number { font-size: 1.3rem; }
@@ -977,21 +1083,29 @@
     <!-- ===== 3 STEPS ===== -->
     <section class="steps-section">
         <div class="container">
-            <div class="steps-grid">
-                <div class="step-card fade-up">
-                    <div class="step-number">1</div>
-                    <h3>מבניות לפי משפך</h3>
-                    <p>מבינים מה לייצר בכל שלב - כל קריאייטיב נולד עם מטרה ברורה, לא מ"השראה".</p>
+            <div class="steps-flow">
+                <div class="step-flow-item">
+                    <div class="step-flow-num">1</div>
+                    <div class="step-flow-content">
+                        <h3>מבניות לפי משפך</h3>
+                        <p>מבינים מה לייצר בכל שלב - כל קריאייטיב נולד עם מטרה ברורה, לא מ"השראה".</p>
+                    </div>
                 </div>
-                <div class="step-card fade-up">
-                    <div class="step-number">2</div>
-                    <h3>תסריטים על בסיס עקרונות מנצחים</h3>
-                    <p>לוקחים את העקרונות מתסריטים שכבר הוכיחו את עצמם ב-7 שנים של עבודה מול המותגים הגדולים בארץ.</p>
+                <div class="step-connector">&#x25BC;</div>
+                <div class="step-flow-item">
+                    <div class="step-flow-num">2</div>
+                    <div class="step-flow-content">
+                        <h3>תסריטים על בסיס עקרונות מנצחים</h3>
+                        <p>לוקחים את העקרונות מתסריטים שכבר הוכיחו את עצמם ב-7 שנים של עבודה מול המותגים הגדולים בארץ.</p>
+                    </div>
                 </div>
-                <div class="step-card fade-up">
-                    <div class="step-number">3</div>
-                    <h3>AI שמשכפל את המוח</h3>
-                    <p>פרומפט שנבנה על בסיס התסריטים הכי מנצחים - מייצר ווינרים חדשים בדקות, בלי להמציא את הגלגל.</p>
+                <div class="step-connector">&#x25BC;</div>
+                <div class="step-flow-item">
+                    <div class="step-flow-num">3</div>
+                    <div class="step-flow-content">
+                        <h3>AI שמשכפל את המוח</h3>
+                        <p>פרומפט שנבנה על בסיס התסריטים הכי מנצחים - מייצר ווינרים חדשים בדקות, בלי להמציא את הגלגל.</p>
+                    </div>
                 </div>
             </div>
 
@@ -1241,6 +1355,7 @@
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.step-flow-item').forEach(el => observer.observe(el));
 
         // Infinite carousel - duplicate items
         const track = document.getElementById('carouselTrack');
