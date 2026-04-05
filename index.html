@@ -387,50 +387,105 @@
         .pain-card {
             background: rgba(26,26,53,0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(124,92,252,0.15);
+            border: 1px solid rgba(255,107,107,0.15);
             border-radius: var(--radius);
             padding: 32px 28px;
             transition: all 0.4s ease;
             border-top: 3px solid var(--red-accent);
             position: relative;
             overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9) rotate(-1deg);
+            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s;
         }
+        .pain-card.visible {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            animation: pain-shake 0.4s ease forwards;
+        }
+        .pain-card:nth-child(1) { transition-delay: 0s; }
+        .pain-card:nth-child(2) { transition-delay: 0.12s; }
+        .pain-card:nth-child(3) { transition-delay: 0.24s; }
+        .pain-card:nth-child(4) { transition-delay: 0.36s; }
+        .pain-card:nth-child(5) { transition-delay: 0.48s; }
+
+        @keyframes pain-shake {
+            0% { transform: scale(1) rotate(0); }
+            20% { transform: scale(1) rotate(-0.5deg) translateX(-2px); }
+            40% { transform: scale(1) rotate(0.5deg) translateX(2px); }
+            60% { transform: scale(1) rotate(-0.3deg) translateX(-1px); }
+            80% { transform: scale(1) rotate(0.2deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        /* Red scan line on card */
         .pain-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(124,92,252,0.05), transparent);
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red-accent), transparent);
+            opacity: 0;
+            animation: none;
+        }
+        .pain-card.visible::before {
+            animation: scan-line 2s ease-out 0.5s forwards;
+        }
+        @keyframes scan-line {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 0.8; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Hover glow */
+        .pain-card::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,107,107,0.06), transparent 60%);
             opacity: 0;
             transition: opacity 0.4s;
+            pointer-events: none;
         }
-        .pain-card:hover::before { opacity: 1; }
+        .pain-card:hover::after { opacity: 1; }
         .pain-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(124,92,252,0.4);
-            box-shadow: 0 12px 40px rgba(124,92,252,0.15);
+            border-color: rgba(255,107,107,0.4);
+            box-shadow: 0 12px 40px rgba(255,107,107,0.12), 0 0 60px rgba(255,107,107,0.05);
         }
+
+        /* X icon */
         .pain-icon {
             width: 50px; height: 50px;
             border-radius: 12px;
             background: rgba(255,107,107,0.1);
+            border: 1px solid rgba(255,107,107,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             margin-bottom: 16px;
-            animation: pain-icon-pulse 3s ease-in-out infinite;
+            position: relative;
         }
-        @keyframes pain-icon-pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .pain-card.visible .pain-icon {
+            animation: icon-stamp 0.4s ease 0.3s both;
         }
-        .pain-card:nth-child(1) .pain-icon { animation-delay: 0s; }
-        .pain-card:nth-child(2) .pain-icon { animation-delay: 0.5s; }
-        .pain-card:nth-child(3) .pain-icon { animation-delay: 1s; }
-        .pain-card:nth-child(4) .pain-icon { animation-delay: 1.5s; }
-        .pain-card:nth-child(5) .pain-icon { animation-delay: 2s; }
-        .pain-card h3 { font-size: 1rem; margin-bottom: 10px; position: relative; }
+        @keyframes icon-stamp {
+            0% { transform: scale(2) rotate(15deg); opacity: 0; }
+            50% { transform: scale(0.9) rotate(-3deg); }
+            100% { transform: scale(1) rotate(0); opacity: 1; }
+        }
+        .pain-card:nth-child(1) .pain-icon { animation-delay: 0.3s; }
+        .pain-card:nth-child(2) .pain-icon { animation-delay: 0.45s; }
+        .pain-card:nth-child(3) .pain-icon { animation-delay: 0.6s; }
+        .pain-card:nth-child(4) .pain-icon { animation-delay: 0.75s; }
+        .pain-card:nth-child(5) .pain-icon { animation-delay: 0.9s; }
+
+        .pain-card h3 {
+            font-size: 1rem; margin-bottom: 10px; position: relative;
+            color: var(--text-primary);
+        }
         .pain-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; position: relative; }
 
         /* ===== SOLUTION TRANSITION ===== */
@@ -1040,27 +1095,27 @@
             <h2 class="fade-up">בואו נהיה כנים -<br>ככה נראה הקריאייטיב <span style="color: var(--red-accent)">ברוב מותגי האיקומרס</span> היום:</h2>
 
             <div class="pain-grid">
-                <div class="pain-card fade-up" style="transition-delay: 0s;">
+                <div class="pain-card">
                     <div class="pain-icon">&#10060;</div>
                     <h3>עובדים לפי אינטואיציה</h3>
                     <p>כל קריאייטיב נולד מ"השראה" או מהעתקה של המתחרים - אין שיטה, מבנה או חזרתיות.</p>
                 </div>
-                <div class="pain-card fade-up" style="transition-delay: 0.15s;">
+                <div class="pain-card">
                     <div class="pain-icon">&#10060;</div>
                     <h3>בריפים מעורפלים ליוצרות תוכן</h3>
                     <p>מורידים בריף, מקווים לטוב, ומקבלים סרטון שלא עובד - כי אין מבנה ברור מאחורי הבקשה.</p>
                 </div>
-                <div class="pain-card fade-up" style="transition-delay: 0.3s;">
+                <div class="pain-card">
                     <div class="pain-icon">&#10060;</div>
                     <h3>בזבוז שעות על כל קריאייטיב</h3>
                     <p>כל סרטון, כל מודעה, כל פוסט - מתחילים מאפס. אין טמפלטים, תהליך או סיסטם.</p>
                 </div>
-                <div class="pain-card fade-up" style="transition-delay: 0.45s;">
+                <div class="pain-card">
                     <div class="pain-icon">&#10060;</div>
                     <h3>לא יודעים מה לייצר לכל שלב במשפך</h3>
                     <p>מייצרים קריאייטיב "כללי" בלי להבין מה צריך לשים בכל שלב, ואז תוהים למה הקמפיינים "עומדים" במקום.</p>
                 </div>
-                <div class="pain-card fade-up" style="grid-column: 1 / -1; max-width: 540px; margin: 0 auto; transition-delay: 0.6s;">
+                <div class="pain-card" style="grid-column: 1 / -1; max-width: 540px; margin: 0 auto;">
                     <div class="pain-icon">&#10060;</div>
                     <h3>שופכים כסף על קריאייטיב "יפה" שלא מוכר</h3>
                     <p>מודעות מלוטשות, עיצוב מושלם, הכל נראה פרו - ואף אחד לא קונה. כי ככל שזה נראה יותר מושלם, הלקוח סומך על זה פחות.</p>
@@ -1356,6 +1411,7 @@
         }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
         document.querySelectorAll('.step-flow-item').forEach(el => observer.observe(el));
+        document.querySelectorAll('.pain-card').forEach(el => observer.observe(el));
 
         // Infinite carousel - duplicate items
         const track = document.getElementById('carouselTrack');
