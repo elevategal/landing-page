@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סדנת קריאייטיב AI | 10 קריאטיבים מנצחים בשבוע</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1265390459065125');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1265390459065125&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #111122;
+            --bg-secondary: #141428;
+            --bg-card: #1a1a35;
+            --bg-card-hover: #22223d;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            --accent: #7C5CFC;
+            --accent-hover: #9B80FF;
+            --accent-glow: rgba(124, 92, 252, 0.3);
+            --purple: #7C5CFC;
+            --red-accent: #FF6B6B;
+            --green-accent: #22C55E;
+            --gold: #F59E0B;
+            --border: rgba(255,255,255,0.08);
+            --radius: 12px;
+            --radius-lg: 20px;
+            --max-width: 1100px;
+            --section-padding: 50px 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            background-image:
+                linear-gradient(rgba(124,92,252,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,92,252,0.12) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-primary);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section { padding: var(--section-padding); position: relative; }
+
+        h1, h2, h3, h4 { line-height: 1.3; font-weight: 700; }
+        h1 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 900; }
+        h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; }
+        h3 { font-size: clamp(1.1rem, 3vw, 1.4rem); }
+
+        .highlight { color: var(--accent); }
+
+        /* ===== CTA BUTTON ===== */
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #1a6fb5);
+            color: #fff;
+            padding: 18px 48px;
+            border-radius: 50px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 25px var(--accent-glow);
+        }
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--accent-glow);
+            background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+        }
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+        .cta-btn:hover::after { left: 100%; }
+
+        .cta-wrapper { text-align: center; margin-top: 40px; }
+
+        /* ===== BADGE ===== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(43, 143, 212, 0.1);
+            border: 1px solid rgba(43, 143, 212, 0.3);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .badge .dot {
+            width: 8px; height: 8px;
+            background: var(--green-accent);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+        }
+
+        /* ===== GLOW ===== */
+        .glow-top {
+            position: absolute;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, var(--accent-glow), transparent 70%);
+            pointer-events: none; z-index: 0;
+        }
+
+        /* ===== HERO ===== */
+        .hero { padding: 90px 0 30px; text-align: center; position: relative; }
+        .hero .glow-top { top: -100px; }
+        .hero .container { position: relative; z-index: 1; }
+        .hero h1 { margin-bottom: 24px; }
+        .hero .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto 20px;
+        }
+        .hero .subtitle strong { color: var(--text-primary); font-weight: 700; }
+
+        /* ===== VSL ===== */
+        .vsl-section { padding: 20px 0 50px; }
+        .video-wrapper {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .video-wrapper:hover { border-color: rgba(43,143,212,0.4); }
+        .play-btn {
+            width: 80px; height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative; z-index: 2;
+            transition: transform 0.3s;
+        }
+        .video-wrapper:hover .play-btn { transform: scale(1.1); }
+        .play-btn::after {
+            content: '';
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 14px 0 14px 24px;
+            border-color: transparent transparent transparent #fff;
+            margin-right: -4px;
+        }
+        .play-ripple {
+            position: absolute;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            animation: ripple 2s ease-out infinite;
+        }
+        .play-ripple:nth-child(2) { animation-delay: 0.6s; }
+        @keyframes ripple {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        .video-label {
+            position: absolute;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.85rem;
+            color: var(--text-muted); z-index: 2;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials { background: var(--bg-secondary); }
+        .testimonials h2 { text-align: center; margin-bottom: 30px; }
+        /* Testimonial Carousel */
+        .testimonial-carousel-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .testimonial-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 8px 0 20px;
+            scrollbar-width: none;
+        }
+        .testimonial-carousel::-webkit-scrollbar { display: none; }
+        .video-testimonial {
+            flex-shrink: 0;
+            width: 220px;
+            aspect-ratio: 9/16;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: border-color 0.3s;
+            scroll-snap-align: start;
+        }
+        .video-testimonial:hover { border-color: rgba(43,143,212,0.3); }
+
+        /* Carousel Arrows */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-60%);
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+        .carousel-arrow:hover { background: var(--accent-hover); transform: translateY(-60%) scale(1.1); }
+        .carousel-arrow.prev { left: -16px; }
+        .carousel-arrow.next { right: -16px; }
+
+        /* Swipe Hint */
+        .swipe-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            animation: hint-bounce 2s ease-in-out infinite;
+        }
+        @keyframes hint-bounce {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-6px); }
+        }
+        .play-icon {
+            width: 50px; height: 50px;
+            background: rgba(43,143,212,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .play-icon::after {
+            content: '';
+            width: 0; height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 16px;
+            border-color: transparent transparent transparent var(--accent);
+            margin-right: -3px;
+        }
+
+        /* ===== INFINITE CAROUSEL ===== */
+        .carousel-section { padding: 40px 0; overflow: hidden; }
+        .carousel-section h2 { text-align: center; margin-bottom: 40px; font-size: 1.4rem; }
+        .carousel-track-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to left, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 10%, black 90%, transparent);
+        }
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            animation: scroll-rtl 45s linear infinite;
+            width: max-content;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .carousel-item {
+            flex-shrink: 0;
+            background: transparent;
+            border: none;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .carousel-item:hover { opacity: 1; }
+        .carousel-item img {
+            max-height: 40px;
+            max-width: 140px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        /* ===== PAIN POINTS ===== */
+        .pain-section {
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+        .pain-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(rgba(124,92,252,0.18) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124,92,252,0.18) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .pain-section::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(124,92,252,0.08), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .pain-section .container { position: relative; z-index: 1; }
+        .pain-section h2 { text-align: center; margin-bottom: 30px; }
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .pain-card {
+            background: rgba(26,26,53,0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124,92,252,0.15);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            transition: all 0.4s ease;
+            border-top: 3px solid var(--red-accent);
+            position: relative;
+            overflow: hidden;
+        }
+        .pain-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(124,92,252,0.05), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .pain-card:hover::before { opacity: 1; }
+        .pain-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(124,92,252,0.4);
+            box-shadow: 0 12px 40px rgba(124,92,252,0.15);
+        }
+        .pain-icon {
+            width: 50px; height: 50px;
+            border-radius: 12px;
+            background: rgba(255,107,107,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            animation: pain-icon-pulse 3s ease-in-out infinite;
+        }
+        @keyframes pain-icon-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .pain-card:nth-child(1) .pain-icon { animation-delay: 0s; }
+        .pain-card:nth-child(2) .pain-icon { animation-delay: 0.5s; }
+        .pain-card:nth-child(3) .pain-icon { animation-delay: 1s; }
+        .pain-card:nth-child(4) .pain-icon { animation-delay: 1.5s; }
+        .pain-card:nth-child(5) .pain-icon { animation-delay: 2s; }
+        .pain-card h3 { font-size: 1rem; margin-bottom: 10px; position: relative; }
+        .pain-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; position: relative; }
+
+        /* ===== SOLUTION TRANSITION ===== */
+        .solution-transition { text-align: center; padding: 50px 0 20px; }
+        .solution-transition .but-text {
+            font-size: 1.8rem; font-weight: 900;
+            color: var(--accent); margin-bottom: 24px;
+        }
+        .solution-transition .system-text {
+            font-size: 1.2rem; color: var(--accent); font-weight: 700; margin-top: 12px;
+        }
+        .solution-transition p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 16px auto 0;
+            font-size: 1.05rem;
+        }
+
+        /* ===== STEPS ===== */
+        .steps-section { padding: 20px 0 50px; }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-bottom: 50px;
+        }
+        .step-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 36px 28px;
+            transition: all 0.3s;
+            border-top: 3px solid var(--accent);
+        }
+        .step-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(43,143,212,0.3);
+            background: var(--bg-card-hover);
+        }
+        .step-number {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--accent), var(--purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+        .step-card h3 { margin-bottom: 12px; font-size: 1.15rem; }
+        .step-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
+
+        .bottom-line {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(43,143,212,0.1), rgba(86,54,209,0.1));
+            border: 1px solid rgba(43,143,212,0.2);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+        }
+        .bottom-line h3 { font-size: 1.3rem; font-weight: 800; }
+        .bottom-line .highlight-number {
+            font-size: 2rem; font-weight: 900; color: var(--accent);
+        }
+
+        /* ===== FIRST WEEK TIMELINE ===== */
+        .first-week { background: var(--bg-secondary); }
+        .first-week h2 { text-align: center; margin-bottom: 30px; }
+        .timeline {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            right: 23px;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--purple));
+        }
+        .timeline-item {
+            position: relative;
+            padding-right: 64px;
+            margin-bottom: 36px;
+        }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot {
+            position: absolute;
+            right: 12px; top: 4px;
+            width: 24px; height: 24px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-secondary);
+            z-index: 1;
+        }
+        .timeline-item h3 {
+            font-size: 1.05rem; margin-bottom: 6px; color: var(--accent);
+        }
+        .timeline-item p {
+            color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-section { background: var(--bg-secondary); }
+        .about-section h2 { text-align: center; margin-bottom: 30px; }
+        .about-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .about-photo {
+            width: 280px; height: 340px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .about-text p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+        .about-text strong { color: var(--text-primary); }
+        .about-brands {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .about-brand-tag {
+            background: rgba(43,143,212,0.1);
+            border: 1px solid rgba(43,143,212,0.2);
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ===== WHAT YOU GET ===== */
+        .what-you-get { padding: 50px 0; }
+        .what-you-get h2 { text-align: center; margin-bottom: 30px; }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            transition: all 0.3s;
+        }
+        .benefit-item:hover {
+            border-color: rgba(43,143,212,0.3);
+            background: var(--bg-card-hover);
+        }
+        .benefit-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: rgba(34, 197, 94, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .benefit-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .price-box {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.02));
+            border: 1px solid rgba(245,158,11,0.25);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .price-box .old-price {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        .price-box .old-price span { text-decoration: line-through; }
+        .price-box .new-price {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+        .price-box .price-note {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* ===== LIMITED SPOTS ===== */
+        .limited-section { text-align: center; position: relative; }
+        .limited-section .glow-top { top: -150px; }
+        .limited-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,107,107,0.1);
+            border: 1px solid rgba(255,107,107,0.3);
+            border-radius: 50px;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            color: var(--red-accent);
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+        .limited-section h2 { margin-bottom: 16px; }
+        .limited-section p {
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin: 0 auto 16px;
+            font-size: 1.05rem;
+        }
+        .urgency-text {
+            color: var(--gold) !important;
+            font-weight: 700;
+            font-size: 1.1rem !important;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-section { background: var(--bg-secondary); }
+        .faq-section h2 { text-align: center; margin-bottom: 30px; }
+        .section-divider {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--purple));
+            border-radius: 3px;
+            margin: 0 auto 40px;
+        }
+        .faq-list { max-width: 750px; margin: 0 auto; }
+        .faq-item {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: var(--bg-card);
+            transition: border-color 0.3s;
+        }
+        .faq-item:hover { border-color: rgba(43,143,212,0.3); }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .faq-question:hover { color: var(--accent); }
+        .faq-toggle {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: rgba(43,143,212,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+            background: rgba(43,143,212,0.2);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+        .faq-item.open .faq-answer { max-height: 300px; }
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta { text-align: center; padding: 60px 0; position: relative; }
+        .final-cta .glow-top { top: -100px; }
+        .final-cta h2 { margin-bottom: 16px; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+        .final-cta p {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            :root { --section-padding: 36px 0; }
+
+            .hero { padding: 70px 0 20px; }
+            .hero h1 { font-size: 1.6rem; }
+            .hero .subtitle { font-size: 0.95rem; padding: 0 8px; }
+
+            .cta-btn {
+                padding: 16px 32px;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 340px;
+            }
+            .cta-wrapper { margin-top: 30px; }
+
+            .video-wrapper { border-radius: 14px; }
+            .play-btn { width: 64px; height: 64px; }
+            .play-btn::after { border-width: 11px 0 11px 18px; }
+            .play-ripple { width: 64px; height: 64px; }
+
+            .video-testimonial { width: 180px; border-radius: 8px; }
+            .carousel-arrow { display: none; }
+            .play-icon { width: 36px; height: 36px; }
+            .play-icon::after { border-width: 7px 0 7px 12px; }
+
+            .pain-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .pain-card { padding: 24px 20px; }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .step-card { padding: 22px 18px; }
+            .step-card h3 { font-size: 1rem; margin-bottom: 8px; }
+            .step-card p { font-size: 0.85rem; }
+            .step-number { width: 40px; height: 40px; font-size: 1.1rem; margin-bottom: 14px; }
+            .bottom-line { padding: 22px 16px; }
+            .bottom-line h3 { font-size: 1.1rem; }
+            .bottom-line .highlight-number { font-size: 1.3rem; }
+
+            .timeline { padding-right: 0; }
+            .timeline::before { right: 15px; }
+            .timeline-item { padding-right: 48px; margin-bottom: 28px; }
+            .timeline-dot { right: 4px; width: 22px; height: 22px; }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+                gap: 32px;
+            }
+            .about-brands { justify-content: center; }
+            .about-photo { width: 200px; height: 250px; }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .benefit-item { padding: 20px 18px; }
+
+            .price-box {
+                padding: 28px 20px;
+                margin: 0 8px;
+            }
+            .price-box .new-price { font-size: 1.5rem; }
+
+            .limited-section p { padding: 0 8px; }
+
+            .faq-question { padding: 18px 20px; font-size: 0.95rem; }
+            .faq-answer-inner { padding: 0 20px 18px; font-size: 0.9rem; }
+
+            .final-cta { padding: 40px 0; }
+            .final-cta h2 { font-size: 1.5rem; }
+
+            .solution-transition { padding: 36px 0 16px; }
+            .solution-transition .but-text { font-size: 1.3rem; margin-bottom: 16px; }
+            .solution-transition h2 { font-size: 1.2rem; }
+            .solution-transition p { font-size: 0.9rem; }
+            .solution-transition .system-text { font-size: 1rem; }
+            .solution-transition .but-text { font-size: 1.5rem; }
+            .solution-transition h2 { font-size: 1.3rem; }
+
+            h2 { font-size: 1.35rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 70px 0 30px; }
+            .hero h1 { font-size: 1.4rem; }
+            .badge { font-size: 0.75rem; padding: 6px 14px; }
+            .video-testimonial { width: 160px; }
+            .carousel-item { padding: 18px 28px; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="glow-top"></div>
+        <div class="container">
+            <div class="badge fade-up">
+                <span class="dot"></span>
+                <span>סדנה שיתופית | מוגבלת ל-10 משתתפים</span>
+            </div>
+            <p class="subtitle fade-up" style="margin-bottom: 16px;">
+                למותגי איקומרס שמייצרים <span class="highlight" style="font-weight:700;">30K בחודש</span>
+            </p>
+            <h1 class="fade-up">איך מותגי איקומרס מייצרים מעל<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span><br>בלי לנחש, בלי להתחיל מאפס,<br>ובלי לבזבז שעות על כל בריף.</h1>
+            <p class="subtitle fade-up" style="color: var(--accent); font-weight: 600; font-size: 1.1rem;">
+                הכנתי לכם סרטון שחושף את הסיסטם המדויק
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== VSL VIDEO ===== -->
+    <section class="vsl-section">
+        <div class="container">
+            <div class="video-wrapper fade-up">
+                <div class="play-ripple"></div>
+                <div class="play-ripple"></div>
+                <div class="play-btn"></div>
+                <span class="video-label">לחצו לצפייה בסרטון</span>
+            </div>
+            <div class="cta-wrapper fade-up">
+                <a href="form.html" class="cta-btn">לשיחת התאמה למחזור הקרוב &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS 1 ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="fade-up">הנה מה שיש לחברה כמוך,<br>שהיו <span class="highlight">בסדנה הקודמת</span> להגיד:</h2>
+            <div class="testimonial-carousel-wrapper fade-up">
+                <button class="carousel-arrow prev" onclick="this.parentElement.querySelector('.testimonial-carousel').scrollBy({left: -240, behavior:'smooth'})">&larr;</button>
+                <button class="carousel-arrow next" onclick="this.parentElement.querySelector('.testimonial-carousel').scrollBy({left: 240, behavior:'smooth'})">&rarr;</button>
+                <div class="testimonial-carousel">
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/6tV3KxmI5TY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                </div>
+                <div class="swipe-hint">&larr; גללו לצדדים לעוד המלצות &rarr;</div>
+            </div>
+            <div class="cta-wrapper fade-up">
+                <a href="form.html" class="cta-btn">לשיחת התאמה למחזור הקרוב &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INFINITE CAROUSEL - LOGOS ===== -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2 class="fade-up">המותגים שכבר עובדים עם <span class="highlight">הסיסטם הזה</span>:</h2>
+        </div>
+        <div class="carousel-track-wrapper fade-up">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-item"><img src="logos-white/Foreground.png" alt="Megemeria"></div>
+                <div class="carousel-item"><img src="logos-white/Group.png" alt="Escape Room"></div>
+                <div class="carousel-item"><img src="logos-white/Harmony-1.png" alt="Harmony"></div>
+                <div class="carousel-item"><img src="logos-white/image-2-1.png" alt="AMORpHICURE"></div>
+                <div class="carousel-item"><img src="logos-white/image-removebg-preview-2-2.png" alt="Smoovee"></div>
+                <div class="carousel-item"><img src="logos-white/Logo_Promise_site_3_410x.png" alt="Promise"></div>
+                <div class="carousel-item"><img src="logos-white/logo-1.png" alt="מותג"></div>
+                <div class="carousel-item"><img src="logos-white/logos.png" alt="מותג" style="max-height:80px; max-width:220px;"></div>
+                <div class="carousel-item"><img src="logos-white/LOGO-SOURCE-1-removebg-preview-1.png" alt="מותג" style="max-height:80px; max-width:220px;"></div>
+                <div class="carousel-item"><img src="logos-white/trip-logo.svg" alt="Trip"></div>
+                <div class="carousel-item"><img src="logos-white/Tieta-Logo.svg" alt="Tieta"></div>
+                <div class="carousel-item"><img src="logos-white/logo.white_.blank_.svg" alt="מותג"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PAIN POINTS ===== -->
+    <section class="pain-section">
+        <div class="container">
+            <h2 class="fade-up">בואו נהיה כנים -<br>ככה נראה הקריאייטיב <span style="color: var(--red-accent)">ברוב מותגי האיקומרס</span> היום:</h2>
+
+            <div class="pain-grid">
+                <div class="pain-card fade-up" style="transition-delay: 0s;">
+                    <div class="pain-icon">&#10060;</div>
+                    <h3>עובדים לפי אינטואיציה</h3>
+                    <p>כל קריאייטיב נולד מ"השראה" או מהעתקה של המתחרים - אין שיטה, מבנה או חזרתיות.</p>
+                </div>
+                <div class="pain-card fade-up" style="transition-delay: 0.15s;">
+                    <div class="pain-icon">&#10060;</div>
+                    <h3>בריפים מעורפלים ליוצרות תוכן</h3>
+                    <p>מורידים בריף, מקווים לטוב, ומקבלים סרטון שלא עובד - כי אין מבנה ברור מאחורי הבקשה.</p>
+                </div>
+                <div class="pain-card fade-up" style="transition-delay: 0.3s;">
+                    <div class="pain-icon">&#10060;</div>
+                    <h3>בזבוז שעות על כל קריאייטיב</h3>
+                    <p>כל סרטון, כל מודעה, כל פוסט - מתחילים מאפס. אין טמפלטים, תהליך או סיסטם.</p>
+                </div>
+                <div class="pain-card fade-up" style="transition-delay: 0.45s;">
+                    <div class="pain-icon">&#10060;</div>
+                    <h3>לא יודעים מה לייצר לכל שלב במשפך</h3>
+                    <p>מייצרים קריאייטיב "כללי" בלי להבין מה צריך לשים בכל שלב, ואז תוהים למה הקמפיינים "עומדים" במקום.</p>
+                </div>
+                <div class="pain-card fade-up" style="grid-column: 1 / -1; max-width: 540px; margin: 0 auto; transition-delay: 0.6s;">
+                    <div class="pain-icon">&#10060;</div>
+                    <h3>שופכים כסף על קריאייטיב "יפה" שלא מוכר</h3>
+                    <p>מודעות מלוטשות, עיצוב מושלם, הכל נראה פרו - ואף אחד לא קונה. כי ככל שזה נראה יותר מושלם, הלקוח סומך על זה פחות.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOLUTION TRANSITION ===== -->
+    <section class="solution-transition">
+        <div class="container">
+            <div class="but-text fade-up">אבל...</div>
+            <h2 class="fade-up">מותגים שעושים סקייל, ומייצרים<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span><br>באמצעות AI - עובדים בצורה שונה</h2>
+            <p class="system-text fade-up">יש להם סיסטם.<br>לכל קריאייטיב יש מטרה.</p>
+            <p class="fade-up">ברגע שמבינים את המבניות מאחורי הקריאייטיב, פתאום זה נהיה סיסטמטי -<br>אתה לא צריך להמציא את עצמך בכל קריאייטיב.</p>
+            <p class="fade-up" style="margin-top: 32px; font-weight: 700; color: var(--text-primary); font-size: 1.2rem;">זה קורה באמצעות 3 שלבים:</p>
+        </div>
+    </section>
+
+    <!-- ===== 3 STEPS ===== -->
+    <section class="steps-section">
+        <div class="container">
+            <div class="steps-grid">
+                <div class="step-card fade-up">
+                    <div class="step-number">1</div>
+                    <h3>מבניות לפי משפך</h3>
+                    <p>מבינים מה לייצר בכל שלב - כל קריאייטיב נולד עם מטרה ברורה, לא מ"השראה".</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="step-number">2</div>
+                    <h3>תסריטים על בסיס עקרונות מנצחים</h3>
+                    <p>לוקחים את העקרונות מתסריטים שכבר הוכיחו את עצמם ב-7 שנים של עבודה מול המותגים הגדולים בארץ.</p>
+                </div>
+                <div class="step-card fade-up">
+                    <div class="step-number">3</div>
+                    <h3>AI שמשכפל את המוח</h3>
+                    <p>פרומפט שנבנה על בסיס התסריטים הכי מנצחים - מייצר ווינרים חדשים בדקות, בלי להמציא את הגלגל.</p>
+                </div>
+            </div>
+
+            <div class="bottom-line fade-up">
+                <h3>ובשורה התחתונה יש לכם</h3>
+                <div class="highlight-number">10 קריאטיבים מנצחים בכל שבוע</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FIRST WEEK TIMELINE ===== -->
+    <section class="first-week">
+        <div class="container">
+            <h2 class="fade-up">איך נראה <span class="highlight">השבוע הראשון</span> שלך אחרי הסדנה?</h2>
+
+            <div class="timeline fade-up">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>יום ראשון</h3>
+                    <p>יושבים מול הקמפיין ובפעם הראשונה יודעים בדיוק איזה קריאייטיב צריך, למי, ובאיזה שלב במשפך.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>יום שלישי</h3>
+                    <p>כותבים בריף שעובר לגרפיקאי, ליוצרת תוכן או לעורך וידאו. הפעם זה לא ניחוש - יש לוגיקה מאחורי כל שורה.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3>סוף השבוע</h3>
+                    <p>10+ קריאטיבים עולים לאוויר. כל אחד עם כתובת מדויקת.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS 2 ===== -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="fade-up">הנה מה שיש לחברות כמוך,<br>שהיו <span class="highlight">בסדנה הקודמת</span>, להגיד:</h2>
+            <div class="testimonial-carousel-wrapper fade-up">
+                <button class="carousel-arrow prev" onclick="this.parentElement.querySelector('.testimonial-carousel').scrollBy({left: -240, behavior:'smooth'})">&larr;</button>
+                <button class="carousel-arrow next" onclick="this.parentElement.querySelector('.testimonial-carousel').scrollBy({left: 240, behavior:'smooth'})">&rarr;</button>
+                <div class="testimonial-carousel">
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                    <div class="video-testimonial"><div class="play-icon"></div></div>
+                </div>
+                <div class="swipe-hint">&larr; גללו לצדדים לעוד המלצות &rarr;</div>
+            </div>
+            <div class="cta-wrapper fade-up">
+                <a href="form.html" class="cta-btn">לשיחת התאמה למחזור הקרוב &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about-section">
+        <div class="container">
+            <h2 class="fade-up">מי מאחורי <span class="highlight">הסדנה</span>?</h2>
+
+            <div class="about-content fade-up">
+                <div style="position:relative;">
+                    <div class="about-photo"><img src="profile.jpg" alt="תמונת פרופיל" style="width:100%; height:100%; object-fit:cover; border-radius: var(--radius-lg);"></div>
+                    <img src="signature.png" alt="חתימה" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); width:120px; opacity:0.85; filter:invert(1) drop-shadow(0 0 8px rgba(0,0,0,0.5)); pointer-events:none;">
+                </div>
+                <div class="about-text">
+                    <p>אחרי <strong>10 שנים ו-50+ מותגי איקומרס</strong> - הבנתי דבר אחד שרוב האנשים בתחום עדיין לא מבינים:</p>
+                    <p style="color: var(--accent); font-weight: 700; font-size: 1.15rem;">קריאייטיב שנולד מהשראה הוא קריאייטיב שאי אפשר לשכפל.</p>
+                    <p>ניהלתי קריאייטיב <strong>למותגי איקומרס מהמובילים בארץ</strong>. בשיא ניהלתי <strong>30 יוצרות תוכן במקביל</strong> - ולמדתי בדרך הקשה מה גורם לקריאייטיב למכור ומה גורם לו לבזבז כסף לבעלים.</p>
+                    <p>מה שיש לי היום זה לא רק ניסיון. זה <strong>שיטה</strong> - שנבנתה מתוך מה שעבד, מה שנכשל, ומה שגרם למותגים <strong>להכפיל את הקריאייטיב שלהם בלי להכפיל את השעות</strong>.</p>
+                    <p>עכשיו אני מלמד אותה. <strong>ואת זה בדיוק תקבל בשלושה מפגשים.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== WHAT YOU GET ===== -->
+    <section class="what-you-get">
+        <div class="container">
+            <h2 class="fade-up">מה אתה מקבל <span class="highlight">בסדנה</span>:</h2>
+
+            <div class="benefits-grid fade-up">
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#9989;</div>
+                    <p>שיטת עבודה שנבנתה מ-7 שנים מול המותגים הגדולים בארץ</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#9989;</div>
+                    <p>סוכן קריאייטיב AI - הפרומפט המלא שאני עובד איתו ביום יום</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#9989;</div>
+                    <p>3 מפגשים של שעה וחצי - שיתופיים, עם פידבק אישי</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#9989;</div>
+                    <p>חוברת תרגילים עם בריפים מוכנים</p>
+                </div>
+                <div class="benefit-item" style="grid-column: 1 / -1; max-width: 540px; margin: 0 auto;">
+                    <div class="benefit-icon">&#9989;</div>
+                    <p>כניסה לקהילה סגורה של מותגי איקומרס שמתייעצים, משתפים ולומדים אחד מהשני</p>
+                </div>
+            </div>
+
+            <div class="price-box fade-up">
+                <p class="old-price">עסקים משלמים לי <span>12,000 &#8362; בחודש</span> על אסטרטגיית קריאייטיב.</p>
+                <p class="new-price">בסדנה אתה מקבל את אותה שיטה ב-&#8362;1,700 + מע"מ</p>
+                <p class="price-note">השקעה חד-פעמית. תוצאות שנשארות.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LIMITED SPOTS ===== -->
+    <section class="limited-section" id="contact">
+        <div class="glow-top"></div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <div class="limited-badge fade-up">&#128293; מקומות מוגבלים</div>
+            <h2 class="fade-up">הסדנה מוגבלת ל-<span class="highlight">10 אנשים</span></h2>
+            <p class="fade-up">זה לא וובינר. זאת סדנה שיתופית שבה אתה הולך להיות מעורב - ובסוף להעתיק את הסיסטם לעסק שלך.</p>
+            <p class="urgency-text fade-up">המחזור הקרוב נפתח ב-12.4. נשארו 3 מקומות.</p>
+            <div class="cta-wrapper fade-up">
+                <a href="form.html" class="cta-btn">לשיחת התאמה למחזור הקרוב &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="fade-up">שאלות נפוצות</h2>
+            <div class="section-divider"></div>
+
+            <div class="faq-list fade-up">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>למי הסדנה מתאימה?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">למותגי איקומרס עם מחזור של 30K+ שמנהלים קריאייטיב בעצמם או עם יוצרות תוכן, ורוצים לעשות סקייל.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>מה ההבדל בין הסדנה לקורס רגיל?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">זאת לא הרצאה. זאת סדנה שיתופית של 10 אנשים, שבה אתה מתרגל, מקבל פידבק ויוצא עם סיסטם מוכן.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>אני כבר עובד עם AI - מה חדש פה?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">הפרומפט שלנו בנוי על 7 שנים של תסריטים שרצו מול מותגי איקומרס אמיתיים. אתה מכניס מוצר - ומקבל בריפים שיודעים בדיוק מה להגיד, למי, ובאיזה שלב במשפך.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>כמה זמן הסדנה?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">3 מפגשים של שעה וחצי בזום.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FINAL CTA ===== -->
+    <section class="final-cta">
+        <div class="glow-top"></div>
+        <div class="container" style="position: relative; z-index: 1;">
+            <h2 class="fade-up">מוכנים לייצר <span class="highlight">10 קריאטיבים מנצחים</span><br>בכל שבוע?</h2>
+            <p class="fade-up">הסדנה מוגבלת ל-10 משתתפים בלבד.</p>
+            <p class="fade-up" style="color: var(--gold); font-weight: 700;">המחזור הקרוב נפתח ב-12.4. נשארו 3 מקומות.</p>
+            <div class="cta-wrapper fade-up">
+                <a href="form.html" class="cta-btn" style="padding: 20px 56px; font-size: 1.25rem;">לשיחת התאמה למחזור הקרוב &larr;</a>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 30px 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem;">
+        כל הזכויות שמורות &copy; 2026 | <a href="#" style="color: var(--text-muted); text-decoration: underline;" onclick="document.getElementById('cookieBanner').style.display='flex'; return false;">הגדרות קוקיז</a> | <a href="#" style="color: var(--text-muted); text-decoration: underline;" href="accessibility.html">הצהרת נגישות</a> | <a href="terms.html" style="color: var(--text-muted); text-decoration: underline;">תקנון האתר</a>
+    </footer>
+
+    <!-- ===== COOKIE BANNER ===== -->
+    <div id="cookieBanner" style="display:none; position:fixed; bottom:0; left:0; right:0; z-index:9999; background:var(--bg-card); border-top:1px solid var(--border); padding:14px 20px; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; box-shadow:0 -4px 30px rgba(0,0,0,0.5);">
+        <p style="color:var(--text-secondary); font-size:0.8rem; max-width:600px; margin:0; line-height:1.4;">אתר זה משתמש בקוקיז כדי לשפר את חוויית הגלישה שלך ולנתח תנועה באתר.</p>
+        <div style="display:flex; gap:10px; flex-shrink:0;">
+            <button onclick="acceptCookies()" style="background:var(--accent); color:#fff; border:none; border-radius:50px; padding:8px 22px; font-family:inherit; font-size:0.8rem; font-weight:700; cursor:pointer;">אישור</button>
+            <button onclick="declineCookies()" style="background:transparent; color:var(--text-muted); border:1px solid var(--border); border-radius:50px; padding:8px 16px; font-family:inherit; font-size:0.8rem; cursor:pointer;">דחייה</button>
+        </div>
+    </div>
+
+    <script src="accessibility-widget.js"></script>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!isOpen) item.classList.add('open');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Infinite carousel - duplicate items
+        const track = document.getElementById('carouselTrack');
+        if (track) {
+            const items = track.innerHTML;
+            track.innerHTML = items + items;
+        }
+
+        // ===== COOKIES =====
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.getElementById('cookieBanner').style.display = 'flex';
+        }
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+        function declineCookies() {
+            localStorage.setItem('cookiesAccepted', 'declined');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>
