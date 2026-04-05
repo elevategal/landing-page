@@ -387,80 +387,63 @@
         .pain-card {
             background: rgba(26,26,53,0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,107,107,0.15);
+            border: 1px solid rgba(255,107,107,0.1);
             border-radius: var(--radius);
             padding: 32px 28px;
-            transition: all 0.4s ease;
             border-top: 3px solid var(--red-accent);
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: scale(0.9) rotate(-1deg);
-            transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s, border-color 0.3s;
         }
         .pain-card.visible {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
-            animation: pain-shake 0.4s ease forwards;
+            transform: translateY(0);
         }
         .pain-card:nth-child(1) { transition-delay: 0s; }
-        .pain-card:nth-child(2) { transition-delay: 0.12s; }
-        .pain-card:nth-child(3) { transition-delay: 0.24s; }
-        .pain-card:nth-child(4) { transition-delay: 0.36s; }
-        .pain-card:nth-child(5) { transition-delay: 0.48s; }
+        .pain-card:nth-child(2) { transition-delay: 0.15s; }
+        .pain-card:nth-child(3) { transition-delay: 0.3s; }
+        .pain-card:nth-child(4) { transition-delay: 0.45s; }
+        .pain-card:nth-child(5) { transition-delay: 0.6s; }
 
-        @keyframes pain-shake {
-            0% { transform: scale(1) rotate(0); }
-            20% { transform: scale(1) rotate(-0.5deg) translateX(-2px); }
-            40% { transform: scale(1) rotate(0.5deg) translateX(2px); }
-            60% { transform: scale(1) rotate(-0.3deg) translateX(-1px); }
-            80% { transform: scale(1) rotate(0.2deg); }
-            100% { transform: scale(1) rotate(0); }
+        /* Slow red pulse - feels uncomfortable, like a warning */
+        .pain-card.visible {
+            animation: pain-pulse 3s ease-in-out infinite;
+        }
+        .pain-card:nth-child(2).visible { animation-delay: 0.6s; }
+        .pain-card:nth-child(3).visible { animation-delay: 1.2s; }
+        .pain-card:nth-child(4).visible { animation-delay: 1.8s; }
+        .pain-card:nth-child(5).visible { animation-delay: 2.4s; }
+
+        @keyframes pain-pulse {
+            0%, 100% { border-color: rgba(255,107,107,0.1); box-shadow: 0 0 0 rgba(255,107,107,0); }
+            50% { border-color: rgba(255,107,107,0.35); box-shadow: 0 0 25px rgba(255,107,107,0.08); }
         }
 
-        /* Red scan line on card */
+        /* Red bleed from top border */
         .pain-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 2px;
-            background: linear-gradient(90deg, transparent, var(--red-accent), transparent);
-            opacity: 0;
-            animation: none;
-        }
-        .pain-card.visible::before {
-            animation: scan-line 2s ease-out 0.5s forwards;
-        }
-        @keyframes scan-line {
-            0% { top: 0; opacity: 0; }
-            10% { opacity: 0.8; }
-            100% { top: 100%; opacity: 0; }
-        }
-
-        /* Hover glow */
-        .pain-card::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,107,107,0.06), transparent 60%);
-            opacity: 0;
-            transition: opacity 0.4s;
+            top: 0; left: 0; right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, rgba(255,107,107,0.08), transparent);
             pointer-events: none;
         }
-        .pain-card:hover::after { opacity: 1; }
+
+        /* Hover - feels heavier, like sinking */
         .pain-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(255,107,107,0.4);
-            box-shadow: 0 12px 40px rgba(255,107,107,0.12), 0 0 60px rgba(255,107,107,0.05);
+            transform: translateY(3px);
+            border-color: rgba(255,107,107,0.5);
+            box-shadow: 0 2px 20px rgba(255,107,107,0.15);
         }
 
-        /* X icon */
+        /* X icon - red, feels like a stamp of failure */
         .pain-icon {
             width: 50px; height: 50px;
             border-radius: 12px;
-            background: rgba(255,107,107,0.1);
-            border: 1px solid rgba(255,107,107,0.2);
+            background: rgba(255,107,107,0.12);
+            border: 1px solid rgba(255,107,107,0.25);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -469,24 +452,19 @@
             position: relative;
         }
         .pain-card.visible .pain-icon {
-            animation: icon-stamp 0.4s ease 0.3s both;
+            animation: icon-throb 2.5s ease-in-out infinite;
         }
-        @keyframes icon-stamp {
-            0% { transform: scale(2) rotate(15deg); opacity: 0; }
-            50% { transform: scale(0.9) rotate(-3deg); }
-            100% { transform: scale(1) rotate(0); opacity: 1; }
+        @keyframes icon-throb {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.08); opacity: 1; }
         }
-        .pain-card:nth-child(1) .pain-icon { animation-delay: 0.3s; }
-        .pain-card:nth-child(2) .pain-icon { animation-delay: 0.45s; }
-        .pain-card:nth-child(3) .pain-icon { animation-delay: 0.6s; }
-        .pain-card:nth-child(4) .pain-icon { animation-delay: 0.75s; }
-        .pain-card:nth-child(5) .pain-icon { animation-delay: 0.9s; }
 
+        /* Strikethrough on title - "this is wrong" */
         .pain-card h3 {
             font-size: 1rem; margin-bottom: 10px; position: relative;
-            color: var(--text-primary);
+            color: var(--red-accent);
         }
-        .pain-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; position: relative; }
+        .pain-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; position: relative; }
 
         /* ===== SOLUTION TRANSITION ===== */
         .solution-transition { text-align: center; padding: 50px 0 20px; }
