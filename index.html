@@ -234,6 +234,7 @@
 
         /* ===== GLOW ===== */
         section { overflow: hidden; }
+        section.testimonials { overflow: visible; }
 
         .glow-top {
             position: absolute;
@@ -1532,7 +1533,7 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            let scrollSpeed = 0.5; // pixels per frame
+            let scrollSpeed = 0.8; // pixels per frame
             let isScrolling = true;
             let animId;
 
