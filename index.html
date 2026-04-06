@@ -142,7 +142,7 @@
             --section-padding: 50px 0;
         }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
             font-family: 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -233,6 +233,8 @@
         }
 
         /* ===== GLOW ===== */
+        section { overflow: hidden; }
+
         .glow-top {
             position: absolute;
             top: -200px; left: 50%;
