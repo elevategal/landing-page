@@ -1533,14 +1533,14 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            // Duplicate items for infinite loop
+            // Duplicate items multiple times for seamless infinite loop
             var items = carousel.innerHTML;
-            carousel.innerHTML = items + items;
+            carousel.innerHTML = items + items + items;
 
-            var speed = 0.8;
+            var speed = 0.4;
             var pos = 0;
             var paused = false;
-            var totalWidth = carousel.scrollWidth / 2;
+            var totalWidth = carousel.scrollWidth / 3;
 
             function animate() {
                 if (!paused) {
@@ -1555,6 +1555,7 @@
             // Disable native scroll since we use transform
             carousel.style.overflow = 'hidden';
             carousel.style.flexWrap = 'nowrap';
+            carousel.style.width = 'max-content';
 
             // Stop on touch/mouse
             carousel.addEventListener('touchstart', function() { paused = true; }, { passive: true });
