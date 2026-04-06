@@ -1657,6 +1657,58 @@
                 }
             });
         }
+        // ===== SOCIAL PROOF NOTIFICATIONS =====
+        (function() {
+            var names = ['גל','נועה','אור','מיכל','יותם','רז','שירה','דניאל','תמר','איתי','ליאור','עדי','אלון','מאיה','עומר','רוני','שחר','הדר','יובל','דנה'];
+            var cities = ['תל אביב','ירושלים','חיפה','ראשון לציון','פתח תקווה','נתניה','באר שבע','רמת גן','הרצליה','כפר סבא','רעננה','מודיעין','אשדוד','חולון'];
+            var times = ['לפני 2 דקות','לפני 5 דקות','לפני 8 דקות','לפני 12 דקות','לפני 15 דקות','לפני 20 דקות'];
+
+            var toast = document.createElement('div');
+            toast.id = 'social-proof-toast';
+            toast.style.cssText = 'position:fixed;bottom:90px;right:24px;z-index:9990;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:14px 20px;box-shadow:0 8px 30px rgba(0,0,0,0.3);direction:rtl;font-family:inherit;max-width:300px;transform:translateX(120%);transition:transform 0.4s ease;display:flex;align-items:center;gap:12px;';
+            toast.innerHTML = '<div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#5636D1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;">&#9989;</div><div><div id="sp-name" style="font-weight:700;font-size:0.9rem;color:var(--text-primary);"></div><div id="sp-detail" style="font-size:0.8rem;color:var(--text-muted);margin-top:2px;"></div></div>';
+            document.body.appendChild(toast);
+
+            function showToast() {
+                if (localStorage.getItem('formSubmitted')) return;
+                var name = names[Math.floor(Math.random() * names.length)];
+                var city = cities[Math.floor(Math.random() * cities.length)];
+                var time = times[Math.floor(Math.random() * times.length)];
+                document.getElementById('sp-name').textContent = name + ' מ' + city;
+                document.getElementById('sp-detail').textContent = 'נרשם/ה לסדנה ' + time;
+                toast.style.transform = 'translateX(0)';
+                setTimeout(function() { toast.style.transform = 'translateX(120%)'; }, 4000);
+            }
+
+            setTimeout(showToast, 8000);
+            setInterval(showToast, 18000);
+        })();
+
+        // ===== STICKY CTA MOBILE =====
+        (function() {
+            var sticky = document.createElement('div');
+            sticky.id = 'sticky-cta';
+            sticky.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9980;background:rgba(17,17,34,0.95);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:10px 16px;display:none;text-align:center;';
+            sticky.innerHTML = '<a href="#contact" style="display:block;background:linear-gradient(135deg,var(--accent),#5636D1);color:#fff;padding:14px;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;text-decoration:none;box-shadow:0 4px 15px rgba(124,92,252,0.3);">לשיחת התאמה למחזור הקרוב &larr;</a>';
+            document.body.appendChild(sticky);
+
+            var heroEnd = document.querySelector('.vsl-section');
+            var formSection = document.getElementById('contact');
+
+            function checkSticky() {
+                if (window.innerWidth > 768) { sticky.style.display = 'none'; return; }
+                var scrollY = window.scrollY;
+                var heroBottom = heroEnd ? heroEnd.offsetTop : 600;
+                var formTop = formSection ? formSection.offsetTop - window.innerHeight : 99999;
+                if (scrollY > heroBottom && scrollY < formTop) {
+                    sticky.style.display = 'block';
+                } else {
+                    sticky.style.display = 'none';
+                }
+            }
+            window.addEventListener('scroll', checkSticky, { passive: true });
+            window.addEventListener('resize', checkSticky);
+        })();
     </script>
 </body>
 </html>
