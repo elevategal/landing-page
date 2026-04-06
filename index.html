@@ -575,6 +575,10 @@
         }
 
         /* Strikethrough on title - "this is wrong" */
+        @keyframes copyShift { 0%,100% { transform:translate(0,0); opacity:1; } 50% { transform:translate(-4px,-4px); opacity:0.3; } }
+        @keyframes linePulse { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+        @keyframes dotBounce { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-4px); } }
+
         .pain-card h3 {
             font-size: 1rem; margin-bottom: 10px; position: relative;
             color: var(--red-accent);
@@ -1210,17 +1214,36 @@
 
             <div class="pain-grid">
                 <div class="pain-card">
-                    <div class="pain-icon">&#10060;</div>
+                    <div style="position:relative;width:48px;height:48px;min-width:48px;margin-bottom:16px">
+                        <div style="position:absolute;width:28px;height:36px;border:2px solid #E53935;border-radius:3px;background:rgba(229,57,53,0.1);top:0;right:0;animation:copyShift 2s ease-in-out infinite"></div>
+                        <div style="position:absolute;width:28px;height:36px;border:2px solid #E53935;border-radius:3px;background:rgba(229,57,53,0.2);top:8px;right:8px"></div>
+                    </div>
                     <h3>מעתיקים מהמתחרים</h3>
                     <p>רואים מודעה שעובדת, מעתיקים את הפורמט, מקווים לטוב. אין הבנה של למה זה עבד להם - ולמה זה לא יעבוד לכם.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-icon">&#10060;</div>
+                    <div style="width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+                        <div style="width:34px;height:40px;border:2px solid #E53935;border-radius:3px;background:rgba(229,57,53,0.08);padding:5px 4px;display:flex;flex-direction:column;gap:4px">
+                            <div style="height:2px;background:rgba(243,239,231,0.3);border-radius:1px"></div>
+                            <div style="height:2px;background:#E53935;border-radius:1px;animation:linePulse 1.5s ease-in-out infinite"></div>
+                            <div style="height:2px;background:rgba(243,239,231,0.3);border-radius:1px"></div>
+                            <div style="height:2px;background:#E53935;border-radius:1px;animation:linePulse 1.5s ease-in-out 0.3s infinite"></div>
+                        </div>
+                    </div>
                     <h3>זורקים פרומפטים ל-AI ומצפים לפלאים</h3>
                     <p>"תכתוב לי 5 הוקים לסרטון" - זה לא עובד. כולם עושים בדיוק אותו דבר, וAI בלי הקשר אסטרטגי מייצר קריאייטיב גנרי.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-icon">&#10060;</div>
+                    <div style="width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+                        <div style="width:38px;height:28px;border:2px solid #E53935;border-radius:10px;position:relative;display:flex;align-items:center;justify-content:center;background:rgba(229,57,53,0.08)">
+                            <div style="display:flex;gap:4px">
+                                <div style="width:5px;height:5px;border-radius:50%;background:#E53935;animation:dotBounce 1.2s ease-in-out infinite"></div>
+                                <div style="width:5px;height:5px;border-radius:50%;background:#E53935;animation:dotBounce 1.2s ease-in-out 0.2s infinite"></div>
+                                <div style="width:5px;height:5px;border-radius:50%;background:#E53935;animation:dotBounce 1.2s ease-in-out 0.4s infinite"></div>
+                            </div>
+                            <div style="position:absolute;bottom:-7px;right:8px;width:8px;height:8px;border-right:2px solid #E53935;border-bottom:2px solid #E53935;background:var(--bg-card);transform:rotate(45deg)"></div>
+                        </div>
+                    </div>
                     <h3>לא יודעים מה לייצר לכל שלב במשפך</h3>
                     <p>מייצרים קריאייטיב "כללי" בלי להבין מה צריך לשים בכל שלב - ואז תוהים למה הקמפיינים עומדים במקום.</p>
                 </div>
