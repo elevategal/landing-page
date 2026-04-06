@@ -1,10 +1,12 @@
 exports.handler = async (event) => {
-  // Only allow POST
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type' }, body: '' };
+  }
+
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
-  // CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -25,52 +27,48 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid email' }) };
     }
 
-    // Monday.com API - token is hidden in environment variable
-    const MONDAY_TOKEN = process.env.MONDAY_API_TOKEN;
-    const BOARD_ID = 5027628363;
+    const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN;
+    const BASE_ID = 'app0wUm7hxJOq8DWG';
+    const TABLE_NAME = 'Table 1';
 
-    const mutation = `mutation ($name: String!, $columnValues: JSON!) {
-      create_item (board_id: ${BOARD_ID}, item_name: $name, column_values: $columnValues) {
-        id
-      }
-    }`;
-
-    const columnValues = JSON.stringify({
-      "phone_mm23htqj": { "phone": phone, "countryShortName": "IL" },
-      "email_mm23r2jm": { "email": email, "text": email },
-      "color_mm2383c8": { "label": "Working on it" },
-      "boolean_mm24kw4r": { "checked": consent ? "true" : "false" }
-    });
-
-    const response = await fetch('https://api.monday.com/v2', {
+    const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': MONDAY_TOKEN
+        'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        query: mutation,
-        variables: { name, columnValues }
+        records: [
+          {
+            fields: {
+              'Name': name,
+              'Phone number': phone,
+              'Email': email,
+              'Consent': consent || false,
+              'Purchase Status': 'Lead'
+            }
+          }
+        ]
       })
     });
 
     const result = await response.json();
 
-    if (result.errors) {
-      return { statusCode: 500, headers, body: JSON.stringify({ error: result.errors[0].message }) };
+    if (result.error) {
+      return { statusCode: 500, headers, body: JSON.stringify({ error: result.error.message }) };
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, id: result.data.create_item.id })
+      body: JSON.stringify({ success: true, id: result.records[0].id })
     };
 
   } catch (error) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Server error' })
+      body: JSON.stringify({ error: 'Server error: ' + error.message })
     };
   }
 };

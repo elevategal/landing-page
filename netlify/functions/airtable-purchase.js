@@ -7,7 +7,6 @@ exports.handler = async (event) => {
     'Content-Type': 'application/json'
   };
 
-  // Handle OPTIONS for CORS
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
@@ -17,8 +16,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const body = JSON.parse(event.body);
-    const { email, phone, name, value } = body;
+    const { email, phone, name, value } = JSON.parse(event.body);
 
     if (!email && !phone) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Need email or phone' }) };
@@ -27,7 +25,6 @@ exports.handler = async (event) => {
     const FB_TOKEN = process.env.FB_CAPI_TOKEN;
     const PIXEL_ID = '1265390459065125';
 
-    // Hash user data (Facebook requires SHA256 hashing)
     const hashSha256 = (val) => {
       if (!val) return undefined;
       return crypto.createHash('sha256').update(val.trim().toLowerCase()).digest('hex');
@@ -43,7 +40,7 @@ exports.handler = async (event) => {
     }
     userData.country = [hashSha256('il')];
 
-    const eventData = {
+    const fbEvent = {
       data: [
         {
           event_name: 'Purchase',
@@ -63,7 +60,7 @@ exports.handler = async (event) => {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(eventData)
+        body: JSON.stringify(fbEvent)
       }
     );
 
