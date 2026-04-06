@@ -1533,30 +1533,35 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            let scrollSpeed = 0.8; // pixels per frame
-            let isScrolling = true;
-            let animId;
+            // Duplicate items for infinite loop
+            var items = carousel.innerHTML;
+            carousel.innerHTML = items + items;
 
-            function autoScroll() {
-                if (isScrolling) {
-                    carousel.scrollLeft += scrollSpeed;
-                    // Reset to start when reaching end
-                    if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 5) {
-                        carousel.scrollLeft = 0;
-                    }
+            var speed = 0.8;
+            var pos = 0;
+            var paused = false;
+            var totalWidth = carousel.scrollWidth / 2;
+
+            function animate() {
+                if (!paused) {
+                    pos -= speed;
+                    if (Math.abs(pos) >= totalWidth) pos = 0;
+                    carousel.style.transform = 'translateX(' + pos + 'px)';
                 }
-                animId = requestAnimationFrame(autoScroll);
+                requestAnimationFrame(animate);
             }
-            autoScroll();
+            animate();
+
+            // Disable native scroll since we use transform
+            carousel.style.overflow = 'hidden';
+            carousel.style.flexWrap = 'nowrap';
 
             // Stop on touch/mouse
-            carousel.addEventListener('touchstart', function() { isScrolling = false; }, { passive: true });
-            carousel.addEventListener('mousedown', function() { isScrolling = false; });
-
-            // Resume after release (with delay)
-            carousel.addEventListener('touchend', function() { setTimeout(function() { isScrolling = true; }, 3000); });
-            carousel.addEventListener('mouseup', function() { setTimeout(function() { isScrolling = true; }, 3000); });
-            carousel.addEventListener('mouseleave', function() { setTimeout(function() { isScrolling = true; }, 1000); });
+            carousel.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+            carousel.addEventListener('mousedown', function() { paused = true; });
+            carousel.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); });
+            carousel.addEventListener('mouseup', function() { setTimeout(function() { paused = false; }, 3000); });
+            carousel.addEventListener('mouseleave', function() { setTimeout(function() { paused = false; }, 1000); });
         });
 
         // ===== COOKIES =====
