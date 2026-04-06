@@ -1533,38 +1533,46 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            // Duplicate items for seamless infinite loop
-            var items = carousel.innerHTML;
-            carousel.innerHTML = items + items + items + items;
+            // Get original items and measure
+            var originalItems = Array.from(carousel.children);
+            var numOriginal = originalItems.length;
 
-            var speed = 0.4;
-            var pos = 0;
-            var paused = false;
+            // Clone items 3 more times for seamless loop
+            for (var c = 0; c < 3; c++) {
+                originalItems.forEach(function(item) {
+                    carousel.appendChild(item.cloneNode(true));
+                });
+            }
 
-            // Disable native scroll
+            // Setup
             carousel.style.overflow = 'hidden';
             carousel.style.flexWrap = 'nowrap';
             carousel.style.width = 'max-content';
 
-            // Calculate width of one set after render
-            var totalWidth;
-            requestAnimationFrame(function() {
-                totalWidth = carousel.scrollWidth / 4;
-            });
+            var speed = 0.4;
+            var pos = 0;
+            var paused = false;
+            var oneSetWidth = 0;
 
-            function animate() {
-                if (!paused && totalWidth) {
-                    pos -= speed;
-                    if (Math.abs(pos) >= totalWidth) pos = 0;
-                    carousel.style.transform = 'translateX(' + pos + 'px)';
+            // Measure one set width after render
+            setTimeout(function() {
+                var allItems = carousel.children;
+                var firstOfSecondSet = allItems[numOriginal];
+                oneSetWidth = firstOfSecondSet.offsetLeft - allItems[0].offsetLeft;
+
+                function animate() {
+                    if (!paused && oneSetWidth > 0) {
+                        pos -= speed;
+                        if (Math.abs(pos) >= oneSetWidth) pos += oneSetWidth;
+                        carousel.style.transform = 'translateX(' + pos + 'px)';
+                    }
+                    requestAnimationFrame(animate);
                 }
                 requestAnimationFrame(animate);
-            }
-            requestAnimationFrame(function() { requestAnimationFrame(animate); });
+            }, 100);
 
-            // Stop on hover/touch - use wrapper for mouse events
+            // Pause on hover/touch
             var wrapper = carousel.closest('.testimonial-carousel-wrapper');
-
             wrapper.addEventListener('mouseenter', function() { paused = true; });
             wrapper.addEventListener('mouseleave', function() { paused = false; });
             wrapper.addEventListener('touchstart', function() { paused = true; }, { passive: true });
