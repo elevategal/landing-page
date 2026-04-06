@@ -1507,7 +1507,7 @@
 
                 // Validate
                 if (name.length < 2) { document.getElementById('leadName').style.borderColor='#FF6B6B'; return; }
-                if (!/^[\d\-\+\(\)\s]{9,15}$/.test(phone)) { document.getElementById('leadPhone').style.borderColor='#FF6B6B'; return; }
+                if (phone.replace(/[\-\s\+\(\)]/g, '').length < 9) { document.getElementById('leadPhone').style.borderColor='#FF6B6B'; return; }
                 if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('leadEmail').style.borderColor='#FF6B6B'; return; }
 
                 // Loading

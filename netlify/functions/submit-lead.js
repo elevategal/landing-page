@@ -20,7 +20,7 @@ exports.handler = async (event) => {
     if (!name || name.length < 2) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
-    if (!phone || !/^[\d\-\+\(\)\s]{9,15}$/.test(phone)) {
+    if (!phone || phone.replace(/[\-\s\+\(\)]/g, '').length < 9) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid phone' }) };
     }
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -55,7 +55,13 @@ exports.handler = async (event) => {
     const result = await response.json();
 
     if (result.error) {
-      return { statusCode: 500, headers, body: JSON.stringify({ error: result.error.message }) };
+      console.error('Airtable error:', JSON.stringify(result.error));
+      return { statusCode: 500, headers, body: JSON.stringify({ error: result.error.message || result.error.type }) };
+    }
+
+    if (!result.records || !result.records.length) {
+      console.error('Airtable unexpected response:', JSON.stringify(result));
+      return { statusCode: 500, headers, body: JSON.stringify({ error: 'Unexpected response from database' }) };
     }
 
     return {
