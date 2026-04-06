@@ -326,7 +326,6 @@
             display: flex;
             gap: 16px;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             padding: 8px 0 20px;
@@ -1530,6 +1529,34 @@
             const items = track.innerHTML;
             track.innerHTML = items + items;
         }
+
+        // ===== TESTIMONIAL AUTO-SCROLL =====
+        document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
+            let scrollSpeed = 0.5; // pixels per frame
+            let isScrolling = true;
+            let animId;
+
+            function autoScroll() {
+                if (isScrolling) {
+                    carousel.scrollLeft += scrollSpeed;
+                    // Reset to start when reaching end
+                    if (carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 5) {
+                        carousel.scrollLeft = 0;
+                    }
+                }
+                animId = requestAnimationFrame(autoScroll);
+            }
+            autoScroll();
+
+            // Stop on touch/mouse
+            carousel.addEventListener('touchstart', function() { isScrolling = false; }, { passive: true });
+            carousel.addEventListener('mousedown', function() { isScrolling = false; });
+
+            // Resume after release (with delay)
+            carousel.addEventListener('touchend', function() { setTimeout(function() { isScrolling = true; }, 3000); });
+            carousel.addEventListener('mouseup', function() { setTimeout(function() { isScrolling = true; }, 3000); });
+            carousel.addEventListener('mouseleave', function() { setTimeout(function() { isScrolling = true; }, 1000); });
+        });
 
         // ===== COOKIES =====
         if (!localStorage.getItem('cookiesAccepted')) {
