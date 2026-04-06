@@ -136,7 +136,12 @@
             transition: all 0.3s;
             box-shadow: 0 4px 15px rgba(37,211,102,0.3);
         }
-        .wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+        .wa-btn { animation: wa-breathe 2.5s ease-in-out infinite; }
+        @keyframes wa-breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(37,211,102,0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+        }
+        .wa-btn:hover { animation: none; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
         .wa-btn svg { width: 22px; height: 22px; fill: #fff; }
         .wa-subtitle {
             color: var(--text-secondary);
