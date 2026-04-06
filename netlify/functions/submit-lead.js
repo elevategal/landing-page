@@ -44,7 +44,7 @@ exports.handler = async (event) => {
               'Name': name,
               'Phone number': phone,
               'Email': email,
-              'Consent': consent || false,
+              'אישר דיוור': consent || false,
               'Purchase Status': 'Lead'
             }
           }
