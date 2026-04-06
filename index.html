@@ -1533,87 +1533,67 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            // Get original items and measure
+            var wrapper = carousel.closest('.testimonial-carousel-wrapper');
             var originalItems = Array.from(carousel.children);
             var numOriginal = originalItems.length;
+            if (numOriginal === 0) return;
 
-            // Clone items 3 more times for seamless loop
+            // Clone 3x
             for (var c = 0; c < 3; c++) {
-                originalItems.forEach(function(item) {
-                    carousel.appendChild(item.cloneNode(true));
-                });
+                originalItems.forEach(function(item) { carousel.appendChild(item.cloneNode(true)); });
             }
 
-            // Setup
-            carousel.style.overflow = 'hidden';
+            carousel.style.overflow = 'visible';
             carousel.style.flexWrap = 'nowrap';
             carousel.style.width = 'max-content';
+            wrapper.style.overflow = 'hidden';
 
-            var speed = 0.4;
-            var pos = 0;
-            var paused = false;
-            var oneSetWidth = 0;
+            var speed = 0.4, pos = 0, paused = false, isDragging = false;
+            var touchStartX = 0, dragStartPos = 0, oneSetWidth = 0;
 
-            // Measure one set width after render
             setTimeout(function() {
-                var allItems = carousel.children;
-                var firstOfSecondSet = allItems[numOriginal];
-                oneSetWidth = firstOfSecondSet.offsetLeft - allItems[0].offsetLeft;
-
-                function animate() {
-                    if (!paused && oneSetWidth > 0) {
+                var items = carousel.children;
+                if (items.length > numOriginal) {
+                    oneSetWidth = items[numOriginal].offsetLeft - items[0].offsetLeft;
+                }
+                if (oneSetWidth <= 0) {
+                    oneSetWidth = (items[0].offsetWidth + 16) * numOriginal;
+                }
+                console.log('Carousel oneSetWidth:', oneSetWidth);
+                function tick() {
+                    if (!paused && !isDragging && oneSetWidth > 0) {
                         pos -= speed;
                         if (Math.abs(pos) >= oneSetWidth) pos += oneSetWidth;
                         carousel.style.transform = 'translateX(' + pos + 'px)';
                     }
-                    requestAnimationFrame(animate);
+                    requestAnimationFrame(tick);
                 }
-                requestAnimationFrame(animate);
-            }, 100);
+                requestAnimationFrame(tick);
+            }, 500);
 
-            // Pause on hover/touch + manual drag
-            var wrapper = carousel.closest('.testimonial-carousel-wrapper');
-            var touchStartX = 0;
-            var dragStartPos = 0;
-            var isDragging = false;
-
-            // Mouse hover
             wrapper.addEventListener('mouseenter', function() { paused = true; });
-            wrapper.addEventListener('mouseleave', function() {
-                if (!isDragging) paused = false;
-            });
+            wrapper.addEventListener('mouseleave', function() { if (!isDragging) paused = false; });
 
-            // Touch: pause + drag to scroll manually
             carousel.addEventListener('touchstart', function(e) {
-                paused = true;
-                isDragging = true;
-                touchStartX = e.touches[0].clientX;
-                dragStartPos = pos;
+                paused = true; isDragging = true;
+                touchStartX = e.touches[0].clientX; dragStartPos = pos;
             }, { passive: true });
-
             carousel.addEventListener('touchmove', function(e) {
                 if (!isDragging) return;
-                var diff = e.touches[0].clientX - touchStartX;
-                pos = dragStartPos + diff;
-                // Keep within bounds
-                if (pos > 0) pos = 0;
-                if (Math.abs(pos) >= oneSetWidth) pos = pos % oneSetWidth;
+                pos = dragStartPos + (e.touches[0].clientX - touchStartX);
+                if (Math.abs(pos) >= oneSetWidth) pos = -(Math.abs(pos) % oneSetWidth);
+                if (pos > 0) pos = -(oneSetWidth - pos);
                 carousel.style.transform = 'translateX(' + pos + 'px)';
             }, { passive: true });
-
             carousel.addEventListener('touchend', function() {
                 isDragging = false;
                 setTimeout(function() { paused = false; }, 3000);
             });
 
-            // Arrow buttons - also work with transform-based carousel
-            var arrows = wrapper.querySelectorAll('.carousel-arrow');
-            arrows.forEach(function(arrow) {
-                arrow.addEventListener('click', function(e) {
-                    e.stopPropagation();
+            wrapper.querySelectorAll('.carousel-arrow').forEach(function(arrow) {
+                arrow.addEventListener('click', function() {
                     paused = true;
-                    var direction = arrow.classList.contains('next') ? -240 : 240;
-                    pos += direction;
+                    pos += arrow.classList.contains('next') ? -240 : 240;
                     if (Math.abs(pos) >= oneSetWidth) pos += oneSetWidth;
                     if (pos > 0) pos -= oneSetWidth;
                     carousel.style.transform = 'translateX(' + pos + 'px)';
