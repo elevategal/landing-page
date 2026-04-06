@@ -1533,36 +1533,42 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            // Duplicate items multiple times for seamless infinite loop
+            // Duplicate items for seamless infinite loop
             var items = carousel.innerHTML;
-            carousel.innerHTML = items + items + items;
+            carousel.innerHTML = items + items + items + items;
 
             var speed = 0.4;
             var pos = 0;
             var paused = false;
-            var totalWidth = carousel.scrollWidth / 3;
+
+            // Disable native scroll
+            carousel.style.overflow = 'hidden';
+            carousel.style.flexWrap = 'nowrap';
+            carousel.style.width = 'max-content';
+
+            // Calculate width of one set after render
+            var totalWidth;
+            requestAnimationFrame(function() {
+                totalWidth = carousel.scrollWidth / 4;
+            });
 
             function animate() {
-                if (!paused) {
+                if (!paused && totalWidth) {
                     pos -= speed;
                     if (Math.abs(pos) >= totalWidth) pos = 0;
                     carousel.style.transform = 'translateX(' + pos + 'px)';
                 }
                 requestAnimationFrame(animate);
             }
-            animate();
+            requestAnimationFrame(function() { requestAnimationFrame(animate); });
 
-            // Disable native scroll since we use transform
-            carousel.style.overflow = 'hidden';
-            carousel.style.flexWrap = 'nowrap';
-            carousel.style.width = 'max-content';
+            // Stop on hover/touch - use wrapper for mouse events
+            var wrapper = carousel.closest('.testimonial-carousel-wrapper');
 
-            // Stop on touch/mouse
-            carousel.addEventListener('touchstart', function() { paused = true; }, { passive: true });
-            carousel.addEventListener('mousedown', function() { paused = true; });
-            carousel.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 3000); });
-            carousel.addEventListener('mouseup', function() { setTimeout(function() { paused = false; }, 3000); });
-            carousel.addEventListener('mouseleave', function() { setTimeout(function() { paused = false; }, 1000); });
+            wrapper.addEventListener('mouseenter', function() { paused = true; });
+            wrapper.addEventListener('mouseleave', function() { paused = false; });
+            wrapper.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+            wrapper.addEventListener('touchend', function() { setTimeout(function() { paused = false; }, 2000); });
         });
 
         // ===== COOKIES =====
