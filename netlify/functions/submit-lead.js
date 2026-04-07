@@ -14,7 +14,7 @@ exports.handler = async (event) => {
   };
 
   try {
-    const { name, phone, email, consent } = JSON.parse(event.body);
+    const { name, phone, email, consent, utmSource, utmMedium, utmCampaign, utmContent } = JSON.parse(event.body);
 
     // Validate
     if (!name || name.length < 2) {
@@ -45,7 +45,11 @@ exports.handler = async (event) => {
               'Phone number': phone,
               'Email': email,
               'אישר דיוור': consent || false,
-              'Purchase Status': 'Lead'
+              'Purchase Status': 'Lead',
+              'UTM Source': utmSource || '',
+              'UTM Medium': utmMedium || '',
+              'UTM Campaign': utmCampaign || '',
+              'UTM Content': utmContent || ''
             }
           }
         ]
