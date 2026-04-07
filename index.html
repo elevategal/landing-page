@@ -1050,8 +1050,21 @@
             .play-btn::after { border-width: 11px 0 11px 18px; }
             .play-ripple { width: 64px; height: 64px; }
 
+            .testimonial-carousel-wrapper {
+                mask-image: none;
+                -webkit-mask-image: none;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .testimonial-carousel {
+                animation: none !important;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding: 8px 16px 20px;
+            }
             .video-testimonial { width: 180px; border-radius: 8px; }
-            .carousel-arrow { width: 36px; height: 36px; font-size: 1rem; }
+            .video-testimonial::after { display: none; }
+            .carousel-arrow { display: none; }
             .play-icon { width: 36px; height: 36px; }
             .play-icon::after { border-width: 7px 0 7px 12px; }
 
