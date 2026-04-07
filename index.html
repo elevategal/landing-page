@@ -329,20 +329,28 @@
         .testimonials { background: var(--bg-secondary); }
         .testimonials h2 { text-align: center; margin-bottom: 30px; }
         /* Testimonial Carousel */
-        .testimonial-carousel-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
         .testimonial-carousel {
             display: flex;
             gap: 16px;
-            overflow-x: auto;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
             padding: 8px 0 20px;
-            scrollbar-width: none;
+            width: max-content;
+            animation: scroll-testimonials 30s linear infinite;
         }
-        .testimonial-carousel::-webkit-scrollbar { display: none; }
+        .testimonial-carousel:hover,
+        .testimonial-carousel.paused {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-testimonials {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .testimonial-carousel-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
+        }
         .video-testimonial {
             flex-shrink: 0;
             width: 220px;
@@ -1539,74 +1547,17 @@
             track.innerHTML = items + items;
         }
 
-        // ===== TESTIMONIAL AUTO-SCROLL =====
+        // ===== TESTIMONIAL AUTO-SCROLL (CSS animation based) =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            var wrapper = carousel.closest('.testimonial-carousel-wrapper');
-            var originalItems = Array.from(carousel.children);
-            var numOriginal = originalItems.length;
-            if (numOriginal === 0) return;
+            // Duplicate items once for seamless CSS loop
+            carousel.innerHTML = carousel.innerHTML + carousel.innerHTML;
 
-            // Clone 3x
-            for (var c = 0; c < 3; c++) {
-                originalItems.forEach(function(item) { carousel.appendChild(item.cloneNode(true)); });
-            }
-
-            carousel.style.overflow = 'visible';
-            carousel.style.flexWrap = 'nowrap';
-            carousel.style.width = 'max-content';
-            wrapper.style.overflow = 'hidden';
-
-            var speed = 0.4, pos = 0, paused = false, isDragging = false;
-            var touchStartX = 0, dragStartPos = 0, oneSetWidth = 0;
-
-            setTimeout(function() {
-                var items = carousel.children;
-                if (items.length > numOriginal) {
-                    oneSetWidth = items[numOriginal].offsetLeft - items[0].offsetLeft;
-                }
-                if (oneSetWidth <= 0) {
-                    oneSetWidth = (items[0].offsetWidth + 16) * numOriginal;
-                }
-                console.log('Carousel oneSetWidth:', oneSetWidth);
-                function tick() {
-                    if (!paused && !isDragging && oneSetWidth > 0) {
-                        pos -= speed;
-                        if (Math.abs(pos) >= oneSetWidth) pos += oneSetWidth;
-                        carousel.style.transform = 'translateX(' + pos + 'px)';
-                    }
-                    requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-            }, 500);
-
-            wrapper.addEventListener('mouseenter', function() { paused = true; });
-            wrapper.addEventListener('mouseleave', function() { if (!isDragging) paused = false; });
-
-            carousel.addEventListener('touchstart', function(e) {
-                paused = true; isDragging = true;
-                touchStartX = e.touches[0].clientX; dragStartPos = pos;
-            }, { passive: true });
-            carousel.addEventListener('touchmove', function(e) {
-                if (!isDragging) return;
-                pos = dragStartPos + (e.touches[0].clientX - touchStartX);
-                if (Math.abs(pos) >= oneSetWidth) pos = -(Math.abs(pos) % oneSetWidth);
-                if (pos > 0) pos = -(oneSetWidth - pos);
-                carousel.style.transform = 'translateX(' + pos + 'px)';
+            // Touch pause for mobile
+            carousel.addEventListener('touchstart', function() {
+                carousel.classList.add('paused');
             }, { passive: true });
             carousel.addEventListener('touchend', function() {
-                isDragging = false;
-                setTimeout(function() { paused = false; }, 3000);
-            });
-
-            wrapper.querySelectorAll('.carousel-arrow').forEach(function(arrow) {
-                arrow.addEventListener('click', function() {
-                    paused = true;
-                    pos += arrow.classList.contains('next') ? -240 : 240;
-                    if (Math.abs(pos) >= oneSetWidth) pos += oneSetWidth;
-                    if (pos > 0) pos -= oneSetWidth;
-                    carousel.style.transform = 'translateX(' + pos + 'px)';
-                    setTimeout(function() { paused = false; }, 3000);
-                });
+                setTimeout(function() { carousel.classList.remove('paused'); }, 3000);
             });
         });
 
