@@ -32,33 +32,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8SCLND9ZP6');
-    </script>
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '1265390459065125');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" alt=""
-    src="https://www.facebook.com/tr?id=1265390459065125&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-    <!-- Hotjar / Contentsquare -->
-    <script src="https://t.contentsquare.net/uxa/34b53f9af4855.js"></script>
+    <!-- Tracking scripts loaded dynamically after cookie consent -->
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -775,18 +749,18 @@
         .first-week { background: var(--bg-secondary); }
         .first-week h2 { text-align: center; margin-bottom: 30px; }
         .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            columns: 3;
+            column-gap: 20px;
             margin-top: 30px;
         }
         .screenshot-card {
+            break-inside: avoid;
+            margin-bottom: 20px;
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: 0 0 20px rgba(124, 92, 252, 0.3), 0 0 40px rgba(124, 92, 252, 0.15);
             border: 1px solid rgba(124, 92, 252, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            aspect-ratio: 9/16;
         }
         .screenshot-card:hover {
             transform: translateY(-4px);
@@ -794,8 +768,6 @@
         }
         .screenshot-card img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
             display: block;
         }
         .timeline {
@@ -1052,7 +1024,7 @@
         /* ===== MOBILE ===== */
         @media (max-width: 768px) {
             :root { --section-padding: 36px 0; }
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .screenshots-grid { columns: 2; column-gap: 16px; }
             .hero { padding: 70px 0 20px; }
             .hero h1 { font-size: 1.6rem; }
             .hero .subtitle { font-size: 0.95rem; padding: 0 8px; }
@@ -1144,7 +1116,7 @@
         }
 
         @media (max-width: 480px) {
-            .screenshots-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .screenshots-grid { columns: 2; column-gap: 12px; }
             .screenshot-card { box-shadow: 0 0 15px rgba(124, 92, 252, 0.25), 0 0 30px rgba(124, 92, 252, 0.1); }
             .hero { padding: 70px 0 30px; }
             .hero h1 { font-size: 1.4rem; }
@@ -1629,16 +1601,48 @@
         });
 
         // ===== COOKIES =====
-        if (!localStorage.getItem('cookiesAccepted')) {
+        function loadTrackingScripts() {
+            if (window._trackingLoaded) return;
+            window._trackingLoaded = true;
+            // GA4
+            var gs = document.createElement('script');
+            gs.async = true;
+            gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6';
+            document.head.appendChild(gs);
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-8SCLND9ZP6');
+            // Meta Pixel
+            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '1265390459065125');
+            fbq('track', 'PageView');
+            // Hotjar / Contentsquare
+            var hs = document.createElement('script');
+            hs.src = 'https://t.contentsquare.net/uxa/34b53f9af4855.js';
+            document.head.appendChild(hs);
+        }
+        var cookieStatus = localStorage.getItem('cookiesAccepted');
+        if (cookieStatus === 'true') {
+            loadTrackingScripts();
+        } else if (!cookieStatus) {
             document.getElementById('cookieBanner').style.display = 'flex';
         }
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById('cookieBanner').style.display = 'none';
+            loadTrackingScripts();
         }
         function declineCookies() {
             localStorage.setItem('cookiesAccepted', 'declined');
             document.getElementById('cookieBanner').style.display = 'none';
+            var toast = document.createElement('div');
+            toast.textContent = 'המעקב כובה. חווית הגלישה לא תושפע.';
+            toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);border-radius:50px;padding:12px 24px;font-family:inherit;font-size:0.85rem;z-index:9999;opacity:0;transition:opacity 0.3s;';
+            document.body.appendChild(toast);
+            requestAnimationFrame(function(){ toast.style.opacity = '1'; });
+            setTimeout(function(){ toast.style.opacity = '0'; setTimeout(function(){ toast.remove(); }, 300); }, 3000);
         }
 
         // ===== LEAD FORM =====
