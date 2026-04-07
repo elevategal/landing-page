@@ -240,7 +240,31 @@
         .swipe-hint {
             text-align: center;
             color: var(--text-muted);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .swipe-hint .arrow-left,
+        .swipe-hint .arrow-right {
+            display: inline-block;
+            font-size: 1.2rem;
+        }
+        .swipe-hint .arrow-left {
+            animation: swipe-left 1.5s ease-in-out infinite;
+        }
+        .swipe-hint .arrow-right {
+            animation: swipe-right 1.5s ease-in-out infinite;
+        }
+        @keyframes swipe-left {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(-10px); opacity: 0.4; }
+        }
+        @keyframes swipe-right {
+            0%, 100% { transform: translateX(0); opacity: 1; }
+            50% { transform: translateX(10px); opacity: 0.4; }
         }
 
         /* What you get */
@@ -491,6 +515,7 @@
                 <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/nt_Oj_prUMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 3" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
             </div>
         </div>
+        <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
     </section>
 
     <!-- What you get -->
