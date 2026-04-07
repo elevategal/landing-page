@@ -199,6 +199,50 @@
             font-size: 0.9rem;
         }
 
+        /* Testimonial Carousel */
+        .testimonials { background: var(--bg-secondary); padding: 50px 0; overflow: hidden; }
+        .testimonials h2 { text-align: center; font-size: 1.6rem; font-weight: 800; margin-bottom: 30px; }
+        .testimonials h2 .highlight { color: var(--accent); }
+        .testimonial-carousel-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+            overflow: hidden;
+            mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
+        }
+        .testimonial-carousel {
+            display: flex;
+            gap: 16px;
+            padding: 8px 0 20px;
+            width: max-content;
+            animation: scroll-testimonials 30s linear infinite;
+        }
+        .testimonial-carousel:hover,
+        .testimonial-carousel.paused {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-testimonials {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .video-testimonial {
+            flex-shrink: 0;
+            width: 220px;
+            aspect-ratio: 9/16;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .swipe-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
         /* What you get */
         .benefits {
             padding: 50px 0;
@@ -420,6 +464,20 @@
         </div>
     </section>
 
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="fade-up">מה אומרים <span class="highlight">המשתתפים</span></h2>
+        </div>
+        <div class="testimonial-carousel-wrapper">
+            <div class="testimonial-carousel" id="syllabusCarousel">
+                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/6tV3KxmI5TY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 1" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/ZF5JYM8EeS4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 2" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/nt_Oj_prUMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 3" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+            </div>
+        </div>
+    </section>
+
     <!-- What you get -->
     <section class="benefits">
         <div class="container">
@@ -484,6 +542,14 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Duplicate testimonial carousel for infinite loop
+        var sylCarousel = document.getElementById('syllabusCarousel');
+        if (sylCarousel) {
+            sylCarousel.innerHTML = sylCarousel.innerHTML + sylCarousel.innerHTML;
+            sylCarousel.addEventListener('touchstart', function() { sylCarousel.classList.add('paused'); }, { passive: true });
+            sylCarousel.addEventListener('touchend', function() { setTimeout(function() { sylCarousel.classList.remove('paused'); }, 3000); });
+        }
     </script>
     <script src="accessibility-widget.js"></script>
 </body>
