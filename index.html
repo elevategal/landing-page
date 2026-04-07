@@ -338,7 +338,15 @@
             overflow: hidden;
             transition: border-color 0.3s;
             scroll-snap-align: start;
+            position: relative;
         }
+        .video-testimonial::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 1;
+        }
+        .video-testimonial.playing::after { display: none; }
         .video-testimonial:hover { border-color: rgba(43,143,212,0.3); }
 
         /* Carousel Arrows */
@@ -1544,6 +1552,13 @@
             const items = track.innerHTML;
             track.innerHTML = items + items;
         }
+
+        // ===== VIDEO TESTIMONIAL TAP TO PLAY =====
+        document.querySelectorAll('.video-testimonial').forEach(function(vt) {
+            vt.addEventListener('click', function() {
+                vt.classList.add('playing');
+            });
+        });
 
         // ===== TESTIMONIAL AUTO-SCROLL (CSS animation based) =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
