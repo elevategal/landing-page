@@ -335,7 +335,7 @@
 
       /* ===== MOBILE ===== */
       @media (max-width: 768px) {
-        .a11y-fab { width: 48px; height: 48px; bottom: 16px; left: 16px; }
+        .a11y-fab { width: 48px; height: 48px; bottom: 80px; left: 50%; transform: translateX(-50%); }
         .a11y-fab svg { width: 24px; height: 24px; }
         .a11y-panel {
           left: 0; right: 0; bottom: 0;
