@@ -387,8 +387,8 @@
             font-size: 1.3rem;
         }
         .carousel-arrow:hover { background: var(--accent-hover); transform: translateY(-60%) scale(1.1); }
-        .carousel-arrow.prev { left: -16px; }
-        .carousel-arrow.next { right: -16px; }
+        .carousel-arrow.prev { left: 16px; }
+        .carousel-arrow.next { right: 16px; }
 
         /* Swipe Hint */
         .swipe-hint {
@@ -1549,16 +1549,57 @@
 
         // ===== TESTIMONIAL AUTO-SCROLL (CSS animation based) =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
-            // Duplicate items once for seamless CSS loop
+            var wrapper = carousel.closest('.testimonial-carousel-wrapper');
             carousel.innerHTML = carousel.innerHTML + carousel.innerHTML;
 
-            // Touch pause for mobile
-            carousel.addEventListener('touchstart', function() {
+            // Touch: pause + drag to scroll
+            var touchStartX = 0, scrollStart = 0, dragging = false;
+            carousel.addEventListener('touchstart', function(e) {
                 carousel.classList.add('paused');
+                dragging = true;
+                touchStartX = e.touches[0].clientX;
+                // Get current translateX from the animation
+                var style = getComputedStyle(carousel);
+                var matrix = new DOMMatrix(style.transform);
+                scrollStart = matrix.m41;
+                carousel.style.animation = 'none';
+                carousel.style.transform = 'translateX(' + scrollStart + 'px)';
             }, { passive: true });
+
+            carousel.addEventListener('touchmove', function(e) {
+                if (!dragging) return;
+                var diff = e.touches[0].clientX - touchStartX;
+                carousel.style.transform = 'translateX(' + (scrollStart + diff) + 'px)';
+            }, { passive: true });
+
             carousel.addEventListener('touchend', function() {
-                setTimeout(function() { carousel.classList.remove('paused'); }, 3000);
+                dragging = false;
+                setTimeout(function() {
+                    carousel.style.animation = '';
+                    carousel.style.transform = '';
+                    carousel.classList.remove('paused');
+                }, 3000);
             });
+
+            // Arrow buttons
+            if (wrapper) {
+                wrapper.querySelectorAll('.carousel-arrow').forEach(function(arrow) {
+                    arrow.addEventListener('click', function() {
+                        carousel.classList.add('paused');
+                        var style = getComputedStyle(carousel);
+                        var matrix = new DOMMatrix(style.transform);
+                        var current = matrix.m41;
+                        var shift = arrow.classList.contains('next') ? -250 : 250;
+                        carousel.style.animation = 'none';
+                        carousel.style.transform = 'translateX(' + (current + shift) + 'px)';
+                        setTimeout(function() {
+                            carousel.style.animation = '';
+                            carousel.style.transform = '';
+                            carousel.classList.remove('paused');
+                        }, 3000);
+                    });
+                });
+            }
         });
 
         // ===== COOKIES =====
