@@ -114,6 +114,47 @@
             font-size: 1rem;
         }
 
+        /* Logo Carousel */
+        .carousel-section { padding: 30px 0; overflow: hidden; }
+        .carousel-section h2 { text-align: center; margin-bottom: 30px; font-size: 1.2rem; }
+        .carousel-track-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            mask-image: linear-gradient(to left, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 10%, black 90%, transparent);
+        }
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            animation: scroll-rtl 45s linear infinite;
+            width: max-content;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .carousel-item {
+            flex-shrink: 0;
+            background: transparent;
+            border: none;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .carousel-item:hover { opacity: 1; }
+        .carousel-item img {
+            max-height: 35px;
+            max-width: 120px;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
         /* Meeting Card */
         .meeting {
             background: var(--bg-card);
@@ -399,6 +440,10 @@
             .hero { padding: 60px 0 36px; }
             .hero h1 { font-size: 1.6rem; }
             .hero .meta { gap: 12px; font-size: 0.8rem; }
+            .carousel-section { padding: 20px 0; }
+            .carousel-section h2 { font-size: 1rem; margin-bottom: 20px; }
+            .carousel-item { padding: 12px 20px; height: 40px; }
+            .carousel-item img { max-height: 28px; max-width: 100px; }
             .meeting { padding: 28px 20px; }
             .meeting-num { width: 42px; height: 42px; font-size: 1.1rem; }
             .meeting-info h2 { font-size: 1.1rem; }
@@ -434,6 +479,29 @@
                 <span>&#128187; אונליין בזום</span>
             </div>
             <p class="dates fade-up">19-21 באפריל 2026 | 18:00-20:00</p>
+        </div>
+    </section>
+
+    <!-- ===== LOGOS CAROUSEL ===== -->
+    <section class="carousel-section">
+        <div class="container">
+            <h2 class="fade-up">הסיסטם שבניתי כבר עובד <span class="highlight">בקמפיינים של</span>:</h2>
+        </div>
+        <div class="carousel-track-wrapper fade-up">
+            <div class="carousel-track" id="carouselTrack">
+                <div class="carousel-item"><img loading="lazy" src="logos-white/Foreground.png" alt="Megemeria"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/Group.png" alt="Escape Room"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/Harmony-1.png" alt="Harmony"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/image-2-1.png" alt="AMORpHICURE"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/image-removebg-preview-2-2.png" alt="Smoovee"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/Logo_Promise_site_3_410x.png" alt="Promise"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/logo-1.png" alt="לוגו מותג שותף"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/logos.png" alt="Bagir" style="max-height:80px; max-width:220px;"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/LOGO-SOURCE-1-removebg-preview-1.png" alt="Source" style="max-height:80px; max-width:220px;"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/trip-logo.svg" alt="Trip"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/Tieta-Logo.svg" alt="Tieta"></div>
+                <div class="carousel-item"><img loading="lazy" src="logos-white/logo.white_.blank_.svg" alt="מותג"></div>
+            </div>
         </div>
     </section>
 
@@ -606,6 +674,13 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // ===== LOGO CAROUSEL DUPLICATE =====
+        const track = document.getElementById('carouselTrack');
+        if (track) {
+            const items = track.innerHTML;
+            track.innerHTML = items + items;
+        }
 
         // ===== SYLLABUS LEAD FORM =====
         var sylForm = document.getElementById('syllabusLeadForm');
