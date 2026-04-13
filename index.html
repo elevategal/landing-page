@@ -154,7 +154,7 @@
         /* ===== CTA BUTTON ===== */
         .cta-btn {
             display: inline-block;
-            background: var(--red-accent);
+            background: linear-gradient(135deg, #2E7D32, #43A047);
             color: #fff;
             padding: 18px 48px;
             border-radius: 50px;
@@ -166,12 +166,12 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(229, 57, 53, 0.3);
+            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
         }
         .cta-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(229, 57, 53, 0.4);
-            background: #C62828;
+            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.4);
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
         }
         .cta-btn::after {
             content: '';
@@ -185,12 +185,12 @@
         .cta-btn:hover::after { left: 100%; }
 
         .cta-btn-secondary {
-            background: var(--accent);
-            box-shadow: 0 4px 20px var(--accent-glow);
+            background: linear-gradient(135deg, #2E7D32, #43A047);
+            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
         }
         .cta-btn-secondary:hover {
-            background: var(--accent-hover);
-            box-shadow: 0 8px 30px var(--accent-glow);
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.4);
         }
 
         .cta-wrapper { text-align: center; margin-top: 40px; }
@@ -248,7 +248,7 @@
         }
 
         /* ===== VSL ===== */
-        .vsl-section { padding: 20px 0 50px; background: var(--bg-secondary); }
+        .vsl-section { padding: 0 0 50px; background: var(--bg-secondary); }
         .video-wrapper {
             position: relative;
             max-width: 800px;
@@ -329,6 +329,7 @@
             position: relative;
             margin-bottom: 20px;
             overflow: hidden;
+            direction: ltr;
             mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
             -webkit-mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
         }
@@ -405,12 +406,12 @@
             0%, 100% { transform: translateX(0); opacity: 1; }
             50% { transform: translateX(10px); opacity: 0.4; }
         }
-        .testimonials .cta-wrapper .cta-btn { background: var(--accent); box-shadow: 0 4px 20px var(--accent-glow); }
-        .testimonials .cta-wrapper .cta-btn:hover { background: var(--accent-hover); }
+        .testimonials .cta-wrapper .cta-btn { background: linear-gradient(135deg, #2E7D32, #43A047); box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3); }
+        .testimonials .cta-wrapper .cta-btn:hover { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
 
         /* ===== INFINITE CAROUSEL (LOGOS) ===== */
         .carousel-section { padding: 40px 0; overflow: hidden; background: var(--bg-secondary); }
-        .carousel-section h2 { text-align: center; margin-bottom: 40px; font-size: 1.4rem; }
+        .carousel-section h2 { text-align: center; margin-bottom: 40px; font-size: 1.4rem; white-space: nowrap; }
         .carousel-track-wrapper {
             position: relative;
             width: 100%;
@@ -769,8 +770,8 @@
             box-shadow: 0 4px 25px rgba(0,0,0,0.4);
         }
         .screenshots-section .cta-wrapper { margin-top: 30px; text-align: center; }
-        .screenshots-section .cta-btn { background: var(--accent); box-shadow: 0 4px 20px var(--accent-glow); }
-        .screenshots-section .cta-btn:hover { background: var(--accent-hover); }
+        .screenshots-section .cta-btn { background: linear-gradient(135deg, #2E7D32, #43A047); box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3); }
+        .screenshots-section .cta-btn:hover { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
 
         /* ===== ABOUT ===== */
         .about-section { background: var(--bg-secondary); }
@@ -1054,16 +1055,12 @@
             .play-ripple { width: 64px; height: 64px; }
 
             .testimonial-carousel-wrapper {
-                mask-image: none;
-                -webkit-mask-image: none;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
+                mask-image: linear-gradient(to left, transparent, black 3%, black 97%, transparent);
+                -webkit-mask-image: linear-gradient(to left, transparent, black 3%, black 97%, transparent);
             }
             .testimonial-carousel {
-                animation: none !important;
-                overflow-x: auto;
-                -webkit-overflow-scrolling: touch;
-                padding: 8px 16px 20px;
+                animation: scroll-testimonials 25s linear infinite;
+                padding: 8px 0 20px;
             }
             .video-testimonial { width: 180px; border-radius: 8px; }
             .video-testimonial::after { display: none; }
@@ -1151,12 +1148,9 @@
                 <span class="dot"></span>
                 <span>סדנה שיתופית | מוגבלת ל-10 משתתפים</span>
             </div>
-            <p class="pre-headline fade-up">למותגי איקומרס שמריצים אותן מודעות שוב ושוב - ותוהים למה התוצאות נופלות</p>
-            <h1 class="fade-up">הקריאטיב שלך לא נכשל כי אתה לא יצירתי -<br><span class="highlight">הוא נכשל כי אתה לא יודע למה הוא עבד</span></h1>
-            <p class="subtitle fade-up">השיטה שפיתחתי אחרי <strong>9 שנים ו-53 מותגים</strong> — שתאפשר לך לייצר<br><strong>10 קריאטיבים מנצחים בשבוע</strong> עם לוגיקה ברורה<br>מאחורי כל אחד, תוך 3 מפגשים</p>
-            <div class="cta-wrapper fade-up" style="margin-top:24px; display:flex; flex-direction:column; align-items:center; gap:12px;">
-                <a href="#vsl" class="cta-btn-secondary cta-btn" style="background:var(--accent);">לחצו לצפייה בסרטון</a>
-            </div>
+            <p class="pre-headline fade-up">למותגי איקומרס שמייצרים קריאטיבים כל שבוע ועדיין לא רואים תוצאות</p>
+            <h1 class="fade-up">איך מותגי איקומרס מייצרים מעל<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span></h1>
+            <p class="subtitle fade-up">בלי לנחש, בלי להתחיל מאפס<br>ובלי לבזבז שעות על כל בריף</p>
         </div>
     </section>
 
@@ -1190,6 +1184,13 @@
                     <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/QHmuJiRfqCI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה של אור" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
                     <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/pNou8RBW7QU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 5" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
                     <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/zwk95UZQeMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 6" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <!-- duplicates for seamless loop -->
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/6tV3KxmI5TY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/ZF5JYM8EeS4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 2" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/nt_Oj_prUMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 3" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/QHmuJiRfqCI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה של אור" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/pNou8RBW7QU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 5" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/zwk95UZQeMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 6" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
                 </div>
             </div>
             <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
@@ -1202,7 +1203,7 @@
     <!-- ===== INFINITE CAROUSEL - LOGOS ===== -->
     <section class="carousel-section">
         <div class="container">
-            <h2 class="fade-up">הסיסטם שבניתי כבר עובד <span class="highlight">בקמפיינים של</span>:</h2>
+            <h2 class="fade-up">הסיסטם שבניתי כבר עובד<br><span class="highlight">בקמפיינים של</span>:</h2>
         </div>
         <div class="carousel-track-wrapper fade-up">
             <div class="carousel-track" id="carouselTrack">
@@ -1225,7 +1226,7 @@
     <!-- ===== PAIN POINTS ===== -->
     <section class="pain-section">
         <div class="container">
-            <h2 class="fade-up">בואו נהיה כנים - ככה נראה הקריאייטיב<br><span style="color: var(--red-accent)">ברוב מותגי האיקומרס</span> היום:</h2>
+            <h2 class="fade-up">ככה נראה <span style="color: var(--red-accent)">תהליך הקריאייטיב</span><br>ברוב מותגי האיקומרס היום:</h2>
 
             <div class="pain-grid">
                 <div class="pain-card">
@@ -1271,44 +1272,44 @@
     <section class="solution-transition">
         <div class="container">
             <div class="but-text fade-up">אבל...</div>
-            <h2 class="fade-up">מותגים שעושים סקייל, ומייצרים <span class="highlight">10 קריאטיבים מנצחים בשבוע</span><br>באמצעות AI עובדים בצורה שונה</h2>
+            <h2 class="fade-up">מותגים שעושים סקייל, ומייצרים<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span><br>באמצעות AI - עובדים בצורה שונה</h2>
             <p class="system-text fade-up">יש להם סיסטם.<br>לכל קריאייטיב יש מטרה.</p>
-            <p class="fade-up">ברגע שמבינים את המבניות מאחורי הקריאייטיב, פתאום זה נהיה סיסטמטי -<br>אתה לא צריך להמציא את עצמך בכל קריאייטיב.</p>
         </div>
     </section>
 
     <!-- ===== 3 STEPS ===== -->
     <section class="steps-section">
         <div class="container">
+            <h2 class="fade-up" style="text-align:center; margin-bottom:30px;">ברגע שיש לך סיסטם - אתה לא מתחיל מאפס אף פעם.<br><span class="highlight">זה קורה באמצעות 3 שלבים:</span></h2>
             <div class="steps-flow">
                 <div class="step-flow-item">
                     <div class="step-flow-num">1</div>
                     <div class="step-flow-content">
-                        <h3>מבניות לפי משפך</h3>
-                        <p>מבינים מה לייצר בכל שלב - כל קריאייטיב נולד עם מטרה ברורה, לא מ"השראה".</p>
+                        <h3>מחקר עמוק על הקהל</h3>
+                        <p>מבינים את הלקוח ברמה שאף אחד לא מגיע אליה — מה הוא חושב, מרגיש, ומה עוצר אותו מלקנות.</p>
                     </div>
                 </div>
                 <div class="step-connector">&#x25BC;</div>
                 <div class="step-flow-item">
                     <div class="step-flow-num">2</div>
                     <div class="step-flow-content">
-                        <h3>תסריטים על בסיס עקרונות מנצחים</h3>
-                        <p>לוקחים את העקרונות מתסריטים שכבר הוכיחו את עצמם ב-9 שנים של עבודה מול המותגים הגדולים בארץ.</p>
+                        <h3>בנק מטרות לפי משפך</h3>
+                        <p>יודעים בדיוק מה לייצר לכל שלב — כל קריאטיב יוצא עם כתובת ברורה, לא מתחושת בטן.</p>
                     </div>
                 </div>
                 <div class="step-connector">&#x25BC;</div>
                 <div class="step-flow-item">
                     <div class="step-flow-num">3</div>
                     <div class="step-flow-content">
-                        <h3>AI שמשכפל את המוח</h3>
-                        <p>פרומפט שנבנה על בסיס התסריטים הכי מנצחים - מייצר ווינרים חדשים, מקצר 95% מהעבודה, בלי להמציא את הגלגל.</p>
+                        <h3>מייצרים בכמויות — כי יש סדר</h3>
+                        <p>כשיש מחקר ויש מטרה — הפרומפט של Claude עושה את השאר. עשרות קריאטיבים בשעות, לא ימים.</p>
                     </div>
                 </div>
             </div>
 
             <div class="bottom-line fade-up">
-                <h3>ובשיא שלי הייתי מייצר מעל</h3>
-                <div class="highlight-number">30 מודעות כל יום</div>
+                <h3>ובשורה התחתונה יש לכם</h3>
+                <div class="highlight-number">10 קריאטיבים מנצחים בכל שבוע</div>
             </div>
         </div>
     </section>
@@ -1388,7 +1389,7 @@
                 <div class="about-text">
                     <p>היי, אני <strong>גל כהן</strong> וב-9 שנים האחרונות שימשתי כמנהל קריאייטיב במעל 50 מותגים.</p>
                     <p>רוב המותגים לא נכשלים כי אין להם יצירתיות. הם נכשלים כי <strong>אין להם מושג למה הקריאטיב עבד</strong> - ולכן הם לא יכולים לשחזר את זה.</p>
-                    <p>ניהלתי קריאייטיב <strong>למותגי איקומרס מהמובילים בארץ</strong>. בשיא ניהלתי <strong>30 יוצרות תוכן במקביל</strong> - ולמדתי בדרך הקשה מה גורם לקריאייטיב למכור ומה גורם לו לבזבז כסף לבעלים.</p>
+                    <p>ניהלתי קריאייטיב <strong>למותגי איקומרס מהמובילים בארץ</strong>. בשיא שלי הייתי מייצר <strong>30 מודעות במקביל</strong> - ולמדתי בדרך הקשה מה גורם לקריאייטיב למכור ומה גורם לו לבזבז כסף לבעלים.</p>
                     <p>מה שיש לי היום זה לא רק ניסיון. זה <strong>שיטה</strong> - שנבנתה מתוך מה שעבד, מה שנכשל, ומה שגרם למותגים <strong>להכפיל את הקריאייטיב שלהם בלי להכפיל את השעות</strong>.</p>
                     <p>עכשיו אני מלמד אותה. <strong>ואת זה בדיוק תקבל בשלושה מפגשים.</strong></p>
                 </div>
@@ -1742,7 +1743,7 @@
             var sticky = document.createElement('div');
             sticky.id = 'sticky-cta';
             sticky.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9980;background:rgba(26,26,46,0.95);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,0.1);padding:10px 16px;display:none;text-align:center;';
-            sticky.innerHTML = '<a href="#contact" style="display:block;background:var(--red-accent);color:#fff;padding:14px;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;text-decoration:none;box-shadow:0 4px 15px rgba(229,57,53,0.3);">לשיחת התאמה למחזור הקרוב &larr;</a>';
+            sticky.innerHTML = '<a href="#contact" style="display:block;background:linear-gradient(135deg,#2E7D32,#43A047);color:#fff;padding:14px;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;text-decoration:none;box-shadow:0 4px 15px rgba(46,125,50,0.3);">לשיחת התאמה למחזור הקרוב &larr;</a>';
             document.body.appendChild(sticky);
 
             var heroEnd = document.querySelector('.vsl-section');
