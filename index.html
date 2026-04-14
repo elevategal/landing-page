@@ -347,6 +347,22 @@
             position: relative;
         }
         .video-testimonial:hover { border-color: rgba(140,82,255,0.4); }
+        .video-facade {
+            width: 100%; height: 100%;
+            cursor: pointer; position: relative;
+            background-size: cover; background-position: center;
+        }
+        .video-facade::after {
+            content: ''; position: absolute;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 56px; height: 56px;
+            background: rgba(140,82,255,0.85);
+            border-radius: 50%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9.5 7.5v9l7-4.5z'/%3E%3C/svg%3E");
+            background-size: 28px; background-repeat: no-repeat; background-position: 55% center;
+            transition: transform 0.2s;
+        }
+        .video-facade:hover::after { transform: translate(-50%, -50%) scale(1.1); }
 
         /* Carousel Arrows */
         .carousel-arrow {
@@ -438,10 +454,10 @@
             max-height: 40px;
             max-width: 140px;
             object-fit: contain;
-            filter: grayscale(100%) brightness(0.3);
+            filter: invert(1) grayscale(100%) opacity(0.6);
             transition: filter 0.3s;
         }
-        .carousel-item:hover img { filter: grayscale(0%) brightness(1); }
+        .carousel-item:hover img { filter: invert(1) grayscale(0%) opacity(1); }
 
         /* ===== PAIN POINTS ===== */
         .pain-section {
@@ -1019,6 +1035,7 @@
             transition: opacity 0.6s ease, transform 0.6s ease;
         }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
+        .hero .fade-up { opacity: 1; transform: none; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -1271,7 +1288,7 @@
                 <span class="dot"></span>
                 <span>סדנה שיתופית | מוגבלת ל-10 משתתפים</span>
             </div>
-            <p class="pre-headline fade-up">למותגי איקומרס שמייצרים קריאטיבים כל שבוע ועדיין לא רואים תוצאות</p>
+            <p class="pre-headline fade-up">סדנה לבעלי מותגי איקומרס שרוצים להפסיק לנחש</p>
             <h1 class="fade-up">איך מותגי איקומרס מייצרים מעל<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span></h1>
             <p class="subtitle fade-up">בלי לנחש, בלי להתחיל מאפס<br>ובלי לבזבז שעות על כל בריף</p>
         </div>
@@ -1298,12 +1315,12 @@
                 <button class="carousel-arrow prev" aria-label="הקודם">&larr;</button>
                 <button class="carousel-arrow next" aria-label="הבא">&rarr;</button>
                 <div class="testimonial-carousel">
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/fe70a730-f02f-4306-94fc-30f76dcec5a3?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/e1a7090a-7a91-44ee-808d-59fe66c28dcb?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/4bb5388c-6ed1-4ade-bc01-8cb276283f6c?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/d59578e2-1aa1-4d52-a8b7-7a95da114b53?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/567c1478-7051-4d4d-9028-23e2cb9b41c7?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
-                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/0abdb805-dc9d-46c5-97fe-8354116356e9?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div></div>
+                    <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/e1a7090a-7a91-44ee-808d-59fe66c28dcb/thumbnail.jpg')"></div></div>
+                    <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/4bb5388c-6ed1-4ade-bc01-8cb276283f6c/thumbnail.jpg')"></div></div>
+                    <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div></div>
+                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div></div>
+                    <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/0abdb805-dc9d-46c5-97fe-8354116356e9/thumbnail.jpg')"></div></div>
                 </div>
             </div>
             <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
@@ -1689,6 +1706,22 @@
             const items = track.innerHTML;
             track.innerHTML = items + items;
         }
+
+        // ===== VIDEO FACADE CLICK TO LOAD =====
+        document.addEventListener('click', function(e) {
+            var facade = e.target.closest('.video-facade');
+            if (!facade) return;
+            var vt = facade.closest('.video-testimonial');
+            var videoId = vt && vt.getAttribute('data-video');
+            if (!videoId) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://player.mediadelivery.net/embed/637122/' + videoId + '?autoplay=true&loop=false&muted=false&preload=true&responsive=true';
+            iframe.style.cssText = 'border:0; width:100%; height:100%; border-radius: var(--radius);';
+            iframe.allow = 'accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;';
+            iframe.allowFullscreen = true;
+            vt.innerHTML = '';
+            vt.appendChild(iframe);
+        });
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
