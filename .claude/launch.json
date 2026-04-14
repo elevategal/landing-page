@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "landing-page",
-      "runtimeExecutable": "ruby",
-      "runtimeArgs": ["-run", "-e", "httpd", "/Users/galcohen/Documents/landing-page", "-p", "8080"],
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "8080", "-d", "/Users/galcohen/Documents/landing-page"],
       "port": 8080
     }
   ]
