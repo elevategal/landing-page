@@ -347,13 +347,6 @@
             position: relative;
         }
         .video-testimonial:hover { border-color: rgba(140,82,255,0.4); }
-        .video-placeholder {
-            width: 100%; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; background: #1a1a2e;
-        }
-        .video-placeholder svg { opacity: 0.7; transition: opacity 0.2s; }
-        .video-placeholder:hover svg { opacity: 1; }
 
         /* Carousel Arrows */
         .carousel-arrow {
@@ -1305,12 +1298,12 @@
                 <button class="carousel-arrow prev" aria-label="הקודם">&larr;</button>
                 <button class="carousel-arrow next" aria-label="הבא">&rarr;</button>
                 <div class="testimonial-carousel">
-                    <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
-                    <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9"><div class="video-placeholder"><svg width="48" height="48" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/fe70a730-f02f-4306-94fc-30f76dcec5a3?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/e1a7090a-7a91-44ee-808d-59fe66c28dcb?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/4bb5388c-6ed1-4ade-bc01-8cb276283f6c?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/d59578e2-1aa1-4d52-a8b7-7a95da114b53?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/567c1478-7051-4d4d-9028-23e2cb9b41c7?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
+                    <div class="video-testimonial"><iframe src="https://player.mediadelivery.net/embed/637122/0abdb805-dc9d-46c5-97fe-8354116356e9?autoplay=false&loop=false&muted=false&preload=false&responsive=true" loading="lazy" style="border:0; width:100%; height:100%; border-radius: var(--radius);" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;" allowfullscreen="true"></iframe></div>
                 </div>
             </div>
             <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
@@ -1696,23 +1689,6 @@
             const items = track.innerHTML;
             track.innerHTML = items + items;
         }
-
-        // ===== VIDEO TESTIMONIAL CLICK TO LOAD =====
-        function loadVideoIframe(vt) {
-            var videoId = vt.getAttribute('data-video');
-            if (!videoId || vt.querySelector('iframe')) return;
-            var iframe = document.createElement('iframe');
-            iframe.src = 'https://player.mediadelivery.net/embed/637122/' + videoId + '?autoplay=true&loop=false&muted=false&preload=true&responsive=true';
-            iframe.style.cssText = 'border:0; width:100%; height:100%; border-radius: var(--radius);';
-            iframe.allow = 'accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;';
-            iframe.allowFullscreen = true;
-            vt.innerHTML = '';
-            vt.appendChild(iframe);
-        }
-        document.addEventListener('click', function(e) {
-            var vt = e.target.closest('.video-testimonial[data-video]');
-            if (vt) loadVideoIframe(vt);
-        });
 
         // ===== TESTIMONIAL AUTO-SCROLL =====
         document.querySelectorAll('.testimonial-carousel').forEach(function(carousel) {
