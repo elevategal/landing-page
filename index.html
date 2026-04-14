@@ -1019,6 +1019,34 @@
         }
         .final-cta .urgency-text { color: var(--gold) !important; }
 
+        /* ===== COUNTDOWN TIMER ===== */
+        .countdown-wrapper {
+            text-align: center; margin-bottom: 28px;
+        }
+        .countdown-label {
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--text-on-dark); margin-bottom: 12px;
+        }
+        .countdown {
+            display: flex; justify-content: center; gap: 12px; direction: ltr;
+        }
+        .countdown-unit {
+            background: rgba(140,82,255,0.15);
+            border: 1px solid rgba(140,82,255,0.3);
+            border-radius: 12px; padding: 12px 16px; min-width: 70px;
+        }
+        .countdown-unit .num {
+            font-size: 1.8rem; font-weight: 800; color: #fff;
+            line-height: 1;
+        }
+        .countdown-unit .lbl {
+            font-size: 0.7rem; color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .countdown-expired {
+            font-size: 1.1rem; font-weight: 700; color: var(--gold);
+        }
+
         /* ===== FOOTER ===== */
         footer {
             text-align: center; padding: 30px 24px;
@@ -1578,6 +1606,17 @@
             <p class="fade-up" style="max-width:650px; margin:0 auto 8px; color:var(--text-secondary); font-size:1.05rem;">כל יום שאתה עובד בלי סיסטם - אתה לא רק מפסיד זמן. אתה משלם<br>לפייסבוק על קריאטיבים שיצרת לפי תחושת בטן.</p>
             <p class="urgency-text fade-up">המחזור הקרוב נפתח ב-19.4. נשארו 3 מקומות.</p>
 
+            <!-- Countdown Timer -->
+            <div class="countdown-wrapper fade-up" id="countdownWrapper">
+                <p class="countdown-label">⏰ ההרשמה נסגרת במוצאי שבת:</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-unit"><div class="num" id="cdDays">0</div><div class="lbl">ימים</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdHours">0</div><div class="lbl">שעות</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdMins">0</div><div class="lbl">דקות</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdSecs">0</div><div class="lbl">שניות</div></div>
+                </div>
+            </div>
+
             <!-- Inline Form -->
             <div class="inline-form-card fade-up">
                 <h3>השאירו פרטים ונחזור אליכם תוך 24 שעות</h3>
@@ -1785,6 +1824,35 @@
                 });
             }
         });
+
+        // ===== COUNTDOWN TIMER =====
+        (function() {
+            // מוצאי שבת 18.4.2026 בשעה 20:30 שעון ישראל (UTC+3)
+            var deadline = new Date('2026-04-18T20:30:00+03:00').getTime();
+            var cdDays = document.getElementById('cdDays');
+            var cdHours = document.getElementById('cdHours');
+            var cdMins = document.getElementById('cdMins');
+            var cdSecs = document.getElementById('cdSecs');
+            var wrapper = document.getElementById('countdownWrapper');
+            function update() {
+                var now = Date.now();
+                var diff = deadline - now;
+                if (diff <= 0) {
+                    wrapper.innerHTML = '<p class="countdown-expired">ההרשמה נסגרה!</p>';
+                    return;
+                }
+                var d = Math.floor(diff / 86400000);
+                var h = Math.floor((diff % 86400000) / 3600000);
+                var m = Math.floor((diff % 3600000) / 60000);
+                var s = Math.floor((diff % 60000) / 1000);
+                cdDays.textContent = d;
+                cdHours.textContent = h < 10 ? '0' + h : h;
+                cdMins.textContent = m < 10 ? '0' + m : m;
+                cdSecs.textContent = s < 10 ? '0' + s : s;
+            }
+            update();
+            setInterval(update, 1000);
+        })();
 
         // ===== COOKIES =====
         function loadTrackingScripts() {
