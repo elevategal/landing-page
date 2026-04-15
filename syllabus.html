@@ -354,6 +354,40 @@
             line-height: 1.7;
         }
 
+        /* Countdown Timer */
+        .countdown-wrapper {
+            text-align: center; margin-bottom: 28px;
+            background: linear-gradient(135deg, #1A1A2E 0%, #2D1B4E 100%);
+            border-radius: 16px; padding: 24px 20px;
+            border: 2px solid rgba(140,82,255,0.4);
+            box-shadow: 0 4px 24px rgba(140,82,255,0.2);
+            max-width: 500px; margin: 24px auto 0;
+        }
+        .countdown-label {
+            font-size: 1.15rem; font-weight: 800;
+            color: #FF6B6B; margin-bottom: 16px;
+        }
+        .countdown {
+            display: flex; justify-content: center; gap: 12px; direction: ltr;
+        }
+        .countdown-unit {
+            background: linear-gradient(135deg, #E53935, #C62828);
+            border: none;
+            border-radius: 12px; padding: 14px 18px; min-width: 72px;
+            box-shadow: 0 4px 12px rgba(229,57,53,0.4);
+        }
+        .countdown-unit .num {
+            font-size: 2.2rem; font-weight: 900; color: #fff;
+            line-height: 1; text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .countdown-unit .lbl {
+            font-size: 0.75rem; color: rgba(255,255,255,0.85);
+            margin-top: 6px; font-weight: 600;
+        }
+        .countdown-expired {
+            font-size: 1.2rem; font-weight: 800; color: #FF6B6B;
+        }
+
         /* Price */
         .price-section {
             text-align: center;
@@ -630,9 +664,19 @@
     <section class="price-section">
         <div class="container">
             <div class="price-box fade-up">
-                <div class="price-amount">&#8362;1,700 + מע"מ</div>
-                <p class="price-note">פעם אחת. תוצאות שנשארות.</p>
-                <div class="price-discount">&#127942; 10% הנחה לשלושת הנרשמים הראשונים</div>
+                <div class="price-amount">מחיר השקה: &#8362;997 בלבד</div>
+                <p class="price-note">+מע״מ | המחיר עולה במחזור הבא.</p>
+                <p style="color:rgba(255,255,255,0.7); font-size:0.95rem;">קריאטיב אחד שעובד — מחזיר את ההשקעה.</p>
+            </div>
+            <!-- Countdown Timer -->
+            <div class="countdown-wrapper fade-up" id="countdownWrapper" style="margin-top:24px;">
+                <p class="countdown-label">⏰ ההרשמה נסגרת במוצאי שבת:</p>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-unit"><div class="num" id="cdDays">0</div><div class="lbl">ימים</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdHours">0</div><div class="lbl">שעות</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdMins">0</div><div class="lbl">דקות</div></div>
+                    <div class="countdown-unit"><div class="num" id="cdSecs">0</div><div class="lbl">שניות</div></div>
+                </div>
             </div>
         </div>
     </section>
@@ -736,6 +780,34 @@
             sylCarousel.addEventListener('touchend', function() { setTimeout(function() { sylCarousel.classList.remove('paused'); }, 3000); });
         }
     </script>
-    <script src="accessibility-widget.js"></script>
+    <script src="accessibility-widget.js" defer></script>
+    <script>
+    (function() {
+        var deadline = new Date('2026-04-18T20:30:00+03:00').getTime();
+        var cdDays = document.getElementById('cdDays');
+        var cdHours = document.getElementById('cdHours');
+        var cdMins = document.getElementById('cdMins');
+        var cdSecs = document.getElementById('cdSecs');
+        var wrapper = document.getElementById('countdownWrapper');
+        function update() {
+            var now = Date.now();
+            var diff = deadline - now;
+            if (diff <= 0) {
+                wrapper.innerHTML = '<p class="countdown-expired">ההרשמה נסגרה!</p>';
+                return;
+            }
+            var d = Math.floor(diff / 86400000);
+            var h = Math.floor((diff % 86400000) / 3600000);
+            var m = Math.floor((diff % 3600000) / 60000);
+            var s = Math.floor((diff % 60000) / 1000);
+            cdDays.textContent = d;
+            cdHours.textContent = h < 10 ? '0' + h : h;
+            cdMins.textContent = m < 10 ? '0' + m : m;
+            cdSecs.textContent = s < 10 ? '0' + s : s;
+        }
+        update();
+        setInterval(update, 1000);
+    })();
+    </script>
 </body>
 </html>
