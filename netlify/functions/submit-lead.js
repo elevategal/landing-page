@@ -88,7 +88,10 @@ exports.handler = async (event) => {
     const TABLE_NAME = 'Table 1';
 
     // Capture client context now so Purchase events later can replay it for EMQ
-    const clientIp = (event.headers['x-nf-client-connection-ip']
+    // CF-Connecting-IP is the real client IP when Cloudflare proxies the request;
+    // fall back to Netlify/X-Forwarded-For if CF isn't in front (e.g. direct origin hit).
+    const clientIp = (event.headers['cf-connecting-ip']
+                    || event.headers['x-nf-client-connection-ip']
                     || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
     const clientUserAgent = event.headers['user-agent'] || '';
 
