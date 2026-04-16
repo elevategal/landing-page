@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you.html
+Disallow: /netlify/
+Disallow: /form.html
+
+Sitemap: https://elev8.co.il/sitemap.xml
