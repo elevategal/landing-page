@@ -16,7 +16,10 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email, phone, name, value, testEventCode, eventId } = JSON.parse(event.body);
+    const {
+      email, phone, name, value, testEventCode, eventId,
+      fbp, fbc, clientIp, clientUa, eventSourceUrl
+    } = JSON.parse(event.body);
 
     if (!email && !phone) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Need email or phone' }) };
@@ -31,7 +34,10 @@ exports.handler = async (event) => {
     };
 
     const userData = {};
-    if (email) userData.em = [hashSha256(email)];
+    if (email) {
+      userData.em = [hashSha256(email)];
+      userData.external_id = [hashSha256(email)]; // stable unique ID per user
+    }
     if (phone) userData.ph = [hashSha256(phone.replace(/[\-\s\+\(\)]/g, ''))];
     if (name) {
       const parts = name.trim().split(' ');
@@ -39,6 +45,14 @@ exports.handler = async (event) => {
       if (parts.length > 1) userData.ln = [hashSha256(parts[parts.length - 1])];
     }
     userData.country = [hashSha256('il')];
+    // Browser context captured at lead-time, replayed for attribution
+    if (fbp) userData.fbp = fbp;
+    if (fbc) userData.fbc = fbc;
+    if (clientIp) userData.client_ip_address = clientIp;
+    if (clientUa) userData.client_user_agent = clientUa;
+
+    // When we have browser context, use action_source=website for better EMQ
+    const actionSource = (fbp || clientIp || eventSourceUrl) ? 'website' : 'system_generated';
 
     const fbEvent = {
       data: [
@@ -46,7 +60,8 @@ exports.handler = async (event) => {
           event_name: 'Purchase',
           event_time: Math.floor(Date.now() / 1000),
           event_id: eventId,
-          action_source: 'system_generated',
+          event_source_url: eventSourceUrl,
+          action_source: actionSource,
           user_data: userData,
           custom_data: {
             currency: 'ILS',

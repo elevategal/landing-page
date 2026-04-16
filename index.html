@@ -2050,7 +2050,19 @@
                     if (!response.ok) throw new Error(result.error);
 
                     // Fire browser pixel with same event_id for dedup with CAPI
-                    if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: eventId });
+                    // Re-init with Advanced Matching data so fbq hashes + sends PII signals
+                    if (typeof fbq !== 'undefined') {
+                        var nameParts = name.trim().split(' ');
+                        fbq('init', '1265390459065125', {
+                            em: email,
+                            ph: phone.replace(/[\-\s\+\(\)]/g, ''),
+                            fn: nameParts[0],
+                            ln: nameParts.length > 1 ? nameParts[nameParts.length - 1] : undefined,
+                            country: 'il',
+                            external_id: email
+                        });
+                        fbq('track', 'Lead', {}, { eventID: eventId });
+                    }
                     window.location.href = 'thank-you.html';
                 } catch (error) {
                     alert('שגיאה בשליחת הטופס. נסו שוב.');

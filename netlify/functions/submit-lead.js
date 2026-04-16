@@ -11,7 +11,10 @@ const sendCapiLead = async ({ email, phone, name, eventId, eventSourceUrl, clien
   if (!FB_TOKEN) return { skipped: true, reason: 'No FB_CAPI_TOKEN configured' };
 
   const userData = {};
-  if (email) userData.em = [hashSha256(email)];
+  if (email) {
+    userData.em = [hashSha256(email)];
+    userData.external_id = [hashSha256(email)]; // stable unique ID per user
+  }
   if (phone) userData.ph = [hashSha256(phone.replace(/[\-\s\+\(\)]/g, ''))];
   if (name) {
     const parts = name.trim().split(' ');
@@ -84,6 +87,11 @@ exports.handler = async (event) => {
     const BASE_ID = 'app0wUm7hxJOq8DWG';
     const TABLE_NAME = 'Table 1';
 
+    // Capture client context now so Purchase events later can replay it for EMQ
+    const clientIp = (event.headers['x-nf-client-connection-ip']
+                    || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
+    const clientUserAgent = event.headers['user-agent'] || '';
+
     const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`, {
       method: 'POST',
       headers: {
@@ -103,7 +111,12 @@ exports.handler = async (event) => {
               'UTM Source': utmSource || '',
               'UTM Medium': utmMedium || '',
               'UTM Campaign': utmCampaign || '',
-              'UTM Content': utmContent || ''
+              'UTM Content': utmContent || '',
+              'FBP': fbp || '',
+              'FBC': fbc || '',
+              'Client IP': clientIp || '',
+              'User Agent': clientUserAgent || '',
+              'Event Source URL': eventSourceUrl || ''
             }
           }
         ]
@@ -123,10 +136,6 @@ exports.handler = async (event) => {
     }
 
     // Send Lead event to Meta CAPI (server-side, resistant to ad blockers)
-    const clientIp = (event.headers['x-nf-client-connection-ip']
-                    || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
-    const clientUserAgent = event.headers['user-agent'] || '';
-
     let capiResult = null;
     try {
       capiResult = await sendCapiLead({
