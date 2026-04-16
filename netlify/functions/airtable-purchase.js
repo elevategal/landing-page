@@ -16,7 +16,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { email, phone, name, value } = JSON.parse(event.body);
+    const { email, phone, name, value, testEventCode, eventId } = JSON.parse(event.body);
 
     if (!email && !phone) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Need email or phone' }) };
@@ -45,15 +45,17 @@ exports.handler = async (event) => {
         {
           event_name: 'Purchase',
           event_time: Math.floor(Date.now() / 1000),
+          event_id: eventId,
           action_source: 'system_generated',
           user_data: userData,
           custom_data: {
             currency: 'ILS',
-            value: value || 1700
+            value: value || 997
           }
         }
       ]
     };
+    if (testEventCode) fbEvent.test_event_code = testEventCode;
 
     const response = await fetch(
       `https://graph.facebook.com/v18.0/${PIXEL_ID}/events?access_token=${FB_TOKEN}`,

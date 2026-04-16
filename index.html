@@ -2023,16 +2023,34 @@
                 btn.querySelector('.lead-spinner').style.display = 'block';
                 btn.disabled = true;
 
+                // Generate event_id for pixel + CAPI deduplication
+                const eventId = 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+                // Read Meta cookies for better match quality
+                const getCookie = (n) => {
+                    const m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+                    return m ? m.pop() : undefined;
+                };
+                const fbp = getCookie('_fbp');
+                const fbc = getCookie('_fbc');
+
                 try {
                     const response = await fetch('/.netlify/functions/submit-lead', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name, phone, email, consent, utmSource, utmMedium, utmCampaign, utmContent })
+                        body: JSON.stringify({
+                            name, phone, email, consent,
+                            utmSource, utmMedium, utmCampaign, utmContent,
+                            eventId,
+                            eventSourceUrl: window.location.href,
+                            fbp, fbc
+                        })
                     });
                     const result = await response.json();
                     if (!response.ok) throw new Error(result.error);
 
-                    if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+                    // Fire browser pixel with same event_id for dedup with CAPI
+                    if (typeof fbq !== 'undefined') fbq('track', 'Lead', {}, { eventID: eventId });
                     window.location.href = 'thank-you.html';
                 } catch (error) {
                     alert('שגיאה בשליחת הטופס. נסו שוב.');
