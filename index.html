@@ -814,6 +814,60 @@
         }
         .about-text strong { color: var(--text-primary); }
 
+        /* ===== SCHEDULE ===== */
+        .schedule-section { padding: 60px 0; background: #F5F5F5; }
+        .schedule-section h2 { text-align: center; margin-bottom: 16px; }
+        .schedule-info {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .schedule-card {
+            background: #FFFFFF;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            transition: all 0.3s;
+            text-align: right;
+        }
+        .schedule-card:hover {
+            border-color: rgba(140,82,255,0.3);
+            box-shadow: 0 8px 30px rgba(140,82,255,0.08);
+            transform: translateY(-2px);
+        }
+        .schedule-card h3 {
+            color: #8C52FF;
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .schedule-time {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+        .schedule-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .schedule-grid { grid-template-columns: 1fr; }
+            .schedule-section { padding: 40px 0; }
+        }
+
         /* ===== WHAT YOU GET ===== */
         .what-you-get { padding: 60px 0; background: var(--bg-primary); }
         .what-you-get h2 { text-align: center; margin-bottom: 30px; }
@@ -1566,6 +1620,32 @@
                     <p>ניהלתי קריאייטיב <strong>למותגי איקומרס מהמובילים בארץ</strong>. בשיא שלי הייתי מייצר <strong>30 מודעות במקביל</strong> - ולמדתי בדרך הקשה מה גורם לקריאייטיב למכור ומה גורם לו לבזבז כסף לבעלים.</p>
                     <p>מה שיש לי היום זה לא רק ניסיון. זה <strong>שיטה</strong> - שנבנתה מתוך מה שעבד, מה שנכשל, ומה שגרם למותגים <strong>להכפיל את הקריאייטיב שלהם בלי להכפיל את השעות</strong>.</p>
                     <p>עכשיו אני מלמד אותה. <strong>ואת זה בדיוק תקבל בשלושה מפגשים.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCHEDULE ===== -->
+    <section class="schedule-section">
+        <div class="container">
+            <h2 class="fade-up">מתי ומה <span class="highlight">לומדים</span>?</h2>
+            <p class="schedule-info fade-up">&#128197; 19-21 באפריל | 18:00-20:00 | זום</p>
+
+            <div class="schedule-grid fade-up">
+                <div class="schedule-card">
+                    <h3>מפגש 1 &mdash; 19 באפריל</h3>
+                    <div class="schedule-time">18:00-20:00</div>
+                    <p>תבין למה הלקוח שלך קונה &mdash; ומה באמת עוצר אותו מלקנות.</p>
+                </div>
+                <div class="schedule-card">
+                    <h3>מפגש 2 &mdash; 20 באפריל</h3>
+                    <div class="schedule-time">18:00-20:00</div>
+                    <p>תדע לכתוב קופי שעוצר גלילה &mdash; לכל מוצר, לכל קהל, לכל שלב במשפך.</p>
+                </div>
+                <div class="schedule-card">
+                    <h3>מפגש 3 &mdash; 21 באפריל</h3>
+                    <div class="schedule-time">18:00-20:00</div>
+                    <p>תיישם הכל בזמן אמת &mdash; ותצא עם סיסטם שעובד לבד, עם AI.</p>
                 </div>
             </div>
         </div>
