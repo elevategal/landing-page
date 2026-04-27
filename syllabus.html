@@ -669,12 +669,15 @@
         </div>
         <div class="testimonial-carousel-wrapper">
             <div class="testimonial-carousel" id="syllabusCarousel">
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/6tV3KxmI5TY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 1" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/ZF5JYM8EeS4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 2" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/nt_Oj_prUMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה 3" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/QHmuJiRfqCI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה של אור" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/pNou8RBW7QU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 5" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
-                <div class="video-testimonial"><iframe src="https://www.youtube.com/embed/zwk95UZQeMI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy" title="המלצה מהסדנה 6" style="width:100%; height:100%; border-radius: var(--radius);"></iframe></div>
+                <div class="video-testimonial" data-video="3f8b9eb3-b921-4685-9f27-1e0a13548403"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/3f8b9eb3-b921-4685-9f27-1e0a13548403/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="f242ae59-d597-46d2-b188-ee6f123060a2"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/f242ae59-d597-46d2-b188-ee6f123060a2/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="59f9a08b-65ab-4194-b5b8-a93ba10a964a"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/59f9a08b-65ab-4194-b5b8-a93ba10a964a/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/e1a7090a-7a91-44ee-808d-59fe66c28dcb/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/4bb5388c-6ed1-4ade-bc01-8cb276283f6c/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/0abdb805-dc9d-46c5-97fe-8354116356e9/thumbnail.jpg')"></div></div>
             </div>
         </div>
         <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
@@ -846,11 +849,28 @@
             sylCarousel.addEventListener('touchstart', function() { sylCarousel.classList.add('paused'); }, { passive: true });
             sylCarousel.addEventListener('touchend', function() { setTimeout(function() { sylCarousel.classList.remove('paused'); }, 3000); });
         }
+
+        // Click-to-load Bunny iframe for testimonial facades
+        document.addEventListener('click', function(e) {
+            var facade = e.target.closest('.video-facade');
+            if (!facade) return;
+            var vt = facade.closest('.video-testimonial');
+            var videoId = vt && vt.getAttribute('data-video');
+            if (!videoId) return;
+            var iframe = document.createElement('iframe');
+            iframe.src = 'https://player.mediadelivery.net/embed/637122/' + videoId + '?autoplay=true&loop=false&muted=false&preload=true&responsive=true';
+            iframe.style.cssText = 'border:0; width:100%; height:100%; border-radius: var(--radius);';
+            iframe.allow = 'accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;';
+            iframe.allowFullscreen = true;
+            iframe.title = 'המלצה מהסדנה';
+            vt.innerHTML = '';
+            vt.appendChild(iframe);
+        });
     </script>
     <script src="accessibility-widget.js" defer></script>
     <script>
     (function() {
-        var deadline = new Date('2026-04-18T20:30:00+03:00').getTime();
+        var deadline = new Date('2026-05-09T20:30:00+03:00').getTime();
         var cdDays = document.getElementById('cdDays');
         var cdHours = document.getElementById('cdHours');
         var cdMins = document.getElementById('cdMins');
