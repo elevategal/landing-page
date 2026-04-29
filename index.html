@@ -1141,6 +1141,134 @@
         }
         .final-cta .urgency-text { color: var(--gold) !important; }
 
+        /* ===== CASE STUDY / RESULTS (placeholder sections) ===== */
+        .case-study-section, .results-section { padding: 50px 0; background: transparent; }
+        .case-study-section h2, .results-section h2 { text-align: center; margin-bottom: 28px; }
+        .case-study-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto 28px;
+        }
+        .case-study-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius);
+            box-shadow: var(--brutal-shadow);
+            padding: 24px 22px;
+            text-align: center;
+            font-weight: 800;
+            color: #000;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+        }
+        .case-study-card.before { border-color: var(--red-accent); }
+        .case-study-card.after { border-color: var(--green-accent); }
+        .case-study-card .label { font-size: 0.85rem; color: #000; opacity: 0.7; font-weight: 800; }
+        .case-study-card .number { font-size: 1.6rem; font-weight: 900; }
+        .case-study-card .placeholder-img { background: rgba(0,0,0,0.05); border: 2px dashed #000; padding: 20px; border-radius: 8px; font-size: 0.85rem; color: #000; opacity: 0.6; }
+        .case-study-conclusion {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #000;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            max-width: 1000px;
+            margin: 0 auto 28px;
+        }
+        .results-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius);
+            box-shadow: var(--brutal-shadow-sm);
+            padding: 22px 20px;
+            text-align: right;
+        }
+        .results-card .brand { font-size: 0.78rem; font-weight: 700; color: #000; opacity: 0.6; margin-bottom: 4px; }
+        .results-card .field { font-weight: 900; color: #000; margin-bottom: 12px; font-size: 0.95rem; }
+        .results-card .change { display: flex; gap: 8px; font-weight: 800; font-size: 0.9rem; align-items: center; }
+        .results-card .arrow { color: var(--accent); }
+        @media (max-width: 768px) {
+            .case-study-grid { grid-template-columns: 1fr; }
+            .results-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== CAPTAIN ===== */
+        .captain-section { padding: 50px 0; background: transparent; }
+        .captain-card {
+            max-width: 720px;
+            margin: 0 auto;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            padding: 38px 34px;
+            box-shadow: var(--brutal-shadow);
+            text-align: center;
+        }
+        .captain-card p { color: #fff; font-weight: 800; line-height: 1.6; font-size: 1.1rem; margin-bottom: 14px; }
+        .captain-card .lead { font-size: 1.4rem; font-weight: 900; line-height: 1.3; margin-bottom: 18px; }
+        .captain-card .punch { font-size: 1.6rem; font-weight: 900; margin-top: 16px; padding-top: 16px; border-top: 2px solid #fff; }
+
+        /* ===== PRICE COMPARISON / VALUE STACK TABLES ===== */
+        .compare-section, .value-section { padding: 50px 0; background: transparent; }
+        .compare-section h2, .value-section h2 { text-align: center; margin-bottom: 28px; }
+        .compare-table, .value-table {
+            max-width: 820px;
+            margin: 0 auto 18px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius);
+            box-shadow: var(--brutal-shadow);
+            overflow: hidden;
+        }
+        .compare-row, .value-row {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1.4fr;
+            gap: 0;
+            border-bottom: 2px solid #000;
+        }
+        .value-row { grid-template-columns: 2fr 1fr; }
+        .compare-row:last-child, .value-row:last-child { border-bottom: none; }
+        .compare-row .cell, .value-row .cell {
+            padding: 14px 16px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #000;
+            border-left: 2px solid #000;
+        }
+        .compare-row .cell:last-child, .value-row .cell:last-child { border-left: none; }
+        .compare-row.head, .value-row.head { background: #000; color: #fff; font-weight: 900; }
+        .compare-row.head .cell, .value-row.head .cell { color: #fff; font-weight: 900; }
+        .compare-row.total, .value-row.total { background: rgba(140,82,255,0.15); }
+        .compare-row .price-old, .value-row .price-old { color: #000; opacity: 0.6; text-decoration: line-through; font-weight: 800; }
+        .compare-row .price-new, .value-row .price-new { color: var(--green-accent); font-weight: 900; font-size: 1.05rem; }
+        @media (max-width: 768px) {
+            .compare-table, .value-table { background: transparent; border: none; box-shadow: none; }
+            .compare-row, .value-row {
+                display: block;
+                background: #fff;
+                border: 2px solid #000;
+                border-radius: var(--radius);
+                box-shadow: var(--brutal-shadow-sm);
+                margin-bottom: 12px;
+                padding: 14px 16px;
+            }
+            .compare-row.head, .value-row.head { display: none; }
+            .compare-row .cell, .value-row .cell { padding: 4px 0; border: none; }
+            .compare-row .cell:first-child, .value-row .cell:first-child { font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+        }
+
         /* ===== COUNTDOWN TIMER (brutal) ===== */
         .countdown-wrapper {
             text-align: center; margin: 0 auto 28px;
@@ -1450,6 +1578,51 @@
         </div>
     </section>
 
+    <!-- ===== CASE STUDY ===== -->
+    <section class="case-study-section">
+        <div class="container">
+            <h2 class="fade-up">ככה זה עובד בפועל:<br>איך יפעת הורידה את <span class="h-pill">עלות המכירה</span> ל-10 שקלים<br><span style="font-size:0.7em; font-weight:800;">בלי לשנות את המוצר, בלי להעלות תקציב</span></h2>
+            <div class="case-study-grid fade-up">
+                <div class="case-study-card before">
+                    <div class="label">לפני</div>
+                    <div class="placeholder-img">[צילום מודעה ישנה]</div>
+                    <div class="number">עלות מכירה: __ &#8362;</div>
+                </div>
+                <div class="case-study-card after">
+                    <div class="label">אחרי השיטה</div>
+                    <div class="placeholder-img">[צילום מודעה חדשה]</div>
+                    <div class="number">עלות מכירה: 10 &#8362;</div>
+                </div>
+            </div>
+            <p class="case-study-conclusion fade-up">מה השתנה?<br><span class="h-pill">רק הקריאטיב.</span></p>
+        </div>
+    </section>
+
+    <!-- ===== MORE RESULTS ===== -->
+    <section class="results-section">
+        <div class="container">
+            <h2 class="fade-up">זה לא רק יפעת.<br><span style="font-size:0.7em; font-weight:800;">ככה זה נראה אצל עוד מותגים שעבדו איתי לפי השיטה:</span></h2>
+            <div class="results-grid fade-up">
+                <div class="results-card">
+                    <div class="brand">לקוח 1</div>
+                    <div class="field">תחום: ___</div>
+                    <div class="change"><span>לפני: ___</span><span class="arrow">&larr;</span><span>אחרי: ___</span></div>
+                </div>
+                <div class="results-card">
+                    <div class="brand">לקוח 2</div>
+                    <div class="field">תחום: ___</div>
+                    <div class="change"><span>לפני: ___</span><span class="arrow">&larr;</span><span>אחרי: ___</span></div>
+                </div>
+                <div class="results-card">
+                    <div class="brand">לקוח 3</div>
+                    <div class="field">תחום: ___</div>
+                    <div class="change"><span>לפני: ___</span><span class="arrow">&larr;</span><span>אחרי: ___</span></div>
+                </div>
+            </div>
+            <p class="case-study-conclusion fade-up">מה משותף לכולם?<br>לא שינו את המוצר. לא הגדילו תקציב.<br><span class="h-pill">שינו רק את הקריאטיב &mdash; לפי השיטה.</span></p>
+        </div>
+    </section>
+
     <!-- ===== TESTIMONIALS 1 ===== -->
     <section class="testimonials">
         <div class="container">
@@ -1720,7 +1893,65 @@
                     <p>חצי שעה ייעוץ אישי</p>
                 </div>
             </div>
+        </div>
+    </section>
 
+    <!-- ===== CAPTAIN ===== -->
+    <section class="captain-section">
+        <div class="container">
+            <div class="captain-card fade-up">
+                <p class="lead">רגע לפני שאתה נרשם &mdash;<br>משהו שאתה חייב להבין:</p>
+                <p>הסדנה הזו היא <strong>לא קורס AI</strong>.</p>
+                <p>כי AI זה רק הספינה.<br>אתה הקפטן.</p>
+                <p>אם לא תדע לנווט &mdash; תטביע אותה.</p>
+                <p>זו הסיבה שמותגים שמשתמשים באותם כלים בדיוק כמוך &mdash;<br>מקבלים תוצאות אחרות לגמרי.</p>
+                <p class="punch">לא הכלי. הקפטן.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICE COMPARISON ===== -->
+    <section class="compare-section">
+        <div class="container">
+            <h2 class="fade-up">בוא נדבר על מה אנשי קריאטיב<br>גובים היום &mdash; <span class="h-pill">ומה אתה מקבל בסדנה במקום:</span></h2>
+            <div class="compare-table fade-up">
+                <div class="compare-row head">
+                    <div class="cell">מה</div>
+                    <div class="cell">כמה זה עולה היום</div>
+                    <div class="cell">מה תקבל בסדנה</div>
+                </div>
+                <div class="compare-row">
+                    <div class="cell"><strong>מנהל קריאטיב</strong></div>
+                    <div class="cell price-old">4,000 &#8362; ריטיינר חודשי</div>
+                    <div class="cell">את השיטה שלו &mdash; לבד, פעם אחת</div>
+                </div>
+                <div class="compare-row">
+                    <div class="cell"><strong>גרפיקאי</strong></div>
+                    <div class="cell price-old">150 &#8362; למודעה</div>
+                    <div class="cell">תייצר מודעות בעצמך, באינסוף וריאציות</div>
+                </div>
+                <div class="compare-row">
+                    <div class="cell"><strong>קופירייטר ל-UGC</strong></div>
+                    <div class="cell price-old">500 &#8362; לתסריט</div>
+                    <div class="cell">תסריטים מוכנים תוך 20 דקות</div>
+                </div>
+                <div class="compare-row">
+                    <div class="cell"><strong>קורס AI גנרי</strong></div>
+                    <div class="cell price-old">2,500 &#8362;</div>
+                    <div class="cell">קורס AI עם אסטרטגיה &mdash; שעובדת</div>
+                </div>
+                <div class="compare-row total">
+                    <div class="cell"><strong>סה"כ עלות חודשית רגילה</strong></div>
+                    <div class="cell price-old">7,000+ &#8362;</div>
+                    <div class="cell price-new">סדנה אחת: 997 &#8362;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRICE BOX ===== -->
+    <section class="price-section" style="padding:30px 0;">
+        <div class="container">
             <div class="price-box fade-up">
                 <p class="old-price">עסקים משלמים לי <span>12,000 &#8362; בחודש</span> כדי שאני אחשוב בשבילם.</p>
                 <p style="color:#000; font-size:1.15rem; font-weight:900; margin-bottom:18px;">בסדנה אתה לומד לחשוב ככה בעצמך.</p>
@@ -1728,6 +1959,47 @@
                 <p class="price-note">או 3 תשלומים של 389 &#8362; (כולל מע״מ)</p>
                 <p class="single-pay">המחיר עולה במחזור הבא.</p>
                 <p class="roi-line">קריאטיב אחד שעובד &mdash; מחזיר את ההשקעה.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VALUE STACK ===== -->
+    <section class="value-section">
+        <div class="container">
+            <h2 class="fade-up"><span class="h-pill">כמה זה שווה לך?</span></h2>
+            <div class="value-table fade-up">
+                <div class="value-row head">
+                    <div class="cell">מה אתה מקבל</div>
+                    <div class="cell">שווי</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">3 מפגשים שיתופיים (4.5 שעות)</div>
+                    <div class="cell">2,500 &#8362;</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">הקלטות מלאות לצפייה חוזרת</div>
+                    <div class="cell">400 &#8362;</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">סוכן קריאטיב AI מלא</div>
+                    <div class="cell">800 &#8362;</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">מדריך עבודה צעד אחר צעד</div>
+                    <div class="cell">400 &#8362;</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">חוברת תרגילים עם בריפים מוכנים</div>
+                    <div class="cell">150 &#8362;</div>
+                </div>
+                <div class="value-row">
+                    <div class="cell">חצי שעה ייעוץ אישי</div>
+                    <div class="cell">750 &#8362;</div>
+                </div>
+                <div class="value-row total">
+                    <div class="cell"><strong>סה"כ שווי</strong></div>
+                    <div class="cell"><span class="price-old">5,000 &#8362;</span> &nbsp; <span class="price-new">אתה משלם: 997 &#8362;</span></div>
+                </div>
             </div>
         </div>
     </section>
