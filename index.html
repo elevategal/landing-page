@@ -101,14 +101,14 @@
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --bg-primary: #F5F5F5;
-            --bg-secondary: #FFFFFF;
+            --bg-primary: #F3EFE7;
+            --bg-secondary: #F3EFE7;
             --bg-card: #1A1A2E;
             --bg-card-hover: #22223d;
             --bg-card-light: #FFFFFF;
-            --text-primary: #1A1A2E;
-            --text-secondary: #555555;
-            --text-muted: #6B6B6B;
+            --text-primary: #000000;
+            --text-secondary: #000000;
+            --text-muted: #000000;
             --text-on-dark: #FFFFFF;
             --text-on-dark-secondary: #B0B0C0;
             --accent: #8C52FF;
@@ -117,26 +117,29 @@
             --red-accent: #E53935;
             --green-accent: #2E7D32;
             --gold: #F59E0B;
-            --border: rgba(0,0,0,0.08);
+            --border: #000000;
             --border-dark: rgba(255,255,255,0.1);
             --radius: 12px;
             --radius-lg: 20px;
             --max-width: 1100px;
             --section-padding: 60px 0;
+            --brutal-shadow: 6px 6px 0 #000;
+            --brutal-shadow-sm: 4px 4px 0 #000;
         }
 
         html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
-            font-family: 'Noto Sans Hebrew', 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Heebo', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             background-image:
                 linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
             background-size: 40px 40px;
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.6;
             font-size: 16px;
+            font-weight: 700;
             overflow-x: hidden;
         }
 
@@ -148,70 +151,90 @@
 
         section { padding: var(--section-padding); position: relative; overflow: hidden; }
 
-        h1, h2, h3, h4 { font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif; line-height: 1.3; font-weight: 900; }
-        h1 { font-size: clamp(1.8rem, 5vw, 3rem); }
-        h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; }
-        h3 { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; }
+        h1, h2, h3, h4 { font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif; line-height: 1.2; font-weight: 900; color: #000; letter-spacing: -0.01em; }
+        h1 { font-size: clamp(2rem, 5.6vw, 3.4rem); }
+        h2 { font-size: clamp(1.6rem, 4.4vw, 2.4rem); font-weight: 900; }
+        h3 { font-size: clamp(1.15rem, 3vw, 1.5rem); font-weight: 900; }
 
-        .highlight { color: var(--accent); }
+        /* purple text accent (legacy) */
+        .highlight { color: var(--accent); font-weight: 900; }
+        /* purple PILL highlight — black-bg sticker style for key phrases */
+        .h-pill {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.05em 0.4em;
+            border-radius: 4px;
+            font-weight: 900;
+            box-shadow: 3px 3px 0 #000;
+        }
 
-        /* ===== CTA BUTTON ===== */
+        /* neo-brutal box: black border + offset black shadow */
+        .box-brutal {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 12px;
+            box-shadow: var(--brutal-shadow);
+        }
+        .box-brutal-purple { background: rgba(140,82,255,0.08); border: 2px solid #000; border-radius: 12px; box-shadow: var(--brutal-shadow); }
+        .tilted-left  { transform: rotate(-3deg); }
+        .tilted-right { transform: rotate(3deg); }
+
+        /* ===== CTA BUTTON (neo-brutal) ===== */
         .cta-btn {
             display: inline-block;
-            background: linear-gradient(135deg, #2E7D32, #43A047);
+            background: var(--accent);
             color: #fff;
-            padding: 18px 48px;
-            border-radius: 50px;
-            font-size: 1.15rem;
-            font-weight: 700;
+            padding: 18px 44px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 900;
             text-decoration: none;
-            border: none;
+            border: 2px solid #000;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
+            box-shadow: var(--brutal-shadow);
+            font-family: inherit;
         }
         .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.4);
-            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 #000;
         }
-        .cta-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-        }
-        .cta-btn:hover::after { left: 100%; }
+        .cta-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
 
         .cta-btn-secondary {
-            background: linear-gradient(135deg, #2E7D32, #43A047);
-            box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
+            background: #fff;
+            color: #000;
+            border: 2px solid #000;
+            box-shadow: var(--brutal-shadow);
         }
-        .cta-btn-secondary:hover {
-            background: linear-gradient(135deg, #1B5E20, #2E7D32);
-            box-shadow: 0 8px 30px rgba(46, 125, 50, 0.4);
+        .cta-btn-secondary:hover { background: #fff; box-shadow: 8px 8px 0 #000; }
+
+        /* video-style CTA — used for "click to watch video" */
+        .cta-btn-video {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
         }
+        .cta-btn-video:hover { background: #1a1a1a; }
 
         .cta-wrapper { text-align: center; margin-top: 40px; }
 
-        /* ===== BADGE ===== */
+        /* ===== BADGE (brutal pill) ===== */
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(140, 82, 255, 0.08);
-            border: 1px solid rgba(140, 82, 255, 0.2);
+            background: #fff;
+            border: 2px solid #000;
             border-radius: 50px;
-            padding: 8px 20px;
+            padding: 8px 18px;
             font-size: 0.85rem;
-            color: #6B3FC7;
-            font-weight: 600;
+            color: #000;
+            font-weight: 800;
             margin-bottom: 24px;
+            box-shadow: var(--brutal-shadow-sm);
         }
         .badge .dot {
             width: 8px; height: 8px;
@@ -239,51 +262,68 @@
         }
 
         /* ===== HERO ===== */
-        .hero { padding: 90px 0 30px; text-align: center; position: relative; background: var(--bg-secondary); }
+        .hero { padding: 80px 0 30px; text-align: center; position: relative; background: transparent; }
         .hero .container { position: relative; z-index: 1; }
         .hero .pre-headline {
-            font-size: clamp(0.9rem, 2vw, 1.05rem);
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-            max-width: 700px;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            color: #000;
+            font-weight: 700;
+            margin-bottom: 22px;
+            max-width: 720px;
             margin-left: auto;
             margin-right: auto;
         }
-        .hero h1 { margin-bottom: 24px; color: var(--text-primary); }
-        .hero .subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.15rem);
-            color: var(--text-secondary);
-            max-width: 780px;
-            margin: 0 auto 20px;
-            line-height: 1.8;
+        .hero h1 {
+            margin-bottom: 28px;
+            color: #000;
+            font-weight: 900;
+            line-height: 1.15;
         }
-        .hero .subtitle strong { color: var(--text-primary); font-weight: 700; }
+        .hero h1 .line { display: block; }
+        .hero .subtitle {
+            font-size: clamp(1.05rem, 2.5vw, 1.25rem);
+            color: #000;
+            font-weight: 700;
+            max-width: 720px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+        .hero .subtitle .line { display: block; }
         .hero .workshop-info {
             font-size: 0.95rem;
-            color: var(--accent);
-            font-weight: 600;
+            color: #000;
+            font-weight: 700;
             margin-top: 16px;
+            line-height: 1.7;
+        }
+        .hero-cta-row {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
         }
 
         /* ===== VSL ===== */
-        .vsl-section { padding: 0 0 50px; background: var(--bg-secondary); }
+        .vsl-section { padding: 0 0 50px; background: transparent; }
         .video-wrapper {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
             border-radius: var(--radius-lg);
             overflow: hidden;
-            border: 1px solid var(--border);
+            border: 2px solid #000;
             background: var(--bg-card);
             aspect-ratio: 16/9;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: border-color 0.3s;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: var(--brutal-shadow);
         }
-        .video-wrapper:hover { border-color: rgba(140,82,255,0.3); }
+        .video-wrapper:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #000; }
         .video-wrapper:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
         .faq-question:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; border-radius: var(--radius); }
         .vsl-thumb {
@@ -1367,11 +1407,19 @@
         <div class="container">
             <div class="badge fade-up">
                 <span class="dot"></span>
-                <span>סדנה שיתופית | מוגבלת ל-10 משתתפים</span>
+                <span>סדנה שיתופית | מוגבלת ל-15 משתתפים</span>
             </div>
-            <p class="pre-headline fade-up">סדנה לבעלי מותגי איקומרס שרוצים להפסיק לנחש</p>
-            <h1 class="fade-up">איך מותגי איקומרס מייצרים מעל<br><span class="highlight">10 קריאטיבים מנצחים בשבוע</span></h1>
-            <p class="subtitle fade-up">בלי לנחש, בלי להתחיל מאפס<br>ובלי לבזבז שעות על כל בריף</p>
+            <p class="pre-headline fade-up">לבעלי חנויות איקומרס שעובדים על רואס נמוך &mdash; וכבר לא רואים רווח</p>
+            <h1 class="fade-up">
+                <span class="line">איך לייצר <span class="h-pill">10 קריאטיבים מנצחים</span> בשבוע</span>
+                <span class="line">שמעלים את הרואס שלך</span>
+                <span class="line">בלי להעלות תקציב, ובלי להיות יצירתי</span>
+            </h1>
+            <p class="subtitle fade-up">
+                <span class="line">הסיסטם המדויק שאני בונה ללקוחות שלי &mdash;</span>
+                <span class="line">שאתה תיישם עם AI תוך 3 מפגשים</span>
+            </p>
+            <p class="workshop-info fade-up">למותגי איקומרס שעושים מעל 10K בחודש &mdash; ורוצים לגדול</p>
         </div>
     </section>
 
@@ -1387,7 +1435,10 @@
                 <div class="video-label">לחץ לצפייה</div>
             </div>
             <div class="cta-wrapper fade-up">
-                <a href="#contact" class="cta-btn">שמור לי מקום בסדנה &larr;</a>
+                <div class="hero-cta-row">
+                    <a href="#contact" class="cta-btn">שמור לי מקום בסדנה &larr;</a>
+                    <a href="#vsl" class="cta-btn cta-btn-secondary">לחצו לצפייה בסרטון</a>
+                </div>
             </div>
         </div>
     </section>
