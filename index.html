@@ -1627,6 +1627,18 @@
 
         /* ===== PRICE COMPARISON / VALUE STACK TABLES ===== */
         .compare-section, .value-section { padding: 50px 0; background: transparent; }
+        .rent-vs-be { padding: 70px 0; background: transparent; text-align: center; }
+        .rent-vs-be-text {
+            max-width: 880px;
+            margin: 0 auto;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 900;
+            color: #000;
+            line-height: 1.2;
+        }
+        .rent-vs-be-text .l1 { display: block; font-size: clamp(1.5rem, 3.6vw, 2.4rem); margin-bottom: 14px; }
+        .rent-vs-be-text .l2 { display: block; font-size: clamp(1.5rem, 3.6vw, 2.4rem); }
+        @media (max-width: 768px) { .rent-vs-be { padding: 48px 0; } }
         .compare-section h2, .value-section h2 { text-align: center; margin-bottom: 28px; }
         .compare-intro {
             text-align: center;
@@ -2441,6 +2453,16 @@
                     <div class="cell price-new">סדנה אחת: 997 &#8362;</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== CONNECTOR (compare → price) ===== -->
+    <section class="rent-vs-be">
+        <div class="container">
+            <p class="rent-vs-be-text fade-up">
+                <span class="l1">זה ההבדל בין לשכור פתרון</span>
+                <span class="l2">לבין להיות <span class="h-pill">הפתרון</span> בעצמך.</span>
+            </p>
         </div>
     </section>
 
