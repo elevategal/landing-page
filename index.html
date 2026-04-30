@@ -1722,6 +1722,22 @@
             .compare-row.head, .value-row.head { display: none; }
             .compare-row .cell, .value-row .cell { padding: 4px 0; border: none; }
             .compare-row .cell:first-child, .value-row .cell:first-child { font-weight: 900; font-size: 1rem; margin-bottom: 8px; }
+            /* Total row on mobile — center + tighten so the prices don't float in empty space */
+            .compare-row.total, .value-row.total {
+                background: rgba(140,82,255,0.15);
+                text-align: center;
+                padding: 18px 18px;
+            }
+            .compare-row.total .cell, .value-row.total .cell { padding: 2px 0; }
+            .compare-row.total .cell:first-child, .value-row.total .cell:first-child {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+                padding-bottom: 12px;
+                border-bottom: 2px dashed rgba(0,0,0,0.18);
+            }
+            .value-row.total .price-stack { align-items: center; gap: 2px; }
+            .value-row.total .price-old { font-size: 1.4rem; }
+            .value-row.total .price-new { font-size: 1.55rem; }
         }
 
         /* ===== PROGRESS BAR (spots taken) ===== */
