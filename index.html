@@ -341,6 +341,39 @@
             line-height: 1.7;
         }
         .hero-stack { display: block; text-align: center; }
+        /* ===== SCROLL CUE - bouncing chevron between sections to keep eyes moving ===== */
+        .scroll-cue {
+            display: flex;
+            justify-content: center;
+            padding: 12px 0 24px;
+            margin: 0 auto;
+        }
+        .scroll-cue .chev {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid #000;
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: var(--brutal-shadow-sm);
+            animation: scroll-cue-bounce 1.8s ease-in-out infinite;
+            cursor: default;
+            user-select: none;
+        }
+        .scroll-cue.lg .chev { width: 60px; height: 60px; font-size: 1.8rem; box-shadow: var(--brutal-shadow); }
+        @keyframes scroll-cue-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .scroll-cue .chev { animation: none; }
+        }
+
         .hero-cta-row {
             display: flex;
             gap: 14px;
@@ -2080,6 +2113,7 @@
                 <span class="line">הסיסטם המדויק שאני בונה ללקוחות שלי -</span>
                 <span class="line">שאתה תיישם עם AI תוך <span class="h-pill">3 מפגשים</span></span>
             </p>
+            <div class="scroll-cue lg fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
     </header>
@@ -2102,6 +2136,7 @@
                 <p class="case-not">לא היצירתיות. לא המוצר.</p>
                 <p class="case-method">השיטה.</p>
             </div>
+            <div class="scroll-cue fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
 
@@ -2234,6 +2269,7 @@
                 <span class="l2">זה לא <span class="strike">הכלי</span>.</span>
                 <span class="l3">זו <span class="h-pill">השיטה</span>:</span>
             </p>
+            <div class="scroll-cue fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
 
@@ -2284,6 +2320,7 @@
                 </ul>
                 <p class="imagine-tag">זה לא פנטזיה. זה מה שכבר קורה אצל הלקוחות שלי.</p>
             </div>
+            <div class="scroll-cue fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
 
@@ -2333,6 +2370,7 @@
                 </div>
             </div>
             <p class="closing fade-up">זאת לא תוצאה חד-פעמית.<br><span class="h-pill">זה מה שקורה כשיש שיטה.</span></p>
+            <div class="scroll-cue fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
 
@@ -2551,6 +2589,7 @@
                     <div class="cell"><div class="price-stack"><span class="price-old">5,000 &#8362;</span><span class="price-new">אתה משלם: 997 &#8362; <span class="vat-tag">+ מע״מ</span></span></div></div>
                 </div>
             </div>
+            <div class="scroll-cue fade-up" aria-hidden="true"><span class="chev">&#x2193;</span></div>
         </div>
     </section>
 
