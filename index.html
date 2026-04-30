@@ -385,41 +385,36 @@
         .testimonials h2 { text-align: center; margin-bottom: 30px; color: #fff; }
         .testimonials .highlight { color: #fff; }
         .testimonials .h-pill { background: var(--accent); color: #fff; box-shadow: 3px 3px 0 #fff; }
-        /* Testimonial Carousel */
-        .testimonial-carousel {
-            display: flex;
-            gap: 16px;
-            padding: 8px 0 20px;
-            width: max-content;
+        /* Testimonial Grid (3-col desktop, 2-col tablet, 1-col mobile) */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            max-width: 980px;
+            margin: 0 auto 20px;
         }
-        @keyframes scroll-testimonials {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .testimonial-carousel-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-            overflow: hidden;
-            direction: ltr;
-            mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
-            -webkit-mask-image: linear-gradient(to left, transparent, black 5%, black 95%, transparent);
-        }
+        .testimonial-carousel-wrapper { position: relative; margin-bottom: 20px; }
         .video-testimonial {
-            flex-shrink: 0;
-            width: 220px;
+            width: 100%;
             aspect-ratio: 9/16;
             background: #111;
             border-radius: var(--radius);
-            border: 1px solid var(--border-dark);
+            border: 2px solid #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            transition: border-color 0.3s;
-            scroll-snap-align: start;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             position: relative;
+            box-shadow: 6px 6px 0 #fff;
         }
-        .video-testimonial:hover { border-color: rgba(140,82,255,0.4); }
+        .video-testimonial:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #fff; }
+        @media (max-width: 900px) {
+            .testimonial-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        }
+        @media (max-width: 520px) {
+            .testimonial-grid { grid-template-columns: 1fr; gap: 16px; max-width: 320px; }
+        }
         .video-facade {
             width: 100%; height: 100%;
             cursor: pointer; position: relative;
@@ -437,28 +432,8 @@
         }
         .video-facade:hover::after { transform: translate(-50%, -50%) scale(1.1); }
 
-        /* Carousel Arrows */
-        .carousel-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-60%);
-            width: 44px; height: 44px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-            color: #fff;
-            font-size: 1.3rem;
-        }
-        .carousel-arrow:hover { background: var(--accent-hover); transform: translateY(-60%) scale(1.1); }
-        .carousel-arrow.prev { left: 16px; }
-        .carousel-arrow.next { right: 16px; }
+        /* Carousel Arrows (no longer used in grid layout) */
+        .carousel-arrow { display: none; }
 
         /* Swipe Hint */
         .swipe-hint {
@@ -519,18 +494,17 @@
             align-items: center;
             justify-content: center;
             height: 60px;
-            opacity: 0.5;
-            transition: opacity 0.3s;
+            opacity: 1;
+            transition: transform 0.2s;
         }
-        .carousel-item:hover { opacity: 1; }
+        .carousel-item:hover { transform: scale(1.06); }
         .carousel-item img {
             max-height: 40px;
             max-width: 140px;
             object-fit: contain;
-            filter: invert(1) grayscale(100%) opacity(0.6);
-            transition: filter 0.3s;
+            filter: brightness(0) saturate(100%);
+            transition: transform 0.2s;
         }
-        .carousel-item:hover img { filter: invert(1) grayscale(0%) opacity(1); }
 
         /* ===== PAIN POINTS ===== */
         .pain-section {
@@ -1627,22 +1601,17 @@
     <section class="testimonials">
         <div class="container">
             <h2 class="fade-up">הנה מה שיש לחברה כמוך,<br>שהיו <span class="highlight">בסדנה הקודמת</span> להגיד:</h2>
-            <div class="testimonial-carousel-wrapper fade-up">
-                <button class="carousel-arrow prev" aria-label="הקודם">&larr;</button>
-                <button class="carousel-arrow next" aria-label="הבא">&rarr;</button>
-                <div class="testimonial-carousel">
-                    <div class="video-testimonial" data-video="3f8b9eb3-b921-4685-9f27-1e0a13548403"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/3f8b9eb3-b921-4685-9f27-1e0a13548403/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="f242ae59-d597-46d2-b188-ee6f123060a2"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/f242ae59-d597-46d2-b188-ee6f123060a2/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="59f9a08b-65ab-4194-b5b8-a93ba10a964a"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/59f9a08b-65ab-4194-b5b8-a93ba10a964a/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/e1a7090a-7a91-44ee-808d-59fe66c28dcb/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/4bb5388c-6ed1-4ade-bc01-8cb276283f6c/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div></div>
-                    <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/0abdb805-dc9d-46c5-97fe-8354116356e9/thumbnail.jpg')"></div></div>
-                </div>
+            <div class="testimonial-grid fade-up">
+                <div class="video-testimonial" data-video="3f8b9eb3-b921-4685-9f27-1e0a13548403"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/3f8b9eb3-b921-4685-9f27-1e0a13548403/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="f242ae59-d597-46d2-b188-ee6f123060a2"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/f242ae59-d597-46d2-b188-ee6f123060a2/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="59f9a08b-65ab-4194-b5b8-a93ba10a964a"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/59f9a08b-65ab-4194-b5b8-a93ba10a964a/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/e1a7090a-7a91-44ee-808d-59fe66c28dcb/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/4bb5388c-6ed1-4ade-bc01-8cb276283f6c/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div></div>
+                <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/0abdb805-dc9d-46c5-97fe-8354116356e9/thumbnail.jpg')"></div></div>
             </div>
-            <div class="swipe-hint"><span class="arrow-right">&#8594;</span> גללו לצדדים <span class="arrow-left">&#8592;</span></div>
             <div class="cta-wrapper fade-up">
                 <a href="#contact" class="cta-btn">רוצה להבין אם זה מתאים לך? &larr;</a>
             </div>
