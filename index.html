@@ -703,19 +703,45 @@
         }
 
         /* ===== SOLUTION TRANSITION ===== */
-        .solution-transition { text-align: center; padding: 60px 0 20px; background: transparent; }
-        .solution-transition .but-text {
-            font-size: 1.4rem; font-weight: 900;
-            color: #000; margin-bottom: 18px;
-        }
-        .solution-transition .system-text {
-            font-size: 1.1rem; color: #000; font-weight: 700; margin-top: 16px; line-height: 1.7;
-        }
-        .solution-transition p {
+        .solution-transition { text-align: center; padding: 80px 0 40px; background: transparent; }
+        .solution-transition .pivot {
+            max-width: 900px;
+            margin: 0 auto;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 900;
+            line-height: 1.2;
             color: #000;
-            max-width: 720px;
-            margin: 16px auto 0;
-            font-size: 1.05rem;
+        }
+        .solution-transition .pivot .l1 {
+            display: block;
+            font-size: clamp(1.7rem, 4.4vw, 2.8rem);
+            margin-bottom: 18px;
+        }
+        .solution-transition .pivot .l2 {
+            display: block;
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            margin-bottom: 16px;
+        }
+        .solution-transition .pivot .l3 {
+            display: block;
+            font-size: clamp(1.7rem, 4.4vw, 2.8rem);
+        }
+        .solution-transition .pivot .strike {
+            position: relative;
+            display: inline-block;
+            background: rgba(140,82,255,0.12);
+            padding: 0.05em 0.35em;
+            border-radius: 6px;
+        }
+        .solution-transition .pivot .strike::after {
+            content: '';
+            position: absolute;
+            left: -4px; right: -4px;
+            top: 50%;
+            height: 5px;
+            background: var(--red-accent);
+            border-radius: 999px;
+            transform: translateY(-50%) rotate(-2deg);
         }
 
         /* ===== STEPS ===== */
@@ -1840,10 +1866,7 @@
             .final-cta h2 { font-size: 1.5rem; }
             .final-cta .cta-btn { white-space: nowrap; font-size: 0.95rem !important; padding: 16px 28px !important; max-width: none; }
 
-            .solution-transition { padding: 36px 0 16px; }
-            .solution-transition .but-text { font-size: 1.5rem; margin-bottom: 16px; }
-            .solution-transition h2 { font-size: 1.3rem; }
-            .solution-transition p { font-size: 0.9rem; }
+            .solution-transition { padding: 56px 0 28px; }
 
             h2 { font-size: 1.35rem; }
         }
@@ -2132,9 +2155,11 @@
     <!-- ===== SOLUTION TRANSITION ===== -->
     <section class="solution-transition">
         <div class="container">
-            <div class="but-text fade-up">ויש מותגים שלא נופלים בזה.</div>
-            <h2 class="fade-up">הרואס שלהם <span class="h-pill">עולה כל חודש</span><br>בלי לעלות בתקציב</h2>
-            <p class="system-text fade-up">הם עובדים עם אותם כלי בינה מלאכותית כמוכם -<br>ומקבלים תוצאות אחרות לגמרי.<br><br>כי הם לא מבקשים מהכלים לחשוב בשבילם.<br>הם נותנים להם הקשר אסטרטגי - ומקבלים בחזרה קריאטיב<br>שמדבר ללקוח הספציפי שלהם.</p>
+            <p class="pivot fade-up">
+                <span class="l1">אז מה עושה את ההבדל?</span>
+                <span class="l2">זה לא <span class="strike">הכלי</span>.</span>
+                <span class="l3">זו <span class="h-pill">השיטה</span>:</span>
+            </p>
         </div>
     </section>
 
