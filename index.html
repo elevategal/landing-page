@@ -175,10 +175,10 @@
             font-weight: 900;
             box-shadow: 3px 3px 0 #000;
         }
-        /* gradient pill - pink-to-purple, for the loudest words */
+        /* loud pill - solid purple sticker, biggest visual weight */
         .h-pill-grad {
             display: inline-block;
-            background: linear-gradient(90deg, #FF3D8B 0%, #8C52FF 100%);
+            background: var(--accent);
             color: #fff;
             padding: 0.05em 0.5em;
             border-radius: 6px;
@@ -186,15 +186,20 @@
             box-shadow: 4px 4px 0 #000;
             border: 2px solid #000;
         }
-        /* red emphasis (no pill) */
-        .h-red { color: #E53935; font-weight: 900; }
-        /* orange brutal banner - sticker at top of hero */
+        /* underline emphasis - bold black with thick purple underline */
+        .h-red {
+            color: #000;
+            font-weight: 900;
+            background: linear-gradient(transparent 65%, var(--accent) 65%, var(--accent) 92%, transparent 92%);
+            padding: 0 0.1em;
+        }
+        /* brutal banner - black sticker with white text, brand-only */
         .hero-banner {
             display: inline-block;
-            background: #FF7A1A;
-            color: #000;
+            background: #000;
+            color: #fff;
             border: 2px solid #000;
-            box-shadow: 6px 6px 0 #000;
+            box-shadow: 6px 6px 0 var(--accent);
             padding: 12px 22px;
             font-weight: 900;
             font-size: clamp(0.95rem, 2vw, 1.15rem);
@@ -1560,9 +1565,6 @@
                 <span class="line">הסיסטם המדויק שאני בונה ללקוחות שלי -</span>
                 <span class="line">שאתה תיישם עם AI תוך <span class="h-pill">3 מפגשים</span></span>
             </p>
-            <div class="cta-wrapper fade-up">
-                <a href="#contact" class="cta-btn">שמור לי מקום בסדנה &larr;</a>
-            </div>
         </div>
     </section>
     </header>
