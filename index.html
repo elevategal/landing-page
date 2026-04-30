@@ -1087,55 +1087,159 @@
         }
         .about-text strong { color: #000; font-weight: 900; }
 
-        /* ===== SCHEDULE ===== */
-        .schedule-section { padding: 60px 0; background: transparent; }
-        .schedule-section h2 { text-align: center; margin-bottom: 16px; }
-        .schedule-info {
+        /* ===== SOCIAL PROOF GRID (קבלות) ===== */
+        .proof-section { padding: 60px 0; background: transparent; }
+        .proof-section h2 { text-align: center; margin-bottom: 14px; line-height: 1.3; }
+        .proof-section .lead {
             text-align: center;
-            color: #000;
-            font-size: 1.05rem;
             font-weight: 800;
-            margin-bottom: 32px;
+            font-size: 1.05rem;
+            color: #000;
+            margin-bottom: 36px;
+            opacity: 0.85;
         }
-        .schedule-grid {
+        .proof-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 22px;
-            max-width: 1000px;
+            max-width: 1080px;
+            margin: 0 auto 30px;
+        }
+        .proof-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius);
+            box-shadow: var(--brutal-shadow);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .proof-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 #000; }
+        .proof-card .proof-img-wrap {
+            background: #f5f0e6;
+            border-bottom: 2px solid #000;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .proof-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .proof-card .proof-caption {
+            padding: 14px 16px;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            text-align: right;
+        }
+        .proof-card .proof-caption strong { font-weight: 900; color: var(--accent); display: block; margin-bottom: 4px; font-size: 1rem; }
+        .proof-section .closing {
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.15rem;
+            color: #000;
+            line-height: 1.5;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            .proof-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 540px) {
+            .proof-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SCHEDULE (Pleg-style with GIFs) ===== */
+        .schedule-section { padding: 60px 0; background: transparent; }
+        .schedule-section h2 { text-align: center; margin-bottom: 14px; }
+        .schedule-info {
+            text-align: center;
+            color: #000;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+        }
+        .schedule-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            max-width: 1080px;
             margin: 0 auto;
         }
         .schedule-card {
             background: #fff;
             border: 2px solid #000;
-            border-radius: var(--radius);
-            padding: 26px 22px;
-            text-align: right;
+            border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 0;
         }
-        .schedule-card:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #000; }
-        .schedule-card h3 {
-            color: #000;
-            font-size: 1.05rem;
-            font-weight: 900;
-            margin-bottom: 6px;
-            line-height: 1.4;
+        .schedule-gif-wrap {
+            background: #f5f0e6;
+            border-left: 2px solid #000;
+            overflow: hidden;
+            min-height: 280px;
+            display: flex;
+            align-items: stretch;
         }
-        .schedule-time {
+        .schedule-gif-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .schedule-content {
+            padding: 28px 30px;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .schedule-num {
             display: inline-block;
-            background: var(--accent);
+            font-size: clamp(2.6rem, 5vw, 3.6rem);
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .schedule-meta {
+            display: inline-block;
+            background: #000;
             color: #fff;
             font-size: 0.82rem;
             font-weight: 800;
-            padding: 2px 10px;
+            padding: 4px 12px;
             border-radius: 6px;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
-        .schedule-card p {
+        .schedule-card h3 {
             color: #000;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            font-weight: 600;
+            font-size: clamp(1.15rem, 2.6vw, 1.4rem);
+            font-weight: 900;
+            margin-bottom: 14px;
+            line-height: 1.3;
+        }
+        .schedule-bullets { list-style: none; padding: 0; margin: 0; }
+        .schedule-bullets li {
+            position: relative;
+            padding: 7px 26px 7px 0;
+            color: #000;
+            font-weight: 700;
+            font-size: 0.97rem;
+            line-height: 1.5;
+        }
+        .schedule-bullets li::before {
+            content: '\2713';
+            position: absolute;
+            right: 0;
+            top: 7px;
+            color: var(--accent);
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 820px) {
+            .schedule-card { grid-template-columns: 1fr; }
+            .schedule-gif-wrap { border-left: none; border-bottom: 2px solid #000; min-height: 220px; }
         }
         @media (max-width: 768px) {
             .schedule-grid { grid-template-columns: 1fr; }
@@ -1363,41 +1467,49 @@
 
         /* ===== CASE STUDY / RESULTS (placeholder sections) ===== */
         .case-study-section, .results-section { padding: 50px 0; background: transparent; }
-        .case-study-section h2, .results-section h2 { text-align: center; margin-bottom: 28px; }
-        .case-study-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            max-width: 640px;
+        .case-study-section h2, .results-section h2 { text-align: center; margin-bottom: 28px; line-height: 1.25; }
+        .dashboard-wrap {
+            max-width: 940px;
             margin: 0 auto 28px;
-        }
-        .case-study-card {
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius);
             box-shadow: var(--brutal-shadow);
-            padding: 24px 22px;
-            text-align: center;
-            font-weight: 800;
-            color: #000;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 10px;
+            padding: 14px;
+            overflow: hidden;
         }
-        .case-study-card.before { border-color: var(--red-accent); }
-        .case-study-card.after { border-color: var(--green-accent); }
-        .case-study-card .label { font-size: 0.85rem; color: #000; opacity: 0.7; font-weight: 800; }
-        .case-study-card .number { font-size: 1.6rem; font-weight: 900; }
-        .case-study-card .placeholder-img { background: rgba(0,0,0,0.05); border: 2px dashed #000; padding: 20px; border-radius: 8px; font-size: 0.85rem; color: #000; opacity: 0.6; }
+        .dashboard-img { width: 100%; height: auto; display: block; border-radius: 6px; }
+        .case-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            max-width: 940px;
+            margin: 0 auto 30px;
+        }
+        .case-stat {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius);
+            box-shadow: var(--brutal-shadow-sm);
+            padding: 16px 12px;
+            text-align: center;
+        }
+        .case-stat .num { font-size: clamp(1.3rem, 3vw, 1.9rem); font-weight: 900; color: #000; line-height: 1.1; }
+        .case-stat .num .cur { font-size: 0.7em; }
+        .case-stat .lbl { font-size: 0.85rem; color: #000; font-weight: 800; margin-top: 6px; opacity: 0.75; }
+        .case-stat.highlight-stat { background: rgba(46,125,50,0.1); border-color: var(--green-accent); }
+        .case-stat.highlight-stat .num { color: var(--green-accent); font-size: clamp(1.5rem, 3.4vw, 2.1rem); }
         .case-study-conclusion {
             text-align: center;
             font-size: 1.2rem;
             font-weight: 900;
             color: #000;
-            max-width: 600px;
+            max-width: 640px;
             margin: 0 auto;
+            line-height: 1.5;
+        }
+        @media (max-width: 720px) {
+            .case-stats { grid-template-columns: repeat(2, 1fr); }
         }
         .results-grid {
             display: grid;
@@ -1783,20 +1895,20 @@
     </section>
     </header>
 
-    <!-- ===== CASE STUDY ===== -->
+    <!-- ===== CASE STUDY (ROAS 10.37) ===== -->
     <section class="case-study-section">
         <div class="container">
-            <h2 class="fade-up"><span class="h-pill">י. יזמית אי-קומרס</span></h2>
-            <div class="case-study-grid fade-up">
-                <div class="case-study-card before">
-                    <div class="label">י. לפני הסדנה</div>
-                    <div class="placeholder-img">[תמונה]</div>
-                </div>
-                <div class="case-study-card after">
-                    <div class="label">י. אחרי הסדנה</div>
-                    <div class="placeholder-img">[תמונה]</div>
-                </div>
+            <h2 class="fade-up">4 מודעות. אותו תקציב. אותו מוצר.<br>מודעה אחת הביאה <span class="h-pill">רואס 10.37</span><br><span style="font-size:0.65em; font-weight:800;">ו-142,948 ₪ ב-263 רכישות.</span></h2>
+            <div class="dashboard-wrap fade-up">
+                <img src="case-study-dashboard.png" alt="צילום מסך מנהל המודעות - מודעה עם רואס 10.37" class="dashboard-img" loading="lazy">
             </div>
+            <div class="case-stats fade-up">
+                <div class="case-stat"><div class="num">263</div><div class="lbl">רכישות</div></div>
+                <div class="case-stat"><div class="num">52.43&nbsp;<span class="cur">₪</span></div><div class="lbl">עלות לרכישה</div></div>
+                <div class="case-stat"><div class="num">142,948&nbsp;<span class="cur">₪</span></div><div class="lbl">הכנסה</div></div>
+                <div class="case-stat highlight-stat"><div class="num">10.37</div><div class="lbl">רואס</div></div>
+            </div>
+            <p class="case-study-conclusion fade-up">מה הופך מודעה אחת ל"<span class="h-pill">זו</span>"?<br><span style="font-weight:800;">זה בדיוק מה שהסדנה הזו עונה.</span></p>
         </div>
     </section>
 
@@ -2087,27 +2199,86 @@
         </div>
     </section>
 
-    <!-- ===== SCHEDULE ===== -->
+    <!-- ===== SOCIAL PROOF GRID (קבלות) ===== -->
+    <section class="proof-section">
+        <div class="container">
+            <h2 class="fade-up">אני <span class="h-pill">היחיד בשוק</span> שמראה קבלות.</h2>
+            <p class="lead fade-up">לא מילים באוויר. תראה בעצמך.</p>
+            <div class="proof-grid fade-up">
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="proof/proof-frame162.png" alt="צילום מסך תוצאות לקוח 1" loading="lazy"></div>
+                    <div class="proof-caption"><strong>ROAS ממוצע 9.06</strong>על תקציב יומי של 700 ₪</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="proof/proof-frame163.png" alt="צילום מסך תוצאות לקוח 2" loading="lazy"></div>
+                    <div class="proof-caption"><strong>41,485 ₪ ב-UGC אחד</strong>"זה רק מתחילת החודש"</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="proof/proof-group120.png" alt="צילום מסך תוצאות לקוח 3" loading="lazy"></div>
+                    <div class="proof-caption"><strong>"צומחים :) מבסוט עליך גל"</strong>לקוח שעבד איתי</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="proof/proof-shoresh.png" alt="צילום מסך תוצאות לקוח 4" loading="lazy"></div>
+                    <div class="proof-caption"><strong>ROAS 9.73 + 50 מכירות</strong>"עובד מדהים אח"</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="proof/proof-whatsapp.png" alt="צילום מסך תוצאות לקוח 5" loading="lazy"></div>
+                    <div class="proof-caption"><strong>מכולה מלאה במשלוחים</strong>"זה רק חצי"</div>
+                </div>
+                <div class="proof-card">
+                    <div class="proof-img-wrap"><img src="case-study-dashboard.png" alt="ROAS 10.37 דשבורד" loading="lazy"></div>
+                    <div class="proof-caption"><strong>ROAS 10.37 על מודעה אחת</strong>142,948 ₪ ב-263 רכישות</div>
+                </div>
+            </div>
+            <p class="closing fade-up">זאת לא תוצאה חד-פעמית.<br><span class="h-pill">זה מה שקורה כשיש שיטה.</span></p>
+        </div>
+    </section>
+
+    <!-- ===== SCHEDULE (with GIFs) ===== -->
     <section class="schedule-section">
         <div class="container">
-            <h2 class="fade-up">מתי ומה <span class="highlight">לומדים</span>?</h2>
+            <h2 class="fade-up">מתי ומה <span class="h-pill">לומדים</span>?</h2>
             <p class="schedule-info fade-up">&#128197; 10-12 במאי | 18:00-20:00 | זום</p>
 
-            <div class="schedule-grid fade-up">
+            <div class="schedule-list fade-up">
                 <div class="schedule-card">
-                    <h3>מפגש 1 - 10 במאי</h3>
-                    <div class="schedule-time">18:00-20:00</div>
-                    <p>תבין למה הלקוח שלך קונה - ומה באמת עוצר אותו מלקנות.</p>
+                    <div class="schedule-gif-wrap"><img src="gifs/lesson-1.gif" alt="הדגמה ממפגש 1 - מחקר קהל" loading="lazy"></div>
+                    <div class="schedule-content">
+                        <div class="schedule-num">01</div>
+                        <div class="schedule-meta">יום ראשון | 10/5 | 18:00-20:00</div>
+                        <h3>מי הלקוח ומה באמת מניע אותו</h3>
+                        <ul class="schedule-bullets">
+                            <li>תבין למה הלקוח שלך קונה, ומה באמת עוצר אותו מלקנות.</li>
+                            <li>נחקור קהל ברמה שאף יוצרת תוכן לא מגיעה אליה.</li>
+                            <li>נבנה אווטר מלא עם הסיסטם שלי.</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="schedule-card">
-                    <h3>מפגש 2 - 11 במאי</h3>
-                    <div class="schedule-time">18:00-20:00</div>
-                    <p>תדע לכתוב קופי שעוצר גלילה - לכל מוצר, לכל קהל, לכל שלב במשפך.</p>
+                    <div class="schedule-gif-wrap"><img src="gifs/lesson-2.gif" alt="הדגמה ממפגש 2 - כתיבת קופי" loading="lazy"></div>
+                    <div class="schedule-content">
+                        <div class="schedule-num">02</div>
+                        <div class="schedule-meta">יום שני | 11/5 | 18:00-20:00</div>
+                        <h3>איך כותבים קופי שמוכר</h3>
+                        <ul class="schedule-bullets">
+                            <li>תדע לכתוב קופי שעוצר גלילה לכל מוצר, לכל קהל, לכל שלב במשפך.</li>
+                            <li>תכיר את 13 נוסחאות ההוקים שעובדות גם ב-2026.</li>
+                            <li>תדע איזו נוסחת קופי הולכת לאיזה שלב במשפך (TOF/MOF/BOF).</li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="schedule-card">
-                    <h3>מפגש 3 - 12 במאי</h3>
-                    <div class="schedule-time">18:00-20:00</div>
-                    <p>תיישם הכל בזמן אמת - ותצא עם סיסטם שעובד לבד, עם AI.</p>
+                    <div class="schedule-gif-wrap"><img src="gifs/lesson-3.gif" alt="הדגמה ממפגש 3 - בנייה עם AI" loading="lazy"></div>
+                    <div class="schedule-content">
+                        <div class="schedule-num">03</div>
+                        <div class="schedule-meta">יום שלישי | 12/5 | 18:00-20:00</div>
+                        <h3>בונים קריאטיב מא׳ עד ת׳ עם AI</h3>
+                        <ul class="schedule-bullets">
+                            <li>תיישם את הכל בזמן אמת ותצא עם סיסטם שעובד לבד.</li>
+                            <li>תראה הדגמה חיה של הסוכן הקריאייטיב שבניתי.</li>
+                            <li>תקבל את הפרומפט המלא להעתקה לפרויקט שלך.</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
