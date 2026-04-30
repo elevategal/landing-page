@@ -1572,6 +1572,33 @@
         /* ===== PRICE COMPARISON / VALUE STACK TABLES ===== */
         .compare-section, .value-section { padding: 50px 0; background: transparent; }
         .compare-section h2, .value-section h2 { text-align: center; margin-bottom: 28px; }
+        .compare-intro {
+            text-align: center;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+            color: #000;
+            max-width: 700px;
+            margin: 0 auto 36px;
+            line-height: 1.55;
+        }
+        .compare-intro .underline-red {
+            position: relative;
+            display: inline-block;
+            font-weight: 900;
+        }
+        .compare-intro .underline-red::after {
+            content: '';
+            position: absolute;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            height: 6px;
+            background: var(--red-accent);
+            opacity: 0.85;
+            border-radius: 999px;
+            transform: rotate(-1deg);
+        }
         .compare-table, .value-table {
             max-width: 820px;
             margin: 0 auto 18px;
@@ -2312,6 +2339,7 @@
     <!-- ===== PRICE COMPARISON ===== -->
     <section class="compare-section">
         <div class="container">
+            <p class="compare-intro fade-up">לפני שאתה מסתכל על <span class="h-pill">המחיר</span> -<br>תסתכל כמה אתה כבר משלם <span class="underline-red">בלי הסדנה</span>:</p>
             <h2 class="fade-up">בוא נדבר על מה אנשי קריאטיב<br>גובים היום - <span class="h-pill">ומה אתה מקבל בסדנה במקום:</span></h2>
             <div class="compare-table fade-up">
                 <div class="compare-row head">
