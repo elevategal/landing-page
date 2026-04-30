@@ -1571,8 +1571,75 @@
             box-shadow: var(--brutal-shadow);
             padding: 14px;
             overflow: hidden;
+            position: relative;
+            cursor: zoom-in;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
         }
+        .dashboard-wrap:hover { transform: translate(-2px,-2px); box-shadow: 8px 8px 0 #000; }
         .dashboard-img { width: 100%; height: auto; display: block; border-radius: 6px; }
+        .dashboard-zoom {
+            position: absolute;
+            top: 22px; left: 22px;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 900;
+            box-shadow: var(--brutal-shadow-sm);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .dashboard-wrap:hover .dashboard-zoom { transform: scale(1.08); }
+
+        /* Image lightbox */
+        .img-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 100002;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            cursor: zoom-out;
+        }
+        .img-lightbox.open { display: flex; animation: lb-fade 0.2s ease; }
+        @keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+        .img-lightbox img {
+            max-width: min(95vw, 1400px);
+            max-height: 90vh;
+            border: 2px solid #fff;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            background: #fff;
+            display: block;
+        }
+        .img-lightbox-close {
+            position: absolute;
+            top: 18px; left: 18px;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #000;
+            color: #000;
+            font-size: 1.6rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: 4px 4px 0 #000;
+            font-family: inherit;
+        }
+        .img-lightbox-close:hover { background: var(--accent); color: #fff; }
         .case-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -2121,8 +2188,9 @@
     <section class="case-study-section">
         <div class="container">
             <h2 class="fade-up case-no-filter-h">בלי פילטרים. <span class="h-pill">בלי פוטושופ.</span></h2>
-            <div class="dashboard-wrap fade-up">
+            <div class="dashboard-wrap fade-up" role="button" tabindex="0" aria-label="הגדלת התמונה" data-zoom-src="case-study-dashboard.webp">
                 <img src="case-study-dashboard.webp" alt="צילום מסך מנהל המודעות - מודעה עם רואס 10.37" class="dashboard-img" loading="lazy">
+                <div class="dashboard-zoom" aria-hidden="true">&#x26F6;</div>
             </div>
             <div class="case-stats fade-up">
                 <div class="case-stat"><div class="num">263</div><div class="lbl">רכישות</div></div>
@@ -3032,6 +3100,56 @@
             window.addEventListener('scroll', checkSticky, { passive: true });
             window.addEventListener('resize', checkSticky);
         })();
+    </script>
+
+    <!-- ===== IMAGE LIGHTBOX ===== -->
+    <div class="img-lightbox" id="imgLightbox" role="dialog" aria-modal="true" aria-label="תצוגה מוגדלת">
+        <button class="img-lightbox-close" id="imgLightboxClose" aria-label="סגירה" type="button">&times;</button>
+        <img id="imgLightboxImg" src="" alt="">
+    </div>
+    <script>
+    (function() {
+        var lb = document.getElementById('imgLightbox');
+        var lbImg = document.getElementById('imgLightboxImg');
+        var lbClose = document.getElementById('imgLightboxClose');
+        if (!lb || !lbImg || !lbClose) return;
+        function openLb(src, alt) {
+            lbImg.src = src;
+            lbImg.alt = alt || '';
+            lb.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLb() {
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+            setTimeout(function(){ lbImg.src = ''; }, 250);
+        }
+        document.addEventListener('click', function(e) {
+            var trigger = e.target.closest('[data-zoom-src]');
+            if (trigger) {
+                e.preventDefault();
+                var img = trigger.querySelector('img');
+                openLb(trigger.getAttribute('data-zoom-src'), img ? img.alt : '');
+                return;
+            }
+            if (e.target === lb || e.target === lbImg) closeLb();
+        });
+        lbClose.addEventListener('click', closeLb);
+        document.addEventListener('keydown', function(e) {
+            if (!lb.classList.contains('open')) return;
+            if (e.key === 'Escape') closeLb();
+        });
+        // Keyboard activation for zoomable triggers
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            var trigger = document.activeElement && document.activeElement.closest && document.activeElement.closest('[data-zoom-src]');
+            if (trigger) {
+                e.preventDefault();
+                var img = trigger.querySelector('img');
+                openLb(trigger.getAttribute('data-zoom-src'), img ? img.alt : '');
+            }
+        });
+    })();
     </script>
 
     <!-- ===== COOKIE CONSENT ===== -->
