@@ -175,6 +175,33 @@
             font-weight: 900;
             box-shadow: 3px 3px 0 #000;
         }
+        /* gradient pill - pink-to-purple, for the loudest words */
+        .h-pill-grad {
+            display: inline-block;
+            background: linear-gradient(90deg, #FF3D8B 0%, #8C52FF 100%);
+            color: #fff;
+            padding: 0.05em 0.5em;
+            border-radius: 6px;
+            font-weight: 900;
+            box-shadow: 4px 4px 0 #000;
+            border: 2px solid #000;
+        }
+        /* red emphasis (no pill) */
+        .h-red { color: #E53935; font-weight: 900; }
+        /* orange brutal banner - sticker at top of hero */
+        .hero-banner {
+            display: inline-block;
+            background: #FF7A1A;
+            color: #000;
+            border: 2px solid #000;
+            box-shadow: 6px 6px 0 #000;
+            padding: 12px 22px;
+            font-weight: 900;
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
+            margin-bottom: 32px;
+            line-height: 1.4;
+            max-width: 760px;
+        }
 
         /* neo-brutal box: black border + offset black shadow */
         .box-brutal {
@@ -287,6 +314,11 @@
             line-height: 1.15;
         }
         .hero h1 .line { display: block; }
+        /* per-line size variation - "each line earns its weight" */
+        .hero h1 .line-md { font-size: clamp(1.4rem, 3.6vw, 2.2rem); }
+        .hero h1 .line-xl { font-size: clamp(2.2rem, 6.5vw, 4rem); line-height: 1.05; margin: 0.15em 0; }
+        .hero h1 .line-sm { font-size: clamp(1rem, 2.4vw, 1.4rem); font-weight: 800; margin-top: 0.3em; }
+
         .hero .subtitle {
             font-size: clamp(1.05rem, 2.5vw, 1.25rem);
             color: #000;
@@ -1517,15 +1549,16 @@
                 <span class="dot"></span>
                 <span>סדנה שיתופית | מוגבלת ל-15 משתתפים</span>
             </div>
-            <p class="pre-headline fade-up">לבעלי חנויות איקומרס שעובדים על רואס נמוך - וכבר לא רואים רווח</p>
+            <div class="hero-banner fade-up">לבעלי חנויות איקומרס שעובדים על רואס נמוך - וכבר לא רואים רווח</div>
             <h1 class="fade-up">
-                <span class="line">איך לייצר <span class="h-pill">10 קריאטיבים מנצחים</span> בשבוע</span>
-                <span class="line">שמעלים את הרואס שלך</span>
-                <span class="line">בלי להעלות תקציב, ובלי להיות יצירתי</span>
+                <span class="line line-md">איך לייצר</span>
+                <span class="line line-xl"><span class="h-pill-grad">10 קריאטיבים מנצחים</span> בשבוע</span>
+                <span class="line line-md">שמעלים את <span class="h-red">הרואס שלך</span></span>
+                <span class="line line-sm">בלי להעלות תקציב, ובלי להיות יצירתי</span>
             </h1>
             <p class="subtitle fade-up">
                 <span class="line">הסיסטם המדויק שאני בונה ללקוחות שלי -</span>
-                <span class="line">שאתה תיישם עם AI תוך 3 מפגשים</span>
+                <span class="line">שאתה תיישם עם AI תוך <span class="h-pill">3 מפגשים</span></span>
             </p>
             <div class="cta-wrapper fade-up">
                 <a href="#contact" class="cta-btn">שמור לי מקום בסדנה &larr;</a>
