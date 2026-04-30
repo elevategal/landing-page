@@ -548,12 +548,60 @@
             position: relative;
         }
         .pain-section .container { position: relative; z-index: 1; }
-        .pain-section h2 { text-align: center; margin-bottom: 40px; }
+        .pain-section h2 { text-align: center; margin-bottom: 24px; }
+
+        /* Claude-style chat bubble at top of pain section */
+        .pain-chat {
+            max-width: 640px;
+            margin: 0 auto 32px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 14px;
+            padding: 20px 22px;
+            box-shadow: var(--brutal-shadow);
+            position: relative;
+        }
+        .pain-chat-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1.5px dashed rgba(0,0,0,0.15);
+        }
+        .pain-chat-avatar {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: var(--accent);
+            border: 2px solid #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .pain-chat-name { font-weight: 900; color: #000; font-size: 0.95rem; }
+        .pain-chat-time { color: #000; opacity: 0.55; font-size: 0.82rem; font-weight: 700; margin-right: auto; }
+        .pain-chat-body { color: #000; font-size: 1rem; line-height: 1.6; font-weight: 700; }
+
+        .pain-challenge {
+            text-align: center;
+            font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+            font-weight: 900;
+            color: #000;
+            max-width: 700px;
+            margin: 0 auto 32px;
+            line-height: 1.4;
+        }
+
         .pain-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            align-items: start;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            max-width: 920px;
+            margin: 0 auto;
         }
 
         @keyframes copyShift { 0%,100% { transform:translate(0,0); opacity:1; } 50% { transform:translate(-4px,-4px); opacity:0.3; } }
@@ -564,19 +612,55 @@
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius);
-            padding: 28px 26px;
+            padding: 20px 22px;
             position: relative;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            box-shadow: var(--brutal-shadow);
+            box-shadow: var(--brutal-shadow-sm);
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
         }
         .pain-card.visible { opacity: 1; transform: translateY(0); }
         .pain-card:nth-child(1) { transition-delay: 0s; }
-        .pain-card:nth-child(2) { transition-delay: 0.1s; }
-        .pain-card:nth-child(3) { transition-delay: 0.2s; }
-        .pain-card h3 { font-size: 1.05rem; margin-bottom: 12px; color: #000; font-weight: 900; line-height: 1.4; }
-        .pain-card p { font-size: 0.95rem; color: #000; line-height: 1.6; font-weight: 600; }
+        .pain-card:nth-child(2) { transition-delay: 0.07s; }
+        .pain-card:nth-child(3) { transition-delay: 0.14s; }
+        .pain-card:nth-child(4) { transition-delay: 0.21s; }
+        .pain-card:nth-child(5) { transition-delay: 0.28s; }
+        .pain-card:nth-child(6) { transition-delay: 0.35s; }
+        .pain-card .pain-x {
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .pain-card p { font-size: 0.97rem; color: #000; line-height: 1.6; font-weight: 700; margin: 0; }
+
+        .pain-footer {
+            text-align: center;
+            margin: 36px auto 0;
+            max-width: 640px;
+        }
+        .pain-footer p {
+            font-size: 1.05rem;
+            color: #000;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+        .pain-footer p strong { font-weight: 900; }
+        .pain-footer .punch { color: var(--accent); font-weight: 900; font-size: 1.15rem; margin-top: 8px; }
+
+        @media (max-width: 720px) {
+            .pain-grid { grid-template-columns: 1fr; }
+        }
 
         /* ===== SOLUTION TRANSITION ===== */
         .solution-transition { text-align: center; padding: 60px 0 20px; background: transparent; }
@@ -1614,40 +1698,47 @@
     <!-- ===== PAIN POINTS ===== -->
     <section class="pain-section">
         <div class="container">
-            <h2 class="fade-up">בואו נהיה כנים -<br>ככה נראה הקריאייטיב ברוב מותגי האיקומרס היום:</h2>
+            <div class="pain-chat fade-up">
+                <div class="pain-chat-meta">
+                    <div class="pain-chat-avatar">C</div>
+                    <div class="pain-chat-name">Claude responded</div>
+                    <div class="pain-chat-time">5:07 PM</div>
+                </div>
+                <div class="pain-chat-body">אתה יושב לייצר קריאטיב חדש, פותח את הצ'אט, ומקבל עוד 5 הוקים גנריים שראית כבר אצל המתחרים.</div>
+            </div>
+
+            <p class="pain-challenge fade-up">בוא נבדוק עד כמה הקריאטיב שלך <span class="h-pill">באמת תקוע</span>.</p>
 
             <div class="pain-grid">
                 <div class="pain-card">
-                    <div style="width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-                        <div style="width:38px;height:28px;border:2px solid #000;border-radius:10px;position:relative;display:flex;align-items:center;justify-content:center;background:#fff">
-                            <div style="display:flex;gap:4px">
-                                <div style="width:5px;height:5px;border-radius:50%;background:#000;animation:dotBounce 1.2s ease-in-out infinite"></div>
-                                <div style="width:5px;height:5px;border-radius:50%;background:#000;animation:dotBounce 1.2s ease-in-out 0.2s infinite"></div>
-                                <div style="width:5px;height:5px;border-radius:50%;background:#000;animation:dotBounce 1.2s ease-in-out 0.4s infinite"></div>
-                            </div>
-                            <div style="position:absolute;bottom:-7px;right:8px;width:8px;height:8px;border-right:2px solid #000;border-bottom:2px solid #000;background:#fff;transform:rotate(45deg)"></div>
-                        </div>
-                    </div>
-                    <h3>&#10060; שואלים את ChatGPT ומקבלים תוצאה גנרית</h3>
-                    <p>"תכתוב לי 5 הוקים למוצר X" - וההוקים נראים כמו של כל מותג אחר. הבעיה היא לא ה-AI. הבעיה היא שאין מאחוריו אסטרטגיה.</p>
+                    <div class="pain-x">&#10005;</div>
+                    <p>אתה יושב לייצר קריאטיב חדש, פותח את הצ'אט, ומקבל עוד 5 הוקים גנריים שראית כבר אצל המתחרים.</p>
                 </div>
                 <div class="pain-card">
-                    <div style="position:relative;width:48px;height:48px;min-width:48px;margin-bottom:16px">
-                        <div style="position:absolute;width:32px;height:40px;border:2px solid #000;border-radius:4px;background:#fff;top:4px;right:8px;animation:copyShift 2s ease-in-out infinite"></div>
-                    </div>
-                    <h3>&#10060; תקועים על קריאטיב אחד בודד שעובד</h3>
-                    <p>כל פעם שאתם מנסים להעלות קריאטיב חדש - שום דבר לא זז. אתם תלויים במודעה אחת, וביום שהיא תפסיק לעבוד - אתם תהיו בצרות.</p>
+                    <div class="pain-x">&#10005;</div>
+                    <p>העלית קריאטיב חדש לקמפיין. הוא לא הביא תוצאות. שוב התחלת מאפס. כל שבוע מחדש.</p>
                 </div>
                 <div class="pain-card">
-                    <div style="width:48px;height:48px;min-width:48px;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-                        <svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-                            <path d="M4 12 L14 20 L24 14 L34 26 L40 22" stroke="#000" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                            <text x="22" y="38" text-anchor="middle" fill="#000" font-size="11" font-weight="900">&#8362;</text>
-                        </svg>
-                    </div>
-                    <h3>&#10060; הרואס שלכם תקוע - והתקציב נעלם בלי שאתם רואים רווח</h3>
-                    <p>המודעות עולות. הקליקים יקרים יותר. וכל פעם שאתם מנסים לעשות סקייל - הרווח רק יורד. כי בלי קריאטיב חדש שעובד, פייסבוק שורף את התקציב שלכם.</p>
+                    <div class="pain-x">&#10005;</div>
+                    <p>הרואס שלך תקוע. ניסית להגדיל תקציב, והרווח רק ירד. התקציב נעלם בלי שאתה רואה שקל.</p>
                 </div>
+                <div class="pain-card">
+                    <div class="pain-x">&#10005;</div>
+                    <p>אתה תלוי במודעה אחת שעובדת לך חודשים. ואתה יודע שביום שהיא תפסיק, אין לך מה להעלות במקומה.</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-x">&#10005;</div>
+                    <p>שילמת אלפי שקלים ליוצרת תוכן, וקיבלת תסריט שלא מכיר את הקהל שלך. הטעות מתגלגלת לקריאטיב הסופי.</p>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-x">&#10005;</div>
+                    <p>עברת קורסים על AI, ובסוף הסתכלת על הצ'אט וחשבת: "מה לבקש ממנו עכשיו?"</p>
+                </div>
+            </div>
+
+            <div class="pain-footer fade-up">
+                <p>אם רק אחד מאלו פגע בך, <strong>תמשיך לקרוא.</strong></p>
+                <p class="punch">זה הולך להיות שווה את הזמן שלך.</p>
             </div>
         </div>
     </section>
