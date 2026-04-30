@@ -1684,7 +1684,14 @@
         .compare-row.head .cell, .value-row.head .cell { color: #fff; font-weight: 900; }
         .compare-row.total, .value-row.total { background: rgba(140,82,255,0.15); }
         .compare-row.total .cell, .value-row.total .cell { padding: 18px 16px; }
-        .compare-row .price-old, .value-row .price-old { color: #000; opacity: 0.55; text-decoration: line-through; font-weight: 900; }
+        .compare-row .price-old, .value-row .price-old {
+            color: var(--red-accent);
+            opacity: 1;
+            text-decoration: line-through;
+            text-decoration-thickness: 1.5px;
+            text-decoration-color: var(--red-accent);
+            font-weight: 900;
+        }
         .value-row.total .price-old { font-size: clamp(1.25rem, 2.6vw, 1.6rem); display: inline-block; margin-left: 14px; }
         .compare-row .price-new, .value-row .price-new { color: var(--green-accent); font-weight: 900; font-size: 1.05rem; }
         .value-row.total .price-new { font-size: clamp(1.35rem, 3vw, 1.8rem); display: inline-block; }
