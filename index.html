@@ -340,6 +340,7 @@
             margin-top: 16px;
             line-height: 1.7;
         }
+        .hero-stack { display: block; text-align: center; }
         .hero-cta-row {
             display: flex;
             gap: 14px;
@@ -615,33 +616,52 @@
             padding: 20px 22px;
             position: relative;
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translate(0, 20px);
+            transition: opacity 0.5s ease, transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.15s ease;
             box-shadow: var(--brutal-shadow-sm);
             display: flex;
             gap: 14px;
             align-items: flex-start;
+            cursor: default;
         }
-        .pain-card.visible { opacity: 1; transform: translateY(0); }
+        .pain-card.visible { opacity: 1; transform: translate(0, 0); }
         .pain-card:nth-child(1) { transition-delay: 0s; }
         .pain-card:nth-child(2) { transition-delay: 0.07s; }
         .pain-card:nth-child(3) { transition-delay: 0.14s; }
         .pain-card:nth-child(4) { transition-delay: 0.21s; }
         .pain-card:nth-child(5) { transition-delay: 0.28s; }
         .pain-card:nth-child(6) { transition-delay: 0.35s; }
-        .pain-card .pain-x {
-            width: 28px; height: 28px;
-            border-radius: 8px;
-            background: #000;
-            color: #fff;
+        .pain-card.visible:hover { transform: translate(-3px, -3px); box-shadow: 7px 7px 0 #000; transition-delay: 0s; }
+
+        /* "thinking" loader — 3 pulsing dots that mean "AI stuck thinking" */
+        .pain-loader {
+            width: 36px; height: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 900;
-            font-size: 0.95rem;
+            gap: 5px;
             flex-shrink: 0;
-            line-height: 1;
+            background: #000;
+            border-radius: 8px;
+            padding: 0 6px;
+            transition: background 0.25s ease;
         }
+        .pain-loader span {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #fff;
+            animation: pain-dot-pulse 1.4s ease-in-out infinite;
+            transition: background 0.25s ease;
+        }
+        .pain-loader span:nth-child(2) { animation-delay: 0.2s; }
+        .pain-loader span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pain-dot-pulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+        .pain-card:hover .pain-loader { background: var(--accent); }
+        .pain-card:hover .pain-loader span { animation-duration: 0.7s; }
+
         .pain-card p { font-size: 0.97rem; color: #000; line-height: 1.6; font-weight: 700; margin: 0; }
 
         .pain-footer {
@@ -1634,11 +1654,15 @@
     <header>
     <section class="hero">
         <div class="container">
-            <div class="badge fade-up">
-                <span class="dot"></span>
-                <span>סדנה שיתופית | מוגבלת ל-15 משתתפים</span>
+            <div class="hero-stack">
+                <div class="badge fade-up">
+                    <span class="dot"></span>
+                    <span>סדנה שיתופית | מוגבלת ל-15 משתתפים</span>
+                </div>
             </div>
-            <div class="hero-banner fade-up">לבעלי חנויות איקומרס שעובדים על רואס נמוך - וכבר לא רואים רווח</div>
+            <div class="hero-stack">
+                <div class="hero-banner fade-up">לבעלי חנויות איקומרס שעובדים על רואס נמוך - וכבר לא רואים רווח</div>
+            </div>
             <h1 class="fade-up">
                 <span class="line line-md">איך לייצר</span>
                 <span class="line line-xl"><span class="h-pill-grad">10 קריאטיבים מנצחים</span> בשבוע</span>
@@ -1711,27 +1735,27 @@
 
             <div class="pain-grid">
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>אתה יושב לייצר קריאטיב חדש, פותח את הצ'אט, ומקבל עוד 5 הוקים גנריים שראית כבר אצל המתחרים.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>העלית קריאטיב חדש לקמפיין. הוא לא הביא תוצאות. שוב התחלת מאפס. כל שבוע מחדש.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>הרואס שלך תקוע. ניסית להגדיל תקציב, והרווח רק ירד. התקציב נעלם בלי שאתה רואה שקל.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>אתה תלוי במודעה אחת שעובדת לך חודשים. ואתה יודע שביום שהיא תפסיק, אין לך מה להעלות במקומה.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>שילמת אלפי שקלים ליוצרת תוכן, וקיבלת תסריט שלא מכיר את הקהל שלך. הטעות מתגלגלת לקריאטיב הסופי.</p>
                 </div>
                 <div class="pain-card">
-                    <div class="pain-x">&#10005;</div>
+                    <div class="pain-loader" aria-hidden="true"><span></span><span></span><span></span></div>
                     <p>עברת קורסים על AI, ובסוף הסתכלת על הצ'אט וחשבת: "מה לבקש ממנו עכשיו?"</p>
                 </div>
             </div>
