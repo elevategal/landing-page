@@ -1184,6 +1184,71 @@
         }
         .about-text strong { color: #000; font-weight: 900; }
 
+        /* About — personal story chunk */
+        .about-personal {
+            max-width: 860px;
+            margin: 56px auto 0;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 36px 36px 28px;
+            text-align: right;
+        }
+        .about-personal .about-section-title {
+            font-size: clamp(1.4rem, 3.2vw, 2rem);
+            font-weight: 900;
+            color: #000;
+            margin-bottom: 22px;
+            line-height: 1.3;
+        }
+        .about-personal p {
+            color: #000;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .about-personal p em {
+            font-style: normal;
+            color: var(--accent);
+            font-weight: 900;
+        }
+        .about-personal p strong { font-weight: 900; }
+
+        .about-closer {
+            max-width: 860px;
+            margin: 32px auto 0;
+            text-align: center;
+        }
+        .about-closer p {
+            color: #000;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .about-closer .closer-punch {
+            font-weight: 900;
+            font-size: clamp(1.1rem, 2.8vw, 1.35rem);
+            margin-top: 22px;
+        }
+
+        .about-bridge {
+            max-width: 760px;
+            margin: 50px auto 0;
+            text-align: center;
+            font-family: 'Heebo', sans-serif;
+            font-weight: 900;
+            color: #000;
+            font-size: clamp(1.2rem, 3vw, 1.7rem);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .about-personal { padding: 28px 22px 22px; }
+        }
+
         /* ===== SOCIAL PROOF GRID (קבלות) ===== */
         .proof-section { padding: 60px 0; background: transparent; }
         .proof-section h2 { text-align: center; margin-bottom: 14px; line-height: 1.3; }
@@ -2278,7 +2343,7 @@
     <!-- ===== TESTIMONIALS 1 ===== -->
     <section class="testimonials">
         <div class="container">
-            <h2 class="fade-up">שמע מהמשתתפים <span class="h-pill">בעצמם</span>:</h2>
+            <h2 class="fade-up">תשמע <span class="h-pill">מהמשתתפים</span>:</h2>
             <div class="testimonial-grid fade-up">
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="3f8b9eb3-b921-4685-9f27-1e0a13548403"><div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/3f8b9eb3-b921-4685-9f27-1e0a13548403/thumbnail.jpg')"></div></div>
@@ -2400,12 +2465,27 @@
                 </div>
                 <div class="about-text">
                     <p>היי, אני <strong>גל כהן</strong>.</p>
-                    <p>ב-9 שנים האחרונות שימשתי כמנהל קריאייטיב למעל <strong>50 מותגי איקומרס מובילים</strong> - ובשיא שלי הייתי מייצר <strong>30 מודעות ביום בכל הפורמטים</strong>.</p>
-                    <p>לאורך השנים האלה זיקקתי שיטה - שיודעת בדיוק <strong>מה גורם לקריאטיב למכור</strong> ומה גורם לו לבזבז כסף.</p>
-                    <p>ובשנה האחרונה לקחתי את כל מה שלמדתי, ובניתי ממנו <strong>סוכן AI שמייצר קריאטיב מנצח תוך 20 דקות</strong>.</p>
-                    <p>לפני שאתה ניגש ל-AI - אתה צריך לדעת מה לבקש ממנו. לכן בסדנה אנחנו מתחילים מהיסודות של קריאטיב - ורק אחרי שיש לך שיטה ברורה, אנחנו מחברים אותה ל-AI.</p>
-                    <p>השיטה הזו עובדת אצל הלקוחות שלי כל יום. <strong>עכשיו אני מלמד אותה - ואתה תיישם אותה תוך 3 מפגשים.</strong></p>
+                    <p>ב-9 שנים האחרונות שימשתי כמנהל קריאייטיב למעל <strong>50 מותגי איקומרס מובילים</strong>, ובשיא שלי הייתי מייצר <strong>30 מודעות ביום בכל הפורמטים</strong>.</p>
+                    <p>לאורך השנים האלה פיתחתי שיטה - שמראה בדיוק <strong>למה קריאטיב אחד מוכר, ולמה אחר שורף תקציב</strong>.</p>
+                    <p>בשנה האחרונה הפכתי את השיטה הזו ל<strong>סוכן AI שמייצר קריאטיב מנצח תוך 20 דקות</strong>.</p>
                 </div>
+            </div>
+
+            <div class="about-personal fade-up">
+                <h3 class="about-section-title">אז למה <span class="h-pill">החלטתי ללמד</span> את זה?</h3>
+                <p>במשך 9 שנים ראיתי את אותו דבר שוב ושוב.<br>בעלי מותגים עם מוצרים מעולים שלא מצליחים לפרוץ.</p>
+                <p><strong>לא בגלל המוצר. לא בגלל היצירתיות. לא בגלל ה-AI.</strong><br>אלא בגלל שאף אחד לא לימד אותם איך לחשוב קריאטיב.</p>
+                <p>ובעידן ה-AI הבנתי שיש להם פעם ראשונה הזדמנות<br>לעקוף את הפרילנסרים והסוכנויות, ולייצר קריאטיב מנצח לבד.</p>
+                <p><em>אבל הם עומדים מול הצ'אט, ולא יודעים מה לבקש.</em></p>
+                <p>אז במקום להמשיך לעבוד רק עם 50 מותגים בכל שנה,<br>החלטתי לקחת את כל מה שלמדתי - ולהפוך את זה לשיטה<br>שכל בעל מותג יוכל ליישם בעצמו, <strong>תוך 3 מפגשים</strong>.</p>
+            </div>
+
+            <div class="about-closer fade-up">
+                <p>לפני שאתה פותח את הצ'אט - אתה צריך לדעת מה לבקש ממנו.<br>לכן בסדנה אנחנו מתחילים מהיסודות של קריאטיב, ורק אחרי שיש לך שיטה ברורה, מחברים אותה ל-AI.</p>
+                <p class="closer-punch">השיטה הזו עובדת אצל הלקוחות שלי כל יום.<br><span class="h-pill">עכשיו אני מלמד אותה</span> - ואתה תיישם אותה תוך 3 מפגשים.</p>
+            </div>
+
+            <p class="about-bridge fade-up">לא צריך להאמין לי על המילה.<br><span class="h-pill">תראה מה הלקוחות שלי שולחים לי כל שבוע</span>:</p>
             </div>
         </div>
     </section>
@@ -2525,7 +2605,7 @@
     <section class="captain-section">
         <div class="container">
             <div class="captain-card fade-up">
-                <p class="lead">רגע לפני שאתה נרשם -<br>משהו שאתה חייב להבין:</p>
+                <p class="lead">לפני שנדבר על מחיר -<br>משהו שאתה חייב להבין:</p>
                 <p>הסדנה הזו היא <strong>לא קורס AI</strong>.</p>
                 <p>כי AI זה רק הספינה.<br>אתה הקפטן.</p>
                 <p>אם לא תדע לנווט - תטביע אותה.</p>
@@ -2776,7 +2856,7 @@
             <p class="fade-up">3 מפגשים. שיטה אחת.<br>רואס שעולה בלי להעלות תקציב.</p>
             <p class="urgency-text fade-up">המחזור הקרוב נפתח ב-10.5. נשארו 5 מקומות.</p>
             <div class="cta-wrapper fade-up">
-                <a href="#contact" class="cta-btn" style="padding: 20px 44px; font-size: 1.2rem; white-space: nowrap;">אני בפנים - שריינו לי מקום &larr;</a>
+                <a href="#contact" class="cta-btn" style="padding: 20px 44px; font-size: 1.2rem; white-space: nowrap;">אני בפנים - תשריין לי מקום &larr;</a>
             </div>
         </div>
     </section>
