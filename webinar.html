@@ -2348,7 +2348,7 @@
             </div>
 
             <!-- Spots Progress Bar -->
-            <div class="spots-progress fade-up webinar-spots" data-taken="25" data-total="30" aria-label="התקדמות הרשמה">
+            <div class="spots-progress fade-up webinar-spots" data-taken="30" data-total="30" aria-label="התקדמות הרשמה">
                 <div class="label"><span>&#128293; כבר נרשמו</span><span class="count">15 / 30</span></div>
                 <div class="bar"><div class="bar-fill"></div></div>
                 <div class="remaining">נשארו <span class="rem-num">15</span> מקומות בלבד</div>
@@ -2553,7 +2553,7 @@
         <div class="container" style="position: relative; z-index: 1;">
 
             <!-- Spots Progress Bar (repeated near form) -->
-            <div class="spots-progress fade-up webinar-spots final-cta-spots" data-taken="25" data-total="30" aria-label="התקדמות הרשמה">
+            <div class="spots-progress fade-up webinar-spots final-cta-spots" data-taken="30" data-total="30" aria-label="התקדמות הרשמה">
                 <div class="label"><span>&#128293; כבר נרשמו</span><span class="count">15 / 30</span></div>
                 <div class="bar"><div class="bar-fill"></div></div>
                 <div class="remaining">נשארו <span class="rem-num">15</span> מקומות בלבד</div>
@@ -2565,7 +2565,10 @@
 
             <!-- Inline Form -->
             <div class="inline-form-card fade-up">
-                <h3>שריינו לי מקום בוובינר</h3>
+                <div id="waitlistNotice" style="display:none; background:#FFF3E0; border:2px solid #E53935; border-radius:12px; padding:14px 18px; margin-bottom:18px; text-align:right; font-weight:800; font-size:0.95rem; line-height:1.5; color:#000;">
+                    &#9888;&#65039; <strong style="color:#E53935;">הוובינר מלא!</strong> אתה נכנס לרשימת המתנה. נעדכן אותך אם נפתחים מקומות נוספים.
+                </div>
+                <h3 id="formHeading">שריינו לי מקום בוובינר</h3>
                 <form id="leadForm" novalidate>
                     <div style="margin-bottom:16px;">
                         <label for="leadName">שם מלא</label>
@@ -2669,6 +2672,31 @@
                     if (fill) fill.style.width = pct + '%';
                 }, 250);
             });
+
+            // ===== FULL STATE: swap CTAs to waitlist mode =====
+            var firstBar = bars[0];
+            var taken0 = parseInt(firstBar.dataset.taken, 10) || 0;
+            var total0 = parseInt(firstBar.dataset.total, 10) || 30;
+            if (taken0 >= total0) {
+                document.body.classList.add('is-waitlist-mode');
+                // show notice above form
+                var notice = document.getElementById('waitlistNotice');
+                if (notice) notice.style.display = 'block';
+                // form heading
+                var formH = document.getElementById('formHeading');
+                if (formH) formH.textContent = 'הוובינר מלא - הצטרף לרשימת המתנה';
+                // submit button text + spans inside hero CTAs
+                document.querySelectorAll('.lead-btn-text').forEach(function(el) {
+                    el.innerHTML = 'הצטרף לרשימת המתנה &larr;';
+                });
+                // hero/CTA anchors that say "אני בפנים - שריינו לי מקום"
+                document.querySelectorAll('a.cta-btn').forEach(function(el) {
+                    var t = el.textContent;
+                    if (t.indexOf('שריינו') !== -1 || t.indexOf('בפנים') !== -1) {
+                        el.innerHTML = 'הצטרף לרשימת המתנה &larr;';
+                    }
+                });
+            }
         })();
 
         // Infinite carousel - duplicate items
@@ -2911,7 +2939,8 @@
                         });
                         fbq('track', 'Lead', {}, { eventID: eventId });
                     }
-                    window.location.href = 'thank-you-webinar.html';
+                    var isWaitlist = document.body.classList.contains('is-waitlist-mode');
+                    window.location.href = 'thank-you-webinar.html' + (isWaitlist ? '?waitlist=1' : '');
                 } catch (error) {
                     alert('שגיאה בשליחת הטופס. נסו שוב.');
                     btn.querySelector('.lead-btn-text').style.display = '';
@@ -2926,7 +2955,10 @@
             var sticky = document.createElement('div');
             sticky.id = 'sticky-cta';
             sticky.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9980;background:#F3EFE7;border-top:2px solid #000;padding:10px 16px;display:none;text-align:center;';
-            sticky.innerHTML = '<a href="#contact" style="display:block;background:#8C52FF;color:#fff;padding:14px;border:2px solid #000;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:900;text-decoration:none;box-shadow:4px 4px 0 #000;">שריינו לי מקום בוובינר &larr;</a>';
+            var stickyLabel = document.body.classList.contains('is-waitlist-mode')
+                ? 'הצטרף לרשימת המתנה &larr;'
+                : 'שריינו לי מקום בוובינר &larr;';
+            sticky.innerHTML = '<a href="#contact" style="display:block;background:#8C52FF;color:#fff;padding:14px;border:2px solid #000;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:900;text-decoration:none;box-shadow:4px 4px 0 #000;">' + stickyLabel + '</a>';
             document.body.appendChild(sticky);
 
             var heroEnd = document.querySelector('.hero');

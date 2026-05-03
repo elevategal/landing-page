@@ -485,8 +485,8 @@
             <button type="button" class="modal-close" id="modalCloseBtn" aria-label="סגור">&times;</button>
             <div class="modal-emoji">🎉</div>
             <h2 id="modalTitle" class="modal-title">ההרשמה הושלמה!</h2>
-            <p class="modal-sub">עכשיו - שלב אחרון לפני הוובינר:</p>
-            <div class="modal-warning">
+            <p id="modalSub" class="modal-sub">עכשיו - שלב אחרון לפני הוובינר:</p>
+            <div id="modalWarning" class="modal-warning">
                 &#9888;&#65039; <strong>הקישור לזום יישלח רק בקבוצת הוואטסאפ.</strong> אם לא תצטרף - לא תוכל להשתתף בוובינר.
             </div>
             <a
@@ -507,18 +507,18 @@
         <!-- Top badge -->
         <div class="badge">
             <span class="check">&#10003;</span>
-            <span>ההרשמה אושרה</span>
+            <span id="badgeText">ההרשמה אושרה</span>
         </div>
 
         <!-- H1 + sub -->
-        <h1>מעולה!<br><span class="h-pill-grad">המקום שלך נשמר</span></h1>
-        <p class="h1-sub">נשאר שלב אחד בלבד.</p>
+        <h1 id="pageH1">מעולה!<br><span class="h-pill-grad" id="pageH1Pill">המקום שלך נשמר</span></h1>
+        <p id="pageSub" class="h1-sub">נשאר שלב אחד בלבד.</p>
 
         <!-- Main: Join WhatsApp -->
-        <div class="block-black">שלב אחרון:<br>הצטרף לקבוצת הוואטסאפ</div>
+        <div id="blockBlack" class="block-black">שלב אחרון:<br>הצטרף לקבוצת הוואטסאפ</div>
 
         <div class="ty-card">
-            <ul class="check-list">
+            <ul id="checkList" class="check-list">
                 <li>הקישור לזום יישלח רק בקבוצה</li>
                 <li>תקבל תוכן הכנה לקראת הוובינר</li>
                 <li>תזכורת 24 שעות לפני האירוע</li>
@@ -537,7 +537,7 @@
         </div>
 
         <!-- Warning -->
-        <div class="warning">
+        <div id="warningBox" class="warning">
             &#9888;&#65039; <strong>חשוב:</strong> הקישור לזום יישלח רק לחברי הקבוצה. מי שלא יצטרף - לא יוכל להשתתף בוובינר.
         </div>
 
@@ -610,6 +610,47 @@
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) hide();
             });
+        })();
+
+        // ===== WAITLIST MODE: adapt copy when ?waitlist=1 =====
+        (function() {
+            var params = new URLSearchParams(window.location.search);
+            if (params.get('waitlist') !== '1') return;
+
+            var sets = {
+                'modalTitle': 'נרשמת לרשימת המתנה!',
+                'modalSub': 'תקבל עדכון אם נפתחים מקומות. בינתיים -',
+                'badgeText': 'ברשימת המתנה',
+                'pageSub': 'הוובינר מלא — נעדכן אותך אם נפתחים מקומות.',
+                'pageH1Pill': 'אתה ברשימת המתנה'
+            };
+            Object.keys(sets).forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = sets[id];
+            });
+
+            var modalWarning = document.getElementById('modalWarning');
+            if (modalWarning) {
+                modalWarning.innerHTML = '⚠️ <strong>הצטרף לקבוצה</strong> כדי לקבל עדכון מיידי אם נפתחים מקומות, וגם תוכן וערך מהוובינר.';
+            }
+
+            var blockBlack = document.getElementById('blockBlack');
+            if (blockBlack) {
+                blockBlack.innerHTML = 'הצטרף לקבוצה<br>לקבלת עדכונים';
+            }
+
+            var checkList = document.getElementById('checkList');
+            if (checkList) {
+                checkList.innerHTML =
+                    '<li>תקבל עדכון מיידי אם נפתחים מקומות</li>' +
+                    '<li>תקבל תוכן וערך מהוובינר</li>' +
+                    '<li>אם תיכנס - הקישור לזום יישלח בקבוצה</li>';
+            }
+
+            var warningBox = document.getElementById('warningBox');
+            if (warningBox) {
+                warningBox.innerHTML = '⚠️ <strong>חשוב:</strong> הקבוצה היא המקום היחיד שבו תקבל עדכון אם נפתחים מקומות בוובינר.';
+            }
         })();
     </script>
 </body>
