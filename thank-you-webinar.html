@@ -369,9 +369,139 @@
             .check-list li { padding-right: 28px; font-size: 0.95rem; }
             .check-list li::before { font-size: 1.1rem; }
         }
+
+        /* ===== JOIN-GROUP MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.78);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 9999;
+            animation: modalFadeIn 0.25s ease-out;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-overlay.is-hidden { display: none; }
+        .modal-card {
+            position: relative;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: 8px 8px 0 #000;
+            padding: 36px 28px 28px;
+            max-width: 460px;
+            width: 100%;
+            text-align: center;
+            animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalSlideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            box-shadow: 2px 2px 0 #000;
+            transition: transform 0.1s ease;
+        }
+        .modal-close:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 #000; }
+        .modal-close:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #000; }
+        .modal-emoji {
+            font-size: 3rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .modal-title {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #000;
+            margin-bottom: 8px;
+        }
+        .modal-sub {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 18px;
+        }
+        .modal-warning {
+            background: #FFF3E0;
+            border: 2px solid var(--red-accent);
+            border-radius: var(--radius);
+            padding: 14px 18px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.5;
+            margin-bottom: 22px;
+            text-align: right;
+        }
+        .modal-warning strong { color: var(--red-accent); }
+        .modal-cta {
+            width: 100%;
+            justify-content: center;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+        }
+        .modal-foot {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #777;
+            margin-top: 12px;
+        }
+        @media (max-width: 480px) {
+            .modal-card { padding: 30px 20px 22px; }
+            .modal-emoji { font-size: 2.5rem; }
+            .modal-title { font-size: 1.3rem; }
+            .modal-sub { font-size: 0.95rem; }
+            .modal-warning { font-size: 0.88rem; padding: 12px 14px; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- Join-group modal: shown automatically on page load -->
+    <div id="joinGroupModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-card">
+            <button type="button" class="modal-close" id="modalCloseBtn" aria-label="סגור">&times;</button>
+            <div class="modal-emoji">🎉</div>
+            <h2 id="modalTitle" class="modal-title">ההרשמה הושלמה!</h2>
+            <p class="modal-sub">עכשיו - שלב אחרון לפני הוובינר:</p>
+            <div class="modal-warning">
+                &#9888;&#65039; <strong>הקישור לזום יישלח רק בקבוצת הוואטסאפ.</strong> אם לא תצטרף - לא תוכל להשתתף בוובינר.
+            </div>
+            <a
+              href="https://chat.whatsapp.com/BOjfgWWzE4sI59ynWCih7f?mode=gi_t"
+              onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'thank_you_modal',webinar_date:'2026-05-05'});} document.getElementById('joinGroupModal').classList.add('is-hidden');"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-whatsapp modal-cta">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
+                <span>הצטרף לקבוצה עכשיו &larr;</span>
+            </a>
+            <p class="modal-foot">לחיצה תפתח את WhatsApp בלשונית חדשה</p>
+        </div>
+    </div>
+
     <div class="ty-page">
 
         <!-- Top badge -->
@@ -470,5 +600,17 @@
     </div>
 
     <script src="accessibility-widget.js" defer></script>
+    <script>
+        (function() {
+            var modal = document.getElementById('joinGroupModal');
+            var closeBtn = document.getElementById('modalCloseBtn');
+            if (!modal || !closeBtn) return;
+            function hide() { modal.classList.add('is-hidden'); }
+            closeBtn.addEventListener('click', hide);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) hide();
+            });
+        })();
+    </script>
 </body>
 </html>
