@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קבוצה סגורה | ELEV8</title>
+    <meta name="description" content="הצטרף לקבוצת הוואטסאפ הסגורה של ELEV8. תובנות מלקוחות, פרומפטים בלעדיים ולייבים דו-שבועיים.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://elev8.co.il/group">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="קבוצה סגורה — ELEV8">
+    <meta property="og:description" content="הצטרף לקבוצה כדי לקבל את הפרומפט וגישה לכל מה שלא נכנס לאינסטגרם.">
+    <meta property="og:url" content="https://elev8.co.il/group">
+    <meta property="og:image" content="https://elev8.co.il/webinar-og.jpg">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:site_name" content="Elev8 Creative Strategy">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="קבוצה סגורה — ELEV8">
+    <meta name="twitter:description" content="הצטרף לקבוצה כדי לקבל את הפרומפט וגישה לכל מה שלא נכנס לאינסטגרם.">
+    <meta name="twitter:image" content="https://elev8.co.il/webinar-og.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8SCLND9ZP6');
+    </script>
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1265390459065125');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1265390459065125&ev=PageView&noscript=1" /></noscript>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #F3EFE7;
+            --bg-card-dark: #1A1A2E;
+            --accent: #8C52FF;
+            --accent-hover: #A370FF;
+            --whatsapp: #25D366;
+            --whatsapp-dark: #1FAF53;
+            --border: #1A1A2E;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --brutal-shadow: 6px 6px 0 var(--border);
+            --brutal-shadow-sm: 4px 4px 0 var(--border);
+            --brutal-shadow-purple: 6px 6px 0 var(--accent);
+            --brutal-shadow-purple-sm: 4px 4px 0 var(--accent);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            background-image:
+                linear-gradient(rgba(26,26,46,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26,26,46,0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--border);
+            line-height: 1.6;
+            font-weight: 400;
+            min-height: 100vh;
+            padding: 40px 16px 60px;
+        }
+
+        .page {
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Heebo', sans-serif;
+            color: var(--border);
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        section { margin-bottom: 56px; }
+
+        /* ===== Reveal on scroll ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== HERO ===== */
+        .hero { text-align: center; }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 8px 18px;
+            font-size: 0.92rem;
+            color: var(--border);
+            font-weight: 700;
+            margin-bottom: 26px;
+            box-shadow: var(--brutal-shadow-sm);
+        }
+        .badge .dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 0 3px rgba(140,82,255,0.25);
+            animation: pulse-dot 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 0 3px rgba(140,82,255,0.25); }
+            50% { box-shadow: 0 0 0 6px rgba(140,82,255,0.05); }
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 6.8vw, 3.6rem);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .hero-body {
+            font-size: clamp(1rem, 2.4vw, 1.15rem);
+            font-weight: 400;
+            color: var(--border);
+            max-width: 560px;
+            margin: 0 auto 22px;
+            line-height: 1.7;
+        }
+
+        .hero-emphasis {
+            display: inline-block;
+            background: var(--border);
+            color: #fff;
+            padding: 14px 26px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+            box-shadow: 4px 4px 0 var(--accent);
+            margin: 6px 0 18px;
+            line-height: 1.4;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.4vw, 1.1rem);
+            font-weight: 700;
+            color: var(--border);
+        }
+
+        /* ===== BENEFITS ===== */
+        .benefits-section { text-align: center; }
+        .benefits-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--border);
+            opacity: 0.65;
+            margin-bottom: 18px;
+            letter-spacing: 0.02em;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            text-align: right;
+        }
+        .benefit-card {
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 24px 20px;
+        }
+        .benefit-num {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-family: 'Heebo', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 900;
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+        }
+        .benefit-card h3 {
+            color: #fff;
+            font-size: 1.08rem;
+            font-weight: 900;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .benefit-card p {
+            font-size: 0.92rem;
+            font-weight: 400;
+            color: rgba(255,255,255,0.92);
+            line-height: 1.55;
+        }
+        @media (max-width: 720px) {
+            .benefits-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section { text-align: center; }
+        .cta-lead {
+            font-size: clamp(1.05rem, 2.6vw, 1.25rem);
+            font-weight: 700;
+            color: var(--border);
+            margin-bottom: 24px;
+        }
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--whatsapp);
+            color: #fff;
+            padding: 22px 52px;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid var(--border);
+            box-shadow: var(--brutal-shadow);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+            animation: wa-breathe 2.6s ease-in-out infinite;
+        }
+        @keyframes wa-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+        .btn-whatsapp:hover {
+            animation: none;
+            background: var(--whatsapp-dark);
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 var(--border);
+        }
+        .btn-whatsapp:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--border); }
+        .btn-whatsapp svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 2px dashed rgba(26,26,46,0.15);
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--border);
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+        .footer-meta {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--border);
+            opacity: 0.7;
+        }
+        .footer-meta a {
+            color: var(--border);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(26,26,46,0.3);
+        }
+        .footer-meta a:hover { border-bottom-color: var(--accent); }
+        .footer-meta span { margin: 0 10px; opacity: 0.5; }
+
+        /* ===== STICKY BOTTOM CTA (mobile only) ===== */
+        .sticky-bottom-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--whatsapp);
+            color: #fff;
+            border-top: 2px solid var(--border);
+            box-shadow: 0 -4px 0 rgba(0,0,0,0.18);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: inherit;
+            font-weight: 900;
+            font-size: 1rem;
+            padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
+            z-index: 999;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+        .sticky-bottom-cta.is-hidden { transform: translateY(110%); }
+        .sticky-bottom-cta:hover { background: var(--whatsapp-dark); }
+        .sticky-bottom-cta svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+        @media (max-width: 720px) {
+            .sticky-bottom-cta { display: flex; }
+            body { padding-bottom: 110px; }
+            .btn-whatsapp { padding: 20px 40px; font-size: 1.1rem; width: 100%; max-width: 360px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 32px 14px 110px; }
+            section { margin-bottom: 44px; }
+            .benefit-card { padding: 20px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sticky bottom CTA (mobile only): always visible until main CTA enters viewport -->
+    <a id="stickyCta"
+       class="sticky-bottom-cta"
+       href="https://chat.whatsapp.com/BOjfgWWzE4sI59ynWCih7f?mode=gi_t&utm_source=group_page&utm_medium=sticky_bottom&utm_campaign=lead_magnet"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="if(typeof gtag!=='undefined'){gtag('event','join_whatsapp_group',{event_category:'engagement',event_label:'sticky_bottom',page:'group_page'});} if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{source:'group_page_sticky'});}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
+        <span>להצטרפות לקבוצה &larr;</span>
+    </a>
+
+    <div class="page">
+
+        <!-- ============ HERO ============ -->
+        <section class="hero reveal">
+            <div class="badge">
+                <span class="dot"></span>
+                <span>קבוצה סגורה</span>
+            </div>
+
+            <h1>בוא נראה כמה אתה רציני.</h1>
+
+            <p class="hero-body">
+                הפרומפט הזה לא נכתב ב-5 דקות.<br>
+                ישבתי עליו, בדקתי אותו על מותגים אמיתיים,<br>
+                וחידדתי אותו עד שהוא באמת עובד.
+            </p>
+
+            <div class="hero-emphasis">בשביל לקבל אותו, תצטרף לקבוצה.</div>
+
+            <p class="hero-tagline">ואתה רק מרוויח.</p>
+        </section>
+
+        <!-- ============ BENEFITS ============ -->
+        <section class="benefits-section reveal">
+            <p class="benefits-title">חברי הקבוצה מקבלים:</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <span class="benefit-num">01</span>
+                    <h3>תובנות מלקוחות שלי</h3>
+                    <p>מה עובד ומה לא, ישירות משטח.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-num">02</span>
+                    <h3>פרומפטים וכלים</h3>
+                    <p>שאני בונה, לא יוצאים מחוץ לקבוצה.</p>
+                </div>
+                <div class="benefit-card">
+                    <span class="benefit-num">03</span>
+                    <h3>לייבים דו-שבועיים</h3>
+                    <p>בלעדיים לחברי הקבוצה.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CTA ============ -->
+        <section class="cta-section reveal">
+            <p class="cta-lead">לחיצה אחת ואתה בפנים.</p>
+
+            <a id="mainCta"
+               class="btn-whatsapp"
+               href="https://chat.whatsapp.com/BOjfgWWzE4sI59ynWCih7f?mode=gi_t&utm_source=group_page&utm_medium=main_button&utm_campaign=lead_magnet"
+               target="_blank"
+               rel="noopener noreferrer"
+               onclick="if(typeof gtag!=='undefined'){gtag('event','join_whatsapp_group',{event_category:'engagement',event_label:'main_button',page:'group_page'});} if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{source:'group_page_main'});}">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
+                <span>להצטרפות לקבוצה &larr;</span>
+            </a>
+        </section>
+
+        <!-- ============ FOOTER ============ -->
+        <footer>
+            <div class="footer-logo">ELEV8</div>
+            <div class="footer-meta">
+                <a href="https://instagram.com/gal_creativz" target="_blank" rel="noopener noreferrer">@gal_creativz</a>
+                <span>•</span>
+                <a href="https://elev8.co.il">elev8.co.il</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="accessibility-widget.js" defer></script>
+    <script>
+        (function() {
+            // ===== Sticky bottom CTA: hide when main CTA is in viewport =====
+            var stickyCta = document.getElementById('stickyCta');
+            var mainCta = document.getElementById('mainCta');
+            if (stickyCta && mainCta && 'IntersectionObserver' in window) {
+                new IntersectionObserver(function(entries) {
+                    stickyCta.classList.toggle('is-hidden', entries[0].isIntersecting);
+                }, { threshold: 0.5 }).observe(mainCta);
+            }
+
+            // ===== Reveal on scroll =====
+            var revealEls = document.querySelectorAll('.reveal');
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                revealEls.forEach(function(el) { io.observe(el); });
+            } else {
+                revealEls.forEach(function(el) { el.classList.add('is-visible'); });
+            }
+        })();
+    </script>
+</body>
+</html>
