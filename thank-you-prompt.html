@@ -431,6 +431,14 @@
         }
         .btn-whatsapp:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
         .btn-whatsapp svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
+        .btn-whatsapp.pulse-now {
+            animation: wa-attention 0.5s ease-in-out 5;
+            box-shadow: 6px 6px 0 var(--accent), 0 0 0 6px rgba(140,82,255,0.18);
+        }
+        @keyframes wa-attention {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
 
         /* ===== FOOTER ===== */
         footer {
@@ -681,7 +689,7 @@ IMPORTANT:
     <!-- Toast -->
     <div id="toast" class="toast" role="status" aria-live="polite">
         <span class="check">✓</span>
-        <span>הועתק! עכשיו תדביק בקלוד</span>
+        <span>הועתק! רוצה לראות איך אני עובד עם זה? &darr;</span>
     </div>
 
     <script src="accessibility-widget.js" defer></script>
@@ -739,6 +747,18 @@ IMPORTANT:
                     if (typeof fbq !== 'undefined') {
                         fbq('trackCustom', 'CopyPrompt', { event_source: 'thank_you_prompt' });
                     }
+                    // Auto-scroll to WhatsApp group section — captures the "I just got value" moment
+                    setTimeout(function() {
+                        var groupSection = document.querySelector('.section-group');
+                        if (groupSection) {
+                            groupSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            var waBtn = groupSection.querySelector('.btn-whatsapp');
+                            if (waBtn) {
+                                waBtn.classList.add('pulse-now');
+                                setTimeout(function() { waBtn.classList.remove('pulse-now'); }, 2600);
+                            }
+                        }
+                    }, 650);
                 }
             }
             copyBtn.addEventListener('click', copyText);
