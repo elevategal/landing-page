@@ -469,6 +469,36 @@
         .footer-meta a:hover { border-bottom-color: var(--accent); }
         .footer-meta span { margin: 0 10px; opacity: 0.5; }
 
+        /* ===== STICKY TOP CTA (mobile only) ===== */
+        .sticky-top-cta {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--whatsapp);
+            color: #fff;
+            border-bottom: 2px solid #000;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.18);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: inherit;
+            font-weight: 900;
+            font-size: 0.95rem;
+            padding: 12px 14px;
+            z-index: 999;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        .sticky-top-cta.is-visible { transform: translateY(0); }
+        .sticky-top-cta:hover { background: var(--whatsapp-dark); }
+        .sticky-top-cta svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+        @media (max-width: 720px) {
+            .sticky-top-cta { display: flex; }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             body { padding: 24px 12px 50px; }
@@ -483,6 +513,17 @@
 </head>
 <body>
 
+    <!-- Sticky top CTA (mobile only): visible after scrolling past hero, hidden when group section is on screen -->
+    <a id="stickyTopCta"
+       class="sticky-top-cta"
+       href="https://chat.whatsapp.com/GINsZgdyNcKApmy5H88dIL?mode=gi_t"
+       target="_blank"
+       rel="noopener noreferrer"
+       onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'sticky_top'});}">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
+        <span>הצטרף לקבוצה הסגורה &larr;</span>
+    </a>
+
     <div class="page">
 
         <!-- ============ HERO ============ -->
@@ -495,7 +536,7 @@
             <h1>מעולה!<br><span class="h-pill">הפרומפט שלך מוכן</span></h1>
             <p class="hero-sub">
                 תעתיק את הפרומפט למטה, תדביק בקלוד, תענה על 4 שאלות,<br>
-                ותקבל פרומפט באנגלית מוכן להעלאה לגוגל פלואו —<br>
+                ותקבל פרומפט באנגלית מוכן להעלאה לגוגל פלואו,<br>
                 שמשקף את הדי-אן-איי של המותג שלך.
             </p>
         </section>
@@ -615,7 +656,7 @@ IMPORTANT:
                 <div class="step">
                     <div class="step-num">03</div>
                     <h4>קח את הפרומפט באנגלית והעלה לגוגל פלואו</h4>
-                    <p>אם יש לך תמונת מוצר — תצרף אותה גם.</p>
+                    <p>אם יש לך תמונת מוצר, תצרף אותה גם.</p>
                 </div>
                 <div class="step">
                     <div class="step-num">04</div>
@@ -639,7 +680,7 @@ IMPORTANT:
                 </h2>
 
                 <p class="group-text">
-                    בקבוצת הוואצאפ הסגורה שלי אני מעלה תוכן שלא נכנס לאינסטגרם —
+                    בקבוצת הוואצאפ הסגורה שלי אני מעלה תוכן שלא נכנס לאינסטגרם:
                     ניתוחי מודעות ישראליות בלייב, פרומפטים נוספים, ושיחות שיווק בין חברי הקבוצה.
                     בלי תיאוריה, רק עבודה אמיתית.
                 </p>
@@ -648,17 +689,17 @@ IMPORTANT:
                     <div class="benefit">
                         <div class="benefit-icon">🎯</div>
                         <h4>ניתוחי מודעות בלייב</h4>
-                        <p>ניתוח שבועי של מודעה ישראלית — מה עובד, מה לא, ואיך הייתי בונה אותה אחרת.</p>
+                        <p>ניתוח שבועי של מודעה ישראלית: מה עובד, מה לא, ואיך הייתי בונה אותה אחרת.</p>
                     </div>
                     <div class="benefit">
                         <div class="benefit-icon">⚡</div>
                         <h4>פרומפטים נוספים</h4>
-                        <p>פרומפטים שלא משחרר באינסטגרם — לתסריטי UGC, VSL, וקופי.</p>
+                        <p>פרומפטים שלא משחרר באינסטגרם, לתסריטי UGC, VSL, וקופי.</p>
                     </div>
                     <div class="benefit">
                         <div class="benefit-icon">💬</div>
                         <h4>שיחות שיווק</h4>
-                        <p>שיחות בין חברי הקבוצה — שאלות, תובנות, ועזרה הדדית.</p>
+                        <p>שיחות בין חברי הקבוצה: שאלות, תובנות, ועזרה הדדית.</p>
                     </div>
                 </div>
 
@@ -747,7 +788,7 @@ IMPORTANT:
                     if (typeof fbq !== 'undefined') {
                         fbq('trackCustom', 'CopyPrompt', { event_source: 'thank_you_prompt' });
                     }
-                    // Auto-scroll to WhatsApp group section — captures the "I just got value" moment
+                    // Auto-scroll to WhatsApp group section after copy
                     setTimeout(function() {
                         var groupSection = document.querySelector('.section-group');
                         if (groupSection) {
@@ -762,6 +803,28 @@ IMPORTANT:
                 }
             }
             copyBtn.addEventListener('click', copyText);
+
+            // ===== Sticky top CTA (mobile): show after hero, hide when group section is on screen =====
+            var stickyCta = document.getElementById('stickyTopCta');
+            var hero = document.querySelector('.hero');
+            var groupSection = document.querySelector('.section-group');
+            var groupInView = false;
+            if (stickyCta && hero && groupSection && 'IntersectionObserver' in window) {
+                new IntersectionObserver(function(entries) {
+                    groupInView = entries[0].isIntersecting;
+                }, { threshold: 0.15 }).observe(groupSection);
+
+                var ticking = false;
+                function updateSticky() {
+                    var pastHero = window.scrollY > (hero.offsetTop + hero.offsetHeight - 40);
+                    if (pastHero && !groupInView) stickyCta.classList.add('is-visible');
+                    else stickyCta.classList.remove('is-visible');
+                    ticking = false;
+                }
+                window.addEventListener('scroll', function() {
+                    if (!ticking) { requestAnimationFrame(updateSticky); ticking = true; }
+                }, { passive: true });
+            }
 
             // ===== Reveal on scroll =====
             var revealEls = document.querySelectorAll('.reveal');
