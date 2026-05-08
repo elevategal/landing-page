@@ -469,16 +469,16 @@
         .footer-meta a:hover { border-bottom-color: var(--accent); }
         .footer-meta span { margin: 0 10px; opacity: 0.5; }
 
-        /* ===== STICKY TOP CTA (mobile only) ===== */
+        /* ===== STICKY BOTTOM CTA (mobile only) ===== */
         .sticky-top-cta {
             position: fixed;
-            top: 0;
+            bottom: 0;
             left: 0;
             right: 0;
             background: var(--whatsapp);
             color: #fff;
-            border-bottom: 2px solid #000;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.18);
+            border-top: 2px solid #000;
+            box-shadow: 0 -4px 0 rgba(0,0,0,0.18);
             display: none;
             align-items: center;
             justify-content: center;
@@ -486,17 +486,20 @@
             text-decoration: none;
             font-family: inherit;
             font-weight: 900;
-            font-size: 0.95rem;
-            padding: 12px 14px;
+            font-size: 1rem;
+            padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
             z-index: 999;
-            transform: translateY(-100%);
+            transform: translateY(0);
             transition: transform 0.3s ease;
         }
-        .sticky-top-cta.is-visible { transform: translateY(0); }
+        .sticky-top-cta.is-hidden { transform: translateY(110%); }
         .sticky-top-cta:hover { background: var(--whatsapp-dark); }
-        .sticky-top-cta svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+        .sticky-top-cta:active { background: var(--whatsapp-dark); }
+        .sticky-top-cta svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
         @media (max-width: 720px) {
             .sticky-top-cta { display: flex; }
+            /* Reserve space at the bottom so the bar doesn't cover the footer when scrolled to end */
+            body { padding-bottom: 110px; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -804,26 +807,20 @@ IMPORTANT:
             }
             copyBtn.addEventListener('click', copyText);
 
-            // ===== Sticky top CTA (mobile): show after hero, hide when group section is on screen =====
+            // ===== Sticky bottom CTA: hide once user reaches the WhatsApp group section =====
             var stickyCta = document.getElementById('stickyTopCta');
-            var hero = document.querySelector('.hero');
             var groupSection = document.querySelector('.section-group');
-            var groupInView = false;
-            if (stickyCta && hero && groupSection && 'IntersectionObserver' in window) {
-                new IntersectionObserver(function(entries) {
-                    groupInView = entries[0].isIntersecting;
-                }, { threshold: 0.15 }).observe(groupSection);
-
+            if (stickyCta && groupSection) {
                 var ticking = false;
                 function updateSticky() {
-                    var pastHero = window.scrollY > (hero.offsetTop + hero.offsetHeight - 40);
-                    if (pastHero && !groupInView) stickyCta.classList.add('is-visible');
-                    else stickyCta.classList.remove('is-visible');
+                    var pastGroup = window.scrollY + window.innerHeight > groupSection.offsetTop + 80;
+                    stickyCta.classList.toggle('is-hidden', pastGroup);
                     ticking = false;
                 }
                 window.addEventListener('scroll', function() {
                     if (!ticking) { requestAnimationFrame(updateSticky); ticking = true; }
                 }, { passive: true });
+                updateSticky();
             }
 
             // ===== Reveal on scroll =====
