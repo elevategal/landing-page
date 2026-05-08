@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>הפרומפט שלך מוכן | Elev8</title>
+    <title>הפרומפט שלך — ELEV8</title>
+    <meta name="description" content="הפרומפט ליצירת מודעות סטטיות בעברית לאיקומרס. הוראות שימוש מובנות.">
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6"></script>
@@ -47,31 +50,27 @@
             --accent-hover: #A370FF;
             --green: #10B981;
             --green-dark: #059669;
-            --whatsapp: #25D366;
-            --whatsapp-dark: #1FAF53;
-            --border: #000000;
+            --border: #1A1A2E;
             --radius: 12px;
-            --radius-lg: 20px;
-            --brutal-shadow: 6px 6px 0 #000;
-            --brutal-shadow-sm: 4px 4px 0 #000;
-            --brutal-shadow-purple: 6px 6px 0 var(--accent);
-            --brutal-shadow-purple-sm: 4px 4px 0 var(--accent);
+            --radius-lg: 16px;
+            --brutal-shadow: 6px 6px 0 var(--border);
+            --brutal-shadow-sm: 4px 4px 0 var(--border);
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Heebo', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
             background-image:
-                linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: #000;
+                linear-gradient(rgba(26,26,46,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26,26,46,0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+            color: var(--border);
             line-height: 1.6;
-            font-weight: 700;
+            font-weight: 400;
             min-height: 100vh;
-            padding: 32px 16px 60px;
+            padding: 40px 16px 60px;
         }
 
         .page {
@@ -81,19 +80,19 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif;
-            color: #000;
+            font-family: 'Heebo', sans-serif;
+            color: var(--border);
             font-weight: 900;
             line-height: 1.2;
         }
 
-        section { margin-bottom: 60px; }
+        section { margin-bottom: 56px; }
 
-        /* ===== Fade-in on scroll ===== */
+        /* ===== Reveal on scroll ===== */
         .reveal {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
         .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
@@ -103,69 +102,51 @@
             align-items: center;
             gap: 8px;
             background: #fff;
-            border: 2px solid #000;
+            border: 2px solid var(--border);
             border-radius: 50px;
             padding: 8px 18px;
             font-size: 0.92rem;
-            color: #000;
-            font-weight: 800;
+            color: var(--border);
+            font-weight: 700;
             margin-bottom: 24px;
             box-shadow: var(--brutal-shadow-sm);
         }
-        .badge .dot {
-            width: 10px; height: 10px;
+        .badge .check {
+            width: 22px; height: 22px;
             border-radius: 50%;
             background: var(--green);
-            box-shadow: 0 0 0 3px rgba(16,185,129,0.25);
-            animation: pulse-dot 2s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 3px rgba(16,185,129,0.25); }
-            50% { box-shadow: 0 0 0 6px rgba(16,185,129,0.05); }
-        }
-        .badge.lock {
-            background: #fff;
-        }
-        .badge.lock .dot {
-            background: var(--accent);
-            box-shadow: 0 0 0 3px rgba(140,82,255,0.25);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.85rem;
+            border: 2px solid var(--border);
         }
 
         /* ===== HERO ===== */
-        .hero { text-align: center; margin-bottom: 56px; }
+        .hero { text-align: center; }
         h1 {
             font-size: clamp(2.2rem, 6vw, 3.4rem);
             margin-bottom: 16px;
             line-height: 1.15;
         }
-        .h-pill {
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 0.05em 0.5em;
-            border-radius: 8px;
-            font-weight: 900;
-            box-shadow: 4px 4px 0 var(--accent);
-            border: 2px solid #000;
-            margin-top: 6px;
-        }
         .hero-sub {
             font-size: clamp(1rem, 2.4vw, 1.18rem);
-            font-weight: 700;
-            color: #000;
-            max-width: 640px;
+            font-weight: 400;
+            color: var(--border);
+            max-width: 560px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* ===== BLOCK BLACK (section headers) ===== */
+        /* ===== BLOCK BLACK (section header) ===== */
         .block-black {
             display: inline-block;
-            background: #000;
+            background: var(--border);
             color: #fff;
             padding: 12px 24px;
-            border: 2px solid #000;
+            border: 2px solid var(--border);
             border-radius: 8px;
             font-weight: 900;
             font-size: clamp(1.05rem, 2.6vw, 1.25rem);
@@ -174,12 +155,12 @@
             margin-bottom: 22px;
         }
 
-        /* ===== SECTION 2: PROMPT CODE BOX ===== */
+        /* ===== PROMPT CODE BOX ===== */
         .section-prompt { text-align: center; }
         .code-wrap {
             position: relative;
             background: var(--bg-card-dark);
-            border: 2px solid #000;
+            border: 2px solid var(--border);
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
             text-align: right;
@@ -206,22 +187,22 @@
             gap: 8px;
             background: var(--accent);
             color: #fff;
-            border: 2px solid #000;
+            border: 2px solid var(--border);
             border-radius: 8px;
             padding: 8px 16px;
             font-family: inherit;
             font-size: 0.92rem;
             font-weight: 900;
             cursor: pointer;
-            box-shadow: 3px 3px 0 #000;
+            box-shadow: 3px 3px 0 var(--border);
             transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
         }
         .copy-btn:hover {
             background: var(--accent-hover);
             transform: translate(-1px, -1px);
-            box-shadow: 4px 4px 0 #000;
+            box-shadow: 4px 4px 0 var(--border);
         }
-        .copy-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+        .copy-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--border); }
         .copy-btn.copied {
             background: var(--green);
             animation: copied-pop 0.3s ease;
@@ -236,7 +217,7 @@
 
         .code-box {
             padding: 22px 22px 26px;
-            max-height: 480px;
+            max-height: 520px;
             overflow-y: auto;
             color: #E8E8F0;
             font-family: 'SFMono-Regular', Menlo, Consolas, 'Courier New', monospace;
@@ -257,56 +238,26 @@
         }
         .code-box::-webkit-scrollbar-thumb:hover { background: rgba(140,82,255,0.6); }
 
-        /* Toast confirmation */
-        .toast {
-            position: fixed;
-            bottom: 28px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #000;
-            color: #fff;
-            border: 2px solid var(--green);
-            border-radius: 12px;
-            padding: 14px 22px;
-            font-weight: 900;
-            font-size: 1rem;
-            box-shadow: 6px 6px 0 var(--accent);
-            z-index: 1000;
-            opacity: 0;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease;
-            pointer-events: none;
-        }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-        .toast .check {
-            color: var(--green);
-            margin-left: 6px;
-        }
-
-        /* ===== SECTION 3: 4 STEPS ===== */
+        /* ===== 4 STEPS ===== */
         .section-steps { text-align: center; }
         .steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
             margin-top: 14px;
-            position: relative;
         }
         .step {
             background: #fff;
-            border: 2px solid #000;
+            border: 2px solid var(--border);
             border-radius: var(--radius);
             box-shadow: var(--brutal-shadow-sm);
             padding: 24px 18px 20px;
             text-align: right;
-            position: relative;
             transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
         .step:hover {
             transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000;
+            box-shadow: 6px 6px 0 var(--border);
         }
         .step-num {
             display: inline-flex;
@@ -319,22 +270,22 @@
             font-family: 'Heebo', sans-serif;
             font-size: 1.15rem;
             font-weight: 900;
-            border: 2px solid #000;
-            box-shadow: 3px 3px 0 #000;
+            border: 2px solid var(--border);
+            box-shadow: 3px 3px 0 var(--border);
             margin-bottom: 14px;
             line-height: 1;
         }
         .step h4 {
             font-size: 1.02rem;
             font-weight: 900;
-            color: #000;
+            color: var(--border);
             margin-bottom: 8px;
             line-height: 1.3;
         }
         .step p {
             font-size: 0.88rem;
-            font-weight: 700;
-            color: #000;
+            font-weight: 400;
+            color: var(--border);
             line-height: 1.55;
             opacity: 0.85;
         }
@@ -345,169 +296,39 @@
             .steps { grid-template-columns: 1fr; gap: 16px; }
         }
 
-        /* ===== SECTION 4: BRIDGE TO GROUP ===== */
-        .section-group { text-align: center; }
-        .group-card {
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--brutal-shadow);
-            padding: 36px 32px;
-        }
-        .group-text {
-            font-size: clamp(0.98rem, 2.2vw, 1.08rem);
-            font-weight: 700;
-            color: #000;
-            line-height: 1.7;
-            max-width: 620px;
-            margin: 0 auto 30px;
-        }
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 36px;
-            text-align: right;
-        }
-        .benefit {
-            background: var(--accent);
-            color: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: 4px 4px 0 #000;
-            padding: 22px 18px;
-        }
-        .benefit-icon {
-            font-size: 1.7rem;
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-        .benefit h4 {
-            font-size: 1rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-        .benefit p {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: rgba(255,255,255,0.92);
-            line-height: 1.55;
-        }
-        @media (max-width: 720px) {
-            .benefits { grid-template-columns: 1fr; }
-        }
-
-        /* ===== WHATSAPP CTA ===== */
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--whatsapp);
-            color: #fff;
-            padding: 20px 44px;
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 1.18rem;
-            font-weight: 900;
-            text-decoration: none;
-            border: 2px solid #000;
-            box-shadow: var(--brutal-shadow);
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-            animation: wa-breathe 2.5s ease-in-out infinite;
-            min-width: 300px;
-        }
-        @keyframes wa-breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
-        .btn-whatsapp:hover {
-            animation: none;
-            background: var(--whatsapp-dark);
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000;
-        }
-        .btn-whatsapp:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
-        .btn-whatsapp svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
-        .btn-whatsapp.pulse-now {
-            animation: wa-attention 0.5s ease-in-out 5;
-            box-shadow: 6px 6px 0 var(--accent), 0 0 0 6px rgba(140,82,255,0.18);
-        }
-        @keyframes wa-attention {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-
         /* ===== FOOTER ===== */
         footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 2px dashed rgba(0,0,0,0.15);
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 2px dashed rgba(26,26,46,0.15);
             text-align: center;
         }
         .footer-logo {
             font-family: 'Heebo', sans-serif;
             font-size: 1.4rem;
             font-weight: 900;
-            color: #000;
+            color: var(--border);
             letter-spacing: 0.05em;
             margin-bottom: 8px;
         }
         .footer-meta {
             font-size: 0.88rem;
             font-weight: 700;
-            color: #000;
+            color: var(--border);
             opacity: 0.7;
         }
         .footer-meta a {
-            color: #000;
+            color: var(--border);
             text-decoration: none;
-            border-bottom: 1px solid rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(26,26,46,0.3);
         }
         .footer-meta a:hover { border-bottom-color: var(--accent); }
         .footer-meta span { margin: 0 10px; opacity: 0.5; }
-
-        /* ===== STICKY BOTTOM CTA (mobile only) ===== */
-        .sticky-top-cta {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--whatsapp);
-            color: #fff;
-            border-top: 2px solid #000;
-            box-shadow: 0 -4px 0 rgba(0,0,0,0.18);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            font-family: inherit;
-            font-weight: 900;
-            font-size: 1rem;
-            padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
-            z-index: 999;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
-        }
-        .sticky-top-cta.is-hidden { transform: translateY(110%); }
-        .sticky-top-cta:hover { background: var(--whatsapp-dark); }
-        .sticky-top-cta:active { background: var(--whatsapp-dark); }
-        .sticky-top-cta svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
-        @media (max-width: 720px) {
-            .sticky-top-cta { display: flex; }
-            /* Reserve space at the bottom so the bar doesn't cover the footer when scrolled to end */
-            body { padding-bottom: 110px; }
-        }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 480px) {
             body { padding: 24px 12px 50px; }
             section { margin-bottom: 44px; }
-            .group-card { padding: 28px 20px; }
-            .btn-whatsapp { padding: 18px 28px; font-size: 1.05rem; min-width: 0; width: 100%; }
             .code-box { font-size: 0.8rem; padding: 18px; }
             .code-toolbar { padding: 10px 14px; }
             .copy-btn { padding: 7px 12px; font-size: 0.85rem; }
@@ -516,31 +337,19 @@
 </head>
 <body>
 
-    <!-- Sticky top CTA (mobile only): visible after scrolling past hero, hidden when group section is on screen -->
-    <a id="stickyTopCta"
-       class="sticky-top-cta"
-       href="https://chat.whatsapp.com/GINsZgdyNcKApmy5H88dIL?mode=gi_t"
-       target="_blank"
-       rel="noopener noreferrer"
-       onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'sticky_top'});}">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
-        <span>הצטרף לקבוצה הסגורה &larr;</span>
-    </a>
-
     <div class="page">
 
         <!-- ============ HERO ============ -->
         <section class="hero reveal">
             <div class="badge">
-                <span class="dot"></span>
-                <span>הפרומפט מוכן</span>
+                <span class="check">&#10003;</span>
+                <span>ברוך הבא לקבוצה</span>
             </div>
 
-            <h1>מעולה!<br><span class="h-pill">הפרומפט שלך מוכן</span></h1>
+            <h1>הפרומפט שלך כאן.</h1>
             <p class="hero-sub">
-                תעתיק את הפרומפט למטה, תדביק בקלוד, תענה על 4 שאלות,<br>
-                ותקבל פרומפט באנגלית מוכן להעלאה לגוגל פלואו,<br>
-                שמשקף את הדי-אן-איי של המותג שלך.
+                העתק אותו, השתמש בו, ותראה תוצאות.<br>
+                ההוראות מתחת.
             </p>
         </section>
 
@@ -551,15 +360,15 @@
             <div class="code-wrap">
                 <div class="code-toolbar">
                     <span class="code-toolbar-label">PROMPT.txt</span>
-                    <button id="copyBtn" type="button" class="copy-btn" aria-label="העתק את הפרומפט">
+                    <button id="copy-btn" type="button" class="copy-btn" aria-label="העתק את הפרומפט">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <rect x="9" y="9" width="13" height="13" rx="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                         </svg>
-                        <span id="copyBtnText">העתק</span>
+                        <span id="copy-btn-text">העתק</span>
                     </button>
                 </div>
-                <pre id="promptText" class="code-box">אתה יוצר פרומפטים מקצועי למודעות סטטיות באיקומרס.
+                <pre id="prompt-content" class="code-box">אתה יוצר פרומפטים מקצועי למודעות סטטיות באיקומרס.
 המטרה שלך: לקבל ממני מידע על המוצר ועל המותג, ולהוציא פרומפט מוכן באנגלית להדבקה בגוגל פלואו (Google Flow) שיפיק מודעה סטטית מקצועית עם טקסט בעברית מובנה בתמונה - שמשקפת את הדי-אן-איי הוויזואלי של המותג.
 
 לפני שאתה מתחיל, שאל אותי את 4 השאלות הבאות בזו אחר זו (אחת בכל פעם, חכה לתשובה):
@@ -669,55 +478,6 @@ IMPORTANT:
             </div>
         </section>
 
-        <!-- ============ BRIDGE TO GROUP ============ -->
-        <section class="section-group reveal">
-            <div class="group-card">
-                <div class="badge lock">
-                    <span class="dot"></span>
-                    <span>קבוצה סגורה</span>
-                </div>
-
-                <h2 style="font-size: clamp(1.6rem, 4.4vw, 2.4rem); margin-bottom: 18px;">
-                    רוצה לראות איך אני עובד עם זה<br>
-                    <span class="h-pill">על מותגים אמיתיים?</span>
-                </h2>
-
-                <p class="group-text">
-                    בקבוצת הוואצאפ הסגורה שלי אני מעלה תוכן שלא נכנס לאינסטגרם:
-                    ניתוחי מודעות ישראליות בלייב, פרומפטים נוספים, ושיחות שיווק בין חברי הקבוצה.
-                    בלי תיאוריה, רק עבודה אמיתית.
-                </p>
-
-                <div class="benefits">
-                    <div class="benefit">
-                        <div class="benefit-icon">🎯</div>
-                        <h4>ניתוחי מודעות בלייב</h4>
-                        <p>ניתוח שבועי של מודעה ישראלית: מה עובד, מה לא, ואיך הייתי בונה אותה אחרת.</p>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">⚡</div>
-                        <h4>פרומפטים נוספים</h4>
-                        <p>פרומפטים שלא משחרר באינסטגרם, לתסריטי UGC, VSL, וקופי.</p>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">💬</div>
-                        <h4>שיחות שיווק</h4>
-                        <p>שיחות בין חברי הקבוצה: שאלות, תובנות, ועזרה הדדית.</p>
-                    </div>
-                </div>
-
-                <a
-                  href="https://chat.whatsapp.com/GINsZgdyNcKApmy5H88dIL?mode=gi_t"
-                  onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'thank_you_prompt'});}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-whatsapp">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
-                  <span>להצטרף לקבוצה &larr;</span>
-                </a>
-            </div>
-        </section>
-
         <!-- ============ FOOTER ============ -->
         <footer>
             <div class="footer-logo">ELEV8</div>
@@ -730,29 +490,13 @@ IMPORTANT:
 
     </div>
 
-    <!-- Toast -->
-    <div id="toast" class="toast" role="status" aria-live="polite">
-        <span class="check">✓</span>
-        <span>הועתק! רוצה לראות איך אני עובד עם זה? &darr;</span>
-    </div>
-
     <script src="accessibility-widget.js" defer></script>
     <script>
         (function() {
             // ===== Copy button =====
-            var copyBtn = document.getElementById('copyBtn');
-            var copyBtnText = document.getElementById('copyBtnText');
-            var promptEl = document.getElementById('promptText');
-            var toast = document.getElementById('toast');
-            var resetTimer;
-
-            function showToast() {
-                toast.classList.add('show');
-                clearTimeout(resetTimer);
-                resetTimer = setTimeout(function() {
-                    toast.classList.remove('show');
-                }, 2400);
-            }
+            var copyBtn = document.getElementById('copy-btn');
+            var copyBtnText = document.getElementById('copy-btn-text');
+            var promptEl = document.getElementById('prompt-content');
 
             function flashCopied() {
                 copyBtn.classList.add('copied');
@@ -760,7 +504,7 @@ IMPORTANT:
                 setTimeout(function() {
                     copyBtn.classList.remove('copied');
                     copyBtnText.textContent = 'העתק';
-                }, 2400);
+                }, 2000);
             }
 
             function copyText() {
@@ -784,44 +528,15 @@ IMPORTANT:
                 }
                 function onCopySuccess() {
                     flashCopied();
-                    showToast();
                     if (typeof gtag !== 'undefined') {
-                        gtag('event', 'copy_prompt', { event_category: 'engagement', event_label: 'thank_you_prompt' });
+                        gtag('event', 'copy_prompt', { page: 'thank_you_prompt' });
                     }
                     if (typeof fbq !== 'undefined') {
-                        fbq('trackCustom', 'CopyPrompt', { event_source: 'thank_you_prompt' });
+                        fbq('trackCustom', 'CopyPrompt', { page: 'thank_you_prompt' });
                     }
-                    // Auto-scroll to WhatsApp group section after copy
-                    setTimeout(function() {
-                        var groupSection = document.querySelector('.section-group');
-                        if (groupSection) {
-                            groupSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            var waBtn = groupSection.querySelector('.btn-whatsapp');
-                            if (waBtn) {
-                                waBtn.classList.add('pulse-now');
-                                setTimeout(function() { waBtn.classList.remove('pulse-now'); }, 2600);
-                            }
-                        }
-                    }, 650);
                 }
             }
             copyBtn.addEventListener('click', copyText);
-
-            // ===== Sticky bottom CTA: hide once user reaches the WhatsApp group section =====
-            var stickyCta = document.getElementById('stickyTopCta');
-            var groupSection = document.querySelector('.section-group');
-            if (stickyCta && groupSection) {
-                var ticking = false;
-                function updateSticky() {
-                    var pastGroup = window.scrollY + window.innerHeight > groupSection.offsetTop + 80;
-                    stickyCta.classList.toggle('is-hidden', pastGroup);
-                    ticking = false;
-                }
-                window.addEventListener('scroll', function() {
-                    if (!ticking) { requestAnimationFrame(updateSticky); ticking = true; }
-                }, { passive: true });
-                updateSticky();
-            }
 
             // ===== Reveal on scroll =====
             var revealEls = document.querySelectorAll('.reveal');
