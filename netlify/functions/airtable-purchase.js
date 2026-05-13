@@ -65,7 +65,7 @@ exports.handler = async (event) => {
           user_data: userData,
           custom_data: {
             currency: 'ILS',
-            value: value || 997
+            value: value || 1397
           }
         }
       ]

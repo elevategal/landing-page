@@ -110,7 +110,7 @@ exports.handler = async (event) => {
               'Email': email,
               'אישר דיוור': consent || false,
               'Purchase Status': 'Lead',
-              'Price': 997,
+              'Price': 1397,
               'UTM Source': utmSource || '',
               'UTM Medium': utmMedium || '',
               'UTM Campaign': utmCampaign || '',
