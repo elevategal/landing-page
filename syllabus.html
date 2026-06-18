@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>סילבוס מלא | סדנת קריאייטיב AI</title>
-    <meta name="description" content="סילבוס מלא לסדנת קריאייטיב AI - 3 מפגשים, אונליין בזום. מבנה מפורט של כל מפגש, מה לומדים, ומה יוצא בסוף.">
+    <title>סילבוס מלא | סדנת קריאייטיב ELEV8</title>
+    <meta name="description" content="סילבוס מלא לסדנת קריאייטיב ELEV8 - מפגש אחד, 3.5 שעות בזום, 4 חלקים. כל מה שצריך כדי להפסיק לנחש בקריאייטיב.">
     <meta name="author" content="Elev8 Creative Strategy">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://elev8.co.il/syllabus">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="סילבוס מלא | סדנת קריאייטיב AI">
-    <meta property="og:description" content="סילבוס מלא לסדנת קריאייטיב AI - 3 מפגשים, אונליין בזום. מבנה מפורט של כל מפגש, מה לומדים, ומה יוצא בסוף.">
+    <meta property="og:title" content="סילבוס מלא | סדנת קריאייטיב ELEV8">
+    <meta property="og:description" content="סילבוס מלא לסדנת קריאייטיב ELEV8 - מפגש אחד, 3.5 שעות בזום, 4 חלקים. כל מה שצריך כדי להפסיק לנחש בקריאייטיב.">
     <meta property="og:url" content="https://elev8.co.il/syllabus">
     <meta property="og:image" content="https://elev8.co.il/syllabus-og.jpg">
     <meta property="og:image:width" content="600">
@@ -22,8 +22,8 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="סילבוס מלא | סדנת קריאייטיב AI">
-    <meta name="twitter:description" content="סילבוס מלא לסדנת קריאייטיב AI - 3 מפגשים, אונליין בזום.">
+    <meta name="twitter:title" content="סילבוס מלא | סדנת קריאייטיב ELEV8">
+    <meta name="twitter:description" content="סילבוס מלא לסדנת קריאייטיב ELEV8 - מפגש אחד, 3.5 שעות בזום, 4 חלקים.">
     <meta name="twitter:image" content="https://elev8.co.il/syllabus-og.jpg">
 
     <!-- Favicon -->
@@ -44,15 +44,15 @@
     {
       "@context": "https://schema.org",
       "@type": "Course",
-      "name": "סדנת קריאייטיב AI למותגי איקומרס",
-      "description": "סדנה שיתופית למותגי איקומרס - למד איך לייצר 10 קריאטיבים מנצחים בשבוע באמצעות AI",
+      "name": "סדנת קריאייטיב ELEV8 למותגי איקומרס",
+      "description": "סדנה אחת של 3.5 שעות למותגי איקומרס - כל מה שצריך כדי להפסיק לנחש בקריאייטיב. אסטרטגיה, קופי, פאנל ודמו חי של הסוכן.",
       "provider": {
         "@type": "Organization",
         "name": "Elev8 Creative Strategy"
       },
       "offers": {
         "@type": "Offer",
-        "price": "1397",
+        "price": "497",
         "priceCurrency": "ILS"
       }
     }
@@ -80,10 +80,10 @@
         },
         {
           "@type": "Question",
-          "name": "מה אם פספסתי מפגש?",
+          "name": "מה אם לא אוכל להשתתף בסדנה?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "כל מפגש מוקלט ומתומלל - ותוכל להכניס את התמלול ישירות לפרומפט שתקבל בסדנה."
+            "text": "הסדנה מוקלטת ונשארת אצלך לכל החיים - תוכל לצפות בהקלטה בכל זמן ולהכניס את התמלול ישירות לסוכן שתקבל בסדנה."
           }
         },
         {
@@ -1409,6 +1409,36 @@
             font-weight: 900;
             font-size: 1.1rem;
         }
+        /* 10-min break divider between parts */
+        .schedule-break {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: -8px auto;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.9rem;
+            opacity: 0.65;
+        }
+        .schedule-break::before,
+        .schedule-break::after {
+            content: '';
+            height: 2px;
+            width: 40px;
+            background: #000;
+            opacity: 0.3;
+            border-radius: 2px;
+        }
+        .schedule-break .brk-pill {
+            background: #fff;
+            border: 2px dashed rgba(0,0,0,0.35);
+            border-radius: 50px;
+            padding: 4px 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
         @media (max-width: 820px) {
             .schedule-card { grid-template-columns: 1fr; }
             .schedule-gif-wrap { border-right: none; border-top: 2px solid #000; min-height: 220px; }
@@ -1476,11 +1506,18 @@
         }
         .price-box .old-price span { text-decoration: line-through; font-weight: 800; }
         .price-box .new-price {
-            font-size: clamp(2rem, 5vw, 2.6rem);
+            font-size: clamp(3.2rem, 9vw, 5rem);
             font-weight: 900;
             color: var(--green-accent);
             margin-bottom: 6px;
-            line-height: 1.1;
+            line-height: 1.05;
+        }
+        .price-box .new-price .vat {
+            display: block;
+            font-size: 0.28em;
+            color: #000;
+            font-weight: 800;
+            margin-top: 4px;
         }
         .price-box .price-note {
             color: #000;
@@ -2264,93 +2301,128 @@
             <div class="hero-stack">
                 <div class="badge fade-up">
                     <span class="dot"></span>
-                    <span>סילבוס מלא | 3 מפגשים</span>
+                    <span>סילבוס מלא | מפגש אחד</span>
                 </div>
             </div>
             <h1 class="fade-up">
                 <span class="line line-md">סדנת</span>
-                <span class="line line-xl"><span class="h-pill-grad">קריאייטיב AI</span></span>
+                <span class="line line-xl"><span class="h-pill-grad">קריאייטיב</span></span>
             </h1>
-            <p class="subtitle fade-up">24-26 במאי 2026 | 18:00-20:00 | אונליין בזום</p>
-            <p class="subtitle fade-up" style="margin-top:6px; font-weight:800; color:#000; font-size:1.05rem;">3 מפגשים. סיסטם אחד לקריאייטיב שעובד.</p>
+            <p class="subtitle fade-up" style="font-weight:900; color:#000;">מפגש אחד. 3.5 שעות.</p>
+            <p class="subtitle fade-up" style="margin-top:6px; font-weight:800; color:#000; font-size:1.05rem;">כל מה שצריך כדי להפסיק לנחש בקריאייטיב.</p>
+            <p class="subtitle fade-up" style="margin-top:14px; font-weight:800; color:#000; font-size:1rem;">&#128197; יום שני, 22.6.2026 | 18:00&#8211;21:30 | אונליין בזום</p>
         </div>
     </section>
     </header>
 
-    <!-- ===== SYLLABUS (3 MEETINGS WITH VISUALS) ===== -->
+    <!-- ===== WHO IS THIS FOR ===== -->
+    <section class="objection-section" style="padding: 20px 0 40px;">
+        <div class="container">
+            <div class="objection-card fade-up">
+                <div class="objection-quote">למי הסדנה הזאת <span class="h-pill">מתאימה</span></div>
+                <p class="objection-answer">לבעלי מותגי איקומרס שמריצים מודעות במטא, יודעים שמשהו חסר להם, ועייפים מ"לנסות עוד קריאייטיב ולקוות שיעבוד".</p>
+                <div class="objection-body">
+                    <p class="punch">זאת לא סדנה למתחילים. זאת סדנה למי שכבר מוציא כסף על מדיה, ראה מה לא עובד, ורוצה לדעת למה.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SYLLABUS (4 PARTS IN ONE LIVE) ===== -->
     <section class="schedule-section">
         <div class="container">
-            <h2 class="fade-up">מתי ומה <span class="h-pill">לומדים?</span></h2>
-            <p class="schedule-info fade-up">&#128197; 24-26 במאי | 18:00-20:00 | זום</p>
+            <h2 class="fade-up">מה נעבור <span class="h-pill">בסדנה</span></h2>
+            <p class="schedule-info fade-up">&#128197; יום שני, 22.6 | 18:00&#8211;21:30 | 4 חלקים | בזום</p>
 
             <div class="schedule-list fade-up">
-                <!-- Meeting 1 -->
+                <!-- Part 1 -->
                 <div class="schedule-card">
                     <div class="schedule-gif-wrap">
-                        <img loading="lazy" src="gifs/lesson-1.gif" alt="מפגש 1 - מי הלקוח ומה באמת מניע אותו">
+                        <img loading="lazy" src="gifs/lesson-1.gif" alt="חלק 1 - מי הלקוח שלך באמת">
                     </div>
                     <div class="schedule-content">
                         <div class="schedule-num">01</div>
-                        <div class="schedule-meta">יום ראשון | 10/5 | 18:00-20:00</div>
-                        <h3>"מה שהמתחרים שלך לא יודעים על הלקוח שלהם"</h3>
-                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">לפני שכותבים שורה אחת של קופי, צריך להבין עם מי מדברים באמת.</p>
+                        <div class="schedule-meta">חלק 1 | 60 דקות</div>
+                        <h3>מי הלקוח שלך באמת</h3>
+                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">לפני שכותבים שורה אחת של קופי, צריך להבין עם מי מדברים.</p>
                         <ul class="schedule-bullets">
-                            <li>למה מודעות מכוערות מוכרות יותר ממודעות "יפות" - ומה קורה בראש של הלקוח כשהוא רואה פרסומת.</li>
-                            <li>חמש רמות המודעות של הלקוח - איך לזהות בשנייה אחת באיזו רמה הוא נמצא ולמה כל רמה דורשת מסר שונה.</li>
-                            <li>ההבדל בין מה שהלקוח אומר שהוא רוצה לבין מה שמוציא לו את הארנק - ולמה רוב המודעות מוכרות את הדבר הלא נכון.</li>
-                            <li>פירמידת הצרכים של מאסלו ואיך בחירת הצורך הנכון קובעת אם אתה מתחרה על מחיר או על זהות.</li>
-                            <li>מיפוי חושי מלא של הלקוח - מה הוא רואה, שומע, חושב, מרגיש, אומר, עושה.</li>
-                            <li>איך לקוחה אחת קיימת יכולה לתת לך חומר לחודש שלם של קריאייטיב - בלי להמציא כלום.</li>
-                            <li>טריגרים לכל קהל - צעירות, מבוגרות, גברים, הורים - למה כל אחד דורש גישה שונה.</li>
+                            <li>למה מודעות מכוערות מוכרות יותר ממודעות יפות.</li>
+                            <li>ההבדל בין מה שהלקוח אומר שהוא רוצה לבין מה שהוא באמת קונה.</li>
+                            <li>איך לדעת לאיזה רגש לפנות בכל קהל - צעירות, מבוגרות, גברים, הורים. כל אחד דורש טריגר שונה.</li>
+                            <li>5 השאלות שצריך לשאול לקוח כדי לחשוף את ה-Deep Desire שלו.</li>
                         </ul>
-                        <div class="meeting-outcome"><strong>מה יוצא מהמפגש:</strong> מיפוי אסטרטגי שלם של הלקוח שלך, ברמה שאתה לא יכול לעבוד בלעדיו. זה הבסיס לכל מה שנבנה בשני המפגשים הבאים.</div>
+                        <div class="meeting-outcome"><strong>עם מה אתה יוצא:</strong> מיפוי מלא של הלקוח שלך וה-Deep Desire שלו, מוכן להפוך לקופי בחלק הבא.</div>
                     </div>
                 </div>
 
-                <!-- Meeting 2 -->
+                <!-- Break -->
+                <div class="schedule-break"><span class="brk-pill">&#9749; הפסקה של 10 דקות</span></div>
+
+                <!-- Part 2 -->
                 <div class="schedule-card">
                     <div class="schedule-gif-wrap">
-                        <img loading="lazy" src="gifs/lesson-2.gif" alt="מפגש 2 - איך כותבים קופי שמוכר">
+                        <img loading="lazy" src="gifs/lesson-2.gif" alt="חלק 2 - איך כותבים קופי שעוצר לקרוא">
                     </div>
                     <div class="schedule-content">
                         <div class="schedule-num">02</div>
-                        <div class="schedule-meta">יום שני | 11/5 | 18:00-20:00</div>
-                        <h3>"איך כותבים קופי שלא עוצרים לקרוא"</h3>
-                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">כאן הסיסטם מתחיל להיבנות.</p>
+                        <div class="schedule-meta">חלק 2 | 50 דקות</div>
+                        <h3>איך כותבים קופי שגורם ללקוח לעצור לקרוא</h3>
+                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">הסיסטם המלא של איך לבנות מודעה שעוצרת את הגלילה.</p>
                         <ul class="schedule-bullets">
-                            <li>שלוש נוסחאות הקופי שעומדות מאחורי 99% מהמודעות שעוצרות גלילה - ומתי להשתמש בכל אחת.</li>
-                            <li>שלוש רמות התועלת - מה המוצר עושה, מה הוא מאפשר לעשות, ומה הוא גורם להרגיש.</li>
-                            <li>"להבטיח בלי להבטיח" - הטכניקה המשפטית שעומדת מאחורי המודעות הכי רווחיות בישראל.</li>
-                            <li>מילים שמשנות את ההמרה - ואיך להחליף את המילים הגנריות שלך בשקט.</li>
-                            <li>ריפריימינג - איך להפוך מוצר של 380 שקל לרולס רויס של הקטגוריה בלי לגעת במחיר.</li>
-                            <li>מבנה הוק נכון - ואיך להתאים אותו לכל שלב בפאנל.</li>
-                            <li>מיפוי הזוויות השיווקיות - 7 דרכים לתקוף את אותו קהל בלי לחזור על עצמך.</li>
+                            <li>4 הנוסחאות שעומדות מאחורי 99% מהמודעות שרצות היום, ומתי להשתמש בכל אחת.</li>
+                            <li>3 רמות התועלת - מה המוצר עושה, מה הוא מאפשר לעשות, ומה הוא גורם להרגיש.</li>
+                            <li>"להבטיח בלי להבטיח" - 4 מבנים שתוכל להעתיק למוצר שלך כבר אותו ערב.</li>
+                            <li>כוח המילה - איך להחליף קופי גנרי בקופי שעוצר.</li>
+                            <li>ריפריימינג - איך להפוך מוצר "יקר" ל"משתלם" בלי לגעת במחיר.</li>
+                            <li>Golden Nugget - המשפט האחד שעוצר את הגלילה ומכיל את כל ההבטחה.</li>
                         </ul>
-                        <div class="meeting-outcome"><strong>מה יוצא מהמפגש:</strong> אתה מפסיק להסתכל על מודעות כ"יצירה". אתה מתחיל לראות אותן כחלק מסיסטם. כל בחירה מנומקת. כל מילה במקום.</div>
+                        <div class="meeting-outcome"><strong>עם מה אתה יוצא:</strong> ארגז כלים מלא לכתיבת מודעות, עם דוגמאות אמיתיות לכל טכניקה.</div>
                     </div>
                 </div>
 
-                <!-- Meeting 3 -->
+                <!-- Break -->
+                <div class="schedule-break"><span class="brk-pill">&#9749; הפסקה של 10 דקות</span></div>
+
+                <!-- Part 3 -->
                 <div class="schedule-card">
                     <div class="schedule-gif-wrap">
-                        <img loading="lazy" src="gifs/lesson-3.gif" alt="מפגש 3 - הסוכן בלייב על המותג שלך">
+                        <img loading="lazy" src="gifs/lesson-3.gif" alt="חלק 3 - איך לבנות פאנל רווחי">
                     </div>
                     <div class="schedule-content">
                         <div class="schedule-num">03</div>
-                        <div class="schedule-meta">יום שלישי | 12/5 | 18:00-20:00</div>
-                        <h3>"הסוכן. בלייב. על המותג שלך."</h3>
-                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">המפגש הזה משנה את כל מה שאתה יודע על קריאייטיב.</p>
+                        <div class="schedule-meta">חלק 3 | 50 דקות</div>
+                        <h3>איך לבנות פאנל שמכניס לקוחות חדשים ברווחיות</h3>
+                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">הסיבה שרוב המותגים בישראל תקועים זה לא הקריאייטיב. זה הפאנל.</p>
                         <ul class="schedule-bullets">
-                            <li>לייב של שעתיים איתי ועם קלוד - בונים אסטרטגיה שלמה למותג אמיתי מאפס: קהלים, Deep Desire, מתחרים, פוזישנינג, התנגדויות. הכל ב-30 דקות.</li>
-                            <li>איך אני נותן לסוכן את המותג שלי פעם אחת ואחרי זה הוא זוכר אותו לנצח - כל צ'אט חדש נשען על האסטרטגיה.</li>
-                            <li>מודעות סטטיות - איך הסוכן מוציא קופי, כותרת ראשית, primary text, CTA ובריף ויזואל מוכן לגרפיקאי או ל-Google Flow.</li>
-                            <li>תסריט UGC מלא - סיפור, רגעי מפתח, סיום. עד שלוש דקות מול הסוכן ויש לך סקריפט מוכן לצלם.</li>
-                            <li>VSL בסגנון סופטי - המודעות שמדפיסות כסף לדרופרים הגדולים של ישראל. הסוכן בונה מבנה מלא עם 60-30-10.</li>
-                            <li>נייטיב - הפורמט השקט שמדפיס מיליונים. איך לכתוב אדוורטוריאל של 2,500 מילים שאנשים קוראים עד הסוף.</li>
-                            <li>מודעות קפשנים - הפורמט הכי פשוט לייצור, הכי חזק ל-first click.</li>
-                            <li>שמות קבצים סיסטמטיים - למה התהליך הזה חוסך לך 80% מזמן ניהול הקריאייטיב.</li>
+                            <li>למה רוב המותגים תקועים גם כשהמודעות שלהם "עובדות".</li>
+                            <li>13 דרכים לפתוח מודעה כך שאי אפשר לגלול דרכה - מחולקות ל-4 משפחות הוקים לפי שלב בפאנל.</li>
+                            <li>7 הזוויות השיווקיות ואיך לפזר אותן נכון לאורך הפאנל.</li>
+                            <li>איך לחבר כל מודעה לשלב הנכון בפאנל.</li>
+                            <li>תהליך החשיבה של בניית קריאייטיב יחיד מאפס.</li>
                         </ul>
-                        <div class="meeting-outcome"><strong>מה יוצא מהמפגש:</strong> סוכן AI שלך, מוגדר לפי המותג שלך, מוכן לייצר קריאייטיבים בלתי מוגבלים. אתה לא מקבל "פרומפט" - אתה מקבל סיסטם שעובד גם בשבת בבוקר כשאתה שותה קפה.</div>
+                        <div class="meeting-outcome"><strong>עם מה אתה יוצא:</strong> מבנה פאנל מסודר, עם הבנה איזה סוג של קריאייטיב לשים בכל שלב.</div>
+                    </div>
+                </div>
+
+                <!-- Break -->
+                <div class="schedule-break"><span class="brk-pill">&#9749; הפסקה של 10 דקות</span></div>
+
+                <!-- Part 4 -->
+                <div class="schedule-card">
+                    <div class="schedule-gif-wrap">
+                        <img loading="lazy" src="gifs/lesson-3.gif" alt="חלק 4 - דמו חי של הסוכן">
+                    </div>
+                    <div class="schedule-content">
+                        <div class="schedule-num">04</div>
+                        <div class="schedule-meta">חלק 4 | 30 דקות</div>
+                        <h3>דמו חי של הסוכן</h3>
+                        <p style="color:#000; font-weight:700; font-size:0.97rem; line-height:1.55; margin-bottom:16px;">אני פותח את המסך מולך ובונה קריאייטיב למותג אמיתי מאפס.</p>
+                        <ul class="schedule-bullets">
+                            <li>בונים קריאייטיב מאפס - אסטרטגיה, קהלים, פוזישנינג, קופי, מודעה מוגמרת.</li>
+                            <li>כל מה שלמדנו ב-3 השעות הראשונות, מיושם בזמן אמת, בתוך הסוכן שלי.</li>
+                            <li>כל משתתף יוצא עם הסוכן הזה - מוגדר לעבוד עליו עם המותג שלו.</li>
+                        </ul>
+                        <div class="meeting-outcome"><strong>מה תצא איתו:</strong> הסוכן של ELEV8 ביד, מותקן ומוכן לעבודה על המותג שלך.</div>
                     </div>
                 </div>
             </div>
@@ -2406,7 +2478,7 @@
                 <p>ראיתי שוב ושוב את אותה תמונה: בעלי עסקים ומנהלי מדיה שיושבים בעשר בלילה מול דף ריק ב-Canva, מנחשים מה לכתוב, מתפללים שהמודעה הזאת תעבוד הפעם.</p>
                 <p>בלי שיטה. בלי סיסטם. בלי מושג מה הופך מודעה אחת למכונת מכירות ואחרת לכישלון של 4 ספרות.</p>
                 <p>זה לא קשור לכישרון. זה קשור לזה ש<em>אף אחד לא לימד אותם איך לחשוב על הלקוח</em> - לפני שכותבים מילה אחת של קופי.</p>
-                <p>אז יצרתי את הסדנה הזאת. כל מה שלמדתי בשטח, מקופל ל-3 מפגשים. בלי תיאוריה מיותרת. עם סוכן AI שעושה את העבודה הכבדה ברקע.</p>
+                <p>אז יצרתי את הסדנה הזאת. כל מה שלמדתי בשטח, מקופל למפגש אחד של 3.5 שעות. בלי תיאוריה מיותרת. עם סוכן AI שעושה את העבודה הכבדה ברקע.</p>
                 <p style="margin-bottom:0;"><strong>היעד: שגם בשבת בבוקר, כשאתה שותה קפה, הסיסטם שלך ימשיך לייצר קריאייטיב שמוכר.</strong></p>
             </div>
         </div>
@@ -2443,7 +2515,7 @@
                 </div>
             </div>
             <div class="cta-wrapper fade-up">
-                <a href="#contact" class="cta-btn">רוצה להבין אם זה מתאים לך? &larr;</a>
+                <a href="#contact" class="cta-btn">להרשמה &larr;</a>
             </div>
         </div>
     </section>
@@ -2493,7 +2565,7 @@
             </div>
             <p class="closing fade-up">אלה מספרים אמיתיים. מאנשים אמיתיים. שהשתמשו בסיסטם.</p>
             <div class="cta-wrapper fade-up" style="text-align:center; margin-top:30px;">
-                <a href="#contact" class="cta-btn">אני רוצה את אותן התוצאות &larr;</a>
+                <a href="#contact" class="cta-btn">להרשמה &larr;</a>
             </div>
         </div>
     </section>
@@ -2505,15 +2577,15 @@
             <div class="benefits-grid fade-up">
                 <div class="benefit-item">
                     <div class="benefit-icon">&#9989;</div>
-                    <p>3 מפגשים של שעתיים עם הקלטה מלאה לכל החיים</p>
+                    <p>מפגש מלא של 3.5 שעות עם הקלטה לכל החיים</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-icon">&#9989;</div>
-                    <p>סוכן הקריאייטיב של ELEV8 - הפרומפט המלא שאני עובד איתו, שווה 300 ₪ ביוטיוב</p>
+                    <p>סוכן הקריאייטיב שלי בקלוד שאני עובד איתו ליצור קריאייטיבים + מדריך התקנה</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-icon">&#9989;</div>
-                    <p>חוברת תרגילים עם מוצרים לדוגמה ובריפים מוכנים לכל מפגש</p>
+                    <p>טבלת קהלים מקצועית - איך לפנות לכל קהל</p>
                 </div>
                 <div class="benefit-item">
                     <div class="benefit-icon">&#9989;</div>
@@ -2521,7 +2593,7 @@
                 </div>
                 <div class="benefit-item" style="grid-column: 1 / -1;">
                     <div class="benefit-icon">&#9989;</div>
-                    <p>קבוצת וואטסאפ סגורה עם כל המשתתפים - להתייעצויות, שיתופים והמשך לימוד</p>
+                    <p>קבוצת וואטסאפ סגורה עם כל המשתתפים</p>
                 </div>
             </div>
         </div>
@@ -2531,20 +2603,34 @@
     <section class="captain-section">
         <div class="container">
             <div class="captain-card fade-up">
-                <p class="lead">הבטחה אחת:</p>
-                <p>אחרי הסדנה אתה מפסיק לשבת בעשר בלילה מול דף ריק.</p>
-                <p>אתה לא מנחש יותר.</p>
-                <p class="punch">יש סיסטם. יש שיטה. יש כלי שעובד.</p>
+                <p class="lead">ההבטחה שלי:</p>
+                <p>אם לא חידשתי לך כלום -</p>
+                <p class="punch">אני מחזיר לך את מלוא הסכום, מבלי לשאול שאלות.</p>
             </div>
         </div>
     </section>
 
-    <!-- ===== TARGET AUDIENCE ===== -->
-    <section class="objection-section">
+    <!-- ===== TECHNICAL DETAILS ===== -->
+    <section class="schedule-section" style="padding:40px 0 20px;">
         <div class="container">
-            <div class="objection-card fade-up">
-                <div class="objection-quote">למי הסדנה <span class="h-pill">מתאימה?</span></div>
-                <p class="objection-answer">למי שרוצה להפסיק להיות תלוי בגרפיקאי, בקופירייטר, או בהשראה - ולהתחיל לבנות קריאייטיב לפי שיטה שעובדת.</p>
+            <h2 class="fade-up">פרטים <span class="h-pill">טכניים</span></h2>
+            <div class="benefits-grid fade-up" style="margin-top:30px;">
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#128197;</div>
+                    <p><strong>מתי:</strong> יום שני, 22.6 | 18:00&#8211;21:30 בזום</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#128176;</div>
+                    <p><strong>מחיר:</strong> 497 &#8362; כולל מע״מ</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#128101;</div>
+                    <p><strong>מקומות:</strong> מוגבל ל-15 משתתפים בלבד</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">&#127909;</div>
+                    <p><strong>הקלטה:</strong> לכל החיים</p>
+                </div>
             </div>
         </div>
     </section>
@@ -2554,10 +2640,9 @@
         <div class="container">
             <div class="price-box fade-up">
                 <p class="old-price">מחיר השקה</p>
-                <p class="new-price">1397 &#8362; <span style="font-size:0.5em; color:#000; font-weight:700;">+ מע״מ</span></p>
-                <p class="price-note">או 3 תשלומים של 545 &#8362; (כולל מע״מ)</p>
-                <p class="single-pay">המחיר עולה במחזור הבא.</p>
-                <p class="roi-line">קריאטיב אחד שעובד - מחזיר את ההשקעה.</p>
+                <p class="new-price">497 &#8362;<span class="vat">כולל מע״מ</span></p>
+                <p class="single-pay">מוגבל ל-15 משתתפים בלבד.</p>
+                <p class="roi-line">קריאייטיב אחד שעובד - מחזיר את ההשקעה.</p>
             </div>
         </div>
     </section>
@@ -2568,11 +2653,11 @@
             <div class="limited-badge fade-up">&#128293; מקומות מוגבלים</div>
             <h2 class="fade-up">הסדנה מוגבלת ל-<span class="h-pill">15 משתתפים</span> בלבד.</h2>
             <p class="fade-up">זה לא וובינר. זאת סדנה שיתופית שבה אתה מעורב, מקבל פידבק אישי, ויוצא עם הסיסטם מותאם לעסק שלך.</p>
-            <p class="urgency-text fade-up">המחזור הקרוב נפתח ב-24.5. נשארו 5 מקומות.</p>
+            <p class="urgency-text fade-up">הסדנה ב-22.6 (יום שני) | 18:00&#8211;21:30. נשארו מקומות אחרונים.</p>
 
             <!-- Countdown Timer -->
             <div class="countdown-wrapper fade-up" id="countdownWrapper">
-                <p class="countdown-label">⏰ ההרשמה נסגרת במוצאי שבת:</p>
+                <p class="countdown-label">⏰ ההרשמה נסגרת עם פתיחת הסדנה (22.6, 18:00):</p>
                 <div class="countdown" id="countdown">
                     <div class="countdown-unit"><div class="num" id="cdDays">0</div><div class="lbl">ימים</div></div>
                     <div class="countdown-unit"><div class="num" id="cdHours">0</div><div class="lbl">שעות</div></div>
@@ -2604,7 +2689,7 @@
                         </label>
                     </div>
                     <button type="submit" id="leadSubmitBtn" class="cta-btn" style="width:100%; text-align:center; padding:16px; font-size:1.1rem;">
-                        <span class="lead-btn-text">לשיחת התאמה למחזור הקרוב &larr;</span>
+                        <span class="lead-btn-text">תרשום אותי &larr;</span>
                         <span class="lead-spinner" style="display:none; width:20px; height:20px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.6s linear infinite; margin:0 auto;"></span>
                     </button>
                 </form>
@@ -2616,11 +2701,11 @@
     <!-- ===== FINAL CTA ===== -->
     <section class="final-cta">
         <div class="container" style="position: relative; z-index: 1;">
-            <h2 class="fade-up">3 מפגשים. שיטה אחת.<br><span class="h-pill">סיסטם שעובד לבד.</span></h2>
-            <p class="fade-up">24-26 במאי 2026 | 18:00-20:00 | אונליין בזום</p>
-            <p class="urgency-text fade-up">המחזור הקרוב נפתח ב-24.5. נשארו 5 מקומות.</p>
+            <h2 class="fade-up">מפגש אחד. 3.5 שעות.<br><span class="h-pill">סיסטם שעובד לבד.</span></h2>
+            <p class="fade-up">יום שני, 22.6 | 18:00&#8211;21:30 | אונליין בזום</p>
+            <p class="urgency-text fade-up">מוגבל ל-15 משתתפים בלבד.</p>
             <div class="cta-wrapper fade-up">
-                <a href="#contact" class="cta-btn" style="padding: 20px 44px; font-size: 1.2rem; white-space: nowrap;">לשיחת התאמה &larr;</a>
+                <a href="#contact" class="cta-btn" style="padding: 20px 44px; font-size: 1.2rem; white-space: nowrap;">תרשום אותי &larr;</a>
             </div>
         </div>
     </section>
@@ -2786,8 +2871,8 @@
 
         // ===== COUNTDOWN TIMER =====
         (function() {
-            // מוצאי שבת 9.5.2026 בשעה 20:30 שעון ישראל (UTC+3)
-            var deadline = new Date('2026-05-23T20:30:00+03:00').getTime();
+            // פתיחת הסדנה - יום שני 22.6.2026 בשעה 18:00 שעון ישראל (UTC+3)
+            var deadline = new Date('2026-06-22T18:00:00+03:00').getTime();
             var cdDays = document.getElementById('cdDays');
             var cdHours = document.getElementById('cdHours');
             var cdMins = document.getElementById('cdMins');
@@ -2924,7 +3009,7 @@
             var sticky = document.createElement('div');
             sticky.id = 'sticky-cta';
             sticky.style.cssText = 'position:fixed;bottom:0;left:0;right:0;z-index:9980;background:#F3EFE7;border-top:2px solid #000;padding:10px 16px;display:none;text-align:center;';
-            sticky.innerHTML = '<a href="#contact" style="display:block;background:#8C52FF;color:#fff;padding:14px;border:2px solid #000;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:900;text-decoration:none;box-shadow:4px 4px 0 #000;">שמור לי מקום בסדנה &larr;</a>';
+            sticky.innerHTML = '<a href="#contact" style="display:block;background:#8C52FF;color:#fff;padding:14px;border:2px solid #000;border-radius:12px;font-family:inherit;font-size:1rem;font-weight:900;text-decoration:none;box-shadow:4px 4px 0 #000;">תרשום אותי &larr;</a>';
             document.body.appendChild(sticky);
 
             var heroEnd = document.querySelector('.hero');
