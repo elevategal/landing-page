@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שאלון אבחון קריאייטיב | 90 שניות | Elev8</title>
+    <meta name="description" content="שאלון אבחון של 90 שניות לבעלי חנויות אינטרנטיות שמוציאים מעל 10K בחודש על שיווק. תגלה בדיוק למה הקמפיינים שלך לא מייצרים את התוצאה שהם צריכים.">
+    <meta name="author" content="Elev8 Creative Strategy">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://elev8.co.il/diagnosis">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="שאלון אבחון קריאייטיב | 90 שניות | Elev8">
+    <meta property="og:description" content="עדיין מפסיד כסף בקמפיינים? תוך 90 שניות תדע בדיוק למה.">
+    <meta property="og:url" content="https://elev8.co.il/diagnosis">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:site_name" content="Elev8 Creative Strategy">
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #F3EFE7;
+            --bg-card-light: #FFFFFF;
+            --text-primary: #000000;
+            --text-on-dark: #FFFFFF;
+            --accent: #8C52FF;
+            --accent-hover: #A370FF;
+            --accent-soft: rgba(140, 82, 255, 0.08);
+            --red-accent: #E53935;
+            --green-accent: #2E7D32;
+            --border: #000000;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --max-width: 780px;
+            --brutal-shadow: 6px 6px 0 #000;
+            --brutal-shadow-sm: 4px 4px 0 #000;
+            --brutal-shadow-lg: 8px 8px 0 #000;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: 'Heebo', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            background-image:
+                linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: 16px;
+            font-weight: 700;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif;
+            line-height: 1.2;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: -0.01em;
+        }
+        h1 { font-size: clamp(1.8rem, 5.2vw, 3rem); }
+        h2 { font-size: clamp(1.4rem, 3.8vw, 2rem); font-weight: 900; }
+        h3 { font-size: clamp(1.1rem, 2.6vw, 1.35rem); font-weight: 900; }
+
+        /* ===== SHARED COMPONENTS (neo-brutal) ===== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 50px;
+            padding: 7px 16px;
+            font-size: 0.82rem;
+            color: #000;
+            font-weight: 800;
+            margin-bottom: 20px;
+            box-shadow: var(--brutal-shadow-sm);
+        }
+        .badge .dot {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-decoration: none;
+            border: 2px solid #000;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: var(--brutal-shadow);
+            font-family: inherit;
+        }
+        .cta-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: var(--brutal-shadow-lg);
+        }
+        .cta-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        .cta-btn-lg { padding: 22px 52px; font-size: 1.2rem; }
+        .cta-btn-wa {
+            background: #25D366;
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cta-btn-wa svg { width: 26px; height: 26px; fill: #fff; }
+        .cta-btn-secondary {
+            background: #fff;
+            color: #000;
+        }
+
+        /* ===== SCREEN CONTAINER ===== */
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+            animation: screen-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .screen.active { display: block; }
+        @keyframes screen-in {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .screen { animation: none; }
+        }
+
+        /* ===== INTRO SCREEN ===== */
+        .intro { text-align: center; }
+        .intro .pre-headline {
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            color: #000;
+            font-weight: 700;
+            margin-bottom: 18px;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .intro h1 {
+            margin-bottom: 24px;
+            line-height: 1.15;
+        }
+        .intro h1 .highlight {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.05em 0.35em;
+            border-radius: 6px;
+            box-shadow: 4px 4px 0 #000;
+            border: 2px solid #000;
+        }
+        .intro .subhead {
+            font-size: clamp(1rem, 2.4vw, 1.15rem);
+            color: #000;
+            font-weight: 700;
+            max-width: 620px;
+            margin: 0 auto 36px;
+            line-height: 1.55;
+        }
+        .intro-trust {
+            display: block;
+            margin-top: 18px;
+            font-size: 0.9rem;
+            color: #000;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        /* ===== QUESTIONNAIRE ===== */
+        .question-shell { max-width: 720px; margin: 0 auto; }
+
+        .progress-wrap {
+            margin-bottom: 32px;
+        }
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        .progress-track {
+            height: 14px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 999px;
+            box-shadow: var(--brutal-shadow-sm);
+            overflow: hidden;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 2px solid #000;
+        }
+
+        .question-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 28px 24px;
+        }
+        @media (min-width: 640px) {
+            .question-card { padding: 40px 44px; }
+        }
+
+        .q-norm {
+            display: block;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #4a4a4a;
+            line-height: 1.55;
+            margin-bottom: 16px;
+            padding: 12px 14px;
+            background: var(--accent-soft);
+            border-right: 3px solid var(--accent);
+            border-radius: 6px;
+        }
+        .q-title {
+            font-size: clamp(1.2rem, 3.4vw, 1.55rem);
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 22px;
+            color: #000;
+        }
+        .q-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .q-opt {
+            display: block;
+            width: 100%;
+            text-align: right;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 16px 18px;
+            font-size: 1rem;
+            font-weight: 800;
+            font-family: inherit;
+            color: #000;
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+            box-shadow: 4px 4px 0 #000;
+            line-height: 1.4;
+        }
+        .q-opt:hover {
+            background: var(--accent-soft);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+        .q-opt:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        .q-opt.selected {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .q-back {
+            display: inline-block;
+            margin-top: 22px;
+            background: none;
+            border: none;
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 800;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 8px 0;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .q-back:hover { color: var(--accent); }
+        .q-back:disabled { opacity: 0.35; cursor: default; text-decoration: none; }
+
+        /* ===== RESULT SCREEN ===== */
+        .result-shell { max-width: 760px; margin: 0 auto; }
+
+        .result-score-block {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 30px 24px;
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .result-score-label {
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            opacity: 0.75;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .result-score-num {
+            font-size: clamp(3.5rem, 12vw, 5.5rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+        .result-score-num .of {
+            color: var(--accent);
+            font-size: 0.55em;
+            font-weight: 900;
+        }
+        .result-gauge {
+            height: 18px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 18px auto 0;
+            max-width: 420px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .result-gauge-fill {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            transition: width 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .result-headline-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 28px 24px;
+            margin-bottom: 24px;
+        }
+        @media (min-width: 640px) {
+            .result-headline-card { padding: 34px 40px; }
+        }
+        .result-headline-card h2 {
+            margin-bottom: 18px;
+            line-height: 1.25;
+        }
+        .result-headline-card h2 .accent {
+            background: var(--accent);
+            color: #fff;
+            padding: 0.05em 0.35em;
+            border-radius: 4px;
+            box-shadow: 3px 3px 0 #000;
+            display: inline-block;
+        }
+        .result-detail-list {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+        }
+        .result-detail-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 0.98rem;
+            font-weight: 700;
+            line-height: 1.55;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .result-detail-list li:last-child { border-bottom: none; }
+        .result-detail-list .ico {
+            flex-shrink: 0;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 900;
+            border: 2px solid #000;
+            line-height: 1;
+            margin-top: 2px;
+        }
+        .result-detail-list .ico.win { background: var(--green-accent); color: #fff; }
+        .result-detail-list .ico.lose { background: var(--red-accent); color: #fff; }
+        .result-detail-list .ico.mid { background: #fff; color: #000; }
+
+        .trust-block {
+            background: var(--accent-soft);
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow-sm);
+            padding: 22px 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+        .trust-block .avatar {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #000;
+            overflow: hidden;
+            box-shadow: var(--brutal-shadow-sm);
+            background-image: url('profile.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .trust-block .txt {
+            flex: 1;
+            min-width: 0;
+        }
+        .trust-block .name {
+            font-size: 0.95rem;
+            font-weight: 900;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .trust-block .name span {
+            font-weight: 700;
+            opacity: 0.75;
+            font-size: 0.85em;
+        }
+        .trust-block .position {
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        @media (max-width: 480px) {
+            .trust-block { flex-direction: column; text-align: center; padding: 22px 18px; }
+            .trust-block .txt { text-align: center; }
+        }
+
+        .cta-card {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 30px 24px;
+            text-align: center;
+        }
+        @media (min-width: 640px) {
+            .cta-card { padding: 36px 40px; }
+        }
+        .cta-card p {
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #fff;
+        }
+        .cta-card p .catch {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 0.05em 0.4em;
+            border-radius: 4px;
+            font-weight: 900;
+            border: 2px solid #fff;
+        }
+        .cta-card .cta-sub {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            opacity: 0.75;
+            margin-top: 14px;
+        }
+
+        /* Result variant: soft CTA */
+        .cta-card.soft {
+            background: #fff;
+            color: #000;
+        }
+        .cta-card.soft p { color: #000; }
+        .cta-card.soft p .catch { border-color: #000; }
+
+        /* ===== FOOTER (minimal) ===== */
+        footer {
+            padding: 30px 20px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #000;
+            opacity: 0.65;
+        }
+        footer a { color: inherit; text-decoration: underline; }
+
+        /* ===== COOKIE CONSENT (neo-brutal, matches other pages visually) ===== */
+        .cookie-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 100000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        .cookie-overlay.active { opacity: 1; pointer-events: auto; }
+        .cookie-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: calc(100% - 32px);
+            max-width: 480px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: 16px;
+            box-shadow: 8px 8px 0 #000;
+            padding: 28px 26px 22px;
+            z-index: 100001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            direction: rtl;
+            text-align: center;
+        }
+        .cookie-modal.visible {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        .cookie-modal.hidden { display: none; }
+        .cookie-modal-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
+        .cookie-modal-body { font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; line-height: 1.55; }
+        .cookie-btn-row { display: flex; flex-direction: column; gap: 10px; }
+        .cookie-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            border: 2px solid #000;
+            font-family: inherit;
+            text-decoration: none;
+            display: block;
+        }
+        .cookie-btn-primary { background: var(--accent); color: #fff; box-shadow: 4px 4px 0 #000; }
+        .cookie-btn-secondary { background: #fff; color: #000; }
+    </style>
+</head>
+<body>
+
+    <main>
+        <div class="container">
+
+            <!-- ===== INTRO SCREEN ===== -->
+            <section class="screen active" id="screen-intro" aria-label="עמוד פתיחה">
+                <div class="intro">
+                    <div class="badge"><span class="dot"></span>90 שניות · ללא הרשמה</div>
+                    <p class="pre-headline">לבעלי חנויות אינטרנטיות שמוציאים מעל 10K בחודש על שיווק</p>
+                    <h1>
+                        עדיין <span class="highlight">מפסיד כסף</span> בקמפיינים?<br>
+                        תוך 90 שניות תדע בדיוק למה.
+                    </h1>
+                    <p class="subhead">6 שאלות קצרות מבוססות ניסיון של 10 שנים ו-50+ מותגים. אבחון אמיתי, בלי בולשיט.</p>
+                    <button class="cta-btn cta-btn-lg" id="btnStart" type="button">בדוק את זה</button>
+                    <span class="intro-trust">90 שניות. בלי אימייל, בלי התחייבות.</span>
+                </div>
+            </section>
+
+            <!-- ===== QUESTIONNAIRE SCREEN ===== -->
+            <section class="screen" id="screen-quiz" aria-label="שאלון">
+                <div class="question-shell">
+                    <div class="progress-wrap">
+                        <div class="progress-labels">
+                            <span id="progressLabel">שאלה 1 מתוך 6</span>
+                            <span id="progressPct">17%</span>
+                        </div>
+                        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+                    </div>
+
+                    <div class="question-card" id="questionCard">
+                        <!-- filled by JS -->
+                    </div>
+
+                    <button class="q-back" id="btnBack" type="button" disabled>&rarr; חזור לשאלה קודמת</button>
+                </div>
+            </section>
+
+            <!-- ===== RESULT SCREEN ===== -->
+            <section class="screen" id="screen-result" aria-label="תוצאה">
+                <div class="result-shell">
+                    <div class="result-score-block">
+                        <div class="result-score-label">הציון שלך</div>
+                        <div class="result-score-num"><span id="resScore">—</span><span class="of">/16</span></div>
+                        <div class="result-gauge"><div class="result-gauge-fill" id="resGaugeFill"></div></div>
+                    </div>
+
+                    <div class="result-headline-card">
+                        <h2 id="resHeadline">—</h2>
+                        <p id="resIntro" style="font-size: 1rem; font-weight: 700; line-height: 1.6; margin-bottom: 6px;"></p>
+                        <ul class="result-detail-list" id="resDetails"></ul>
+                    </div>
+
+                    <div class="trust-block">
+                        <div class="avatar" role="img" aria-label="גל כהן"></div>
+                        <div class="txt">
+                            <div class="name">גל כהן <span>· 10 שנים · 50+ מותגים</span></div>
+                            <div class="position">אני לא עורך וידאו ולא נוגע באד אקאונט - אני האסטרטג שבונה את המערכת מאחורי הקריאייטיב שלך.</div>
+                        </div>
+                    </div>
+
+                    <div class="cta-card" id="ctaCard">
+                        <p id="ctaText"></p>
+                        <a href="#" class="cta-btn cta-btn-lg" id="ctaBtn"></a>
+                        <span class="cta-sub" id="ctaSub"></span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Elev8 Creative Strategy · <a href="/privacy">מדיניות פרטיות</a> · <a href="/terms">תקנון</a> · <a href="#" onclick="var b=document.getElementById('cookieBanner'),o=document.getElementById('cookieOverlay');b.classList.remove('hidden');b.classList.add('visible');if(o)o.classList.add('active');return false;">הגדרות קוקיז</a>
+    </footer>
+
+    <!-- ===== COOKIE CONSENT ===== -->
+    <div class="cookie-overlay" id="cookieOverlay"></div>
+    <div class="cookie-modal" id="cookieBanner" role="dialog" aria-modal="true" aria-labelledby="cookieTitle">
+        <h2 class="cookie-modal-title" id="cookieTitle">יש אצלנו עוגיות!</h2>
+        <p class="cookie-modal-body">אנחנו משתמשים ב-Cookies כדי לשפר את החוויה ולנתח תנועה. אתה יכול לאשר או להמשיך בלי מעקב.</p>
+        <div class="cookie-btn-row">
+            <button class="cookie-btn cookie-btn-primary" id="cookieAcceptAll">אישור וסגירה</button>
+            <button class="cookie-btn cookie-btn-secondary" id="cookieReject">המשך בלי מעקב</button>
+        </div>
+    </div>
+
+    <script>
+    /* =====================================================================
+       Elev8 · שאלון אבחון קריאייטיב
+       - state בזיכרון בלבד (אין localStorage לתשובות)
+       - ניקוד + ניתוב CTA לפי טווח + תקציב (סעיפים 3-4 באיפיון)
+       - A/B טקסט כפתור פתיחה (סעיף 5)
+       - אירועי מעקב: DiagnosisStart, DiagnosisAnswer, DiagnosisResult, DiagnosisCta
+    ===================================================================== */
+
+    // --- CONFIG ---
+    // TODO(gal): החלט מה ה-CTA הרך למי שלא עומד בקריטריון (מתחת ל-10K או ציון נמוך).
+    // כרגע: הפניה חזרה לוובינר החינמי (נכס קיים). אפשר להחליף בעתיד לקורס/רשימת תפוצה.
+    const SOFT_CTA_URL = '/webinar';
+    const SOFT_CTA_LABEL = 'בוא לוובינר החינמי הבא';
+
+    // TODO(gal): לתאם עם ה-ManyChat bot שהודעת "תפוס אותי" מתחילה שיחה נכון.
+    const WA_NUMBER = '972544287773';  // TODO(gal): לוודא שזה המספר הנכון המחובר ל-ManyChat
+    const WA_MESSAGE = 'תפוס אותי';
+
+    const QUESTIONS = [
+        // Q1 - סינון, לא בניקוד
+        {
+            id: 'q1',
+            scored: false,
+            norm: null,
+            title: 'מי מריץ לך את הקמפיינים בפועל?',
+            options: [
+                { label: 'יש לי מישהו שמריץ (עובד/פרילנסר/סוכנות)', value: 'has-runner' },
+                { label: 'אני בעצמי', value: 'self' }
+            ]
+        },
+        // Q2 - ניקוד
+        {
+            id: 'q2',
+            scored: true,
+            norm: 'אד-סט בריא רץ עם 15-25 קריאייטיבים שונים במקביל - ככה תמיד יש עם מה להחליף מודעה שנשרפת.',
+            title: 'אצלך, כמה קונספטים שונים באמת רצים היום?',
+            options: [
+                { label: 'מלא, כל הזמן דברים חדשים בטסט', value: 4, weight: 4 },
+                { label: 'כמה בודדות', value: 2, weight: 2 },
+                { label: 'בעיקר אותן 1-2 מודעות שעובדות', value: 1, weight: 1 }
+            ]
+        },
+        // Q3 - ניקוד
+        {
+            id: 'q3',
+            scored: true,
+            norm: 'מודעות שממירות בגדול פותחות בכאב של הלקוח, לא במוצר - זה מה שגורם לו לעצור ולהרגיש "זה בדיוק אני".',
+            title: 'איך המודעות שלך בדרך כלל פותחות?',
+            options: [
+                { label: 'מהבעיה או הכאב שהלקוח מרגיש', value: 4, weight: 4 },
+                { label: 'מהמוצר - מה הוא עושה, למה הוא טוב', value: 2, weight: 2 },
+                { label: 'אין שיטה קבועה', value: 1, weight: 1 }
+            ]
+        },
+        // Q4 - ניקוד
+        {
+            id: 'q4',
+            scored: true,
+            norm: 'מותג עם מערכת קריאייטיב נכונה - מודעה טובה יכולה לרוץ חודשים בלי לקרוס.',
+            title: 'כמה זמן מודעה טובה אצלך בדרך כלל שורדת לפני שהיא מפסיקה לעבוד?',
+            options: [
+                { label: 'חודשים, יש לי כאלה שרצות הרבה זמן', value: 4, weight: 4 },
+                { label: 'בערך שבועיים-שלושה', value: 2, weight: 2 },
+                { label: 'ימים בודדים ואז זהו', value: 1, weight: 1 }
+            ]
+        },
+        // Q5 - ניקוד
+        {
+            id: 'q5',
+            scored: true,
+            norm: 'בעלי מותג עם שיטה ברורה יודעים תוך כמה ימים בדיוק למה מודעה עבדה או נכשלה - זה מה שמונע מהם לחזור על אותה טעות שוב ושוב.',
+            title: 'אצלך זה ברור, או שזה מרגיש כמו ניחוש?',
+            options: [
+                { label: 'ברור לי, אני יודע להצביע על הסיבה', value: 4, weight: 4 },
+                { label: 'חלקית', value: 2, weight: 2 },
+                { label: 'מרגיש כמו מזל', value: 1, weight: 1 }
+            ]
+        },
+        // Q6 - סינון כלכלי, לא בניקוד
+        {
+            id: 'q6',
+            scored: false,
+            norm: null,
+            title: 'כמה אתה מוציא היום בחודש על שיווק?',
+            options: [
+                { label: 'מתחת ל-10K', value: 'under-10k' },
+                { label: '10-30K', value: '10-30k' },
+                { label: '30K+', value: '30k-plus' }
+            ]
+        }
+    ];
+
+    // Question labels for scoring detail feedback
+    const Q_LABELS = {
+        q2: { win: 'מגוון קריאייטיבים בטסט', lose: 'מעט מדי קריאייטיבים חיים במקביל' },
+        q3: { win: 'פותח מהכאב של הלקוח - זווית שממירה', lose: 'פותח מהמוצר במקום מהכאב - זווית חלשה' },
+        q4: { win: 'מודעות עם חיי מדף ארוכים', lose: 'מודעות נשרפות מהר - אין מערכת מאחורה' },
+        q5: { win: 'ברור לך למה מודעה עבדה או נכשלה', lose: 'ניחוש במקום שיטה - הטעויות חוזרות' }
+    };
+
+    const RESULT_TIERS = [
+        {
+            min: 13, max: 16, key: 'strong',
+            headline: 'יש לך <span class="accent">קמפיינר טוב</span> - אבל אתה עדיין יכול לדחוף חזק יותר',
+            intro: 'המערכת עובדת. הפער בין המצב שלך היום למקסימום הוא ניואנסים אסטרטגיים - שם הצמיחה הבאה שלך.'
+        },
+        {
+            min: 9, max: 12, key: 'core',
+            headline: 'יש לך מי שמריץ - <span class="accent">אבל הוא פועל בלי מפה</span>',
+            intro: 'זה ה-ICP המדויק שלנו. מספיק תשתית שאפשר לבנות עליה, אבל חסרה שיטה - וזה מה שמפריד אותך מלייצר תוצאה חוזרת.'
+        },
+        {
+            min: 0, max: 8, key: 'weak',
+            headline: 'אתה משלם על <span class="accent">ניסוי וטעייה</span>, לא על אסטרטגיה',
+            intro: 'המספרים שלך אומרים שאין עדיין שיטה - כל מודעה היא הימור. זה הכי יקר שיש בקמפיינים.'
+        }
+    ];
+
+    // --- STATE ---
+    const state = {
+        answers: {},
+        currentIndex: 0,
+        started: false,
+        buttonVariant: null   // 'A' = "בדוק את זה", 'B' = "גלה למה"
+    };
+
+    // --- A/B for start button (סעיף 5) ---
+    function pickButtonVariant() {
+        // Consistent per-session variant. Persist so page reloads don't re-shuffle within a session.
+        try {
+            let v = sessionStorage.getItem('diag_btn_variant');
+            if (!v) {
+                v = Math.random() < 0.5 ? 'A' : 'B';
+                sessionStorage.setItem('diag_btn_variant', v);
+            }
+            return v;
+        } catch (e) {
+            return 'A';
+        }
+    }
+    function applyButtonVariant() {
+        state.buttonVariant = pickButtonVariant();
+        const btn = document.getElementById('btnStart');
+        btn.textContent = state.buttonVariant === 'A' ? 'בדוק את זה' : 'גלה למה';
+        btn.setAttribute('data-variant', state.buttonVariant);
+    }
+
+    // --- TRACKING ---
+    function track(eventName, params) {
+        params = params || {};
+        // GA4
+        if (typeof gtag === 'function') {
+            try { gtag('event', eventName, params); } catch (e) {}
+        }
+        // Meta Pixel - custom event
+        if (typeof fbq === 'function') {
+            try { fbq('trackCustom', eventName, params); } catch (e) {}
+        }
+    }
+
+    // --- QUESTION RENDER ---
+    function renderQuestion(index) {
+        const q = QUESTIONS[index];
+        const card = document.getElementById('questionCard');
+        const currentAnswer = state.answers[q.id];
+
+        const normHtml = q.norm ? `<span class="q-norm">${q.norm}</span>` : '';
+        const optionsHtml = q.options.map((opt, i) => {
+            const selected = currentAnswer && currentAnswer.value === opt.value ? 'selected' : '';
+            return `<button type="button" class="q-opt ${selected}" data-idx="${i}">${opt.label}</button>`;
+        }).join('');
+
+        card.innerHTML = `
+            ${normHtml}
+            <div class="q-title">${q.title}</div>
+            <div class="q-options">${optionsHtml}</div>
+        `;
+
+        // Wire options
+        card.querySelectorAll('.q-opt').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const optIdx = parseInt(btn.getAttribute('data-idx'), 10);
+                selectAnswer(q, optIdx);
+            });
+        });
+
+        // Progress
+        const pct = Math.round(((index + 1) / QUESTIONS.length) * 100);
+        document.getElementById('progressLabel').textContent = `שאלה ${index + 1} מתוך ${QUESTIONS.length}`;
+        document.getElementById('progressPct').textContent = pct + '%';
+        document.getElementById('progressFill').style.width = pct + '%';
+
+        // Back button
+        document.getElementById('btnBack').disabled = (index === 0);
+    }
+
+    function selectAnswer(question, optIdx) {
+        const opt = question.options[optIdx];
+        state.answers[question.id] = {
+            value: opt.value,
+            weight: opt.weight != null ? opt.weight : 0,
+            label: opt.label
+        };
+
+        // Visual selection feedback (briefly, before advance)
+        const card = document.getElementById('questionCard');
+        card.querySelectorAll('.q-opt').forEach((el, i) => {
+            el.classList.toggle('selected', i === optIdx);
+        });
+
+        track('DiagnosisAnswer', {
+            question_id: question.id,
+            question_index: state.currentIndex + 1,
+            answer_value: String(opt.value),
+            scored: question.scored
+        });
+
+        // Auto-advance
+        setTimeout(() => {
+            if (state.currentIndex < QUESTIONS.length - 1) {
+                state.currentIndex++;
+                renderQuestion(state.currentIndex);
+            } else {
+                showResult();
+            }
+        }, 260);
+    }
+
+    // --- SCORING ---
+    function calcScore() {
+        let s = 0;
+        QUESTIONS.forEach(q => {
+            if (!q.scored) return;
+            const a = state.answers[q.id];
+            if (a) s += (a.weight || 0);
+        });
+        return s;
+    }
+
+    function tierForScore(score) {
+        return RESULT_TIERS.find(t => score >= t.min && score <= t.max);
+    }
+
+    function buildDetailList(score) {
+        const items = [];
+        ['q2', 'q3', 'q4', 'q5'].forEach(qid => {
+            const a = state.answers[qid];
+            if (!a) return;
+            const labels = Q_LABELS[qid];
+            if (!labels) return;
+            const w = a.weight || 0;
+            if (w >= 4) {
+                items.push({ kind: 'win', text: labels.win });
+            } else if (w >= 2) {
+                items.push({ kind: 'mid', text: labels.lose });
+            } else {
+                items.push({ kind: 'lose', text: labels.lose });
+            }
+        });
+        return items;
+    }
+
+    function showResult() {
+        const score = calcScore();
+        const tier = tierForScore(score);
+        const budget = state.answers.q6 ? state.answers.q6.value : null;
+        const runner = state.answers.q1 ? state.answers.q1.value : null;
+
+        // Score display
+        const scoreEl = document.getElementById('resScore');
+        const gauge = document.getElementById('resGaugeFill');
+        animateScore(scoreEl, score);
+        setTimeout(() => {
+            gauge.style.width = Math.round((score / 16) * 100) + '%';
+        }, 120);
+
+        // Headline + intro
+        document.getElementById('resHeadline').innerHTML = tier.headline;
+        document.getElementById('resIntro').textContent = tier.intro;
+
+        // Details
+        const details = buildDetailList(score);
+        const detailsEl = document.getElementById('resDetails');
+        detailsEl.innerHTML = details.map(d => `
+            <li>
+                <span class="ico ${d.kind}">${d.kind === 'win' ? '✓' : (d.kind === 'lose' ? '✗' : '!')}</span>
+                <span>${d.text}</span>
+            </li>
+        `).join('');
+
+        // CTA routing (סעיף 3)
+        const qualifiedTier = (tier.key === 'strong' || tier.key === 'core');
+        const qualifiedBudget = (budget === '10-30k' || budget === '30k-plus');
+        const isHardCta = qualifiedTier && qualifiedBudget;
+
+        const ctaCard = document.getElementById('ctaCard');
+        const ctaText = document.getElementById('ctaText');
+        const ctaBtn = document.getElementById('ctaBtn');
+        const ctaSub = document.getElementById('ctaSub');
+
+        if (isHardCta) {
+            ctaCard.classList.remove('soft');
+            ctaText.innerHTML = 'תכתוב לי <span class="catch">"תפוס אותי"</span> בוואטסאפ ונבדוק אם זה מתאים לך. אני לוקח מספר מצומצם של מותגים לליווי צמוד החודש.';
+            const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_MESSAGE);
+            ctaBtn.href = waUrl;
+            ctaBtn.target = '_blank';
+            ctaBtn.rel = 'noopener';
+            ctaBtn.classList.add('cta-btn-wa');
+            ctaBtn.innerHTML = `
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                דבר איתי בוואטסאפ
+            `;
+            ctaSub.textContent = 'הלינק יפתח וואטסאפ עם ההודעה מוכנה. אני מקבל שיחה חדשה כל 24-48 שעות.';
+        } else {
+            ctaCard.classList.add('soft');
+            let softMsg;
+            if (tier.key === 'weak') {
+                softMsg = 'לפני שנדבר על ליווי אישי - תבוא ל<span class="catch">וובינר החינמי</span> הבא. תלמד שם את המערכת שלי בקומפקט, ואם עדיין תרצה ליווי - נדבר.';
+            } else if (budget === 'under-10k') {
+                softMsg = 'הליווי האישי בנוי למותגים עם תקציב שיווק גדול יותר - אבל תבוא ל<span class="catch">וובינר החינמי</span> הבא. תוציא ממנו כלים ששווים כסף אמיתי.';
+            } else {
+                softMsg = 'תבוא ל<span class="catch">וובינר החינמי</span> הבא. שם ניכנס לעומק המערכת - וזה יתן לך את הכיוון הכי מדויק לצעד הבא.';
+            }
+            ctaText.innerHTML = softMsg;
+            ctaBtn.href = SOFT_CTA_URL;
+            ctaBtn.target = '_self';
+            ctaBtn.classList.remove('cta-btn-wa');
+            ctaBtn.innerHTML = SOFT_CTA_LABEL;
+            ctaSub.textContent = '';
+        }
+
+        // Track click
+        ctaBtn.addEventListener('click', function onCtaClick() {
+            track('DiagnosisCta', {
+                cta_type: isHardCta ? 'whatsapp' : 'soft',
+                score: score,
+                tier: tier.key,
+                budget: budget,
+                runner: runner,
+                button_variant: state.buttonVariant
+            });
+            ctaBtn.removeEventListener('click', onCtaClick);
+        });
+
+        // Track result impression
+        track('DiagnosisResult', {
+            score: score,
+            tier: tier.key,
+            budget: budget,
+            runner: runner,
+            button_variant: state.buttonVariant,
+            cta_type: isHardCta ? 'whatsapp' : 'soft'
+        });
+
+        // Show screen
+        showScreen('screen-result');
+    }
+
+    function animateScore(el, target) {
+        const duration = 900;
+        const start = performance.now();
+        function tick(now) {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            el.textContent = Math.round(target * eased);
+            if (t < 1) requestAnimationFrame(tick);
+            else el.textContent = target;
+        }
+        requestAnimationFrame(tick);
+    }
+
+    // --- SCREEN NAVIGATION ---
+    function showScreen(id) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- INIT ---
+    document.addEventListener('DOMContentLoaded', () => {
+        applyButtonVariant();
+
+        document.getElementById('btnStart').addEventListener('click', () => {
+            state.started = true;
+            state.currentIndex = 0;
+            track('DiagnosisStart', { button_variant: state.buttonVariant });
+            renderQuestion(0);
+            showScreen('screen-quiz');
+        });
+
+        document.getElementById('btnBack').addEventListener('click', () => {
+            if (state.currentIndex > 0) {
+                state.currentIndex--;
+                renderQuestion(state.currentIndex);
+            }
+        });
+    });
+    </script>
+
+    <!-- ===== TRACKING (loaded after cookie consent) ===== -->
+    <script>
+    function loadTrackingScripts() {
+        if (window._trackingLoaded) return;
+        window._trackingLoaded = true;
+        // GA4
+        var gs = document.createElement('script');
+        gs.async = true;
+        gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6';
+        document.head.appendChild(gs);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-8SCLND9ZP6');
+        // Meta Pixel
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1265390459065125');
+        fbq('track', 'PageView');
+    }
+    if (localStorage.getItem('cookieConsent') === 'all') {
+        loadTrackingScripts();
+    }
+
+    // Cookie modal wiring
+    (function() {
+        var banner = document.getElementById('cookieBanner');
+        var overlay = document.getElementById('cookieOverlay');
+        var consent = localStorage.getItem('cookieConsent');
+        if (consent) {
+            banner.classList.add('hidden');
+            return;
+        }
+        setTimeout(function() {
+            overlay.classList.add('active');
+            banner.classList.add('visible');
+        }, 700);
+        document.getElementById('cookieAcceptAll').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'all');
+            loadTrackingScripts();
+            closeBanner();
+        });
+        document.getElementById('cookieReject').addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'essential');
+            closeBanner();
+        });
+        function closeBanner() {
+            banner.classList.remove('visible');
+            overlay.classList.remove('active');
+            setTimeout(function() { banner.classList.add('hidden'); }, 400);
+        }
+    })();
+    </script>
+</body>
+</html>
