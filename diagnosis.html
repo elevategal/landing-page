@@ -65,6 +65,7 @@
         }
 
         .container {
+            width: 100%;
             max-width: var(--max-width);
             margin: 0 auto;
             padding: 0 20px;
@@ -279,7 +280,7 @@
         .q-back:disabled { opacity: 0.35; cursor: default; text-decoration: none; }
 
         /* ===== RESULT SCREEN ===== */
-        .result-shell { max-width: 760px; margin: 0 auto; }
+        .result-shell { width: 100%; max-width: 760px; margin: 0 auto; min-width: 0; }
 
         .result-score-block {
             background: #000;
@@ -416,7 +417,7 @@
             margin-bottom: 14px;
         }
 
-        /* ===== INSTAGRAM EMBEDS ===== */
+        /* ===== INSTAGRAM CAROUSEL ===== */
         .ig-section { margin-bottom: 34px; }
         .ig-section-title {
             font-size: 1.1rem;
@@ -425,15 +426,27 @@
             margin-bottom: 20px;
             color: #000;
         }
-        .ig-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+        .ig-viewport {
+            width: 100%;
+            min-width: 0;
+            max-width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 4px 4px 18px;
+            margin: 0 -4px;
         }
-        @media (min-width: 760px) {
-            .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        .ig-viewport::-webkit-scrollbar { display: none; }
+        .ig-track {
+            display: flex;
+            gap: 18px;
+            width: max-content;
         }
         .ig-card {
+            flex: 0 0 min(340px, 88vw);
+            scroll-snap-align: center;
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius-lg);
@@ -459,8 +472,31 @@
             font-weight: 700;
             font-size: 0.9rem;
         }
+        .ig-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 4px;
+        }
+        .ig-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 2px solid #000;
+            background: #fff;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+        .ig-dot.active { background: var(--accent); transform: scale(1.15); }
+        @media (min-width: 900px) {
+            .ig-viewport { overflow: visible; }
+            .ig-track { width: 100%; }
+            .ig-card { flex: 1 1 0; min-width: 0; }
+            .ig-dots { display: none; }
+        }
 
-        /* ===== LOGO BANNER ===== */
+        /* ===== LOGO MARQUEE ===== */
         .logos-block { margin-bottom: 34px; }
         .logos-title {
             font-size: 0.95rem;
@@ -471,30 +507,47 @@
             letter-spacing: 0.02em;
             text-transform: uppercase;
         }
-        .logos-strip {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 22px 34px;
-            padding: 22px 20px;
+        .logos-viewport {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
+            padding: 22px 0;
+            mask-image: linear-gradient(to left, transparent, black 6%, black 94%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 6%, black 94%, transparent);
         }
-        .logos-strip img {
-            max-height: 44px;
+        .logos-track {
+            display: flex;
+            gap: 56px;
+            align-items: center;
+            width: max-content;
+            animation: logos-scroll-rtl 40s linear infinite;
+        }
+        .logos-track:hover { animation-play-state: paused; }
+        @keyframes logos-scroll-rtl {
+            0%   { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .logos-track img {
+            flex-shrink: 0;
+            max-height: 48px;
             width: auto;
             object-fit: contain;
             filter: grayscale(1);
             opacity: 0.85;
             transition: filter 0.2s ease, opacity 0.2s ease;
         }
-        .logos-strip img:hover { filter: grayscale(0); opacity: 1; }
+        .logos-track img:hover { filter: grayscale(0); opacity: 1; }
         @media (max-width: 480px) {
-            .logos-strip { gap: 16px 24px; padding: 18px 14px; }
-            .logos-strip img { max-height: 34px; }
+            .logos-viewport { padding: 18px 0; }
+            .logos-track { gap: 40px; }
+            .logos-track img { max-height: 36px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .logos-track { animation-duration: 120s; }
         }
 
         /* ===== LEAD FORM ===== */
@@ -752,30 +805,48 @@
                         </div>
                     </div>
 
-                    <!-- 5. Instagram embeds -->
+                    <!-- 5. Instagram carousel -->
                     <div class="ig-section">
                         <div class="ig-section-title">תראה בעצמך</div>
-                        <div class="ig-grid" id="igGrid">
-                            <!-- placeholders filled via lazy load -->
-                            <div class="ig-card" data-ig-code="DYJ9v_EJE0M"><div class="ig-placeholder">טוען...</div></div>
-                            <div class="ig-card" data-ig-code="DXHmWFLAY7b"><div class="ig-placeholder">טוען...</div></div>
-                            <div class="ig-card" data-ig-code="DPdhv-fgRfd"><div class="ig-placeholder">טוען...</div></div>
+                        <div class="ig-viewport" id="igViewport">
+                            <div class="ig-track">
+                                <div class="ig-card" data-ig-code="DYJ9v_EJE0M"><div class="ig-placeholder">טוען...</div></div>
+                                <div class="ig-card" data-ig-code="DXHmWFLAY7b"><div class="ig-placeholder">טוען...</div></div>
+                                <div class="ig-card" data-ig-code="DPdhv-fgRfd"><div class="ig-placeholder">טוען...</div></div>
+                            </div>
+                        </div>
+                        <div class="ig-dots" id="igDots">
+                            <button class="ig-dot active" type="button" aria-label="עבור לרילס 1"></button>
+                            <button class="ig-dot" type="button" aria-label="עבור לרילס 2"></button>
+                            <button class="ig-dot" type="button" aria-label="עבור לרילס 3"></button>
                         </div>
                     </div>
 
-                    <!-- 6. Logo banner -->
+                    <!-- 6. Logo marquee -->
                     <div class="logos-block">
                         <div class="logos-title">מותגים שליוויתי השנה</div>
-                        <div class="logos-strip">
-                            <!-- TODO(gal): לאשר עם כל לקוח שימוש בלוגו על דף שיווקי לפני עלייה לפרודקשן -->
-                            <img src="logo/logo 1.png" alt="Megemeria" loading="lazy">
-                            <img src="logo/Harmony 1.png" alt="Harmony" loading="lazy">
-                            <img src="logo/Group.png" alt="AMORpHICURE" loading="lazy">
-                            <img src="logo/Logo_Promise_site_3_410x.avif" alt="Promise" loading="lazy">
-                            <img src="logo/Tieta-Logo.svg" alt="Tieta" loading="lazy">
-                            <img src="logo/trip-logo.svg" alt="Trip" loading="lazy">
-                            <img src="logo/image (2) 1.png" alt="Source" loading="lazy">
-                            <img src="logo/image-removebg-preview (2) 2.png" alt="Bagir" loading="lazy">
+                        <div class="logos-viewport">
+                            <div class="logos-track">
+                                <!-- TODO(gal): לאשר עם כל לקוח שימוש בלוגו על דף שיווקי לפני עלייה לפרודקשן -->
+                                <!-- copy 1 -->
+                                <img src="logo/logo 1.png" alt="Megemeria" loading="lazy">
+                                <img src="logo/Harmony 1.png" alt="Harmony" loading="lazy">
+                                <img src="logo/Group.png" alt="AMORpHICURE" loading="lazy">
+                                <img src="logo/Logo_Promise_site_3_410x.avif" alt="Promise" loading="lazy">
+                                <img src="logo/Tieta-Logo.svg" alt="Tieta" loading="lazy">
+                                <img src="logo/trip-logo.svg" alt="Trip" loading="lazy">
+                                <img src="logo/image (2) 1.png" alt="Source" loading="lazy">
+                                <img src="logo/image-removebg-preview (2) 2.png" alt="Bagir" loading="lazy">
+                                <!-- copy 2 (needed for seamless infinite loop) -->
+                                <img src="logo/logo 1.png" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/Harmony 1.png" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/Group.png" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/Logo_Promise_site_3_410x.avif" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/Tieta-Logo.svg" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/trip-logo.svg" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/image (2) 1.png" alt="" aria-hidden="true" loading="lazy">
+                                <img src="logo/image-removebg-preview (2) 2.png" alt="" aria-hidden="true" loading="lazy">
+                            </div>
                         </div>
                     </div>
 
@@ -1114,6 +1185,7 @@
 
         showScreen('screen-result');
         setupIgLazyLoad();
+        setupIgCarousel();
     }
 
     function showScreen(id) {
@@ -1161,6 +1233,87 @@
             });
         }, { rootMargin: '400px 0px' });
         cards.forEach(c => io.observe(c));
+    }
+
+    // --- INSTAGRAM CAROUSEL (mobile auto-advance + dots) ---
+    function setupIgCarousel() {
+        const viewport = document.getElementById('igViewport');
+        const dotsWrap = document.getElementById('igDots');
+        if (!viewport || !dotsWrap) return;
+        const cards = viewport.querySelectorAll('.ig-card');
+        const dots = dotsWrap.querySelectorAll('.ig-dot');
+        if (!cards.length) return;
+
+        // Skip carousel on desktop (all 3 fit side-by-side)
+        const mq = window.matchMedia('(min-width: 900px)');
+        let autoTimer = null;
+        let currentIdx = 0;
+        let userInteracted = false;
+
+        function scrollToIdx(idx) {
+            const card = cards[idx];
+            if (!card) return;
+            const scrollLeft = card.offsetLeft - (viewport.clientWidth - card.clientWidth) / 2;
+            viewport.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        }
+
+        function syncDots() {
+            const vpCenter = viewport.scrollLeft + viewport.clientWidth / 2;
+            let bestIdx = 0;
+            let bestDist = Infinity;
+            cards.forEach((c, i) => {
+                const cCenter = c.offsetLeft + c.clientWidth / 2;
+                const d = Math.abs(cCenter - vpCenter);
+                if (d < bestDist) { bestDist = d; bestIdx = i; }
+            });
+            if (bestIdx !== currentIdx) {
+                currentIdx = bestIdx;
+                dots.forEach((d, i) => d.classList.toggle('active', i === bestIdx));
+            }
+        }
+
+        function startAuto() {
+            if (mq.matches) return;
+            stopAuto();
+            autoTimer = setInterval(() => {
+                if (userInteracted) return;
+                const next = (currentIdx + 1) % cards.length;
+                scrollToIdx(next);
+            }, 5000);
+        }
+        function stopAuto() {
+            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                userInteracted = true;
+                scrollToIdx(i);
+                setTimeout(() => { userInteracted = false; }, 8000);
+            });
+        });
+
+        viewport.addEventListener('scroll', () => {
+            syncDots();
+        }, { passive: true });
+
+        ['touchstart', 'pointerdown', 'wheel'].forEach(ev => {
+            viewport.addEventListener(ev, () => {
+                userInteracted = true;
+                stopAuto();
+                setTimeout(() => {
+                    userInteracted = false;
+                    startAuto();
+                }, 8000);
+            }, { passive: true });
+        });
+
+        mq.addEventListener?.('change', () => {
+            if (mq.matches) stopAuto();
+            else startAuto();
+        });
+
+        startAuto();
     }
 
     // --- LEAD FORM ---
