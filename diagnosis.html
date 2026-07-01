@@ -9,7 +9,6 @@
     <meta name="robots" content="noindex, nofollow">
     <link rel="canonical" href="https://elev8.co.il/diagnosis">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="שאלון אבחון קריאייטיב | 90 שניות | Elev8">
     <meta property="og:description" content="עדיין מפסיד כסף בקמפיינים? תוך 90 שניות תדע בדיוק למה.">
@@ -82,7 +81,6 @@
         h2 { font-size: clamp(1.4rem, 3.8vw, 2rem); font-weight: 900; }
         h3 { font-size: clamp(1.1rem, 2.6vw, 1.35rem); font-weight: 900; }
 
-        /* ===== SHARED COMPONENTS (neo-brutal) ===== */
         .badge {
             display: inline-flex;
             align-items: center;
@@ -97,11 +95,7 @@
             margin-bottom: 20px;
             box-shadow: var(--brutal-shadow-sm);
         }
-        .badge .dot {
-            width: 8px; height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
+        .badge .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
 
         .cta-btn {
             display: inline-block;
@@ -118,36 +112,19 @@
             box-shadow: var(--brutal-shadow);
             font-family: inherit;
         }
-        .cta-btn:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: var(--brutal-shadow-lg);
-        }
-        .cta-btn:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000;
-        }
+        .cta-btn:hover { transform: translate(-2px, -2px); box-shadow: var(--brutal-shadow-lg); }
+        .cta-btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
         .cta-btn-lg { padding: 22px 52px; font-size: 1.2rem; }
-        .cta-btn-wa {
-            background: #25D366;
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .cta-btn-wa svg { width: 26px; height: 26px; fill: #fff; }
-        .cta-btn-secondary {
-            background: #fff;
-            color: #000;
-        }
+        .cta-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        /* ===== SCREEN CONTAINER ===== */
         main {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             min-height: 100vh;
             padding: 40px 0;
         }
+        main.centered { align-items: center; }
 
         .screen {
             display: none;
@@ -164,7 +141,7 @@
         }
 
         /* ===== INTRO SCREEN ===== */
-        .intro { text-align: center; }
+        .intro { text-align: center; padding-top: 20px; }
         .intro .pre-headline {
             font-size: clamp(0.9rem, 2vw, 1.05rem);
             color: #000;
@@ -174,10 +151,7 @@
             margin-left: auto;
             margin-right: auto;
         }
-        .intro h1 {
-            margin-bottom: 24px;
-            line-height: 1.15;
-        }
+        .intro h1 { margin-bottom: 24px; line-height: 1.15; }
         .intro h1 .highlight {
             display: inline-block;
             background: var(--accent);
@@ -207,9 +181,7 @@
         /* ===== QUESTIONNAIRE ===== */
         .question-shell { max-width: 720px; margin: 0 auto; }
 
-        .progress-wrap {
-            margin-bottom: 32px;
-        }
+        .progress-wrap { margin-bottom: 32px; }
         .progress-labels {
             display: flex;
             justify-content: space-between;
@@ -242,9 +214,7 @@
             box-shadow: var(--brutal-shadow);
             padding: 28px 24px;
         }
-        @media (min-width: 640px) {
-            .question-card { padding: 40px 44px; }
-        }
+        @media (min-width: 640px) { .question-card { padding: 40px 44px; } }
 
         .q-norm {
             display: block;
@@ -265,11 +235,7 @@
             margin-bottom: 22px;
             color: #000;
         }
-        .q-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .q-options { display: flex; flex-direction: column; gap: 12px; }
         .q-opt {
             display: block;
             width: 100%;
@@ -292,14 +258,8 @@
             transform: translate(-2px, -2px);
             box-shadow: 6px 6px 0 #000;
         }
-        .q-opt:active {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 #000;
-        }
-        .q-opt.selected {
-            background: var(--accent);
-            color: #fff;
-        }
+        .q-opt:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+        .q-opt.selected { background: var(--accent); color: #fff; }
 
         .q-back {
             display: inline-block;
@@ -346,11 +306,7 @@
             margin-bottom: 6px;
             color: #fff;
         }
-        .result-score-num .of {
-            color: var(--accent);
-            font-size: 0.55em;
-            font-weight: 900;
-        }
+        .result-score-num .of { color: var(--accent); font-size: 0.55em; font-weight: 900; }
         .result-gauge {
             height: 18px;
             background: rgba(255,255,255,0.12);
@@ -375,13 +331,8 @@
             padding: 28px 24px;
             margin-bottom: 24px;
         }
-        @media (min-width: 640px) {
-            .result-headline-card { padding: 34px 40px; }
-        }
-        .result-headline-card h2 {
-            margin-bottom: 18px;
-            line-height: 1.25;
-        }
+        @media (min-width: 640px) { .result-headline-card { padding: 34px 40px; } }
+        .result-headline-card h2 { margin-bottom: 18px; line-height: 1.25; }
         .result-headline-card h2 .accent {
             background: var(--accent);
             color: #fff;
@@ -390,11 +341,7 @@
             box-shadow: 3px 3px 0 #000;
             display: inline-block;
         }
-        .result-detail-list {
-            list-style: none;
-            padding: 0;
-            margin: 12px 0 0;
-        }
+        .result-detail-list { list-style: none; padding: 0; margin: 12px 0 0; }
         .result-detail-list li {
             display: flex;
             align-items: flex-start;
@@ -424,100 +371,264 @@
         .result-detail-list .ico.lose { background: var(--red-accent); color: #fff; }
         .result-detail-list .ico.mid { background: #fff; color: #000; }
 
-        .trust-block {
-            background: var(--accent-soft);
-            border: 2px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--brutal-shadow-sm);
-            padding: 22px 20px;
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 28px;
-        }
-        .trust-block .avatar {
-            flex-shrink: 0;
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
+        /* ===== BIO BLOCK ===== */
+        .bio-block {
             background: #fff;
             border: 2px solid #000;
-            overflow: hidden;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 28px 24px;
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 22px;
+        }
+        @media (min-width: 640px) {
+            .bio-block { grid-template-columns: 150px 1fr; padding: 32px 36px; gap: 28px; align-items: start; }
+        }
+        .bio-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 2px solid #000;
             box-shadow: var(--brutal-shadow-sm);
             background-image: url('profile.jpg');
             background-size: cover;
             background-position: center;
+            margin: 0 auto;
         }
-        .trust-block .txt {
-            flex: 1;
-            min-width: 0;
+        @media (min-width: 640px) {
+            .bio-photo { width: 140px; height: 140px; margin: 0; }
         }
-        .trust-block .name {
-            font-size: 0.95rem;
+        .bio-txt {
+            font-size: 0.98rem;
+            font-weight: 700;
+            line-height: 1.7;
+            color: #000;
+        }
+        .bio-txt p { margin-bottom: 12px; }
+        .bio-txt p:last-child { margin-bottom: 0; }
+        .bio-txt strong { font-weight: 900; }
+        .bio-txt .bio-open {
+            font-size: 1.15rem;
             font-weight: 900;
-            margin-bottom: 4px;
-            line-height: 1.3;
-        }
-        .trust-block .name span {
-            font-weight: 700;
-            opacity: 0.75;
-            font-size: 0.85em;
-        }
-        .trust-block .position {
-            font-size: 0.9rem;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-        @media (max-width: 480px) {
-            .trust-block { flex-direction: column; text-align: center; padding: 22px 18px; }
-            .trust-block .txt { text-align: center; }
+            display: block;
+            margin-bottom: 14px;
         }
 
-        .cta-card {
+        /* ===== INSTAGRAM EMBEDS ===== */
+        .ig-section { margin-bottom: 34px; }
+        .ig-section-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000;
+        }
+        .ig-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 760px) {
+            .ig-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+        }
+        .ig-card {
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 8px;
+            overflow: hidden;
+        }
+        .ig-card .instagram-media {
+            margin: 0 !important;
+            min-width: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            border-radius: 10px !important;
+        }
+        .ig-placeholder {
+            height: 500px;
+            background: linear-gradient(135deg, #fafafa, #f0f0f0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* ===== LOGO BANNER ===== */
+        .logos-block { margin-bottom: 34px; }
+        .logos-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 18px;
+            color: #000;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .logos-strip {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 22px 34px;
+            padding: 22px 20px;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+        }
+        .logos-strip img {
+            max-height: 44px;
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(1);
+            opacity: 0.85;
+            transition: filter 0.2s ease, opacity 0.2s ease;
+        }
+        .logos-strip img:hover { filter: grayscale(0); opacity: 1; }
+        @media (max-width: 480px) {
+            .logos-strip { gap: 16px 24px; padding: 18px 14px; }
+            .logos-strip img { max-height: 34px; }
+        }
+
+        /* ===== LEAD FORM ===== */
+        .form-block {
             background: #000;
             color: #fff;
             border: 2px solid #000;
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
             padding: 30px 24px;
-            text-align: center;
+            margin-bottom: 20px;
         }
-        @media (min-width: 640px) {
-            .cta-card { padding: 36px 40px; }
-        }
-        .cta-card p {
-            font-size: 1.05rem;
-            font-weight: 800;
-            line-height: 1.6;
-            margin-bottom: 24px;
+        @media (min-width: 640px) { .form-block { padding: 40px 44px; } }
+        .form-block h2 {
             color: #fff;
+            font-size: clamp(1.4rem, 3.6vw, 1.85rem);
+            margin-bottom: 16px;
+            line-height: 1.25;
         }
-        .cta-card p .catch {
-            display: inline-block;
-            background: var(--accent);
-            color: #fff;
-            padding: 0.05em 0.4em;
-            border-radius: 4px;
-            font-weight: 900;
-            border: 2px solid #fff;
+        .form-block .form-intro {
+            font-size: 0.98rem;
+            font-weight: 700;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 26px;
         }
-        .cta-card .cta-sub {
+        .form-block .form-intro p { margin-bottom: 10px; }
+        .form-block .form-intro p:last-child { margin-bottom: 0; }
+        .lead-form { display: flex; flex-direction: column; gap: 14px; }
+        .field-label {
             display: block;
             font-size: 0.85rem;
-            font-weight: 700;
-            opacity: 0.75;
-            margin-top: 14px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 6px;
         }
-
-        /* Result variant: soft CTA */
-        .cta-card.soft {
+        .field-input, .field-select {
+            width: 100%;
             background: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
             color: #000;
+            box-shadow: 3px 3px 0 rgba(255,255,255,0.15);
+            direction: rtl;
         }
-        .cta-card.soft p { color: #000; }
-        .cta-card.soft p .catch { border-color: #000; }
+        .field-input:focus, .field-select:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .field-input::placeholder { color: #999; font-weight: 700; }
+        .field-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='%23000' d='M5 8l5 5 5-5H5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: left 14px center;
+            background-size: 18px;
+            padding-left: 40px;
+        }
+        .form-error {
+            background: #E53935;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 800;
+            margin-top: 6px;
+            display: none;
+        }
+        .form-error.visible { display: block; }
+        .form-submit {
+            margin-top: 12px;
+            padding: 18px 30px;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid #fff;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #fff;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .form-submit:hover:not(:disabled) {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #fff;
+        }
+        .form-submit:disabled { opacity: 0.7; cursor: wait; }
+        .form-spinner {
+            display: inline-block;
+            width: 16px; height: 16px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ===== FOOTER (minimal) ===== */
+        .form-success {
+            display: none;
+            background: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 30px 24px;
+            text-align: center;
+        }
+        @media (min-width: 640px) { .form-success { padding: 40px 44px; } }
+        .form-success.visible { display: block; }
+        .form-success .check-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--green-accent);
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 900;
+            border: 2px solid #000;
+            box-shadow: var(--brutal-shadow-sm);
+            margin-bottom: 18px;
+        }
+        .form-success h3 { margin-bottom: 10px; font-size: 1.5rem; }
+        .form-success p { font-size: 1rem; font-weight: 700; line-height: 1.6; color: #000; }
+
+        /* ===== FOOTER ===== */
         footer {
             padding: 30px 20px 24px;
             text-align: center;
@@ -528,7 +639,7 @@
         }
         footer a { color: inherit; text-decoration: underline; }
 
-        /* ===== COOKIE CONSENT (neo-brutal, matches other pages visually) ===== */
+        /* ===== COOKIE ===== */
         .cookie-overlay {
             position: fixed; inset: 0;
             background: rgba(0,0,0,0.6);
@@ -556,11 +667,7 @@
             direction: rtl;
             text-align: center;
         }
-        .cookie-modal.visible {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translate(-50%, -50%) scale(1);
-        }
+        .cookie-modal.visible { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
         .cookie-modal.hidden { display: none; }
         .cookie-modal-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
         .cookie-modal-body { font-size: 0.9rem; font-weight: 700; margin-bottom: 20px; line-height: 1.55; }
@@ -582,7 +689,7 @@
 </head>
 <body>
 
-    <main>
+    <main class="centered">
         <div class="container">
 
             <!-- ===== INTRO SCREEN ===== -->
@@ -594,7 +701,7 @@
                         עדיין <span class="highlight">מפסיד כסף</span> בקמפיינים?<br>
                         תוך 90 שניות תדע בדיוק למה.
                     </h1>
-                    <p class="subhead">6 שאלות קצרות מבוססות ניסיון של 10 שנים ו-50+ מותגים. אבחון אמיתי, בלי בולשיט.</p>
+                    <p class="subhead">5 שאלות קצרות מבוססות ניסיון של 10 שנים ו-50+ מותגים. אבחון אמיתי, בלי בולשיט.</p>
                     <button class="cta-btn cta-btn-lg" id="btnStart" type="button">בדוק את זה</button>
                     <span class="intro-trust">90 שניות. בלי אימייל, בלי התחייבות.</span>
                 </div>
@@ -605,15 +712,13 @@
                 <div class="question-shell">
                     <div class="progress-wrap">
                         <div class="progress-labels">
-                            <span id="progressLabel">שאלה 1 מתוך 6</span>
-                            <span id="progressPct">17%</span>
+                            <span id="progressLabel">שאלה 1 מתוך 5</span>
+                            <span id="progressPct">20%</span>
                         </div>
                         <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
                     </div>
 
-                    <div class="question-card" id="questionCard">
-                        <!-- filled by JS -->
-                    </div>
+                    <div class="question-card" id="questionCard"></div>
 
                     <button class="q-back" id="btnBack" type="button" disabled>&rarr; חזור לשאלה קודמת</button>
                 </div>
@@ -622,30 +727,109 @@
             <!-- ===== RESULT SCREEN ===== -->
             <section class="screen" id="screen-result" aria-label="תוצאה">
                 <div class="result-shell">
+                    <!-- 1. Score -->
                     <div class="result-score-block">
                         <div class="result-score-label">הציון שלך</div>
                         <div class="result-score-num"><span id="resScore">—</span><span class="of">/16</span></div>
                         <div class="result-gauge"><div class="result-gauge-fill" id="resGaugeFill"></div></div>
                     </div>
 
+                    <!-- 2 + 3. Headline + details -->
                     <div class="result-headline-card">
                         <h2 id="resHeadline">—</h2>
                         <p id="resIntro" style="font-size: 1rem; font-weight: 700; line-height: 1.6; margin-bottom: 6px;"></p>
                         <ul class="result-detail-list" id="resDetails"></ul>
                     </div>
 
-                    <div class="trust-block">
-                        <div class="avatar" role="img" aria-label="גל כהן"></div>
-                        <div class="txt">
-                            <div class="name">גל כהן <span>· 10 שנים · 50+ מותגים</span></div>
-                            <div class="position">אני לא עורך וידאו ולא נוגע באד אקאונט - אני האסטרטג שבונה את המערכת מאחורי הקריאייטיב שלך.</div>
+                    <!-- 4. Bio -->
+                    <div class="bio-block">
+                        <div class="bio-photo" role="img" aria-label="גל כהן"></div>
+                        <div class="bio-txt">
+                            <span class="bio-open">היי, אני גל כהן.</span>
+                            <p>10 שנים באיקומרס, ועזרתי ליותר מ-50 מותגים ישראלים לעשות שינוי מהותי בעסק שלהם. רוב המצבים שאני רואה נראים בדיוק כמו מה שהתוצאה שלך הראתה עכשיו: יש מי שמריץ קמפיינים, יש תקציב שיוצא כל חודש, אבל אין מי שיושב מעל הכל ומחליט מה המסר, למי הוא מיועד, ולמה בכלל קריאייטיב מסוים אמור לעבוד.</p>
+                            <p>זו לא בעיית ביצוע - פשוט אין כיוון ברור לכל המערך שיצרת. ותאמין לי, אני מכיר את זה מקרוב: בניתי מותג מאפס ומכרתי אותו לפני שנה.</p>
+                            <p>אז מה אני עושה בפועל? נכנס איתך למחקר מעמיק על המותג, ובונה אסטרטגיית קריאייטיב מותאמת אישית. אני לא מחליף אף אחד אצלך - מי שמריץ היום את הקמפיינים ממשיך להריץ, רק שעכשיו הוא עושה את זה לפי כיוון ברור, לא לפי ניחוש.</p>
                         </div>
                     </div>
 
-                    <div class="cta-card" id="ctaCard">
-                        <p id="ctaText"></p>
-                        <a href="#" class="cta-btn cta-btn-lg" id="ctaBtn"></a>
-                        <span class="cta-sub" id="ctaSub"></span>
+                    <!-- 5. Instagram embeds -->
+                    <div class="ig-section">
+                        <div class="ig-section-title">תראה בעצמך</div>
+                        <div class="ig-grid" id="igGrid">
+                            <!-- placeholders filled via lazy load -->
+                            <div class="ig-card" data-ig-code="DYJ9v_EJE0M"><div class="ig-placeholder">טוען...</div></div>
+                            <div class="ig-card" data-ig-code="DXHmWFLAY7b"><div class="ig-placeholder">טוען...</div></div>
+                            <div class="ig-card" data-ig-code="DPdhv-fgRfd"><div class="ig-placeholder">טוען...</div></div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Logo banner -->
+                    <div class="logos-block">
+                        <div class="logos-title">מותגים שליוויתי השנה</div>
+                        <div class="logos-strip">
+                            <!-- TODO(gal): לאשר עם כל לקוח שימוש בלוגו על דף שיווקי לפני עלייה לפרודקשן -->
+                            <img src="logo/logo 1.png" alt="Megemeria" loading="lazy">
+                            <img src="logo/Harmony 1.png" alt="Harmony" loading="lazy">
+                            <img src="logo/Group.png" alt="AMORpHICURE" loading="lazy">
+                            <img src="logo/Logo_Promise_site_3_410x.avif" alt="Promise" loading="lazy">
+                            <img src="logo/Tieta-Logo.svg" alt="Tieta" loading="lazy">
+                            <img src="logo/trip-logo.svg" alt="Trip" loading="lazy">
+                            <img src="logo/image (2) 1.png" alt="Source" loading="lazy">
+                            <img src="logo/image-removebg-preview (2) 2.png" alt="Bagir" loading="lazy">
+                        </div>
+                    </div>
+
+                    <!-- 7. Lead form -->
+                    <div class="form-block" id="formBlock">
+                        <h2>רוצה לבדוק אם זה מתאים לך?</h2>
+                        <div class="form-intro">
+                            <p>זו לא שיחת ייעוץ חינמית - זו שיחת התאמה. 15 דקות שבהן נבדוק ביחד אם המותג שלך במקום שאני יכול לעזור בו, או שעוד מוקדם. לא כל מותג מתאים, וזה בסדר.</p>
+                            <p>תמלא כמה פרטים קצרים, ואני אחזור אליך אישית לתאם.</p>
+                        </div>
+                        <form class="lead-form" id="leadForm" novalidate>
+                            <div>
+                                <label class="field-label" for="leadName">שם מלא</label>
+                                <input class="field-input" type="text" id="leadName" name="name" autocomplete="name" placeholder="השם שלך" required>
+                            </div>
+                            <div>
+                                <label class="field-label" for="leadPhone">טלפון / וואטסאפ</label>
+                                <input class="field-input" type="tel" id="leadPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="05X-XXX-XXXX" required>
+                            </div>
+                            <div>
+                                <label class="field-label" for="leadBrand">שם המותג</label>
+                                <input class="field-input" type="text" id="leadBrand" name="brand" placeholder="שם החנות/המותג שלך" required>
+                            </div>
+                            <div>
+                                <label class="field-label" for="leadRevenue">מחזור חודשי</label>
+                                <select class="field-select" id="leadRevenue" name="revenue" required>
+                                    <option value="">-- בחר --</option>
+                                    <option value="under-20k">מתחת ל-20K</option>
+                                    <option value="20-50k">20-50K</option>
+                                    <option value="50-100k">50-100K</option>
+                                    <option value="over-100k">מעל 100K</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="field-label" for="leadBudget">תקציב שיווק חודשי</label>
+                                <select class="field-select" id="leadBudget" name="budget" required>
+                                    <option value="">-- בחר --</option>
+                                    <option value="under-10k">מתחת ל-10K</option>
+                                    <option value="10-30k">10-30K</option>
+                                    <option value="30k-plus">30K+</option>
+                                </select>
+                            </div>
+                            <div class="form-error" id="formError">אנא מלא את כל השדות</div>
+                            <button class="form-submit" type="submit" id="leadSubmit">
+                                <span class="submit-text">קבע שיחת התאמה</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Success state (shown after submit) -->
+                    <div class="form-success" id="formSuccess">
+                        <div class="check-badge">✓</div>
+                        <h3>קיבלתי</h3>
+                        <p>אחזור אליך בהקדם לתאם שיחת התאמה. תודה שלקחת את הזמן להשלים את השאלון.</p>
                     </div>
                 </div>
             </section>
@@ -670,25 +854,14 @@
 
     <script>
     /* =====================================================================
-       Elev8 · שאלון אבחון קריאייטיב
-       - state בזיכרון בלבד (אין localStorage לתשובות)
-       - ניקוד + ניתוב CTA לפי טווח + תקציב (סעיפים 3-4 באיפיון)
-       - A/B טקסט כפתור פתיחה (סעיף 5)
-       - אירועי מעקב: DiagnosisStart, DiagnosisAnswer, DiagnosisResult, DiagnosisCta
+       Elev8 · שאלון אבחון קריאייטיב v2
+       - 5 questions (Q6/budget moved to lead form)
+       - Result: score → headline → details → bio → IG embeds → logos → lead form
+       - Form submits to /.netlify/functions/submit-diagnosis-lead → Airtable
+       - Events: DiagnosisStart, DiagnosisAnswer, DiagnosisResult, DiagnosisFormSubmit
     ===================================================================== */
 
-    // --- CONFIG ---
-    // TODO(gal): החלט מה ה-CTA הרך למי שלא עומד בקריטריון (מתחת ל-10K או ציון נמוך).
-    // כרגע: הפניה חזרה לוובינר החינמי (נכס קיים). אפשר להחליף בעתיד לקורס/רשימת תפוצה.
-    const SOFT_CTA_URL = '/webinar';
-    const SOFT_CTA_LABEL = 'בוא לוובינר החינמי הבא';
-
-    // TODO(gal): לתאם עם ה-ManyChat bot שהודעת "תפוס אותי" מתחילה שיחה נכון.
-    const WA_NUMBER = '972544287773';  // TODO(gal): לוודא שזה המספר הנכון המחובר ל-ManyChat
-    const WA_MESSAGE = 'תפוס אותי';
-
     const QUESTIONS = [
-        // Q1 - סינון, לא בניקוד
         {
             id: 'q1',
             scored: false,
@@ -699,43 +872,39 @@
                 { label: 'אני בעצמי', value: 'self' }
             ]
         },
-        // Q2 - ניקוד
         {
             id: 'q2',
             scored: true,
-            norm: 'אד-סט בריא רץ עם 15-25 קריאייטיבים שונים במקביל - ככה תמיד יש עם מה להחליף מודעה שנשרפת.',
-            title: 'אצלך, כמה קונספטים שונים באמת רצים היום?',
+            norm: 'אד-סט בריא רץ עם 15-25 קריאייטיבים שונים במקביל - ככה תמיד יש מה להחליף מודעה שנשרפת.',
+            title: 'אצלך, כמה קריאייטיבים שונים באמת רצים היום?',
             options: [
                 { label: 'מלא, כל הזמן דברים חדשים בטסט', value: 4, weight: 4 },
                 { label: 'כמה בודדות', value: 2, weight: 2 },
                 { label: 'בעיקר אותן 1-2 מודעות שעובדות', value: 1, weight: 1 }
             ]
         },
-        // Q3 - ניקוד
         {
             id: 'q3',
             scored: true,
-            norm: 'מודעות שממירות בגדול פותחות בכאב של הלקוח, לא במוצר - זה מה שגורם לו לעצור ולהרגיש "זה בדיוק אני".',
-            title: 'איך המודעות שלך בדרך כלל פותחות?',
+            norm: 'מודעות שממירות פותחות בכאב של הלקוח, לא במוצר - זה מה שגורם לו לעצור ולהרגיש "זה בדיוק אני".',
+            title: 'איך המודעות שלך בדרך כלל נפתחות?',
             options: [
-                { label: 'מהבעיה או הכאב שהלקוח מרגיש', value: 4, weight: 4 },
-                { label: 'מהמוצר - מה הוא עושה, למה הוא טוב', value: 2, weight: 2 },
-                { label: 'אין שיטה קבועה', value: 1, weight: 1 }
+                { label: 'קודם מציגות את המוצר ומה הוא עושה', value: 2, weight: 2 },
+                { label: 'קודם נוגעות במה שמטריד את הלקוח', value: 4, weight: 4 },
+                { label: 'משתנה ממודעה למודעה, אין לי נוסחה קבועה', value: 1, weight: 1 }
             ]
         },
-        // Q4 - ניקוד
         {
             id: 'q4',
             scored: true,
             norm: 'מותג עם מערכת קריאייטיב נכונה - מודעה טובה יכולה לרוץ חודשים בלי לקרוס.',
-            title: 'כמה זמן מודעה טובה אצלך בדרך כלל שורדת לפני שהיא מפסיקה לעבוד?',
+            title: 'מודעה טובה אצלך - כמה זמן היא בדרך כלל מחזיקה?',
             options: [
-                { label: 'חודשים, יש לי כאלה שרצות הרבה זמן', value: 4, weight: 4 },
-                { label: 'בערך שבועיים-שלושה', value: 2, weight: 2 },
-                { label: 'ימים בודדים ואז זהו', value: 1, weight: 1 }
+                { label: 'חודשים', value: 4, weight: 4 },
+                { label: 'שבועיים-שלושה', value: 2, weight: 2 },
+                { label: 'ימים בודדים', value: 1, weight: 1 }
             ]
         },
-        // Q5 - ניקוד
         {
             id: 'q5',
             scored: true,
@@ -746,25 +915,12 @@
                 { label: 'חלקית', value: 2, weight: 2 },
                 { label: 'מרגיש כמו מזל', value: 1, weight: 1 }
             ]
-        },
-        // Q6 - סינון כלכלי, לא בניקוד
-        {
-            id: 'q6',
-            scored: false,
-            norm: null,
-            title: 'כמה אתה מוציא היום בחודש על שיווק?',
-            options: [
-                { label: 'מתחת ל-10K', value: 'under-10k' },
-                { label: '10-30K', value: '10-30k' },
-                { label: '30K+', value: '30k-plus' }
-            ]
         }
     ];
 
-    // Question labels for scoring detail feedback
     const Q_LABELS = {
         q2: { win: 'מגוון קריאייטיבים בטסט', lose: 'מעט מדי קריאייטיבים חיים במקביל' },
-        q3: { win: 'פותח מהכאב של הלקוח - זווית שממירה', lose: 'פותח מהמוצר במקום מהכאב - זווית חלשה' },
+        q3: { win: 'המודעות נוגעות בכאב הלקוח - זווית שממירה', lose: 'המודעות מתחילות מהמוצר במקום מהכאב' },
         q4: { win: 'מודעות עם חיי מדף ארוכים', lose: 'מודעות נשרפות מהר - אין מערכת מאחורה' },
         q5: { win: 'ברור לך למה מודעה עבדה או נכשלה', lose: 'ניחוש במקום שיטה - הטעויות חוזרות' }
     };
@@ -777,27 +933,27 @@
         },
         {
             min: 9, max: 12, key: 'core',
-            headline: 'יש לך מי שמריץ - <span class="accent">אבל הוא פועל בלי מפה</span>',
+            headline: 'יש לך מי שמריץ - <span class="accent">אבל הוא פועל בלי כיוון</span>',
             intro: 'זה ה-ICP המדויק שלנו. מספיק תשתית שאפשר לבנות עליה, אבל חסרה שיטה - וזה מה שמפריד אותך מלייצר תוצאה חוזרת.'
         },
         {
-            min: 0, max: 8, key: 'weak',
+            min: 4, max: 8, key: 'weak',
             headline: 'אתה משלם על <span class="accent">ניסוי וטעייה</span>, לא על אסטרטגיה',
             intro: 'המספרים שלך אומרים שאין עדיין שיטה - כל מודעה היא הימור. זה הכי יקר שיש בקמפיינים.'
         }
     ];
 
-    // --- STATE ---
     const state = {
         answers: {},
         currentIndex: 0,
         started: false,
-        buttonVariant: null   // 'A' = "בדוק את זה", 'B' = "גלה למה"
+        buttonVariant: null,
+        score: null,
+        tier: null
     };
 
-    // --- A/B for start button (סעיף 5) ---
+    // --- A/B for start button ---
     function pickButtonVariant() {
-        // Consistent per-session variant. Persist so page reloads don't re-shuffle within a session.
         try {
             let v = sessionStorage.getItem('diag_btn_variant');
             if (!v) {
@@ -805,9 +961,7 @@
                 sessionStorage.setItem('diag_btn_variant', v);
             }
             return v;
-        } catch (e) {
-            return 'A';
-        }
+        } catch (e) { return 'A'; }
     }
     function applyButtonVariant() {
         state.buttonVariant = pickButtonVariant();
@@ -819,14 +973,8 @@
     // --- TRACKING ---
     function track(eventName, params) {
         params = params || {};
-        // GA4
-        if (typeof gtag === 'function') {
-            try { gtag('event', eventName, params); } catch (e) {}
-        }
-        // Meta Pixel - custom event
-        if (typeof fbq === 'function') {
-            try { fbq('trackCustom', eventName, params); } catch (e) {}
-        }
+        if (typeof gtag === 'function') { try { gtag('event', eventName, params); } catch (e) {} }
+        if (typeof fbq === 'function') { try { fbq('trackCustom', eventName, params); } catch (e) {} }
     }
 
     // --- QUESTION RENDER ---
@@ -847,21 +995,17 @@
             <div class="q-options">${optionsHtml}</div>
         `;
 
-        // Wire options
         card.querySelectorAll('.q-opt').forEach(btn => {
             btn.addEventListener('click', () => {
-                const optIdx = parseInt(btn.getAttribute('data-idx'), 10);
-                selectAnswer(q, optIdx);
+                selectAnswer(q, parseInt(btn.getAttribute('data-idx'), 10));
             });
         });
 
-        // Progress
         const pct = Math.round(((index + 1) / QUESTIONS.length) * 100);
         document.getElementById('progressLabel').textContent = `שאלה ${index + 1} מתוך ${QUESTIONS.length}`;
         document.getElementById('progressPct').textContent = pct + '%';
         document.getElementById('progressFill').style.width = pct + '%';
 
-        // Back button
         document.getElementById('btnBack').disabled = (index === 0);
     }
 
@@ -873,7 +1017,6 @@
             label: opt.label
         };
 
-        // Visual selection feedback (briefly, before advance)
         const card = document.getElementById('questionCard');
         card.querySelectorAll('.q-opt').forEach((el, i) => {
             el.classList.toggle('selected', i === optIdx);
@@ -886,7 +1029,6 @@
             scored: question.scored
         });
 
-        // Auto-advance
         setTimeout(() => {
             if (state.currentIndex < QUESTIONS.length - 1) {
                 state.currentIndex++;
@@ -907,12 +1049,10 @@
         });
         return s;
     }
-
     function tierForScore(score) {
-        return RESULT_TIERS.find(t => score >= t.min && score <= t.max);
+        return RESULT_TIERS.find(t => score >= t.min && score <= t.max) || RESULT_TIERS[RESULT_TIERS.length - 1];
     }
-
-    function buildDetailList(score) {
+    function buildDetailList() {
         const items = [];
         ['q2', 'q3', 'q4', 'q5'].forEach(qid => {
             const a = state.answers[qid];
@@ -920,111 +1060,11 @@
             const labels = Q_LABELS[qid];
             if (!labels) return;
             const w = a.weight || 0;
-            if (w >= 4) {
-                items.push({ kind: 'win', text: labels.win });
-            } else if (w >= 2) {
-                items.push({ kind: 'mid', text: labels.lose });
-            } else {
-                items.push({ kind: 'lose', text: labels.lose });
-            }
+            if (w >= 4) items.push({ kind: 'win', text: labels.win });
+            else if (w >= 2) items.push({ kind: 'mid', text: labels.lose });
+            else items.push({ kind: 'lose', text: labels.lose });
         });
         return items;
-    }
-
-    function showResult() {
-        const score = calcScore();
-        const tier = tierForScore(score);
-        const budget = state.answers.q6 ? state.answers.q6.value : null;
-        const runner = state.answers.q1 ? state.answers.q1.value : null;
-
-        // Score display
-        const scoreEl = document.getElementById('resScore');
-        const gauge = document.getElementById('resGaugeFill');
-        animateScore(scoreEl, score);
-        setTimeout(() => {
-            gauge.style.width = Math.round((score / 16) * 100) + '%';
-        }, 120);
-
-        // Headline + intro
-        document.getElementById('resHeadline').innerHTML = tier.headline;
-        document.getElementById('resIntro').textContent = tier.intro;
-
-        // Details
-        const details = buildDetailList(score);
-        const detailsEl = document.getElementById('resDetails');
-        detailsEl.innerHTML = details.map(d => `
-            <li>
-                <span class="ico ${d.kind}">${d.kind === 'win' ? '✓' : (d.kind === 'lose' ? '✗' : '!')}</span>
-                <span>${d.text}</span>
-            </li>
-        `).join('');
-
-        // CTA routing (סעיף 3)
-        const qualifiedTier = (tier.key === 'strong' || tier.key === 'core');
-        const qualifiedBudget = (budget === '10-30k' || budget === '30k-plus');
-        const isHardCta = qualifiedTier && qualifiedBudget;
-
-        const ctaCard = document.getElementById('ctaCard');
-        const ctaText = document.getElementById('ctaText');
-        const ctaBtn = document.getElementById('ctaBtn');
-        const ctaSub = document.getElementById('ctaSub');
-
-        if (isHardCta) {
-            ctaCard.classList.remove('soft');
-            ctaText.innerHTML = 'תכתוב לי <span class="catch">"תפוס אותי"</span> בוואטסאפ ונבדוק אם זה מתאים לך. אני לוקח מספר מצומצם של מותגים לליווי צמוד החודש.';
-            const waUrl = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_MESSAGE);
-            ctaBtn.href = waUrl;
-            ctaBtn.target = '_blank';
-            ctaBtn.rel = 'noopener';
-            ctaBtn.classList.add('cta-btn-wa');
-            ctaBtn.innerHTML = `
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-                דבר איתי בוואטסאפ
-            `;
-            ctaSub.textContent = 'הלינק יפתח וואטסאפ עם ההודעה מוכנה. אני מקבל שיחה חדשה כל 24-48 שעות.';
-        } else {
-            ctaCard.classList.add('soft');
-            let softMsg;
-            if (tier.key === 'weak') {
-                softMsg = 'לפני שנדבר על ליווי אישי - תבוא ל<span class="catch">וובינר החינמי</span> הבא. תלמד שם את המערכת שלי בקומפקט, ואם עדיין תרצה ליווי - נדבר.';
-            } else if (budget === 'under-10k') {
-                softMsg = 'הליווי האישי בנוי למותגים עם תקציב שיווק גדול יותר - אבל תבוא ל<span class="catch">וובינר החינמי</span> הבא. תוציא ממנו כלים ששווים כסף אמיתי.';
-            } else {
-                softMsg = 'תבוא ל<span class="catch">וובינר החינמי</span> הבא. שם ניכנס לעומק המערכת - וזה יתן לך את הכיוון הכי מדויק לצעד הבא.';
-            }
-            ctaText.innerHTML = softMsg;
-            ctaBtn.href = SOFT_CTA_URL;
-            ctaBtn.target = '_self';
-            ctaBtn.classList.remove('cta-btn-wa');
-            ctaBtn.innerHTML = SOFT_CTA_LABEL;
-            ctaSub.textContent = '';
-        }
-
-        // Track click
-        ctaBtn.addEventListener('click', function onCtaClick() {
-            track('DiagnosisCta', {
-                cta_type: isHardCta ? 'whatsapp' : 'soft',
-                score: score,
-                tier: tier.key,
-                budget: budget,
-                runner: runner,
-                button_variant: state.buttonVariant
-            });
-            ctaBtn.removeEventListener('click', onCtaClick);
-        });
-
-        // Track result impression
-        track('DiagnosisResult', {
-            score: score,
-            tier: tier.key,
-            budget: budget,
-            runner: runner,
-            button_variant: state.buttonVariant,
-            cta_type: isHardCta ? 'whatsapp' : 'soft'
-        });
-
-        // Show screen
-        showScreen('screen-result');
     }
 
     function animateScore(el, target) {
@@ -1040,22 +1080,206 @@
         requestAnimationFrame(tick);
     }
 
-    // --- SCREEN NAVIGATION ---
+    function showResult() {
+        const score = calcScore();
+        const tier = tierForScore(score);
+        state.score = score;
+        state.tier = tier.key;
+
+        animateScore(document.getElementById('resScore'), score);
+        setTimeout(() => {
+            document.getElementById('resGaugeFill').style.width = Math.round((score / 16) * 100) + '%';
+        }, 120);
+
+        document.getElementById('resHeadline').innerHTML = tier.headline;
+        document.getElementById('resIntro').textContent = tier.intro;
+
+        const details = buildDetailList();
+        document.getElementById('resDetails').innerHTML = details.map(d => `
+            <li>
+                <span class="ico ${d.kind}">${d.kind === 'win' ? '✓' : (d.kind === 'lose' ? '✗' : '!')}</span>
+                <span>${d.text}</span>
+            </li>
+        `).join('');
+
+        track('DiagnosisResult', {
+            score: score,
+            tier: tier.key,
+            runner: state.answers.q1 ? state.answers.q1.value : null,
+            button_variant: state.buttonVariant
+        });
+
+        // Remove centered so the long result page scrolls from the top
+        document.querySelector('main').classList.remove('centered');
+
+        showScreen('screen-result');
+        setupIgLazyLoad();
+    }
+
     function showScreen(id) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // --- INSTAGRAM EMBEDS (lazy) ---
+    let igScriptLoaded = false;
+    function loadIgScript() {
+        if (igScriptLoaded) return;
+        igScriptLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.instagram.com/embed.js';
+        document.body.appendChild(s);
+    }
+    function renderIgEmbed(card) {
+        const code = card.getAttribute('data-ig-code');
+        if (!code || card.getAttribute('data-loaded') === '1') return;
+        card.setAttribute('data-loaded', '1');
+        card.innerHTML = `
+            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/${code}/" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; max-width:100%; min-width:280px; padding:0; width:100%;">
+                <a href="https://www.instagram.com/reel/${code}/" target="_blank" rel="noopener">צפה ברילס</a>
+            </blockquote>
+        `;
+        loadIgScript();
+        if (window.instgrm && window.instgrm.Embeds) {
+            window.instgrm.Embeds.process();
+        }
+    }
+    function setupIgLazyLoad() {
+        const cards = document.querySelectorAll('.ig-card[data-ig-code]');
+        if (!('IntersectionObserver' in window)) {
+            cards.forEach(renderIgEmbed);
+            return;
+        }
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    renderIgEmbed(entry.target);
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { rootMargin: '400px 0px' });
+        cards.forEach(c => io.observe(c));
+    }
+
+    // --- LEAD FORM ---
+    function setupLeadForm() {
+        const form = document.getElementById('leadForm');
+        const err = document.getElementById('formError');
+        const btn = document.getElementById('leadSubmit');
+        const formBlock = document.getElementById('formBlock');
+        const successBlock = document.getElementById('formSuccess');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            err.classList.remove('visible');
+
+            const name = document.getElementById('leadName').value.trim();
+            const phone = document.getElementById('leadPhone').value.trim();
+            const brand = document.getElementById('leadBrand').value.trim();
+            const revenue = document.getElementById('leadRevenue').value;
+            const budget = document.getElementById('leadBudget').value;
+
+            if (name.length < 2) { err.textContent = 'שם קצר מדי'; err.classList.add('visible'); return; }
+            if (phone.replace(/[\-\s\+\(\)]/g, '').length < 9) { err.textContent = 'מספר טלפון לא תקין'; err.classList.add('visible'); return; }
+            if (brand.length < 1) { err.textContent = 'חסר שם המותג'; err.classList.add('visible'); return; }
+            if (!revenue) { err.textContent = 'בחר את המחזור החודשי'; err.classList.add('visible'); return; }
+            if (!budget) { err.textContent = 'בחר את תקציב השיווק החודשי'; err.classList.add('visible'); return; }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="submit-text">שולח</span><span class="form-spinner"></span>';
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = 'diag-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+
+            const getCookie = (n) => {
+                const m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
+                return m ? m.pop() : undefined;
+            };
+
+            const payload = {
+                name, phone, brand, revenue, budget,
+                score: state.score,
+                tier: state.tier,
+                runner: state.answers.q1 ? state.answers.q1.value : null,
+                answers: {
+                    q1: state.answers.q1?.value,
+                    q2: state.answers.q2?.value,
+                    q3: state.answers.q3?.value,
+                    q4: state.answers.q4?.value,
+                    q5: state.answers.q5?.value
+                },
+                buttonVariant: state.buttonVariant,
+                utmSource: urlParams.get('utm_source') || '',
+                utmMedium: urlParams.get('utm_medium') || '',
+                utmCampaign: urlParams.get('utm_campaign') || '',
+                utmContent: urlParams.get('utm_content') || '',
+                eventId,
+                eventSourceUrl: window.location.href,
+                fbp: getCookie('_fbp'),
+                fbc: getCookie('_fbc')
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/submit-diagnosis-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || 'submission failed');
+
+                // Fire pixel Lead event with dedup id
+                if (typeof fbq !== 'undefined') {
+                    const parts = name.trim().split(' ');
+                    fbq('init', '1265390459065125', {
+                        ph: phone.replace(/[\-\s\+\(\)]/g, ''),
+                        fn: parts[0],
+                        ln: parts.length > 1 ? parts[parts.length - 1] : undefined,
+                        country: 'il'
+                    });
+                    fbq('track', 'Lead', {
+                        value: 0,
+                        currency: 'ILS',
+                        content_name: 'diagnosis_lead',
+                        tier: state.tier,
+                        budget: budget,
+                        revenue: revenue
+                    }, { eventID: eventId });
+                }
+
+                track('DiagnosisFormSubmit', {
+                    score: state.score,
+                    tier: state.tier,
+                    budget: budget,
+                    revenue: revenue,
+                    button_variant: state.buttonVariant
+                });
+
+                formBlock.style.display = 'none';
+                successBlock.classList.add('visible');
+                successBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } catch (error) {
+                err.textContent = 'שגיאה בשליחה. נסה שוב.';
+                err.classList.add('visible');
+                btn.disabled = false;
+                btn.innerHTML = '<span class="submit-text">קבע שיחת התאמה</span>';
+            }
+        });
+    }
+
     // --- INIT ---
     document.addEventListener('DOMContentLoaded', () => {
         applyButtonVariant();
+        setupLeadForm();
 
         document.getElementById('btnStart').addEventListener('click', () => {
             state.started = true;
             state.currentIndex = 0;
             track('DiagnosisStart', { button_variant: state.buttonVariant });
             renderQuestion(0);
+            document.querySelector('main').classList.remove('centered');
             showScreen('screen-quiz');
         });
 
@@ -1073,7 +1297,6 @@
     function loadTrackingScripts() {
         if (window._trackingLoaded) return;
         window._trackingLoaded = true;
-        // GA4
         var gs = document.createElement('script');
         gs.async = true;
         gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6';
@@ -1083,7 +1306,6 @@
         window.gtag = gtag;
         gtag('js', new Date());
         gtag('config', 'G-8SCLND9ZP6');
-        // Meta Pixel
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '1265390459065125');
         fbq('track', 'PageView');
@@ -1092,7 +1314,6 @@
         loadTrackingScripts();
     }
 
-    // Cookie modal wiring
     (function() {
         var banner = document.getElementById('cookieBanner');
         var overlay = document.getElementById('cookieOverlay');
