@@ -417,6 +417,22 @@
             margin-bottom: 14px;
         }
 
+        /* ===== MID-PAGE CTA (bio → form) ===== */
+        .mid-cta-wrap {
+            text-align: center;
+            margin: 8px 0 34px;
+            padding: 4px 12px;
+        }
+        .mid-cta { padding: 20px 44px; font-size: 1.15rem; }
+        .mid-cta-sub {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #000;
+            opacity: 0.7;
+        }
+
         /* ===== INSTAGRAM CAROUSEL ===== */
         .ig-section { margin-bottom: 34px; }
         .ig-section-title {
@@ -803,6 +819,12 @@
                             <p>זו לא בעיית ביצוע - פשוט אין כיוון ברור לכל המערך שיצרת. ותאמין לי, אני מכיר את זה מקרוב: בניתי מותג מאפס ומכרתי אותו לפני שנה.</p>
                             <p>אז מה אני עושה בפועל? נכנס איתך למחקר מעמיק על המותג, ובונה אסטרטגיית קריאייטיב מותאמת אישית. אני לא מחליף אף אחד אצלך - מי שמריץ היום את הקמפיינים ממשיך להריץ, רק שעכשיו הוא עושה את זה לפי כיוון ברור, לא לפי ניחוש.</p>
                         </div>
+                    </div>
+
+                    <!-- Mid-page CTA — jumps to the form -->
+                    <div class="mid-cta-wrap">
+                        <button class="cta-btn cta-btn-lg mid-cta" type="button" id="midCtaBtn">בוא נדבר על המותג שלך</button>
+                        <span class="mid-cta-sub">15 דקות. שיחת התאמה, לא מכירה.</span>
                     </div>
 
                     <!-- 5. Instagram carousel -->
@@ -1422,10 +1444,30 @@
         });
     }
 
+    // --- MID CTA (jumps to form) ---
+    function setupMidCta() {
+        const btn = document.getElementById('midCtaBtn');
+        if (!btn) return;
+        btn.addEventListener('click', () => {
+            track('DiagnosisMidCtaClick', {
+                score: state.score,
+                tier: state.tier,
+                button_variant: state.buttonVariant
+            });
+            const target = document.getElementById('formBlock');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const firstField = document.getElementById('leadName');
+                if (firstField) setTimeout(() => firstField.focus({ preventScroll: true }), 700);
+            }
+        });
+    }
+
     // --- INIT ---
     document.addEventListener('DOMContentLoaded', () => {
         applyButtonVariant();
         setupLeadForm();
+        setupMidCta();
 
         document.getElementById('btnStart').addEventListener('click', () => {
             state.started = true;
