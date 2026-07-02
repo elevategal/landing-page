@@ -1128,6 +1128,61 @@
         tier: null
     };
 
+    // ==== FUNNEL TRACKING (session beacons) ====
+    const FUNNEL_STEPS = {
+        page_view:   1,
+        start:       2,
+        q1_done:     3,
+        q2_done:     4,
+        q3_done:     5,
+        q4_done:     6,
+        q5_done:     7,
+        result:      8,
+        form_submit: 9
+    };
+    const session = {
+        id: (function(){
+            try {
+                let sid = sessionStorage.getItem('diag_session_id');
+                if (!sid) {
+                    sid = 'sess-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+                    sessionStorage.setItem('diag_session_id', sid);
+                }
+                return sid;
+            } catch (e) {
+                return 'sess-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+            }
+        })(),
+        farthestOrder: 0
+    };
+    function funnelStep(step) {
+        const order = FUNNEL_STEPS[step];
+        if (!order || order <= session.farthestOrder) return;
+        session.farthestOrder = order;
+        const params = new URLSearchParams(window.location.search);
+        const payload = JSON.stringify({
+            sessionId: session.id,
+            step: step,
+            stepOrder: order,
+            utmSource: params.get('utm_source') || '',
+            utmMedium: params.get('utm_medium') || '',
+            utmCampaign: params.get('utm_campaign') || '',
+            utmContent: params.get('utm_content') || '',
+            runner: state.answers.q1 ? state.answers.q1.value : ''
+        });
+        const url = '/.netlify/functions/log-diagnosis-step';
+        try {
+            const blob = new Blob([payload], { type: 'application/json' });
+            if (navigator.sendBeacon && navigator.sendBeacon(url, blob)) return;
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: payload,
+                keepalive: true
+            }).catch(() => {});
+        } catch (e) {}
+    }
+
     // --- TRACKING ---
     function track(eventName, params) {
         params = params || {};
@@ -1186,6 +1241,9 @@
             answer_value: String(opt.value),
             scored: question.scored
         });
+
+        // Funnel beacon: mark this question as done
+        funnelStep(question.id + '_done');
 
         setTimeout(() => {
             if (state.currentIndex < QUESTIONS.length - 1) {
@@ -1265,6 +1323,7 @@
             tier: tier.key,
             runner: state.answers.q1 ? state.answers.q1.value : null
         });
+        funnelStep('result');
 
         // Remove centered so the long result page scrolls from the top
         document.querySelector('main').classList.remove('centered');
@@ -1369,6 +1428,7 @@
                     budget: budget,
                     revenue: revenue
                 });
+                funnelStep('form_submit');
 
                 formBlock.style.display = 'none';
                 successBlock.classList.add('visible');
@@ -1406,10 +1466,14 @@
         setupLeadForm();
         setupResultCtas();
 
+        // Log the initial page view for the funnel
+        funnelStep('page_view');
+
         document.getElementById('btnStart').addEventListener('click', () => {
             state.started = true;
             state.currentIndex = 0;
             track('DiagnosisStart');
+            funnelStep('start');
             renderQuestion(0);
             document.querySelector('main').classList.remove('centered');
             showScreen('screen-quiz');
