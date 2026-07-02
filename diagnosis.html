@@ -417,23 +417,41 @@
             margin-bottom: 14px;
         }
 
-        /* ===== MID-PAGE CTA (bio → form) ===== */
-        .mid-cta-wrap {
+        /* ===== CTA #1 (right after diagnosis) ===== */
+        .cta1-block {
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--brutal-shadow);
+            padding: 28px 22px;
+            margin-bottom: 28px;
             text-align: center;
-            margin: 8px 0 34px;
-            padding: 4px 12px;
         }
-        .mid-cta { padding: 20px 44px; font-size: 1.15rem; }
-        .mid-cta-sub {
-            display: block;
-            margin-top: 12px;
-            font-size: 0.85rem;
-            font-weight: 800;
-            color: #000;
-            opacity: 0.7;
+        @media (min-width: 640px) { .cta1-block { padding: 34px 40px; } }
+        .cta1-title {
+            color: #fff;
+            font-size: clamp(1.15rem, 3vw, 1.4rem);
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+        .cta1-desc {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.98rem;
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 22px;
         }
 
-        /* ===== INSTAGRAM CAROUSEL ===== */
+        /* ===== CTA #2 (end of bio) ===== */
+        .bio-cta {
+            margin-top: 20px;
+            text-align: center;
+        }
+        @media (min-width: 640px) { .bio-cta { text-align: right; } }
+
+        /* ===== INSTAGRAM LIVE FEED (Elfsight) ===== */
         .ig-section { margin-bottom: 34px; }
         .ig-section-title {
             font-size: 1.1rem;
@@ -442,75 +460,16 @@
             margin-bottom: 20px;
             color: #000;
         }
-        .ig-viewport {
-            width: 100%;
-            min-width: 0;
-            max-width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
-            padding: 4px 4px 18px;
-            margin: 0 -4px;
-        }
-        .ig-viewport::-webkit-scrollbar { display: none; }
-        .ig-track {
-            display: flex;
-            gap: 18px;
-            width: max-content;
-        }
-        .ig-card {
-            flex: 0 0 min(340px, 88vw);
-            scroll-snap-align: center;
+        .ig-card-wrap {
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
-            padding: 8px;
+            padding: 14px 12px;
             overflow: hidden;
         }
-        .ig-card .instagram-media {
-            margin: 0 !important;
-            min-width: 0 !important;
-            border: none !important;
-            box-shadow: none !important;
-            border-radius: 10px !important;
-        }
-        .ig-placeholder {
-            height: 500px;
-            background: linear-gradient(135deg, #fafafa, #f0f0f0);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-        .ig-dots {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 4px;
-        }
-        .ig-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 2px solid #000;
-            background: #fff;
-            padding: 0;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.15s ease;
-        }
-        .ig-dot.active { background: var(--accent); transform: scale(1.15); }
-        @media (min-width: 900px) {
-            .ig-viewport { overflow: visible; }
-            .ig-track { width: 100%; }
-            .ig-card { flex: 1 1 0; min-width: 0; }
-            .ig-dots { display: none; }
-        }
+        @media (min-width: 640px) { .ig-card-wrap { padding: 18px 16px; } }
+        .ig-card-wrap [class*="elfsight-app-"] { min-height: 400px; }
 
         /* ===== LOGO MARQUEE ===== */
         .logos-block { margin-bottom: 34px; }
@@ -770,8 +729,8 @@
                         עדיין <span class="highlight">מפסיד כסף</span> בקמפיינים?<br>
                         תוך 60 שניות תדע בדיוק למה.
                     </h1>
-                    <p class="subhead">5 שאלות קצרות מבוססות ניסיון של 10 שנים ו-50+ מותגים. אבחון אמיתי, בלי בולשיט.</p>
-                    <button class="cta-btn cta-btn-lg" id="btnStart" type="button">בדוק את זה</button>
+                    <p class="subhead">שאלון קצר שיראה לך בדיוק איפה המערכת הקריאייטיבית שלך מדממת - לא עוד ניחוש.</p>
+                    <button class="cta-btn cta-btn-lg" id="btnStart" type="button">בוא נבדוק למה? &larr;</button>
                     <span class="intro-trust">60 שניות. בלי אימייל, בלי התחייבות.</span>
                 </div>
             </section>
@@ -810,7 +769,14 @@
                         <ul class="result-detail-list" id="resDetails"></ul>
                     </div>
 
-                    <!-- 4. Bio -->
+                    <!-- 4. CTA #1 — right after the diagnosis -->
+                    <div class="cta1-block">
+                        <h3 class="cta1-title">זיהינו את הפער. עכשיו יש שתי אפשרויות.</h3>
+                        <p class="cta1-desc">להשאיר את זה ככה, או לדבר 15 דקות ולראות אם אפשר לסגור אותו. בלי לחץ, בלי מכירה - רק בדיקת התאמה.</p>
+                        <button class="cta-btn cta-btn-lg" type="button" data-scroll-to-form="cta1">בוא נדבר על התוצאה שלך &darr;</button>
+                    </div>
+
+                    <!-- 5. Bio (with CTA #2 at the end) -->
                     <div class="bio-block">
                         <div class="bio-photo" role="img" aria-label="גל כהן"></div>
                         <div class="bio-txt">
@@ -818,29 +784,17 @@
                             <p>10 שנים באיקומרס, ועזרתי ליותר מ-50 מותגים ישראלים לעשות שינוי מהותי בעסק שלהם. רוב המצבים שאני רואה נראים בדיוק כמו מה שהתוצאה שלך הראתה עכשיו: יש מי שמריץ קמפיינים, יש תקציב שיוצא כל חודש, אבל אין מי שיושב מעל הכל ומחליט מה המסר, למי הוא מיועד, ולמה בכלל קריאייטיב מסוים אמור לעבוד.</p>
                             <p>זו לא בעיית ביצוע - פשוט אין כיוון ברור לכל המערך שיצרת. ותאמין לי, אני מכיר את זה מקרוב: בניתי מותג מאפס ומכרתי אותו לפני שנה.</p>
                             <p>אז מה אני עושה בפועל? נכנס איתך למחקר מעמיק על המותג, ובונה אסטרטגיית קריאייטיב מותאמת אישית. אני לא מחליף אף אחד אצלך - מי שמריץ היום את הקמפיינים ממשיך להריץ, רק שעכשיו הוא עושה את זה לפי כיוון ברור, לא לפי ניחוש.</p>
-                        </div>
-                    </div>
-
-                    <!-- Mid-page CTA — jumps to the form -->
-                    <div class="mid-cta-wrap">
-                        <button class="cta-btn cta-btn-lg mid-cta" type="button" id="midCtaBtn">בוא נדבר על המותג שלך</button>
-                        <span class="mid-cta-sub">15 דקות. שיחת התאמה, לא מכירה.</span>
-                    </div>
-
-                    <!-- 5. Instagram carousel -->
-                    <div class="ig-section">
-                        <div class="ig-section-title">תראה בעצמך</div>
-                        <div class="ig-viewport" id="igViewport">
-                            <div class="ig-track">
-                                <div class="ig-card" data-ig-code="DYJ9v_EJE0M"><div class="ig-placeholder">טוען...</div></div>
-                                <div class="ig-card" data-ig-code="DXHmWFLAY7b"><div class="ig-placeholder">טוען...</div></div>
-                                <div class="ig-card" data-ig-code="DPdhv-fgRfd"><div class="ig-placeholder">טוען...</div></div>
+                            <div class="bio-cta">
+                                <button class="cta-btn cta-btn-lg" type="button" data-scroll-to-form="cta2_bio">בוא נדבר על המותג שלך &darr;</button>
                             </div>
                         </div>
-                        <div class="ig-dots" id="igDots">
-                            <button class="ig-dot active" type="button" aria-label="עבור לרילס 1"></button>
-                            <button class="ig-dot" type="button" aria-label="עבור לרילס 2"></button>
-                            <button class="ig-dot" type="button" aria-label="עבור לרילס 3"></button>
+                    </div>
+
+                    <!-- 6. Instagram live feed (Elfsight) -->
+                    <div class="ig-section">
+                        <div class="ig-section-title">תראה בעצמך</div>
+                        <div class="ig-card-wrap">
+                            <div class="elfsight-app-12c6e7df-5c24-4aed-bb88-d80199cde242" data-elfsight-app-lazy></div>
                         </div>
                     </div>
 
@@ -921,8 +875,8 @@
                     <!-- Success state (shown after submit) -->
                     <div class="form-success" id="formSuccess">
                         <div class="check-badge">✓</div>
-                        <h3>קיבלתי</h3>
-                        <p>אחזור אליך בהקדם לתאם שיחת התאמה. תודה שלקחת את הזמן להשלים את השאלון.</p>
+                        <h3>קיבלתי!</h3>
+                        <p>אחזור אליך אישית בהקדם לתאם שיחת התאמה. תודה שלקחת את הזמן להשלים את השאלון.</p>
                     </div>
                 </div>
             </section>
@@ -1042,28 +996,9 @@
         answers: {},
         currentIndex: 0,
         started: false,
-        buttonVariant: null,
         score: null,
         tier: null
     };
-
-    // --- A/B for start button ---
-    function pickButtonVariant() {
-        try {
-            let v = sessionStorage.getItem('diag_btn_variant');
-            if (!v) {
-                v = Math.random() < 0.5 ? 'A' : 'B';
-                sessionStorage.setItem('diag_btn_variant', v);
-            }
-            return v;
-        } catch (e) { return 'A'; }
-    }
-    function applyButtonVariant() {
-        state.buttonVariant = pickButtonVariant();
-        const btn = document.getElementById('btnStart');
-        btn.textContent = state.buttonVariant === 'A' ? 'בדוק את זה' : 'גלה למה';
-        btn.setAttribute('data-variant', state.buttonVariant);
-    }
 
     // --- TRACKING ---
     function track(eventName, params) {
@@ -1200,16 +1135,14 @@
         track('DiagnosisResult', {
             score: score,
             tier: tier.key,
-            runner: state.answers.q1 ? state.answers.q1.value : null,
-            button_variant: state.buttonVariant
+            runner: state.answers.q1 ? state.answers.q1.value : null
         });
 
         // Remove centered so the long result page scrolls from the top
         document.querySelector('main').classList.remove('centered');
 
         showScreen('screen-result');
-        setupIgLazyLoad();
-        setupIgCarousel();
+        loadElfsight();
     }
 
     function showScreen(id) {
@@ -1218,126 +1151,15 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- INSTAGRAM EMBEDS (lazy) ---
-    let igScriptLoaded = false;
-    function loadIgScript() {
-        if (igScriptLoaded) return;
-        igScriptLoaded = true;
+    // Load Elfsight IG widget on demand (only once we're on the result screen)
+    let elfsightLoaded = false;
+    function loadElfsight() {
+        if (elfsightLoaded) return;
+        elfsightLoaded = true;
         const s = document.createElement('script');
+        s.src = 'https://elfsightcdn.com/platform.js';
         s.async = true;
-        s.src = 'https://www.instagram.com/embed.js';
         document.body.appendChild(s);
-    }
-    function renderIgEmbed(card) {
-        const code = card.getAttribute('data-ig-code');
-        if (!code || card.getAttribute('data-loaded') === '1') return;
-        card.setAttribute('data-loaded', '1');
-        card.innerHTML = `
-            <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/reel/${code}/" data-instgrm-version="14" style="background:#FFF; border:0; margin:0; max-width:100%; min-width:280px; padding:0; width:100%;">
-                <a href="https://www.instagram.com/reel/${code}/" target="_blank" rel="noopener">צפה ברילס</a>
-            </blockquote>
-        `;
-        loadIgScript();
-        if (window.instgrm && window.instgrm.Embeds) {
-            window.instgrm.Embeds.process();
-        }
-    }
-    function setupIgLazyLoad() {
-        const cards = document.querySelectorAll('.ig-card[data-ig-code]');
-        if (!('IntersectionObserver' in window)) {
-            cards.forEach(renderIgEmbed);
-            return;
-        }
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    renderIgEmbed(entry.target);
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { rootMargin: '400px 0px' });
-        cards.forEach(c => io.observe(c));
-    }
-
-    // --- INSTAGRAM CAROUSEL (mobile auto-advance + dots) ---
-    function setupIgCarousel() {
-        const viewport = document.getElementById('igViewport');
-        const dotsWrap = document.getElementById('igDots');
-        if (!viewport || !dotsWrap) return;
-        const cards = viewport.querySelectorAll('.ig-card');
-        const dots = dotsWrap.querySelectorAll('.ig-dot');
-        if (!cards.length) return;
-
-        // Skip carousel on desktop (all 3 fit side-by-side)
-        const mq = window.matchMedia('(min-width: 900px)');
-        let autoTimer = null;
-        let currentIdx = 0;
-        let userInteracted = false;
-
-        function scrollToIdx(idx) {
-            const card = cards[idx];
-            if (!card) return;
-            const scrollLeft = card.offsetLeft - (viewport.clientWidth - card.clientWidth) / 2;
-            viewport.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-        }
-
-        function syncDots() {
-            const vpCenter = viewport.scrollLeft + viewport.clientWidth / 2;
-            let bestIdx = 0;
-            let bestDist = Infinity;
-            cards.forEach((c, i) => {
-                const cCenter = c.offsetLeft + c.clientWidth / 2;
-                const d = Math.abs(cCenter - vpCenter);
-                if (d < bestDist) { bestDist = d; bestIdx = i; }
-            });
-            if (bestIdx !== currentIdx) {
-                currentIdx = bestIdx;
-                dots.forEach((d, i) => d.classList.toggle('active', i === bestIdx));
-            }
-        }
-
-        function startAuto() {
-            if (mq.matches) return;
-            stopAuto();
-            autoTimer = setInterval(() => {
-                if (userInteracted) return;
-                const next = (currentIdx + 1) % cards.length;
-                scrollToIdx(next);
-            }, 5000);
-        }
-        function stopAuto() {
-            if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-        }
-
-        dots.forEach((dot, i) => {
-            dot.addEventListener('click', () => {
-                userInteracted = true;
-                scrollToIdx(i);
-                setTimeout(() => { userInteracted = false; }, 8000);
-            });
-        });
-
-        viewport.addEventListener('scroll', () => {
-            syncDots();
-        }, { passive: true });
-
-        ['touchstart', 'pointerdown', 'wheel'].forEach(ev => {
-            viewport.addEventListener(ev, () => {
-                userInteracted = true;
-                stopAuto();
-                setTimeout(() => {
-                    userInteracted = false;
-                    startAuto();
-                }, 8000);
-            }, { passive: true });
-        });
-
-        mq.addEventListener?.('change', () => {
-            if (mq.matches) stopAuto();
-            else startAuto();
-        });
-
-        startAuto();
     }
 
     // --- LEAD FORM ---
@@ -1387,7 +1209,6 @@
                     q4: state.answers.q4?.value,
                     q5: state.answers.q5?.value
                 },
-                buttonVariant: state.buttonVariant,
                 utmSource: urlParams.get('utm_source') || '',
                 utmMedium: urlParams.get('utm_medium') || '',
                 utmCampaign: urlParams.get('utm_campaign') || '',
@@ -1430,8 +1251,7 @@
                     score: state.score,
                     tier: state.tier,
                     budget: budget,
-                    revenue: revenue,
-                    button_variant: state.buttonVariant
+                    revenue: revenue
                 });
 
                 formBlock.style.display = 'none';
@@ -1446,35 +1266,34 @@
         });
     }
 
-    // --- MID CTA (jumps to form) ---
-    function setupMidCta() {
-        const btn = document.getElementById('midCtaBtn');
-        if (!btn) return;
-        btn.addEventListener('click', () => {
-            track('DiagnosisMidCtaClick', {
-                score: state.score,
-                tier: state.tier,
-                button_variant: state.buttonVariant
+    // --- CTAs that jump to form (CTA #1 after details, CTA #2 at end of bio) ---
+    function setupResultCtas() {
+        document.querySelectorAll('[data-scroll-to-form]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                track('DiagnosisMidCtaClick', {
+                    cta_position: btn.getAttribute('data-scroll-to-form'),
+                    score: state.score,
+                    tier: state.tier
+                });
+                const target = document.getElementById('formBlock');
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const firstField = document.getElementById('leadName');
+                    if (firstField) setTimeout(() => firstField.focus({ preventScroll: true }), 700);
+                }
             });
-            const target = document.getElementById('formBlock');
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                const firstField = document.getElementById('leadName');
-                if (firstField) setTimeout(() => firstField.focus({ preventScroll: true }), 700);
-            }
         });
     }
 
     // --- INIT ---
     document.addEventListener('DOMContentLoaded', () => {
-        applyButtonVariant();
         setupLeadForm();
-        setupMidCta();
+        setupResultCtas();
 
         document.getElementById('btnStart').addEventListener('click', () => {
             state.started = true;
             state.currentIndex = 0;
-            track('DiagnosisStart', { button_variant: state.buttonVariant });
+            track('DiagnosisStart');
             renderQuestion(0);
             document.querySelector('main').classList.remove('centered');
             showScreen('screen-quiz');
