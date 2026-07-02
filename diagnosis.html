@@ -378,29 +378,10 @@
             border: 2px solid #000;
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
-            padding: 28px 24px;
+            padding: 26px 22px;
             margin-bottom: 32px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 22px;
         }
-        @media (min-width: 640px) {
-            .bio-block { grid-template-columns: 150px 1fr; padding: 32px 36px; gap: 28px; align-items: start; }
-        }
-        .bio-photo {
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            border: 2px solid #000;
-            box-shadow: var(--brutal-shadow-sm);
-            background-image: url('profile.jpg');
-            background-size: cover;
-            background-position: center;
-            margin: 0 auto;
-        }
-        @media (min-width: 640px) {
-            .bio-photo { width: 140px; height: 140px; margin: 0; }
-        }
+        @media (min-width: 640px) { .bio-block { padding: 32px 36px; } }
         .bio-txt {
             font-size: 0.98rem;
             font-weight: 700;
@@ -488,10 +469,15 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background-image: url('profile.jpg');
-            background-size: cover;
-            background-position: center;
             border: 3px solid #fff;
+            overflow: hidden;
+            background: #fff;
+        }
+        .ig-avatar-inner img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .ig-info {
             flex: 1;
@@ -562,25 +548,69 @@
         .ig-follow:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 #000; }
         .ig-follow svg { width: 18px; height: 18px; fill: currentColor; }
 
-        /* Inline variant — sits inside the bio, tighter than standalone card */
+        /* Inline variant — a single horizontal row inside the bio */
         .ig-profile-inline {
-            margin: 6px 0 18px;
-            padding: 16px 14px;
-            box-shadow: var(--brutal-shadow-sm);
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 14px;
+            padding: 14px 14px;
+            margin: 8px 0 20px;
             background: #fafafa;
+            box-shadow: var(--brutal-shadow-sm);
+            text-align: right;
         }
         @media (min-width: 640px) {
-            .ig-profile-inline { padding: 18px 22px; gap: 20px; }
+            .ig-profile-inline { padding: 18px 20px; gap: 20px; flex-wrap: nowrap; }
         }
-        .ig-profile-inline .ig-avatar { width: 72px; height: 72px; padding: 2.5px; }
+        .ig-profile-inline .ig-avatar {
+            width: 76px; height: 76px; padding: 2.5px;
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            .ig-profile-inline .ig-avatar { width: 92px; height: 92px; padding: 3px; }
+        }
         .ig-profile-inline .ig-avatar-inner { border-width: 2px; }
-        .ig-profile-inline .ig-name-line { font-size: 1rem; }
-        .ig-profile-inline .ig-handle { font-size: 0.85rem; }
-        .ig-profile-inline .ig-stats { gap: 18px; }
-        .ig-profile-inline .ig-stat-num { font-size: 0.98rem; }
-        .ig-profile-inline .ig-follow { padding: 8px 14px; font-size: 0.88rem; }
+        .ig-profile-inline .ig-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .ig-profile-inline .ig-name-line {
+            font-size: 1rem;
+            justify-content: flex-start;
+            flex-wrap: nowrap;
+            gap: 6px;
+        }
+        .ig-profile-inline .ig-handle {
+            font-size: 0.82rem;
+            margin-top: -4px;
+        }
+        .ig-profile-inline .ig-stats {
+            display: flex;
+            gap: 22px;
+            margin-top: 2px;
+        }
+        .ig-profile-inline .ig-stat-num { font-size: 0.98rem; line-height: 1; }
+        .ig-profile-inline .ig-stat-label { font-size: 0.7rem; margin-top: 2px; }
+        .ig-profile-inline .ig-follow {
+            flex-shrink: 0;
+            padding: 9px 16px;
+            font-size: 0.88rem;
+        }
+        @media (min-width: 640px) {
+            .ig-profile-inline .ig-follow { margin-right: auto; }
+        }
         .ig-profile-inline .ig-follow svg { width: 15px; height: 15px; }
-        /* Remove standalone ig-section spacing since we're now inline */
+        /* On very narrow screens, let the Follow button wrap to its own full-width row */
+        @media (max-width: 420px) {
+            .ig-profile-inline .ig-follow { flex-basis: 100%; justify-content: center; }
+        }
+        /* Standalone ig-section (outside the bio) is unused now */
         .ig-section { display: none; }
 
         /* ===== LOGO MARQUEE ===== */
@@ -890,14 +920,15 @@
 
                     <!-- 5. Bio (with IG profile bar + CTA #2 at the end) -->
                     <div class="bio-block">
-                        <div class="bio-photo" role="img" aria-label="גל כהן"></div>
                         <div class="bio-txt">
                             <span class="bio-open">היי, אני גל כהן.</span>
 
                             <!-- Instagram profile bar (native) -->
                             <div class="ig-profile ig-profile-inline">
                                 <a class="ig-avatar" href="https://www.instagram.com/gal_creativz/" target="_blank" rel="noopener" aria-label="פתח את הפרופיל של gal_creativz באינסטגרם">
-                                    <div class="ig-avatar-inner"></div>
+                                    <div class="ig-avatar-inner">
+                                        <img src="ig-avatar.jpg" alt="גל כהן" onerror="this.onerror=null;this.src='profile.jpg';">
+                                    </div>
                                 </a>
                                 <div class="ig-info">
                                     <div class="ig-name-line">
