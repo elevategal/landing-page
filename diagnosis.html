@@ -451,7 +451,7 @@
         }
         @media (min-width: 640px) { .bio-cta { text-align: right; } }
 
-        /* ===== INSTAGRAM LIVE FEED (Elfsight) ===== */
+        /* ===== INSTAGRAM PROFILE CARD (native) ===== */
         .ig-section { margin-bottom: 34px; }
         .ig-section-title {
             font-size: 1.1rem;
@@ -460,16 +460,107 @@
             margin-bottom: 20px;
             color: #000;
         }
-        .ig-card-wrap {
+        .ig-profile {
             background: #fff;
             border: 2px solid #000;
             border-radius: var(--radius-lg);
             box-shadow: var(--brutal-shadow);
-            padding: 14px 12px;
-            overflow: hidden;
+            padding: 20px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            text-align: center;
         }
-        @media (min-width: 640px) { .ig-card-wrap { padding: 18px 16px; } }
-        .ig-card-wrap [class*="elfsight-app-"] { min-height: 400px; }
+        @media (min-width: 640px) {
+            .ig-profile { flex-direction: row; padding: 26px 30px; gap: 26px; text-align: right; }
+        }
+        .ig-avatar {
+            flex-shrink: 0;
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: var(--brutal-shadow-sm);
+        }
+        .ig-avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-image: url('profile.jpg');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid #fff;
+        }
+        .ig-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+        @media (min-width: 640px) { .ig-info { align-items: flex-end; } }
+        .ig-name-line {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #000;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @media (min-width: 640px) { .ig-name-line { justify-content: flex-end; } }
+        .ig-verified {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px; height: 18px;
+            background: #3897F0;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+        .ig-handle {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #666;
+            direction: ltr;
+        }
+        .ig-stats {
+            display: flex;
+            gap: 22px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #000;
+        }
+        .ig-stat { text-align: center; }
+        .ig-stat-num { display: block; font-size: 1.05rem; font-weight: 900; line-height: 1; }
+        .ig-stat-label { display: block; font-size: 0.72rem; font-weight: 700; color: #666; margin-top: 3px; }
+        .ig-follow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 10px;
+            padding: 10px 18px;
+            font-size: 0.95rem;
+            font-weight: 900;
+            font-family: inherit;
+            text-decoration: none;
+            box-shadow: var(--brutal-shadow-sm);
+            transition: transform .12s ease, box-shadow .12s ease;
+            cursor: pointer;
+        }
+        .ig-follow:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #000; }
+        .ig-follow:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 #000; }
+        .ig-follow svg { width: 18px; height: 18px; fill: currentColor; }
 
         /* ===== LOGO MARQUEE ===== */
         .logos-block { margin-bottom: 34px; }
@@ -790,11 +881,29 @@
                         </div>
                     </div>
 
-                    <!-- 6. Instagram live feed (Elfsight) -->
+                    <!-- 6. Instagram profile card (native) -->
                     <div class="ig-section">
                         <div class="ig-section-title">תראה בעצמך</div>
-                        <div class="ig-card-wrap">
-                            <div class="elfsight-app-12c6e7df-5c24-4aed-bb88-d80199cde242" data-elfsight-app-lazy></div>
+                        <div class="ig-profile">
+                            <a class="ig-avatar" href="https://www.instagram.com/gal_creativz/" target="_blank" rel="noopener" aria-label="פתח את הפרופיל של gal_creativz באינסטגרם">
+                                <div class="ig-avatar-inner"></div>
+                            </a>
+                            <div class="ig-info">
+                                <div class="ig-name-line">
+                                    <span>גל כהן | Gal Cohen</span>
+                                    <span class="ig-verified" aria-label="חשבון מאומת">✓</span>
+                                </div>
+                                <div class="ig-handle">@gal_creativz</div>
+                                <div class="ig-stats">
+                                    <div class="ig-stat"><span class="ig-stat-num">244</span><span class="ig-stat-label">פוסטים</span></div>
+                                    <div class="ig-stat"><span class="ig-stat-num">5.3K</span><span class="ig-stat-label">עוקבים</span></div>
+                                    <div class="ig-stat"><span class="ig-stat-num">587</span><span class="ig-stat-label">עוקב</span></div>
+                                </div>
+                                <a class="ig-follow" href="https://www.instagram.com/gal_creativz/" target="_blank" rel="noopener">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                    Follow
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -1142,24 +1251,12 @@
         document.querySelector('main').classList.remove('centered');
 
         showScreen('screen-result');
-        loadElfsight();
     }
 
     function showScreen(id) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Load Elfsight IG widget on demand (only once we're on the result screen)
-    let elfsightLoaded = false;
-    function loadElfsight() {
-        if (elfsightLoaded) return;
-        elfsightLoaded = true;
-        const s = document.createElement('script');
-        s.src = 'https://elfsightcdn.com/platform.js';
-        s.async = true;
-        document.body.appendChild(s);
     }
 
     // --- LEAD FORM ---
