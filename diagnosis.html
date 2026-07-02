@@ -398,31 +398,28 @@
             margin-bottom: 14px;
         }
 
-        /* ===== CTA #1 (right after diagnosis) ===== */
-        .cta1-block {
-            background: #000;
-            color: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--brutal-shadow);
-            padding: 28px 22px;
-            margin-bottom: 28px;
+        /* ===== CTA #1 — nested inside the diagnosis card ===== */
+        .cta1-inline {
+            margin-top: 24px;
+            padding-top: 22px;
+            border-top: 2px dashed rgba(0,0,0,0.15);
             text-align: center;
         }
-        @media (min-width: 640px) { .cta1-block { padding: 34px 40px; } }
+        @media (min-width: 640px) { .cta1-inline { margin-top: 28px; padding-top: 26px; } }
         .cta1-title {
-            color: #fff;
-            font-size: clamp(1.15rem, 3vw, 1.4rem);
+            font-size: clamp(1.05rem, 2.6vw, 1.25rem);
             font-weight: 900;
             line-height: 1.35;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            color: #000;
         }
         .cta1-desc {
-            color: rgba(255,255,255,0.9);
-            font-size: 0.98rem;
+            font-size: 0.95rem;
             font-weight: 700;
             line-height: 1.6;
-            margin-bottom: 22px;
+            margin-bottom: 20px;
+            color: #000;
+            opacity: 0.8;
         }
 
         /* ===== CTA #2 (end of bio) ===== */
@@ -904,18 +901,18 @@
                         <div class="result-gauge"><div class="result-gauge-fill" id="resGaugeFill"></div></div>
                     </div>
 
-                    <!-- 2 + 3. Headline + details -->
+                    <!-- 2 + 3 + 4. Diagnosis + details + CTA #1 (one unified card) -->
                     <div class="result-headline-card">
                         <h2 id="resHeadline">—</h2>
                         <p id="resIntro" style="font-size: 1rem; font-weight: 700; line-height: 1.6; margin-bottom: 6px;"></p>
                         <ul class="result-detail-list" id="resDetails"></ul>
-                    </div>
 
-                    <!-- 4. CTA #1 — right after the diagnosis -->
-                    <div class="cta1-block">
-                        <h3 class="cta1-title">זיהינו את הפער. עכשיו יש שתי אפשרויות.</h3>
-                        <p class="cta1-desc">להשאיר את זה ככה, או לדבר 15 דקות ולראות אם אפשר לסגור אותו. בלי לחץ, בלי מכירה - רק בדיקת התאמה.</p>
-                        <button class="cta-btn cta-btn-lg" type="button" data-scroll-to-form="cta1">בוא נדבר על התוצאה שלך &darr;</button>
+                        <!-- CTA #1 nested inside the diagnosis card -->
+                        <div class="cta1-inline">
+                            <h3 class="cta1-title">זיהינו את הפער. עכשיו יש שתי אפשרויות.</h3>
+                            <p class="cta1-desc">להשאיר את זה ככה, או לדבר 15 דקות ולראות אם אפשר לסגור אותו. בלי לחץ, בלי מכירה - רק בדיקת התאמה.</p>
+                            <button class="cta-btn cta-btn-lg" type="button" data-scroll-to-form="cta1">בוא נדבר על התוצאה שלך &darr;</button>
+                        </div>
                     </div>
 
                     <!-- 5. Bio (with IG profile bar + CTA #2 at the end) -->
