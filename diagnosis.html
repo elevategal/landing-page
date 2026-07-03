@@ -815,6 +815,38 @@
         .form-success h3 { margin-bottom: 10px; font-size: 1.5rem; }
         .form-success p { font-size: 1rem; font-weight: 700; line-height: 1.6; color: #000; }
 
+        /* ===== STICKY MOBILE CTA (only during result screen) ===== */
+        .sticky-cta {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            z-index: 9990;
+            background: var(--bg-primary);
+            border-top: 2px solid #000;
+            padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+            transform: translateY(110%);
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+            display: none;
+        }
+        .sticky-cta.visible { transform: translateY(0); }
+        .sticky-cta .sticky-cta-btn {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: 900;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: var(--brutal-shadow-sm);
+            text-align: center;
+        }
+        @media (max-width: 900px) {
+            .sticky-cta { display: block; }
+        }
+
         /* ===== FOOTER ===== */
         footer {
             padding: 30px 20px 24px;
@@ -1059,6 +1091,11 @@
 
         </div>
     </main>
+
+    <!-- Sticky mobile CTA — shown only while result screen is active and the form isn't yet in view -->
+    <div class="sticky-cta" id="stickyCta" role="complementary" aria-hidden="true">
+        <button class="sticky-cta-btn" type="button" data-scroll-to-form="sticky_mobile">בוא נדבר על התוצאה שלך &darr;</button>
+    </div>
 
     <footer>
         &copy; 2026 Elev8 Creative Strategy · <a href="/privacy">מדיניות פרטיות</a> · <a href="/terms">תקנון</a> · <a href="/accessibility">הצהרת נגישות</a> · <a href="#" onclick="var b=document.getElementById('cookieBanner'),o=document.getElementById('cookieOverlay');b.classList.remove('hidden');b.classList.add('visible');if(o)o.classList.add('active');return false;">הגדרות קוקיז</a>
@@ -1377,12 +1414,48 @@
         document.querySelector('main').classList.remove('centered');
 
         showScreen('screen-result');
+        showStickyCta();
     }
 
     function showScreen(id) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- STICKY MOBILE CTA ---
+    let stickyCtaObserver = null;
+    function showStickyCta() {
+        const bar = document.getElementById('stickyCta');
+        const formBlock = document.getElementById('formBlock');
+        if (!bar || !formBlock) return;
+
+        bar.classList.add('visible');
+        bar.setAttribute('aria-hidden', 'false');
+
+        // Hide once the form is in view (avoid competing CTAs)
+        if (stickyCtaObserver) stickyCtaObserver.disconnect();
+        if ('IntersectionObserver' in window) {
+            stickyCtaObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        bar.classList.remove('visible');
+                        bar.setAttribute('aria-hidden', 'true');
+                    } else {
+                        bar.classList.add('visible');
+                        bar.setAttribute('aria-hidden', 'false');
+                    }
+                });
+            }, { rootMargin: '0px 0px -30% 0px' });
+            stickyCtaObserver.observe(formBlock);
+        }
+    }
+    function hideStickyCta() {
+        const bar = document.getElementById('stickyCta');
+        if (!bar) return;
+        bar.classList.remove('visible');
+        bar.setAttribute('aria-hidden', 'true');
+        if (stickyCtaObserver) { stickyCtaObserver.disconnect(); stickyCtaObserver = null; }
     }
 
     // --- LEAD FORM ---
@@ -1481,6 +1554,7 @@
                 formBlock.style.display = 'none';
                 successBlock.classList.add('visible');
                 successBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                hideStickyCta();
             } catch (error) {
                 err.textContent = 'שגיאה בשליחה. נסה שוב.';
                 err.classList.add('visible');
