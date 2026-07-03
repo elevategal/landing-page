@@ -398,6 +398,116 @@
             margin-bottom: 14px;
         }
 
+        /* ===== WASTE CALCULATION BLOCK ===== */
+        .waste-block {
+            margin-top: 22px;
+            padding: 20px 18px;
+            background: #000;
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 14px;
+            box-shadow: var(--brutal-shadow-sm);
+        }
+        @media (min-width: 640px) { .waste-block { padding: 26px 30px; } }
+        .waste-headline {
+            font-size: 1.05rem;
+            font-weight: 800;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .waste-label { color: rgba(255,255,255,0.9); }
+        .waste-budget {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 6px;
+            font-weight: 900;
+            border: 2px solid #fff;
+            margin: 0 2px;
+            font-size: 1.15em;
+        }
+        .waste-gaps {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 18px;
+        }
+        .waste-gaps li {
+            padding: 8px 0;
+            font-size: 0.92rem;
+            font-weight: 700;
+            line-height: 1.55;
+            color: rgba(255,255,255,0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-right: 20px;
+            position: relative;
+        }
+        .waste-gaps li::before {
+            content: '✗';
+            position: absolute;
+            right: 0;
+            top: 8px;
+            color: var(--red-accent);
+            font-weight: 900;
+            width: 16px;
+            text-align: center;
+        }
+        .waste-gaps li:last-child { border-bottom: none; }
+        .waste-gaps:empty { display: none; }
+        .waste-verdict {
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            padding-top: 4px;
+        }
+        .waste-verdict-lead { color: rgba(255,255,255,0.9); }
+        .waste-amount {
+            display: inline-block;
+            background: var(--red-accent);
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 6px;
+            font-weight: 900;
+            border: 2px solid #fff;
+            margin: 0 2px;
+            font-size: 1.15em;
+            white-space: nowrap;
+        }
+        .waste-annual {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.9);
+            padding-top: 12px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .waste-amount-annual {
+            display: inline-block;
+            background: transparent;
+            color: #fff;
+            padding: 2px 8px;
+            font-weight: 900;
+            font-size: 1.1em;
+            border: 1.5px dashed rgba(255,255,255,0.5);
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .waste-note {
+            margin-top: 14px;
+            padding: 10px 12px;
+            background: rgba(255,255,255,0.08);
+            border-right: 3px solid var(--amber);
+            border-radius: 4px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            line-height: 1.55;
+            color: rgba(255,255,255,0.95);
+        }
+        .waste-block.hidden { display: none; }
+
         /* ===== CTA #1 — nested inside the diagnosis card ===== */
         .cta1-inline {
             margin-top: 24px;
@@ -949,7 +1059,7 @@
                     <!-- 1. Score -->
                     <div class="result-score-block">
                         <div class="result-score-label">הציון שלך</div>
-                        <div class="result-score-num"><span id="resScore">—</span><span class="of">/16</span></div>
+                        <div class="result-score-num"><span id="resScore">—</span><span class="of">/20</span></div>
                         <div class="result-gauge"><div class="result-gauge-fill" id="resGaugeFill"></div></div>
                     </div>
 
@@ -958,6 +1068,26 @@
                         <h2 id="resHeadline">—</h2>
                         <p id="resIntro" style="font-size: 1rem; font-weight: 700; line-height: 1.6; margin-bottom: 6px;"></p>
                         <ul class="result-detail-list" id="resDetails"></ul>
+
+                        <!-- Personal waste calculation block -->
+                        <div class="waste-block" id="wasteBlock">
+                            <div class="waste-headline">
+                                <span class="waste-label">לפי מה שענית, אתה מוציא בערך</span>
+                                <span class="waste-budget" id="wasteBudget">—</span>
+                                <span class="waste-label">בחודש.</span>
+                            </div>
+                            <ul class="waste-gaps" id="wasteGaps"></ul>
+                            <div class="waste-verdict">
+                                <span class="waste-verdict-lead">עם הפערים שזיהינו, ההערכה היא ש-</span>
+                                <span class="waste-amount" id="wasteMonthly">—</span>
+                                <span class="waste-verdict-lead">מזה עובדים על ריק. כל חודש.</span>
+                            </div>
+                            <div class="waste-annual">
+                                <span>בשנה:</span>
+                                <span class="waste-amount-annual" id="wasteAnnual">—</span>
+                            </div>
+                            <div class="waste-note" id="wasteNote" style="display: none;"></div>
+                        </div>
 
                         <!-- CTA #1 nested inside the diagnosis card -->
                         <div class="cta1-inline">
@@ -1047,31 +1177,12 @@
                                 <input class="field-input" type="text" id="leadName" name="name" autocomplete="name" placeholder="השם שלך" required>
                             </div>
                             <div>
-                                <label class="field-label" for="leadPhone">טלפון / וואטסאפ</label>
-                                <input class="field-input" type="tel" id="leadPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="05X-XXX-XXXX" required>
-                            </div>
-                            <div>
                                 <label class="field-label" for="leadBrand">שם המותג</label>
                                 <input class="field-input" type="text" id="leadBrand" name="brand" placeholder="שם החנות/המותג שלך" required>
                             </div>
                             <div>
-                                <label class="field-label" for="leadRevenue">מחזור חודשי</label>
-                                <select class="field-select" id="leadRevenue" name="revenue" required>
-                                    <option value="">-- בחר --</option>
-                                    <option value="under-20k">מתחת ל-20K</option>
-                                    <option value="20-50k">20-50K</option>
-                                    <option value="50-100k">50-100K</option>
-                                    <option value="over-100k">מעל 100K</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="field-label" for="leadBudget">תקציב שיווק חודשי</label>
-                                <select class="field-select" id="leadBudget" name="budget" required>
-                                    <option value="">-- בחר --</option>
-                                    <option value="under-10k">מתחת ל-10K</option>
-                                    <option value="10-30k">10-30K</option>
-                                    <option value="30k-plus">30K+</option>
-                                </select>
+                                <label class="field-label" for="leadPhone">מספר טלפון</label>
+                                <input class="field-input" type="tel" id="leadPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="05X-XXX-XXXX" required>
                             </div>
                             <div class="form-error" id="formError">אנא מלא את כל השדות</div>
                             <button class="form-submit" type="submit" id="leadSubmit">
@@ -1130,37 +1241,37 @@
             norm: null,
             title: 'מי מריץ לך את הקמפיינים בפועל?',
             options: [
-                { label: 'יש לי מישהו שמריץ (עובד/פרילנסר/סוכנות)', value: 'has-runner' },
+                { label: 'יש לי מישהו שמריץ (עובד / פרילנסר / סוכנות)', value: 'has-runner' },
                 { label: 'אני בעצמי', value: 'self' }
             ]
         },
         {
             id: 'q2',
             scored: true,
-            norm: 'אד-סט בריא רץ עם 15-25 קריאייטיבים שונים במקביל - ככה תמיד יש מה להחליף מודעה שנשרפת.',
-            title: 'אצלך, כמה קריאייטיבים שונים באמת רצים היום?',
+            norm: 'אד-סט חזק רץ עם 15-25 קריאייטיבים שונים ביחד - ככה כשמודעה נשרפת, יש מה להכניס במקומה.',
+            title: 'כמה קריאייטיבים שונים רצים לך עכשיו בחשבון?',
             options: [
                 { label: 'מלא, כל הזמן דברים חדשים בטסט', value: 4, weight: 4 },
-                { label: 'כמה בודדות', value: 2, weight: 2 },
-                { label: 'בעיקר אותן 1-2 מודעות שעובדות', value: 1, weight: 1 }
+                { label: 'כמה בודדים', value: 2, weight: 2 },
+                { label: 'בעיקר אותן 10 מודעות שעובדות לי טוב', value: 1, weight: 1 }
             ]
         },
         {
             id: 'q3',
             scored: true,
-            norm: 'מודעות שממירות פותחות בכאב של הלקוח, לא במוצר - זה מה שגורם לו לעצור ולהרגיש "זה בדיוק אני".',
-            title: 'איך המודעות שלך בדרך כלל נפתחות?',
+            norm: 'מודעה שמוכרת פותחת בכאב של הלקוח, לא במוצר.',
+            title: 'המודעות שלך - במה הן פותחות?',
             options: [
-                { label: 'קודם מציגות את המוצר ומה הוא עושה', value: 2, weight: 2 },
-                { label: 'קודם נוגעות במה שמטריד את הלקוח', value: 4, weight: 4 },
-                { label: 'משתנה ממודעה למודעה, אין לי נוסחה קבועה', value: 1, weight: 1 }
+                { label: 'קודם במוצר ומה הוא עושה', value: 2, weight: 2 },
+                { label: 'קודם במה שמטריד את הלקוח', value: 4, weight: 4 },
+                { label: 'משתנה ממודעה למודעה, אין נוסחה קבועה', value: 1, weight: 1 }
             ]
         },
         {
             id: 'q4',
             scored: true,
-            norm: 'מותג עם מערכת קריאייטיב נכונה - מודעה טובה יכולה לרוץ חודשים בלי לקרוס.',
-            title: 'מודעה טובה אצלך - כמה זמן היא בדרך כלל מחזיקה?',
+            norm: null,
+            title: 'תיזכר במודעה הכי טובה שלך - כמה זמן היא שרדה עד שפשוט הפסיקה להביא מכירות?',
             options: [
                 { label: 'חודשים', value: 4, weight: 4 },
                 { label: 'שבועיים-שלושה', value: 2, weight: 2 },
@@ -1170,36 +1281,72 @@
         {
             id: 'q5',
             scored: true,
-            norm: 'בעלי מותג עם שיטה ברורה יודעים תוך כמה ימים בדיוק למה מודעה עבדה או נכשלה - זה מה שמונע מהם לחזור על אותה טעות שוב ושוב.',
-            title: 'אצלך זה ברור, או שזה מרגיש כמו ניחוש?',
+            norm: null,
+            title: 'כשמודעה עובדת לך - אתה יודע למה, או שזה מרגיש כמו מזל?',
             options: [
-                { label: 'ברור לי, אני יודע להצביע על הסיבה', value: 4, weight: 4 },
+                { label: 'ברור לי, אני יודע להגיד בדיוק מה עבד', value: 4, weight: 4 },
                 { label: 'חלקית', value: 2, weight: 2 },
                 { label: 'מרגיש כמו מזל', value: 1, weight: 1 }
+            ]
+        },
+        {
+            id: 'q6',
+            scored: true,
+            norm: null,
+            title: 'כשהמודעה הכי חזקה שלך נופלת - כמה זמן לוקח עד שיש מחליפה שעובדת?',
+            options: [
+                { label: 'יש כבר מוכנה, מחליף מיד', value: 4, weight: 4 },
+                { label: 'כמה ימים', value: 2, weight: 2 },
+                { label: 'שבועות, לפעמים יותר', value: 1, weight: 1 }
+            ]
+        },
+        {
+            id: 'q7',
+            scored: false,
+            norm: null,
+            title: 'כמה אתה מוציא בחודש על מודעות?',
+            options: [
+                { label: '5-10K', value: '5-10k' },
+                { label: '10-20K', value: '10-20k' },
+                { label: '20-50K', value: '20-50k' },
+                { label: '50K+', value: '50k-plus' }
+            ]
+        },
+        {
+            id: 'q8',
+            scored: false,
+            norm: 'בשביל לחשב כמה כסף הולך לך לאיבוד כל חודש - איפה בערך ה-ROAS שלך בחודשים האחרונים?',
+            title: 'איפה בערך ה-ROAS שלך בחודשים האחרונים?',
+            options: [
+                { label: 'מעל 3', value: 'over-3' },
+                { label: '2-3', value: '2-3' },
+                { label: 'מתחת ל-2', value: 'under-2' },
+                { label: 'לא עוקב באופן קבוע', value: 'no-tracking' }
             ]
         }
     ];
 
     const Q_LABELS = {
-        q2: { win: 'מגוון קריאייטיבים בטסט', lose: 'מעט מדי קריאייטיבים חיים במקביל' },
+        q2: { win: 'מגוון קריאייטיבים בטסט', lose: 'תלוי במעט מדי מודעות - אין גיבוי כשמודעה נשרפת' },
         q3: { win: 'המודעות נוגעות בכאב הלקוח - זווית שממירה', lose: 'המודעות מתחילות מהמוצר במקום מהכאב' },
         q4: { win: 'מודעות עם חיי מדף ארוכים', lose: 'מודעות נשרפות מהר - אין מערכת מאחורה' },
-        q5: { win: 'ברור לך למה מודעה עבדה או נכשלה', lose: 'ניחוש במקום שיטה - הטעויות חוזרות' }
+        q5: { win: 'ברור לך למה מודעה עבדה או נכשלה', lose: 'ניחוש במקום שיטה - הטעויות חוזרות' },
+        q6: { win: 'תמיד יש מחליפה מוכנה בצינור', lose: 'ימי דימום - התקציב רץ בלי מודעה מנצחת' }
     };
 
     const RESULT_TIERS = [
         {
-            min: 13, max: 16, key: 'strong',
+            min: 17, max: 20, key: 'strong',
             headline: 'יש לך <span class="accent">קמפיינר טוב</span> - אבל אתה עדיין יכול לדחוף חזק יותר',
             intro: 'המערכת עובדת. הפער בין המצב שלך היום למקסימום הוא ניואנסים אסטרטגיים - שם הצמיחה הבאה שלך.'
         },
         {
-            min: 9, max: 12, key: 'core',
+            min: 11, max: 16, key: 'core',
             headline: 'יש לך מי שמריץ - <span class="accent">אבל הוא פועל בלי כיוון</span>',
             intro: 'זה ה-ICP המדויק שלנו. מספיק תשתית שאפשר לבנות עליה, אבל חסרה שיטה - וזה מה שמפריד אותך מלייצר תוצאה חוזרת.'
         },
         {
-            min: 4, max: 8, key: 'weak',
+            min: 5, max: 10, key: 'weak',
             headline: 'אתה משלם על <span class="accent">ניסוי וטעייה</span>, לא על אסטרטגיה',
             intro: 'המספרים שלך אומרים שאין עדיין שיטה - כל מודעה היא הימור. זה הכי יקר שיש בקמפיינים.'
         }
@@ -1222,8 +1369,11 @@
         q3_done:     5,
         q4_done:     6,
         q5_done:     7,
-        result:      8,
-        form_submit: 9
+        q6_done:     8,
+        q7_done:     9,
+        q8_done:    10,
+        result:     11,
+        form_submit: 12
     };
     const session = {
         id: (function(){
@@ -1355,7 +1505,7 @@
     }
     function buildDetailList() {
         const items = [];
-        ['q2', 'q3', 'q4', 'q5'].forEach(qid => {
+        ['q2', 'q3', 'q4', 'q5', 'q6'].forEach(qid => {
             const a = state.answers[qid];
             if (!a) return;
             const labels = Q_LABELS[qid];
@@ -1381,6 +1531,101 @@
         requestAnimationFrame(tick);
     }
 
+    // === WASTE CALCULATOR ===
+    const BUDGET_BASE = {
+        '5-10k':    7500,
+        '10-20k':  15000,
+        '20-50k':  35000,
+        '50k-plus': 60000
+    };
+    const BUDGET_DISPLAY = {
+        '5-10k':   '5-10K ₪',
+        '10-20k':  '10-20K ₪',
+        '20-50k':  '20-50K ₪',
+        '50k-plus': '50K+ ₪'
+    };
+    function computeWaste() {
+        const q7 = state.answers.q7 ? state.answers.q7.value : null;
+        if (!q7 || !BUDGET_BASE[q7]) return null;
+
+        const base = BUDGET_BASE[q7];
+
+        // Cumulative waste multipliers per spec
+        const gapNotes = [];
+        let mult = 0;
+        const q6v = state.answers.q6 ? state.answers.q6.value : null;
+        if (q6v === 1) { // weeks
+            mult += 0.35;
+            gapNotes.push('המודעה החזקה נופלת, ולוקח שבועות עד שיש מחליפה - התקציב רץ חלק גדול מהחודש בלי מודעה מנצחת');
+        } else if (q6v === 2) { // days
+            mult += 0.15;
+            gapNotes.push('כמה ימים בין מודעה מנצחת שנופלת למחליפה - זמן שהתקציב בוזבז');
+        }
+        const q4v = state.answers.q4 ? state.answers.q4.value : null;
+        if (q4v === 1) { // days
+            mult += 0.15;
+            gapNotes.push('מודעות נשרפות תוך ימים - learning phase חוזר שוב ושוב, ומטא צריכה ללמוד מהתחלה');
+        }
+        const q3v = state.answers.q3 ? state.answers.q3.value : null;
+        if (q3v === 2 || q3v === 1) { // product-first or no-formula
+            mult += 0.10;
+            gapNotes.push('המודעות פותחות מהמוצר או ללא נוסחה - שיעור המרה נמוך על אותה תנועה בדיוק');
+        }
+        const q2v = state.answers.q2 ? state.answers.q2.value : null;
+        if (q2v === 1) { // 1-2 ads only
+            mult += 0.10;
+            gapNotes.push('תלוי בכמות קטנה של מודעות - אין גיבוי כשמודעה נשרפת');
+        }
+
+        // Cap at 50%
+        if (mult > 0.5) mult = 0.5;
+
+        const monthlyWaste = Math.round(base * mult);
+        // ±20% display range
+        const monthlyLow  = Math.round(monthlyWaste * 0.8 / 100) * 100;
+        const monthlyHigh = Math.round(monthlyWaste * 1.2 / 100) * 100;
+        const annualLow  = monthlyLow * 12;
+        const annualHigh = monthlyHigh * 12;
+
+        return {
+            budgetLabel: BUDGET_DISPLAY[q7],
+            gapNotes,
+            multPct: Math.round(mult * 100),
+            monthlyLow, monthlyHigh,
+            annualLow, annualHigh
+        };
+    }
+
+    function fmtShekel(n) {
+        return new Intl.NumberFormat('he-IL').format(n) + ' ₪';
+    }
+
+    function renderWasteBlock() {
+        const waste = computeWaste();
+        const block = document.getElementById('wasteBlock');
+        if (!waste || waste.multPct === 0) {
+            // No gaps identified — hide the block entirely
+            if (block) block.classList.add('hidden');
+            return;
+        }
+        block.classList.remove('hidden');
+        document.getElementById('wasteBudget').textContent = waste.budgetLabel;
+        document.getElementById('wasteMonthly').textContent = `${fmtShekel(waste.monthlyLow)} - ${fmtShekel(waste.monthlyHigh)}`;
+        document.getElementById('wasteAnnual').textContent  = `${fmtShekel(waste.annualLow)} - ${fmtShekel(waste.annualHigh)}`;
+
+        const gapsEl = document.getElementById('wasteGaps');
+        gapsEl.innerHTML = waste.gapNotes.map(n => `<li>${n}</li>`).join('');
+
+        // Special no-tracking case (Q8)
+        const noteEl = document.getElementById('wasteNote');
+        if (state.answers.q8 && state.answers.q8.value === 'no-tracking') {
+            noteEl.style.display = 'block';
+            noteEl.textContent = 'והנתון הכי חשוב - אתה בעצמך לא יודע כמה חוזר. זו בפני עצמה הבעיה הראשונה לפתור.';
+        } else {
+            noteEl.style.display = 'none';
+        }
+    }
+
     function showResult() {
         const score = calcScore();
         const tier = tierForScore(score);
@@ -1389,11 +1634,13 @@
 
         animateScore(document.getElementById('resScore'), score);
         setTimeout(() => {
-            document.getElementById('resGaugeFill').style.width = Math.round((score / 16) * 100) + '%';
+            document.getElementById('resGaugeFill').style.width = Math.round((score / 20) * 100) + '%';
         }, 120);
 
         document.getElementById('resHeadline').innerHTML = tier.headline;
         document.getElementById('resIntro').textContent = tier.intro;
+
+        renderWasteBlock();
 
         const details = buildDetailList();
         document.getElementById('resDetails').innerHTML = details.map(d => `
@@ -1473,14 +1720,14 @@
             const name = document.getElementById('leadName').value.trim();
             const phone = document.getElementById('leadPhone').value.trim();
             const brand = document.getElementById('leadBrand').value.trim();
-            const revenue = document.getElementById('leadRevenue').value;
-            const budget = document.getElementById('leadBudget').value;
+
+            // Budget + ROAS come from quiz answers (Q7, Q8) — not from form
+            const budget = state.answers.q7 ? state.answers.q7.value : '';
+            const roas   = state.answers.q8 ? state.answers.q8.value : '';
 
             if (name.length < 2) { err.textContent = 'שם קצר מדי'; err.classList.add('visible'); return; }
-            if (phone.replace(/[\-\s\+\(\)]/g, '').length < 9) { err.textContent = 'מספר טלפון לא תקין'; err.classList.add('visible'); return; }
             if (brand.length < 1) { err.textContent = 'חסר שם המותג'; err.classList.add('visible'); return; }
-            if (!revenue) { err.textContent = 'בחר את המחזור החודשי'; err.classList.add('visible'); return; }
-            if (!budget) { err.textContent = 'בחר את תקציב השיווק החודשי'; err.classList.add('visible'); return; }
+            if (phone.replace(/[\-\s\+\(\)]/g, '').length < 9) { err.textContent = 'מספר טלפון לא תקין'; err.classList.add('visible'); return; }
 
             btn.disabled = true;
             btn.innerHTML = '<span class="submit-text">שולח</span><span class="form-spinner"></span>';
@@ -1494,7 +1741,9 @@
             };
 
             const payload = {
-                name, phone, brand, revenue, budget,
+                name, phone, brand,
+                budget,          // from Q7
+                roas,            // from Q8
                 score: state.score,
                 tier: state.tier,
                 runner: state.answers.q1 ? state.answers.q1.value : null,
@@ -1503,7 +1752,10 @@
                     q2: state.answers.q2?.value,
                     q3: state.answers.q3?.value,
                     q4: state.answers.q4?.value,
-                    q5: state.answers.q5?.value
+                    q5: state.answers.q5?.value,
+                    q6: state.answers.q6?.value,
+                    q7: state.answers.q7?.value,
+                    q8: state.answers.q8?.value
                 },
                 utmSource: urlParams.get('utm_source') || '',
                 utmMedium: urlParams.get('utm_medium') || '',
@@ -1539,7 +1791,7 @@
                         content_name: 'diagnosis_lead',
                         tier: state.tier,
                         budget: budget,
-                        revenue: revenue
+                        roas: roas
                     }, { eventID: eventId });
                 }
 
@@ -1547,7 +1799,7 @@
                     score: state.score,
                     tier: state.tier,
                     budget: budget,
-                    revenue: revenue
+                    roas: roas
                 });
                 funnelStep('form_submit');
 

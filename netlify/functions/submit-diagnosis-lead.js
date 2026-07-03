@@ -5,7 +5,7 @@ const hashSha256 = (val) => {
   return crypto.createHash('sha256').update(String(val).trim().toLowerCase()).digest('hex');
 };
 
-const sendCapiLead = async ({ phone, name, brand, revenue, budget, tier, score, eventId, eventSourceUrl, clientIp, clientUserAgent, fbp, fbc, testEventCode }) => {
+const sendCapiLead = async ({ phone, name, brand, budget, roas, tier, score, eventId, eventSourceUrl, clientIp, clientUserAgent, fbp, fbc, testEventCode }) => {
   const FB_TOKEN = process.env.FB_CAPI_TOKEN;
   const PIXEL_ID = '1265390459065125';
   if (!FB_TOKEN) return { skipped: true, reason: 'No FB_CAPI_TOKEN configured' };
@@ -40,7 +40,7 @@ const sendCapiLead = async ({ phone, name, brand, revenue, budget, tier, score, 
           diagnosis_score: score,
           diagnosis_tier: tier,
           brand: brand,
-          revenue_bucket: revenue,
+          roas_bucket: roas,
           budget_bucket: budget
         }
       }
@@ -76,7 +76,7 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
     const {
-      name, phone, brand, revenue, budget,
+      name, phone, brand, budget, roas,
       score, tier, runner, answers, buttonVariant,
       utmSource, utmMedium, utmCampaign, utmContent,
       eventId, eventSourceUrl, fbp, fbc, testEventCode
@@ -85,8 +85,6 @@ exports.handler = async (event) => {
     if (!name || name.length < 2) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     if (!phone || phone.replace(/[\-\s\+\(\)]/g, '').length < 9) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid phone' }) };
     if (!brand || brand.length < 1) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing brand' }) };
-    if (!revenue) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing revenue' }) };
-    if (!budget) return { statusCode: 400, headers, body: JSON.stringify({ error: 'Missing budget' }) };
 
     const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN;
     const BASE_ID = process.env.AIRTABLE_DIAGNOSIS_BASE_ID;
@@ -114,8 +112,8 @@ exports.handler = async (event) => {
               'Name': name,
               'Phone': phone,
               'Brand': brand,
-              'Monthly Revenue': revenue,
-              'Marketing Budget': budget,
+              'Marketing Budget': budget || '',
+              'ROAS': roas || '',
               'Score': typeof score === 'number' ? score : null,
               'Tier': tier || '',
               'Runner': runner || '',
@@ -123,7 +121,9 @@ exports.handler = async (event) => {
               'Q3': answers?.q3 != null ? String(answers.q3) : '',
               'Q4': answers?.q4 != null ? String(answers.q4) : '',
               'Q5': answers?.q5 != null ? String(answers.q5) : '',
-              'Button Variant': buttonVariant || '',
+              'Q6': answers?.q6 != null ? String(answers.q6) : '',
+              'Q7': answers?.q7 != null ? String(answers.q7) : '',
+              'Q8': answers?.q8 != null ? String(answers.q8) : '',
               'UTM Source': utmSource || '',
               'UTM Medium': utmMedium || '',
               'UTM Campaign': utmCampaign || '',
@@ -153,7 +153,7 @@ exports.handler = async (event) => {
     let capiResult = null;
     try {
       capiResult = await sendCapiLead({
-        phone, name, brand, revenue, budget, tier, score,
+        phone, name, brand, budget, roas, tier, score,
         eventId, eventSourceUrl, clientIp, clientUserAgent, fbp, fbc, testEventCode
       });
     } catch (capiErr) {
