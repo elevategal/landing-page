@@ -124,6 +124,8 @@ exports.handler = async (event) => {
               'Q6': answers?.q6 != null ? String(answers.q6) : '',
               'Q7': answers?.q7 != null ? String(answers.q7) : '',
               'Q8': answers?.q8 != null ? String(answers.q8) : '',
+              'Q Types': Array.isArray(answers?.q_types) ? answers.q_types.join(', ') : '',
+              'Q Tried': Array.isArray(answers?.q_tried) ? answers.q_tried.join(', ') : '',
               'UTM Source': utmSource || '',
               'UTM Medium': utmMedium || '',
               'UTM Campaign': utmCampaign || '',

@@ -262,6 +262,71 @@
         .q-opt:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
         .q-opt.selected { background: var(--accent); color: #fff; }
 
+        /* Multi-select variant */
+        .q-opt-multi {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: right;
+            padding: 14px 16px;
+        }
+        .q-opt-multi .q-check {
+            flex-shrink: 0;
+            width: 22px; height: 22px;
+            border-radius: 4px;
+            border: 2px solid #000;
+            background: #fff;
+            font-size: 0.9rem;
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .q-opt-multi.selected .q-check { background: #fff; color: var(--accent); }
+        .q-opt-multi .q-opt-label { flex: 1; }
+        .q-next {
+            margin-top: 6px;
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: #fff;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 1.05rem;
+            font-weight: 900;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: var(--brutal-shadow-sm);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .q-next:hover { transform: translate(-2px,-2px); box-shadow: 6px 6px 0 #000; }
+        .q-next:active { transform: translate(2px,2px); box-shadow: 2px 2px 0 #000; }
+        .q-next.shake { animation: shake 0.4s cubic-bezier(.36,.07,.19,.97); }
+        @keyframes shake {
+            10%, 90% { transform: translate(-2px, 0); }
+            20%, 80% { transform: translate(4px, 0); }
+            30%, 50%, 70% { transform: translate(-6px, 0); }
+            40%, 60% { transform: translate(6px, 0); }
+        }
+
+        /* "What tried" recognition block */
+        .tried-block {
+            margin-top: 18px;
+            padding: 16px 18px;
+            background: var(--accent-soft);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+        }
+        .tried-block p {
+            font-size: 0.98rem;
+            font-weight: 800;
+            line-height: 1.55;
+            color: #000;
+            margin: 0;
+        }
+
         .q-back {
             display: inline-block;
             margin-top: 22px;
@@ -486,13 +551,14 @@
         }
         .waste-amount-annual {
             display: inline-block;
-            background: transparent;
+            background: var(--red-accent);
             color: #fff;
-            padding: 2px 8px;
+            padding: 2px 12px;
+            border-radius: 6px;
             font-weight: 900;
-            font-size: 1.1em;
-            border: 1.5px dashed rgba(255,255,255,0.5);
-            border-radius: 4px;
+            border: 2px solid #fff;
+            margin: 0 2px;
+            font-size: 1.15em;
             white-space: nowrap;
         }
         .waste-note {
@@ -848,7 +914,7 @@
         .field-input::placeholder { color: #999; font-weight: 700; }
         .field-select {
             appearance: none;
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='%23000' d='M5 8l5 5 5-5H5z'/></svg>");
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2400/svg' viewBox='0 0 20 20'><path fill='%23000' d='M5 8l5 5 5-5H5z'/></svg>");
             background-repeat: no-repeat;
             background-position: left 14px center;
             background-size: 18px;
@@ -1059,7 +1125,7 @@
                     <!-- 1. Score -->
                     <div class="result-score-block">
                         <div class="result-score-label">הציון שלך</div>
-                        <div class="result-score-num"><span id="resScore">—</span><span class="of">/20</span></div>
+                        <div class="result-score-num"><span id="resScore">—</span><span class="of">/24</span></div>
                         <div class="result-gauge"><div class="result-gauge-fill" id="resGaugeFill"></div></div>
                     </div>
 
@@ -1068,6 +1134,11 @@
                         <h2 id="resHeadline">—</h2>
                         <p id="resIntro" style="font-size: 1rem; font-weight: 700; line-height: 1.6; margin-bottom: 6px;"></p>
                         <ul class="result-detail-list" id="resDetails"></ul>
+
+                        <!-- "What tried" recognition block (shown before waste when relevant) -->
+                        <div class="tried-block" id="triedBlock" style="display:none;">
+                            <p id="triedText"></p>
+                        </div>
 
                         <!-- Personal waste calculation block -->
                         <div class="waste-block" id="wasteBlock">
@@ -1121,7 +1192,7 @@
                                         <div class="ig-stat"><span class="ig-stat-num">587</span><span class="ig-stat-label">עוקב</span></div>
                                     </div>
                                     <a class="ig-follow" href="https://www.instagram.com/gal_creativz/" target="_blank" rel="noopener">
-                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2400/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                                         Follow
                                     </a>
                                 </div>
@@ -1257,6 +1328,23 @@
             ]
         },
         {
+            id: 'q_types',
+            scored: true,
+            multi: true,
+            norm: 'חשבונות שמסקיילים רצים על 5-6 סוגי מודעות שונים במקביל - כשממחזרים את אותן זוויות מול אותו קהל, המודעות נשחקות מהר.',
+            title: 'איזה סוגי מודעות רצים לך היום בחשבון? (סמן את כל מה שיש)',
+            options: [
+                { label: 'מודעות שפותחות בבעיה של הלקוח', value: 'pain' },
+                { label: 'לקוחות שמספרים על המוצר (UGC)', value: 'ugc' },
+                { label: 'הדגמה של המוצר בפעולה', value: 'demo' },
+                { label: 'מבצע / הנחה / השקה', value: 'promo' },
+                { label: 'השוואה למתחרים או לפתרון אחר', value: 'compare' },
+                { label: 'סיפור אישי שלך או של המותג', value: 'story' },
+                { label: 'תוכן שנראה כמו פוסט רגיל, לא כמו פרסומת', value: 'native' },
+                { label: 'ביקורות ותגובות של קונים', value: 'reviews' }
+            ]
+        },
+        {
             id: 'q3',
             scored: true,
             norm: 'מודעה שמוכרת פותחת בכאב של הלקוח, לא במוצר.',
@@ -1301,6 +1389,20 @@
             ]
         },
         {
+            id: 'q_tried',
+            scored: false,
+            multi: true,
+            norm: null,
+            title: 'מה כבר ניסית כדי לפתור את זה? (סמן את כל מה שרלוונטי)',
+            options: [
+                { label: 'החלפתי קמפיינר / סוכנות', value: 'switched-runner' },
+                { label: 'לקחתי קורס או הדרכה', value: 'course' },
+                { label: 'הגדלתי תקציב', value: 'more-budget' },
+                { label: 'ניסיתי בעצמי לכתוב קריאייטיבים', value: 'self-tried' },
+                { label: 'עוד לא ניסיתי כלום, מקווה שיסתדר', value: 'nothing' }
+            ]
+        },
+        {
             id: 'q7',
             scored: false,
             norm: null,
@@ -1328,6 +1430,7 @@
 
     const Q_LABELS = {
         q2: { win: 'מגוון קריאייטיבים בטסט', lose: 'תלוי במעט מדי מודעות - אין גיבוי כשמודעה נשרפת' },
+        q_types: { win: 'מגוון סוגי מודעות בחשבון', lose: 'טווח סוגי מודעות מצומצם - הזוויות נשחקות מהר על אותו קהל' },
         q3: { win: 'המודעות נוגעות בכאב הלקוח - זווית שממירה', lose: 'המודעות מתחילות מהמוצר במקום מהכאב' },
         q4: { win: 'מודעות עם חיי מדף ארוכים', lose: 'מודעות נשרפות מהר - אין מערכת מאחורה' },
         q5: { win: 'ברור לך למה מודעה עבדה או נכשלה', lose: 'ניחוש במקום שיטה - הטעויות חוזרות' },
@@ -1336,17 +1439,17 @@
 
     const RESULT_TIERS = [
         {
-            min: 17, max: 20, key: 'strong',
+            min: 20, max: 24, key: 'strong',
             headline: 'יש לך <span class="accent">קמפיינר טוב</span> - אבל אתה עדיין יכול לדחוף חזק יותר',
             intro: 'המערכת עובדת. הפער בין המצב שלך היום למקסימום הוא ניואנסים אסטרטגיים - שם הצמיחה הבאה שלך.'
         },
         {
-            min: 11, max: 16, key: 'core',
+            min: 13, max: 19, key: 'core',
             headline: 'יש לך מי שמריץ - <span class="accent">אבל הוא פועל בלי כיוון</span>',
             intro: 'זה ה-ICP המדויק שלנו. מספיק תשתית שאפשר לבנות עליה, אבל חסרה שיטה - וזה מה שמפריד אותך מלייצר תוצאה חוזרת.'
         },
         {
-            min: 5, max: 10, key: 'weak',
+            min: 6, max: 12, key: 'weak',
             headline: 'אתה משלם על <span class="accent">ניסוי וטעייה</span>, לא על אסטרטגיה',
             intro: 'המספרים שלך אומרים שאין עדיין שיטה - כל מודעה היא הימור. זה הכי יקר שיש בקמפיינים.'
         }
@@ -1362,18 +1465,20 @@
 
     // ==== FUNNEL TRACKING (session beacons) ====
     const FUNNEL_STEPS = {
-        page_view:   1,
-        start:       2,
-        q1_done:     3,
-        q2_done:     4,
-        q3_done:     5,
-        q4_done:     6,
-        q5_done:     7,
-        q6_done:     8,
-        q7_done:     9,
-        q8_done:    10,
-        result:     11,
-        form_submit: 12
+        page_view:      1,
+        start:          2,
+        q1_done:        3,
+        q2_done:        4,
+        q_types_done:   5,
+        q3_done:        6,
+        q4_done:        7,
+        q5_done:        8,
+        q6_done:        9,
+        q_tried_done:  10,
+        q7_done:       11,
+        q8_done:       12,
+        result:        13,
+        form_submit:   14
     };
     const session = {
         id: (function(){
@@ -1432,10 +1537,24 @@
         const currentAnswer = state.answers[q.id];
 
         const normHtml = q.norm ? `<span class="q-norm">${q.norm}</span>` : '';
-        const optionsHtml = q.options.map((opt, i) => {
-            const selected = currentAnswer && currentAnswer.value === opt.value ? 'selected' : '';
-            return `<button type="button" class="q-opt ${selected}" data-idx="${i}">${opt.label}</button>`;
-        }).join('');
+
+        let optionsHtml;
+        if (q.multi) {
+            const selectedSet = new Set((currentAnswer && currentAnswer.selected) || []);
+            optionsHtml = q.options.map((opt, i) => {
+                const isChecked = selectedSet.has(opt.value);
+                return `<button type="button" class="q-opt q-opt-multi ${isChecked ? 'selected' : ''}" data-idx="${i}" aria-pressed="${isChecked}">
+                    <span class="q-check">${isChecked ? '✓' : ''}</span>
+                    <span class="q-opt-label">${opt.label}</span>
+                </button>`;
+            }).join('');
+            optionsHtml += `<button type="button" class="q-next" id="qNextBtn">המשך &larr;</button>`;
+        } else {
+            optionsHtml = q.options.map((opt, i) => {
+                const selected = currentAnswer && currentAnswer.value === opt.value ? 'selected' : '';
+                return `<button type="button" class="q-opt ${selected}" data-idx="${i}">${opt.label}</button>`;
+            }).join('');
+        }
 
         card.innerHTML = `
             ${normHtml}
@@ -1443,11 +1562,21 @@
             <div class="q-options">${optionsHtml}</div>
         `;
 
-        card.querySelectorAll('.q-opt').forEach(btn => {
-            btn.addEventListener('click', () => {
-                selectAnswer(q, parseInt(btn.getAttribute('data-idx'), 10));
+        if (q.multi) {
+            card.querySelectorAll('.q-opt-multi').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    toggleMultiOption(q, parseInt(btn.getAttribute('data-idx'), 10));
+                });
             });
-        });
+            const nextBtn = document.getElementById('qNextBtn');
+            if (nextBtn) nextBtn.addEventListener('click', () => submitMultiAnswer(q));
+        } else {
+            card.querySelectorAll('.q-opt').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectAnswer(q, parseInt(btn.getAttribute('data-idx'), 10));
+                });
+            });
+        }
 
         const pct = Math.round(((index + 1) / QUESTIONS.length) * 100);
         document.getElementById('progressLabel').textContent = `שאלה ${index + 1} מתוך ${QUESTIONS.length}`;
@@ -1490,13 +1619,67 @@
         }, 260);
     }
 
+    function toggleMultiOption(question, optIdx) {
+        const opt = question.options[optIdx];
+        const existing = state.answers[question.id] || { selected: [] };
+        const selected = new Set(existing.selected || []);
+        if (selected.has(opt.value)) selected.delete(opt.value);
+        else selected.add(opt.value);
+        state.answers[question.id] = { selected: [...selected] };
+
+        // Toggle visual
+        const card = document.getElementById('questionCard');
+        const btn = card.querySelectorAll('.q-opt-multi')[optIdx];
+        const isNow = selected.has(opt.value);
+        btn.classList.toggle('selected', isNow);
+        btn.setAttribute('aria-pressed', String(isNow));
+        btn.querySelector('.q-check').textContent = isNow ? '✓' : '';
+    }
+
+    function submitMultiAnswer(question) {
+        const ans = state.answers[question.id] || { selected: [] };
+        if (!ans.selected || ans.selected.length === 0) {
+            // Require at least one selection
+            const nextBtn = document.getElementById('qNextBtn');
+            if (nextBtn) {
+                nextBtn.classList.add('shake');
+                setTimeout(() => nextBtn.classList.remove('shake'), 500);
+            }
+            return;
+        }
+
+        track('DiagnosisAnswer', {
+            question_id: question.id,
+            question_index: state.currentIndex + 1,
+            answer_value: ans.selected.join(','),
+            scored: question.scored
+        });
+
+        funnelStep(question.id + '_done');
+
+        if (state.currentIndex < QUESTIONS.length - 1) {
+            state.currentIndex++;
+            renderQuestion(state.currentIndex);
+        } else {
+            showResult();
+        }
+    }
+
     // --- SCORING ---
     function calcScore() {
         let s = 0;
         QUESTIONS.forEach(q => {
             if (!q.scored) return;
             const a = state.answers[q.id];
-            if (a) s += (a.weight || 0);
+            if (!a) return;
+            if (q.multi) {
+                const count = (a.selected || []).length;
+                if (count >= 5) s += 4;
+                else if (count >= 3) s += 2;
+                else if (count >= 1) s += 1;
+            } else {
+                s += (a.weight || 0);
+            }
         });
         return s;
     }
@@ -1505,14 +1688,24 @@
     }
     function buildDetailList() {
         const items = [];
-        ['q2', 'q3', 'q4', 'q5', 'q6'].forEach(qid => {
+        const order = ['q2', 'q_types', 'q3', 'q4', 'q5', 'q6'];
+        order.forEach(qid => {
             const a = state.answers[qid];
             if (!a) return;
             const labels = Q_LABELS[qid];
             if (!labels) return;
-            const w = a.weight || 0;
-            if (w >= 4) items.push({ kind: 'win', text: labels.win });
-            else if (w >= 2) items.push({ kind: 'mid', text: labels.lose });
+            const q = QUESTIONS.find(x => x.id === qid);
+            let pts = 0;
+            if (q && q.multi) {
+                const count = (a.selected || []).length;
+                if (count >= 5) pts = 4;
+                else if (count >= 3) pts = 2;
+                else if (count >= 1) pts = 1;
+            } else {
+                pts = a.weight || 0;
+            }
+            if (pts >= 4) items.push({ kind: 'win', text: labels.win });
+            else if (pts >= 2) items.push({ kind: 'mid', text: labels.lose });
             else items.push({ kind: 'lose', text: labels.lose });
         });
         return items;
@@ -1576,6 +1769,15 @@
             mult += 0.10;
             gapNotes.push('תלוי בכמות קטנה של מודעות - אין גיבוי כשמודעה נשרפת');
         }
+        // Q_TYPES (ad types multi-select) — 1-2 selected → +10%
+        const qTypesAns = state.answers.q_types;
+        if (qTypesAns && qTypesAns.selected) {
+            const cnt = qTypesAns.selected.length;
+            if (cnt >= 1 && cnt <= 2) {
+                mult += 0.10;
+                gapNotes.push(`אתה רץ על ${cnt} סוגי מודעות. חשבונות שמסקיילים רצים על 5-6 במקביל - כשממחזרים את אותן זוויות מול אותו קהל, המודעות נשחקות מהר`);
+            }
+        }
 
         // Cap at 50%
         if (mult > 0.5) mult = 0.5;
@@ -1598,6 +1800,17 @@
 
     function fmtShekel(n) {
         return new Intl.NumberFormat('he-IL').format(n) + ' ₪';
+    }
+
+    function renderTriedBlock() {
+        const block = document.getElementById('triedBlock');
+        const ans = state.answers.q_tried;
+        if (!ans || !ans.selected) { block.style.display = 'none'; return; }
+        const attempts = ans.selected.filter(v => v !== 'nothing');
+        if (attempts.length < 2) { block.style.display = 'none'; return; }
+        block.style.display = 'block';
+        document.getElementById('triedText').textContent =
+            `ניסית כבר ${attempts.length} דברים - וזה עדיין תקוע. זה לא מקרה: כל מה שניסית טיפל בביצוע. אף אחד מהם לא טיפל בכיוון.`;
     }
 
     function renderWasteBlock() {
@@ -1640,6 +1853,7 @@
         document.getElementById('resHeadline').innerHTML = tier.headline;
         document.getElementById('resIntro').textContent = tier.intro;
 
+        renderTriedBlock();
         renderWasteBlock();
 
         const details = buildDetailList();
@@ -1750,10 +1964,12 @@
                 answers: {
                     q1: state.answers.q1?.value,
                     q2: state.answers.q2?.value,
+                    q_types: state.answers.q_types?.selected || [],
                     q3: state.answers.q3?.value,
                     q4: state.answers.q4?.value,
                     q5: state.answers.q5?.value,
                     q6: state.answers.q6?.value,
+                    q_tried: state.answers.q_tried?.selected || [],
                     q7: state.answers.q7?.value,
                     q8: state.answers.q8?.value
                 },

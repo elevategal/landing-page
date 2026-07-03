@@ -7,15 +7,20 @@
  */
 
 const FUNNEL_STEPS = [
-  { key: 'page_view',   order: 1, label: 'נכנסו לדף' },
-  { key: 'start',       order: 2, label: 'התחילו שאלון' },
-  { key: 'q1_done',     order: 3, label: 'ענו על שאלה 1' },
-  { key: 'q2_done',     order: 4, label: 'ענו על שאלה 2' },
-  { key: 'q3_done',     order: 5, label: 'ענו על שאלה 3' },
-  { key: 'q4_done',     order: 6, label: 'ענו על שאלה 4' },
-  { key: 'q5_done',     order: 7, label: 'ענו על שאלה 5' },
-  { key: 'result',      order: 8, label: 'הגיעו לתוצאה' },
-  { key: 'form_submit', order: 9, label: 'שלחו טופס' }
+  { key: 'page_view',      order:  1, label: 'נכנסו לדף' },
+  { key: 'start',          order:  2, label: 'התחילו שאלון' },
+  { key: 'q1_done',        order:  3, label: 'ענו על שאלה 1 (מי מריץ)' },
+  { key: 'q2_done',        order:  4, label: 'ענו על שאלה 2 (כמות קריאייטיבים)' },
+  { key: 'q_types_done',   order:  5, label: 'ענו על שאלה 3 (סוגי מודעות)' },
+  { key: 'q3_done',        order:  6, label: 'ענו על שאלה 4 (פתיחה)' },
+  { key: 'q4_done',        order:  7, label: 'ענו על שאלה 5 (חיי מדף)' },
+  { key: 'q5_done',        order:  8, label: 'ענו על שאלה 6 (יודע/מזל)' },
+  { key: 'q6_done',        order:  9, label: 'ענו על שאלה 7 (זמן מחליפה)' },
+  { key: 'q_tried_done',   order: 10, label: 'ענו על שאלה 8 (מה ניסית)' },
+  { key: 'q7_done',        order: 11, label: 'ענו על שאלה 9 (תקציב)' },
+  { key: 'q8_done',        order: 12, label: 'ענו על שאלה 10 (ROAS)' },
+  { key: 'result',         order: 13, label: 'הגיעו לתוצאה' },
+  { key: 'form_submit',    order: 14, label: 'שלחו טופס' }
 ];
 
 const bucketBy = (records, keyFn) => {
