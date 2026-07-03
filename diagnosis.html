@@ -217,6 +217,202 @@
         }
         @media (min-width: 640px) { .question-card { padding: 40px 44px; } }
 
+        /* ===== PER-QUESTION ANIMATIONS ===== */
+        .q-anim {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80px;
+            margin-bottom: 18px;
+        }
+        .q-anim svg { max-height: 100%; width: auto; overflow: visible; }
+        @media (prefers-reduced-motion: reduce) {
+            .q-anim * { animation: none !important; }
+        }
+
+        /* Q1 — two silhouettes: runner + director with bulb */
+        .anim-q1-bulb {
+            transform-origin: center;
+            animation: q1Bulb 1.6s cubic-bezier(.16,1,.3,1) both;
+        }
+        .anim-q1-arrow { animation: q1Arrow 1.5s ease-out both; opacity: 0; }
+        @keyframes q1Bulb {
+            0%   { opacity: 0; transform: scale(0.2); }
+            60%  { opacity: 1; transform: scale(1.25); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes q1Arrow {
+            0%   { opacity: 0; stroke-dashoffset: 40; }
+            60%  { opacity: 1; stroke-dashoffset: 40; }
+            100% { opacity: 1; stroke-dashoffset: 0; }
+        }
+
+        /* Q2 — grid of 20 cells, 2 stay lit */
+        .anim-q2-cell {
+            fill: #E5E5E5;
+            animation: q2Cell 2s ease-in-out both;
+        }
+        .anim-q2-cell.stay { animation-name: q2CellStay; }
+        @keyframes q2Cell {
+            0%   { fill: #E5E5E5; }
+            40%  { fill: var(--accent); }
+            60%  { fill: var(--accent); }
+            100% { fill: #E5E5E5; }
+        }
+        @keyframes q2CellStay {
+            0%   { fill: #E5E5E5; }
+            40%  { fill: var(--accent); }
+            100% { fill: var(--accent); }
+        }
+
+        /* Q_TYPES — 8 small cards appearing one-by-one, only 2 turn purple */
+        .anim-types-card {
+            fill: #fff;
+            stroke: #000;
+            stroke-width: 1.5;
+            transform-origin: center;
+            opacity: 0;
+            animation: typesCardIn 1.8s ease-out both;
+        }
+        .anim-types-card.purple {
+            animation-name: typesCardPurple;
+        }
+        @keyframes typesCardIn {
+            0%   { opacity: 0; transform: scale(0.6); }
+            60%  { opacity: 1; transform: scale(1.05); fill: #fff; }
+            100% { opacity: 1; transform: scale(1); fill: #E5E5E5; }
+        }
+        @keyframes typesCardPurple {
+            0%   { opacity: 0; transform: scale(0.6); fill: #fff; }
+            60%  { opacity: 1; transform: scale(1.15); fill: #fff; }
+            100% { opacity: 1; transform: scale(1); fill: var(--accent); }
+        }
+
+        /* Q3 — attention flow (product gets skipped, pain stops them) */
+        .anim-q3-dot {
+            animation: q3Dot 2s linear both;
+            opacity: 0;
+        }
+        @keyframes q3Dot {
+            0%   { opacity: 0; transform: translateX(0); }
+            10%  { opacity: 1; }
+            60%  { opacity: 1; transform: translateX(-80px); }
+            100% { opacity: 1; transform: translateX(-80px); }
+        }
+        .anim-q3-dot.stop { animation-name: q3DotStop; }
+        @keyframes q3DotStop {
+            0%   { opacity: 0; transform: translateX(0); }
+            10%  { opacity: 1; }
+            50%  { opacity: 1; transform: translateX(-45px); }
+            100% { opacity: 1; transform: translateX(-45px); }
+        }
+
+        /* Q4 — line graph up then crash */
+        .anim-q4-line {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: q4Line 1.8s cubic-bezier(.7,.05,.7,.05) both;
+        }
+        .anim-q4-flash {
+            opacity: 0;
+            animation: q4Flash 1.8s ease-in both;
+        }
+        @keyframes q4Line { to { stroke-dashoffset: 0; } }
+        @keyframes q4Flash {
+            0%, 75% { opacity: 0; }
+            80%    { opacity: 1; }
+            90%    { opacity: 0; }
+            100%   { opacity: 1; }
+        }
+
+        /* Q5 — question mark bouncing + die tumbling */
+        .anim-q5-q { animation: q5Bounce 1.6s ease-in-out both; transform-origin: center; }
+        .anim-q5-die { animation: q5Roll 1.8s ease-out both; transform-origin: center; }
+        @keyframes q5Bounce {
+            0%, 100% { transform: translateY(0); }
+            25%      { transform: translateY(-8px); }
+            50%      { transform: translateY(0); }
+            75%      { transform: translateY(-4px); }
+        }
+        @keyframes q5Roll {
+            0%   { transform: rotate(-90deg) translateX(-30px); opacity: 0; }
+            60%  { transform: rotate(20deg) translateX(0); opacity: 1; }
+            100% { transform: rotate(0deg) translateX(0); opacity: 1; }
+        }
+
+        /* Q6 — timer running + coins dripping */
+        .anim-q6-hand {
+            transform-origin: 50px 40px;
+            animation: q6Hand 2s linear both;
+        }
+        .anim-q6-coin {
+            animation: q6CoinDrop 1.8s ease-in both;
+            opacity: 0;
+        }
+        @keyframes q6Hand { from { transform: rotate(0); } to { transform: rotate(300deg); } }
+        @keyframes q6CoinDrop {
+            0%   { opacity: 0; transform: translateY(-8px); }
+            30%  { opacity: 1; }
+            100% { opacity: 0; transform: translateY(40px); }
+        }
+
+        /* Q_TRIED — path with X's, arrow keeps moving forward */
+        .anim-tried-station {
+            opacity: 0;
+            animation: triedStation 1.8s ease-out both;
+        }
+        .anim-tried-x {
+            opacity: 0;
+            animation: triedX 1.8s ease-out both;
+            transform-origin: center;
+        }
+        .anim-tried-arrow {
+            stroke-dasharray: 120;
+            stroke-dashoffset: 120;
+            animation: triedArrow 2s ease-out both;
+        }
+        @keyframes triedStation {
+            0%   { opacity: 0; transform: scale(0.4); }
+            60%  { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes triedX {
+            0%, 40% { opacity: 0; transform: scale(0.2) rotate(-45deg); }
+            70%     { opacity: 1; transform: scale(1.3) rotate(0); }
+            100%    { opacity: 1; transform: scale(1) rotate(0); }
+        }
+        @keyframes triedArrow { to { stroke-dashoffset: 0; } }
+
+        /* Q7 — coin stack building */
+        .anim-q7-coin {
+            opacity: 0;
+            animation: q7Stack 1.6s cubic-bezier(.34,1.56,.64,1) both;
+        }
+        @keyframes q7Stack {
+            0%   { opacity: 0; transform: translateY(-40px); }
+            60%  { opacity: 1; transform: translateY(2px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Q8 — balance scale tipping */
+        .anim-q8-scale {
+            transform-origin: 50% 30%;
+            animation: q8Tip 2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        .anim-q8-heavy { animation: q8Heavy 2s ease-out both; }
+        @keyframes q8Tip {
+            0%   { transform: rotate(0); }
+            40%  { transform: rotate(-3deg); }
+            70%  { transform: rotate(12deg); }
+            100% { transform: rotate(9deg); }
+        }
+        @keyframes q8Heavy {
+            0%   { opacity: 0; transform: translateY(-16px); }
+            50%  { opacity: 1; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         .q-norm {
             display: block;
             font-size: 0.92rem;
@@ -1530,6 +1726,179 @@
         if (typeof fbq === 'function') { try { fbq('trackCustom', eventName, params); } catch (e) {} }
     }
 
+    // --- PER-QUESTION ANIMATIONS ---
+    // Each returns an inline SVG. Animation triggers on element mount via CSS.
+    const Q_ANIMS = {
+        q1: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- runner (right) -->
+                <g fill="#000">
+                    <circle cx="150" cy="30" r="8"/>
+                    <rect x="140" y="40" width="20" height="24" rx="2"/>
+                    <rect x="128" y="52" width="20" height="12" rx="1" fill="#333"/>
+                    <rect x="130" y="54" width="16" height="7" fill="#8C52FF"/>
+                </g>
+                <!-- director (left) with bulb -->
+                <g fill="#8C52FF">
+                    <circle cx="50" cy="34" r="8"/>
+                    <rect x="40" y="44" width="20" height="24" rx="2"/>
+                </g>
+                <g transform="translate(50 16)">
+                    <g class="anim-q1-bulb">
+                        <circle r="6" fill="#FFC107" stroke="#000" stroke-width="1.5"/>
+                        <path d="M0 -10 v-4 M-8 -8 l-3 -3 M8 -8 l3 -3 M-11 -2 h-4 M11 -2 h4" stroke="#FFC107" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <!-- arrow director → runner -->
+                <path class="anim-q1-arrow" d="M64 34 L128 34" stroke="#000" stroke-width="2" stroke-dasharray="40" stroke-linecap="round" marker-end="url(#q1arrow)"/>
+                <defs>
+                    <marker id="q1arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                        <path d="M0 0 L10 5 L0 10 z" fill="#000"/>
+                    </marker>
+                </defs>
+            </svg>`,
+        q2: () => {
+            // 20 cells (5×4), 2 stay lit (indices 6 and 15)
+            const cells = [];
+            const stayIdx = new Set([6, 15]);
+            for (let i = 0; i < 20; i++) {
+                const col = i % 5;
+                const row = Math.floor(i / 5);
+                const x = 10 + col * 18;
+                const y = 6 + row * 16;
+                const delay = (i * 60);
+                cells.push(`<rect class="anim-q2-cell${stayIdx.has(i)?' stay':''}" x="${x}" y="${y}" width="14" height="12" rx="2" style="animation-delay: ${delay}ms"/>`);
+            }
+            return `<svg viewBox="0 0 110 76" xmlns="http://www.w3.org/2000/svg">${cells.join('')}</svg>`;
+        },
+        q_types: () => {
+            // 8 tiny cards in a row, only 2 turn purple
+            const cards = [];
+            const purpleIdx = new Set([2, 5]);
+            for (let i = 0; i < 8; i++) {
+                const x = 6 + i * 22;
+                const delay = i * 130;
+                cards.push(`<rect class="anim-types-card${purpleIdx.has(i)?' purple':''}" x="${x}" y="18" width="16" height="36" rx="3" style="animation-delay: ${delay}ms"/>`);
+            }
+            return `<svg viewBox="0 0 184 76" xmlns="http://www.w3.org/2000/svg">${cards.join('')}</svg>`;
+        },
+        q3: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- Ad 1 (right — product): dots skip past -->
+                <rect x="130" y="12" width="52" height="56" rx="4" fill="#fff" stroke="#000" stroke-width="2"/>
+                <rect x="140" y="22" width="32" height="26" rx="2" fill="#E5E5E5"/>
+                <rect x="140" y="52" width="24" height="4" rx="1" fill="#000"/>
+                <rect x="140" y="59" width="16" height="3" rx="1" fill="#666"/>
+                <!-- Ad 2 (left — pain): dots stop -->
+                <rect x="18" y="12" width="52" height="56" rx="4" fill="#fff" stroke="#000" stroke-width="2"/>
+                <path d="M44 24 v20 M40 40 l4 4 4 -4" stroke="#E5393535" stroke-width="2" fill="none"/>
+                <rect x="28" y="52" width="32" height="4" rx="1" fill="#8C52FF"/>
+                <rect x="28" y="59" width="22" height="3" rx="1" fill="#666"/>
+                <!-- People dots — start right, flow left -->
+                <g fill="#8C52FF">
+                    <circle class="anim-q3-dot" cx="188" cy="34" r="3.5" style="animation-delay: 0ms"/>
+                    <circle class="anim-q3-dot" cx="188" cy="46" r="3.5" style="animation-delay: 220ms"/>
+                    <circle class="anim-q3-dot stop" cx="188" cy="40" r="3.5" style="animation-delay: 440ms"/>
+                    <circle class="anim-q3-dot stop" cx="188" cy="52" r="3.5" style="animation-delay: 660ms"/>
+                </g>
+            </svg>`,
+        q4: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- axis -->
+                <path d="M10 70 L190 70" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 70 L10 8" stroke="#000" stroke-width="1.5" stroke-linecap="round"/>
+                <!-- line: rise, peak, crash -->
+                <path class="anim-q4-line"
+                      d="M14 66 L45 50 L80 34 L115 18 L145 66 L175 62"
+                      stroke="#8C52FF" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                <!-- flash on crash -->
+                <circle class="anim-q4-flash" cx="145" cy="66" r="9" fill="#E53935" opacity="0.6"/>
+                <circle class="anim-q4-flash" cx="145" cy="66" r="4" fill="#E53935"/>
+            </svg>`,
+        q5: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- question mark -->
+                <g class="anim-q5-q">
+                    <text x="60" y="52" font-family="Heebo, sans-serif" font-size="40" font-weight="900" fill="#8C52FF" text-anchor="middle">?</text>
+                </g>
+                <!-- die -->
+                <g transform="translate(140 42)">
+                    <g class="anim-q5-die">
+                        <rect x="-18" y="-18" width="36" height="36" rx="5" fill="#fff" stroke="#000" stroke-width="2"/>
+                        <circle cx="-9" cy="-9" r="2.5" fill="#000"/>
+                        <circle cx="9" cy="9" r="2.5" fill="#000"/>
+                        <circle cx="0" cy="0" r="2.5" fill="#000"/>
+                    </g>
+                </g>
+            </svg>`,
+        q6: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- timer (left) -->
+                <g transform="translate(20 8)">
+                    <circle cx="30" cy="32" r="24" fill="#fff" stroke="#000" stroke-width="2"/>
+                    <line x1="30" y1="32" x2="30" y2="14" stroke="#000" stroke-width="2.5" stroke-linecap="round" class="anim-q6-hand"/>
+                    <circle cx="30" cy="32" r="2.5" fill="#000"/>
+                </g>
+                <!-- coins dripping (right) -->
+                <g fill="#F57C00" stroke="#000" stroke-width="1.5">
+                    <circle class="anim-q6-coin" cx="130" cy="20" r="7" style="animation-delay: 0ms"/>
+                    <circle class="anim-q6-coin" cx="150" cy="20" r="6" style="animation-delay: 400ms"/>
+                    <circle class="anim-q6-coin" cx="170" cy="20" r="7" style="animation-delay: 800ms"/>
+                    <circle class="anim-q6-coin" cx="140" cy="20" r="5" style="animation-delay: 1200ms"/>
+                </g>
+            </svg>`,
+        q_tried: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- path line -->
+                <path class="anim-tried-arrow" d="M10 50 L180 50" stroke="#8C52FF" stroke-width="2.5" stroke-dasharray="120" stroke-linecap="round"/>
+                <!-- 4 stations -->
+                <g>
+                    ${[35, 75, 115, 155].map((cx, i) => `
+                        <circle class="anim-tried-station" cx="${cx}" cy="50" r="10" fill="#fff" stroke="#000" stroke-width="2" style="animation-delay: ${i*220}ms"/>
+                        <g transform="translate(${cx} 50)">
+                            <g class="anim-tried-x" style="animation-delay: ${i*220 + 120}ms">
+                                <path d="M-4 -4 L4 4 M-4 4 L4 -4" stroke="#E53935" stroke-width="2.5" stroke-linecap="round"/>
+                            </g>
+                        </g>
+                    `).join('')}
+                </g>
+                <!-- arrow head continuing forward -->
+                <path d="M180 50 L188 46 M180 50 L188 54" stroke="#8C52FF" stroke-width="2.5" stroke-linecap="round" class="anim-tried-arrow"/>
+            </svg>`,
+        q7: () => {
+            // Stack of coins building bottom up
+            const stack = [];
+            for (let i = 0; i < 6; i++) {
+                stack.push(`<ellipse class="anim-q7-coin" cx="100" cy="${64 - i*8}" rx="26" ry="6" fill="#F57C00" stroke="#000" stroke-width="1.5" style="animation-delay: ${i*180}ms"/>`);
+            }
+            return `<svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">${stack.join('')}</svg>`;
+        },
+        q8: () => `
+            <svg viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+                <!-- Pole + base -->
+                <line x1="100" y1="16" x2="100" y2="66" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+                <rect x="82" y="66" width="36" height="6" rx="1" fill="#000"/>
+                <!-- Scale beam (rotates) -->
+                <g class="anim-q8-scale">
+                    <line x1="46" y1="24" x2="154" y2="24" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Left pan (light — you got back) -->
+                    <line x1="46" y1="24" x2="46" y2="34" stroke="#000" stroke-width="1.5"/>
+                    <path d="M28 34 L64 34 L58 44 L34 44 Z" fill="#8C52FF" stroke="#000" stroke-width="1.5"/>
+                    <!-- Right pan (heavy — you spent) -->
+                    <line x1="154" y1="24" x2="154" y2="34" stroke="#000" stroke-width="1.5"/>
+                    <path d="M136 34 L172 34 L166 44 L142 44 Z" fill="#E53935" stroke="#000" stroke-width="1.5"/>
+                    <!-- Weight indicators inside heavy pan -->
+                    <text x="154" y="41" font-family="Heebo, sans-serif" font-size="11" font-weight="900" fill="#fff" text-anchor="middle">₪₪</text>
+                </g>
+                <!-- Coin dropping into heavy side -->
+                <circle class="anim-q8-heavy" cx="154" cy="20" r="5" fill="#F57C00" stroke="#000" stroke-width="1.5"/>
+            </svg>`
+    };
+    function getQAnim(qid) {
+        const fn = Q_ANIMS[qid];
+        return fn ? `<div class="q-anim">${fn()}</div>` : '';
+    }
+
     // --- QUESTION RENDER ---
     function renderQuestion(index) {
         const q = QUESTIONS[index];
@@ -1557,6 +1926,7 @@
         }
 
         card.innerHTML = `
+            ${getQAnim(q.id)}
             ${normHtml}
             <div class="q-title">${q.title}</div>
             <div class="q-options">${optionsHtml}</div>
