@@ -138,7 +138,7 @@
         @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
         @media (prefers-reduced-motion: reduce) { .hero-arrow { animation: none; } }
 
-        /* ===== VSL (top of fold) ===== */
+        /* ===== VSL (locked player, top of fold) ===== */
         .vsl-section { padding: 12px 0 40px; }
         .video-wrapper {
             position: relative; max-width: 860px; margin: 0 auto;
@@ -146,19 +146,84 @@
             border: 2px solid #000; background: #000;
             aspect-ratio: 16/9; box-shadow: var(--brutal-shadow);
         }
-        .video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-        .vsl-sound-btn {
-            position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
-            background: var(--accent); color: #fff; border: 2px solid #000;
-            padding: 12px 24px; border-radius: 999px; font-family: inherit;
-            font-weight: 900; font-size: 1rem; cursor: pointer;
-            box-shadow: var(--brutal-shadow-sm); z-index: 3;
-            display: inline-flex; align-items: center; gap: 8px;
-            animation: pulse-btn 1.6s ease-in-out infinite;
+        /* iframe locked: pointer-events blocked so Bunny's default controls are un-interactive */
+        .video-wrapper iframe {
+            position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+            pointer-events: none;
         }
-        .vsl-sound-btn:hover { transform: translateX(-50%) translateY(-2px); box-shadow: 6px 6px 0 #000; animation: none; }
-        .vsl-sound-btn.hidden { display: none; }
-        @keyframes pulse-btn { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.05); } }
+        /* click catcher: sits above iframe but below sound overlay; captures play/pause taps only after sound is on */
+        .vsl-click-catcher {
+            position: absolute; inset: 0; z-index: 2;
+            background: transparent; cursor: pointer;
+            pointer-events: none;
+        }
+        .vsl-click-catcher.active { pointer-events: auto; }
+        /* Visual (non-interactive) progress bar */
+        .vsl-progress-bar {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            height: 4px; background: rgba(255,255,255,0.15);
+            z-index: 3; pointer-events: none;
+        }
+        .vsl-progress-fill {
+            height: 100%; width: 0;
+            background: var(--accent);
+            transition: width 0.3s linear;
+        }
+        /* Play/pause icon feedback */
+        .vsl-play-indicator {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 4; width: 80px; height: 80px;
+            border-radius: 50%; background: rgba(0,0,0,0.6);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff; font-size: 2.2rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+        .vsl-play-indicator.show { opacity: 1; transform: translate(-50%,-50%) scale(1.05); }
+        /* Sound overlay */
+        .vsl-sound-overlay {
+            position: absolute; inset: 0; z-index: 5;
+            background: rgba(0,0,0,0.4);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 14px; padding: 20px;
+            transition: opacity 0.4s ease;
+        }
+        .vsl-sound-overlay.hidden { opacity: 0; pointer-events: none; }
+        .vsl-sound-btn {
+            background: var(--bg-card); color: #fff;
+            border: 2px solid #000; padding: 16px 28px;
+            border-radius: 12px;
+            font-family: 'Heebo', sans-serif; font-weight: 900;
+            font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+            cursor: pointer; min-height: 56px;
+            box-shadow: 8px 8px 0 var(--accent);
+            display: inline-flex; align-items: center; gap: 10px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            animation: pulse-btn 1.8s ease-in-out infinite;
+            max-width: 90%; text-align: center;
+        }
+        .vsl-sound-btn:hover { transform: translate(-2px,-2px); box-shadow: 10px 10px 0 var(--accent); animation: none; }
+        .vsl-sound-btn:active { transform: translate(2px,2px); box-shadow: 4px 4px 0 var(--accent); }
+        @keyframes pulse-btn { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+        .vsl-restart-link {
+            background: transparent; border: none;
+            color: rgba(255,255,255,0.85);
+            font-family: inherit; font-weight: 700; font-size: 0.88rem;
+            cursor: pointer; text-decoration: underline;
+            padding: 6px 12px; min-height: 32px;
+        }
+        .vsl-restart-link:hover { color: #fff; }
+        [hidden] { display: none !important; }
+
+        /* ===== LOCKED SECTIONS (delayed CTA) ===== */
+        .locked-section { display: none; }
+        .locked-section.revealed { display: block; animation: revealFade 0.7s ease both; }
+        @keyframes revealFade {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* ===== PROOF (screenshot sticker) ===== */
         .proof-section { padding: 40px 0 60px; }
@@ -531,18 +596,23 @@
     <!-- ===== 2. VSL ===== -->
     <section class="vsl-section" id="vsl">
         <div class="container">
-            <div class="video-wrapper fade-up">
+            <div class="video-wrapper" id="vslWrapper">
                 <iframe
                     id="vslIframe"
-                    src="https://player.mediadelivery.net/embed/637122/a2b87b8c-7326-446f-a31a-3e2841500ef2?autoplay=true&loop=false&muted=true&preload=true&responsive=true"
-                    loading="lazy"
+                    src="https://player.mediadelivery.net/embed/637122/a2b87b8c-7326-446f-a31a-3e2841500ef2?autoplay=true&loop=false&muted=true&preload=true&responsive=true&playsinline=true"
                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                     allowfullscreen
                     title="סרטון סדנת קריאייטיב סקייל"></iframe>
-                <button id="vslSoundBtn" class="vsl-sound-btn" type="button" aria-label="הפעלת סאונד">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-                    לחץ להפעלת סאונד
-                </button>
+                <div class="vsl-click-catcher" id="vslClickCatcher" aria-hidden="true"></div>
+                <div class="vsl-play-indicator" id="vslPlayIndicator" aria-hidden="true">▶</div>
+                <div class="vsl-progress-bar"><div class="vsl-progress-fill" id="vslProgressFill"></div></div>
+                <div class="vsl-sound-overlay" id="vslSoundOverlay" role="dialog" aria-label="הפעלת סאונד">
+                    <button id="vslSoundBtn" class="vsl-sound-btn" type="button">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                        <span id="vslSoundBtnText">לחץ להפעלת הסאונד</span>
+                    </button>
+                    <button id="vslRestartLink" class="vsl-restart-link" type="button" hidden>התחל מההתחלה</button>
+                </div>
             </div>
         </div>
     </section>
@@ -636,7 +706,7 @@
     </section>
 
     <!-- ===== 5. STATEMENTS ===== -->
-    <section class="statements">
+    <section class="statements locked-section">
         <div class="container">
             <div class="stmt fade-up">
                 <p>ראית את המספרים.</p>
@@ -670,7 +740,7 @@
     </section>
 
     <!-- ===== 6. WORKSHOP DETAILS ===== -->
-    <section class="workshop">
+    <section class="workshop locked-section">
         <div class="container">
             <h2 class="fade-up">מה קורה בסדנה</h2>
             <p class="sub fade-up">יומיים. בזום. 18:00 עד 20:00.</p>
@@ -711,8 +781,8 @@
         </div>
     </section>
 
-    <!-- ===== 8. URGENCY ===== -->
-    <section class="urgency">
+    <!-- ===== 7. URGENCY ===== -->
+    <section class="urgency locked-section">
         <div class="container">
             <!-- CHANGE data-taken TO UPDATE THE COUNTER -->
             <div class="spots-progress fade-up" id="spotsProgress" data-taken="4" data-total="15">
@@ -735,8 +805,8 @@
         </div>
     </section>
 
-    <!-- ===== 9. PRICE + FORM ===== -->
-    <section class="price-form-section" id="contact">
+    <!-- ===== 8. PRICE + FORM ===== -->
+    <section class="price-form-section locked-section" id="contact">
         <div class="container">
             <div class="price-block fade-up">
                 <div class="price-main"><span class="cur">₪</span>997</div>
@@ -776,8 +846,8 @@
         </div>
     </section>
 
-    <!-- ===== 10. FAQ ===== -->
-    <section class="faq-section">
+    <!-- ===== 9. FAQ ===== -->
+    <section class="faq-section locked-section">
         <div class="container">
             <h2 class="fade-up">שאלות נפוצות</h2>
             <div class="faq-list fade-up">
@@ -812,8 +882,8 @@
         </div>
     </section>
 
-    <!-- ===== 11. FINAL CTA ===== -->
-    <section class="final-cta">
+    <!-- ===== 10. FINAL CTA ===== -->
+    <section class="final-cta locked-section">
         <div class="container">
             <h2 class="fade-up">מודעה אחת. 143 אלף שקל.<br>עכשיו תורך.</h2>
             <div class="cta-wrapper fade-up">
@@ -904,15 +974,21 @@
         })();
 
         // ===== FADE UP (safe: adds fade-init only if IntersectionObserver works) =====
-        if ('IntersectionObserver' in window) {
+        (function() {
+            if (!('IntersectionObserver' in window)) return;
             var io = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
             }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
-            document.querySelectorAll('.fade-up').forEach(function(el) {
-                el.classList.add('fade-init');
-                io.observe(el);
-            });
-        }
+            function attach() {
+                document.querySelectorAll('.fade-up:not(.fade-init)').forEach(function(el) {
+                    el.classList.add('fade-init');
+                    io.observe(el);
+                });
+            }
+            attach();
+            // Exposed so the VSL unlock flow can wire up newly revealed sections
+            window._vslFadeObserver = attach;
+        })();
 
         // ===== FAQ =====
         document.querySelectorAll('.faq-question').forEach(function(q) {
@@ -974,64 +1050,147 @@
             });
         })();
 
-        // ===== VSL: unmute button + progress tracking via player.js =====
+        // ===== VSL: locked player, sound-gated tracking, resume, delayed CTA =====
         (function() {
             var iframe = document.getElementById('vslIframe');
             var soundBtn = document.getElementById('vslSoundBtn');
+            var soundBtnText = document.getElementById('vslSoundBtnText');
+            var soundOverlay = document.getElementById('vslSoundOverlay');
+            var restartLink = document.getElementById('vslRestartLink');
+            var clickCatcher = document.getElementById('vslClickCatcher');
+            var progressFill = document.getElementById('vslProgressFill');
+            var playIndicator = document.getElementById('vslPlayIndicator');
             if (!iframe) return;
 
+            var STORAGE_RESUME = 'vsl_resume_time';
+            var STORAGE_PCT = 'vsl_percent';
+            var STORAGE_UNLOCK = 'vsl_cta_unlocked';
+
             var player = null;
-            var maxPercent = Number(localStorage.getItem('vsl_percent')) || 0;
+            var soundClicked = false;
+            var duration = 0;
+            var maxPercent = Number(localStorage.getItem(STORAGE_PCT)) || 0;
+            var isPlaying = true;
+            var lastSaveTime = 0;
+            var fired = {};
+            var savedResumeTime = Number(localStorage.getItem(STORAGE_RESUME)) || 0;
+            var isReturning = savedResumeTime >= 10;
+            var unlocked = localStorage.getItem(STORAGE_UNLOCK) === '1';
+
             syncHiddenField(maxPercent);
 
-            // Click handler attached IMMEDIATELY so it always works.
-            // Prefers player.js control; falls back to reloading the iframe unmuted.
-            if (soundBtn) {
-                soundBtn.addEventListener('click', function unmute() {
-                    var handled = false;
-                    if (player && typeof player.setMuted === 'function') {
-                        try {
-                            player.setMuted(false);
-                            player.setVolume(100);
-                            player.play();
-                            handled = true;
-                        } catch (e) { handled = false; }
-                    }
-                    if (!handled) {
-                        // Fallback: rebuild the URL with muted=false and reload the iframe
-                        var src = iframe.src;
-                        if (src.indexOf('muted=true') !== -1) {
-                            src = src.replace('muted=true', 'muted=false');
-                        } else if (src.indexOf('muted=false') === -1) {
-                            src += (src.indexOf('?') === -1 ? '?' : '&') + 'muted=false';
-                        }
-                        iframe.src = src;
-                    }
-                    soundBtn.classList.add('hidden');
-                });
+            // Returning visitors who already unlocked see full page immediately
+            if (unlocked) revealLockedSections(false);
+
+            // Sound overlay text for returning viewers
+            if (isReturning) {
+                var mm = Math.floor(savedResumeTime / 60);
+                var ss = Math.floor(savedResumeTime % 60);
+                soundBtnText.textContent = 'המשך מאיפה שעצרת (' + mm + ':' + (ss < 10 ? '0' + ss : ss) + ')';
+                restartLink.hidden = false;
             }
 
-            // Load player.js (postMessage bridge to Bunny Stream) for progress tracking
+            soundBtn.addEventListener('click', function() { activateSound(isReturning ? savedResumeTime : 0); });
+            restartLink.addEventListener('click', function(e) { e.stopPropagation(); activateSound(0); });
+
+            function activateSound(startAt) {
+                if (soundClicked) return;
+                soundClicked = true;
+                soundOverlay.classList.add('hidden');
+                clickCatcher.classList.add('active');
+
+                if (typeof fbq === 'function') fbq('trackCustom', 'VSL_SoundOn');
+                if (typeof gtag === 'function') gtag('event', 'vsl_sound_on');
+
+                var handled = false;
+                if (player && typeof player.setMuted === 'function') {
+                    try {
+                        player.setCurrentTime(startAt);
+                        player.setMuted(false);
+                        player.setVolume(100);
+                        player.play();
+                        handled = true;
+                    } catch (e) { handled = false; }
+                }
+                if (!handled) {
+                    // Fallback: rebuild iframe URL with unmuted + start time
+                    var src = iframe.src.replace('muted=true', 'muted=false');
+                    // Strip existing t= if present, then append
+                    src = src.replace(/[&?]t=\d+/, '');
+                    src += (src.indexOf('?') === -1 ? '?' : '&') + 't=' + Math.floor(startAt);
+                    iframe.src = src;
+                }
+            }
+
+            // Click catcher: toggle play/pause on tap (only active after sound is on)
+            clickCatcher.addEventListener('click', function() {
+                if (!player) return;
+                try {
+                    if (isPlaying) { player.pause(); showIndicator('▶'); }
+                    else { player.play(); showIndicator('⏸'); }
+                } catch (e) {}
+            });
+            function showIndicator(icon) {
+                playIndicator.textContent = icon;
+                playIndicator.classList.add('show');
+                setTimeout(function() { playIndicator.classList.remove('show'); }, 500);
+            }
+
+            // Fallback: reveal locked sections after 8s if player never becomes ready (network fail)
+            var revealTimer = setTimeout(function() {
+                if (!unlocked) {
+                    console.warn('[VSL] player not ready after 8s — revealing sections as fallback');
+                    revealLockedSections(true);
+                }
+            }, 8000);
+
+            function revealLockedSections(save) {
+                if (unlocked && !save) {
+                    // Already unlocked from storage
+                }
+                if (save) localStorage.setItem(STORAGE_UNLOCK, '1');
+                unlocked = true;
+                document.querySelectorAll('.locked-section').forEach(function(el) {
+                    el.classList.add('revealed');
+                });
+                // Re-observe fade-ups inside the newly revealed sections
+                if (typeof window._vslFadeObserver === 'function') window._vslFadeObserver();
+            }
+
+            // Load player.js (postMessage bridge to Bunny)
             var pjs = document.createElement('script');
             pjs.src = 'https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
             pjs.onload = function() {
-                if (typeof playerjs === 'undefined') return;
+                if (typeof playerjs === 'undefined') { return; }
                 player = new playerjs.Player(iframe);
-                var fired = {};
-
                 player.on('ready', function() {
-                    var duration = 0;
+                    clearTimeout(revealTimer);
                     player.getDuration(function(d) { duration = d; });
 
                     player.on('timeupdate', function(data) {
                         var dur = data.duration || duration;
                         if (!dur) return;
-                        var pct = Math.floor((data.seconds / dur) * 100);
+                        var t = data.seconds;
+                        var pct = Math.floor((t / dur) * 100);
+
+                        // Visual progress bar (always update, even during muted preview)
+                        progressFill.style.width = pct + '%';
+
+                        // Everything below only counts after sound was clicked
+                        if (!soundClicked) return;
+
+                        // Save resume time every 5s
+                        if ((t - lastSaveTime) >= 5) {
+                            lastSaveTime = t;
+                            localStorage.setItem(STORAGE_RESUME, Math.floor(t));
+                        }
+
                         if (pct > maxPercent) {
                             maxPercent = pct;
-                            localStorage.setItem('vsl_percent', maxPercent);
+                            localStorage.setItem(STORAGE_PCT, maxPercent);
                             syncHiddenField(maxPercent);
                         }
+
                         [25, 50, 75, 95].forEach(function(m) {
                             if (pct >= m && !fired[m]) {
                                 fired[m] = true;
@@ -1039,8 +1198,22 @@
                                 if (typeof gtag === 'function') gtag('event', 'vsl_progress', { percent: m });
                             }
                         });
+
+                        // Unlock the rest of the page at 50% real watch
+                        if (pct >= 50 && !unlocked) revealLockedSections(true);
+                    });
+
+                    player.on('play', function() { isPlaying = true; });
+                    player.on('pause', function() { isPlaying = false; });
+                    player.on('error', function() {
+                        console.error('[VSL] playback error — revealing sections');
+                        if (!unlocked) revealLockedSections(true);
                     });
                 });
+            };
+            pjs.onerror = function() {
+                console.error('[VSL] player.js failed to load — revealing sections');
+                if (!unlocked) revealLockedSections(true);
             };
             document.head.appendChild(pjs);
 
@@ -1185,7 +1358,7 @@
             });
         })();
 
-        // ===== STICKY MOBILE CTA =====
+        // ===== STICKY MOBILE CTA (only when form section is unlocked) =====
         (function() {
             var sticky = document.createElement('div');
             sticky.id = 'sticky-cta';
@@ -1195,9 +1368,11 @@
             var form = document.getElementById('contact');
             function check() {
                 if (window.innerWidth > 768) { sticky.style.display = 'none'; return; }
+                // Form section is a locked-section — hidden until unlocked
+                if (form && !form.classList.contains('revealed')) { sticky.style.display = 'none'; return; }
                 var y = window.scrollY;
                 var vBottom = vsl ? vsl.offsetTop + vsl.offsetHeight : 600;
-                var fTop = form ? form.offsetTop - window.innerHeight : 99999;
+                var fTop = form.offsetTop - window.innerHeight;
                 sticky.style.display = (y > vBottom && y < fTop) ? 'block' : 'none';
             }
             window.addEventListener('scroll', check, { passive: true });
