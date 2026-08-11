@@ -146,46 +146,9 @@
             border: 2px solid #000; background: #000;
             aspect-ratio: 16/9; box-shadow: var(--brutal-shadow);
         }
-        /* iframe locked: pointer-events blocked so Bunny's default controls are un-interactive */
         .video-wrapper iframe {
             position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
-            pointer-events: none;
         }
-        /* click catcher: sits above iframe but below sound overlay; captures play/pause taps only after sound is on */
-        .vsl-click-catcher {
-            position: absolute; inset: 0; z-index: 2;
-            background: transparent; cursor: pointer;
-            pointer-events: none;
-            /* iOS: no 300ms tap delay + no gray flash on tap */
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        .vsl-click-catcher.active { pointer-events: auto; }
-        /* Visual (non-interactive) progress bar */
-        .vsl-progress-bar {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            height: 4px; background: rgba(255,255,255,0.15);
-            z-index: 3; pointer-events: none;
-        }
-        .vsl-progress-fill {
-            height: 100%; width: 0;
-            background: var(--accent);
-            transition: width 0.3s linear;
-        }
-        /* Play/pause icon feedback */
-        .vsl-play-indicator {
-            position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 4; width: 80px; height: 80px;
-            border-radius: 50%; background: rgba(0,0,0,0.6);
-            display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 2.2rem;
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.25s ease, transform 0.25s ease;
-        }
-        .vsl-play-indicator.show { opacity: 1; transform: translate(-50%,-50%) scale(1.05); }
         /* Sound overlay */
         .vsl-sound-overlay {
             position: absolute; inset: 0; z-index: 5;
@@ -608,9 +571,6 @@
                     allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
                     allowfullscreen
                     title="סרטון סדנת קריאייטיב סקייל"></iframe>
-                <div class="vsl-click-catcher" id="vslClickCatcher" aria-hidden="true"></div>
-                <div class="vsl-play-indicator" id="vslPlayIndicator" aria-hidden="true">▶</div>
-                <div class="vsl-progress-bar"><div class="vsl-progress-fill" id="vslProgressFill"></div></div>
                 <div class="vsl-sound-overlay" id="vslSoundOverlay" role="dialog" aria-label="הפעלת סאונד">
                     <button id="vslSoundBtn" class="vsl-sound-btn" type="button">
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
@@ -1055,16 +1015,13 @@
             });
         })();
 
-        // ===== VSL: locked player, sound-gated tracking, resume, delayed CTA =====
+        // ===== VSL: sound-gated tracking, resume, delayed CTA (native Bunny controls) =====
         (function() {
             var iframe = document.getElementById('vslIframe');
             var soundBtn = document.getElementById('vslSoundBtn');
             var soundBtnText = document.getElementById('vslSoundBtnText');
             var soundOverlay = document.getElementById('vslSoundOverlay');
             var restartLink = document.getElementById('vslRestartLink');
-            var clickCatcher = document.getElementById('vslClickCatcher');
-            var progressFill = document.getElementById('vslProgressFill');
-            var playIndicator = document.getElementById('vslPlayIndicator');
             if (!iframe) return;
 
             var STORAGE_RESUME = 'vsl_resume_time';
@@ -1075,7 +1032,6 @@
             var soundClicked = false;
             var duration = 0;
             var maxPercent = Number(localStorage.getItem(STORAGE_PCT)) || 0;
-            var isPlaying = true;
             var lastSaveTime = 0;
             var fired = {};
             var savedResumeTime = Number(localStorage.getItem(STORAGE_RESUME)) || 0;
@@ -1083,11 +1039,8 @@
             var unlocked = localStorage.getItem(STORAGE_UNLOCK) === '1';
 
             syncHiddenField(maxPercent);
-
-            // Returning visitors who already unlocked see full page immediately
             if (unlocked) revealLockedSections(false);
 
-            // Sound overlay text for returning viewers
             if (isReturning) {
                 var mm = Math.floor(savedResumeTime / 60);
                 var ss = Math.floor(savedResumeTime % 60);
@@ -1102,7 +1055,6 @@
                 if (soundClicked) return;
                 soundClicked = true;
                 soundOverlay.classList.add('hidden');
-                clickCatcher.classList.add('active');
 
                 if (typeof fbq === 'function') fbq('trackCustom', 'VSL_SoundOn');
                 if (typeof gtag === 'function') gtag('event', 'vsl_sound_on');
@@ -1118,47 +1070,11 @@
                     } catch (e) { handled = false; }
                 }
                 if (!handled) {
-                    // Fallback: rebuild iframe URL with unmuted + start time
                     var src = iframe.src.replace('muted=true', 'muted=false');
-                    // Strip existing t= if present, then append
                     src = src.replace(/[&?]t=\d+/, '');
                     src += (src.indexOf('?') === -1 ? '?' : '&') + 't=' + Math.floor(startAt);
                     iframe.src = src;
                 }
-            }
-
-            // Click catcher: toggle play/pause on tap (only active after sound is on).
-            // Uses playerjs when ready + raw postMessage fallback so it works before player.js loads.
-            // Debounce prevents the touchend→click cascade on iOS from toggling twice (pause → play in the same tap).
-            var lastTapAt = 0;
-            function togglePlayback(e) {
-                var now = Date.now();
-                if (now - lastTapAt < 500) return;
-                lastTapAt = now;
-                if (e && e.cancelable) e.preventDefault();
-
-                isPlaying = !isPlaying;
-                var action = isPlaying ? 'play' : 'pause';
-                showIndicator(isPlaying ? '⏸' : '▶');
-
-                var handled = false;
-                if (player && typeof player[action] === 'function') {
-                    try { player[action](); handled = true; } catch (err) {}
-                }
-                if (!handled) {
-                    try {
-                        iframe.contentWindow.postMessage(JSON.stringify({
-                            context: 'player.js', version: '0.0.11', method: action
-                        }), '*');
-                    } catch (err) {}
-                }
-            }
-            clickCatcher.addEventListener('click', togglePlayback);
-            clickCatcher.addEventListener('touchend', togglePlayback, { passive: false });
-            function showIndicator(icon) {
-                playIndicator.textContent = icon;
-                playIndicator.classList.add('show');
-                setTimeout(function() { playIndicator.classList.remove('show'); }, 500);
             }
 
             // Fallback: reveal locked sections after 8s if player never becomes ready (network fail)
@@ -1170,19 +1086,14 @@
             }, 8000);
 
             function revealLockedSections(save) {
-                if (unlocked && !save) {
-                    // Already unlocked from storage
-                }
                 if (save) localStorage.setItem(STORAGE_UNLOCK, '1');
                 unlocked = true;
                 document.querySelectorAll('.locked-section').forEach(function(el) {
                     el.classList.add('revealed');
                 });
-                // Re-observe fade-ups inside the newly revealed sections
                 if (typeof window._vslFadeObserver === 'function') window._vslFadeObserver();
             }
 
-            // Load player.js (postMessage bridge to Bunny)
             var pjs = document.createElement('script');
             pjs.src = 'https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
             pjs.onload = function() {
@@ -1198,13 +1109,8 @@
                         var t = data.seconds;
                         var pct = Math.floor((t / dur) * 100);
 
-                        // Visual progress bar (always update, even during muted preview)
-                        progressFill.style.width = pct + '%';
-
-                        // Everything below only counts after sound was clicked
                         if (!soundClicked) return;
 
-                        // Save resume time every 5s
                         if ((t - lastSaveTime) >= 5) {
                             lastSaveTime = t;
                             localStorage.setItem(STORAGE_RESUME, Math.floor(t));
@@ -1224,12 +1130,9 @@
                             }
                         });
 
-                        // Unlock the rest of the page at 50% real watch
                         if (pct >= 50 && !unlocked) revealLockedSections(true);
                     });
 
-                    player.on('play', function() { isPlaying = true; });
-                    player.on('pause', function() { isPlaying = false; });
                     player.on('error', function() {
                         console.error('[VSL] playback error — revealing sections');
                         if (!unlocked) revealLockedSections(true);
