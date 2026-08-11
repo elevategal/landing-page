@@ -156,6 +156,11 @@
             position: absolute; inset: 0; z-index: 2;
             background: transparent; cursor: pointer;
             pointer-events: none;
+            /* iOS: no 300ms tap delay + no gray flash on tap */
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
         }
         .vsl-click-catcher.active { pointer-events: auto; }
         /* Visual (non-interactive) progress bar */
@@ -1122,14 +1127,29 @@
                 }
             }
 
-            // Click catcher: toggle play/pause on tap (only active after sound is on)
-            clickCatcher.addEventListener('click', function() {
-                if (!player) return;
-                try {
-                    if (isPlaying) { player.pause(); showIndicator('▶'); }
-                    else { player.play(); showIndicator('⏸'); }
-                } catch (e) {}
-            });
+            // Click catcher: toggle play/pause on tap (only active after sound is on).
+            // Uses playerjs when ready + raw postMessage fallback so it works before player.js loads
+            // (critical on mobile where playerjs may still be downloading when the user taps).
+            function togglePlayback() {
+                isPlaying = !isPlaying;
+                var action = isPlaying ? 'play' : 'pause';
+                showIndicator(isPlaying ? '⏸' : '▶');
+                var handled = false;
+                if (player && typeof player[action] === 'function') {
+                    try { player[action](); handled = true; } catch (e) {}
+                }
+                if (!handled) {
+                    // player.js postMessage protocol - Bunny Stream understands this even without the SDK loaded
+                    try {
+                        iframe.contentWindow.postMessage(JSON.stringify({
+                            context: 'player.js', version: '0.0.11', method: action
+                        }), '*');
+                    } catch (e) {}
+                }
+            }
+            clickCatcher.addEventListener('click', togglePlayback);
+            // iOS: touchend fires before click and avoids the 300ms delay entirely
+            clickCatcher.addEventListener('touchend', function(e) { e.preventDefault(); togglePlayback(); }, { passive: false });
             function showIndicator(icon) {
                 playIndicator.textContent = icon;
                 playIndicator.classList.add('show');
