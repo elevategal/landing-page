@@ -1128,28 +1128,33 @@
             }
 
             // Click catcher: toggle play/pause on tap (only active after sound is on).
-            // Uses playerjs when ready + raw postMessage fallback so it works before player.js loads
-            // (critical on mobile where playerjs may still be downloading when the user taps).
-            function togglePlayback() {
+            // Uses playerjs when ready + raw postMessage fallback so it works before player.js loads.
+            // Debounce prevents the touchend→click cascade on iOS from toggling twice (pause → play in the same tap).
+            var lastTapAt = 0;
+            function togglePlayback(e) {
+                var now = Date.now();
+                if (now - lastTapAt < 500) return;
+                lastTapAt = now;
+                if (e && e.cancelable) e.preventDefault();
+
                 isPlaying = !isPlaying;
                 var action = isPlaying ? 'play' : 'pause';
                 showIndicator(isPlaying ? '⏸' : '▶');
+
                 var handled = false;
                 if (player && typeof player[action] === 'function') {
-                    try { player[action](); handled = true; } catch (e) {}
+                    try { player[action](); handled = true; } catch (err) {}
                 }
                 if (!handled) {
-                    // player.js postMessage protocol - Bunny Stream understands this even without the SDK loaded
                     try {
                         iframe.contentWindow.postMessage(JSON.stringify({
                             context: 'player.js', version: '0.0.11', method: action
                         }), '*');
-                    } catch (e) {}
+                    } catch (err) {}
                 }
             }
             clickCatcher.addEventListener('click', togglePlayback);
-            // iOS: touchend fires before click and avoids the 300ms delay entirely
-            clickCatcher.addEventListener('touchend', function(e) { e.preventDefault(); togglePlayback(); }, { passive: false });
+            clickCatcher.addEventListener('touchend', togglePlayback, { passive: false });
             function showIndicator(icon) {
                 playIndicator.textContent = icon;
                 playIndicator.classList.add('show');
