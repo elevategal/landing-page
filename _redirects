@@ -8,6 +8,9 @@
 /live        /webinar.html     200
 /thank-you-webinar  /thank-you-webinar.html  200
 /thank-you-prompt   /thank-you-prompt.html   200
+/creative-scale     /creative-scale.html     200
+/workshop-vsl       /creative-scale.html     200
+/thank-you-creative-scale  /thank-you-creative-scale.html  200
 /group              /group.html              200
 /diagnosis          /diagnosis.html          200
 /diagnosis-stats    /diagnosis-stats.html    200

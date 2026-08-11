@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תודה! | סדנת קריאייטיב סקייל</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&display=swap" rel="stylesheet"></noscript>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', 'G-8SCLND9ZP6');
+    </script>
+    <!-- Meta Pixel -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1265390459065125');
+    fbq('track', 'PageView');
+    // Lead event is fired on submit (creative-scale.html) with eventID + CAPI dedup.
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1265390459065125&ev=PageView&noscript=1"/></noscript>
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #F3EFE7;
+            --accent: #8C52FF;
+            --wa: #25D366;
+            --radius: 12px;
+            --radius-lg: 20px;
+            --brutal-shadow: 6px 6px 0 #000;
+            --brutal-shadow-sm: 4px 4px 0 #000;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Heebo', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            background-image:
+                linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: #000;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-weight: 700;
+        }
+        .container { max-width: 640px; margin: 0 auto; }
+
+        .success-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #fff; border: 2px solid #000;
+            padding: 8px 18px; border-radius: 50px;
+            font-size: 0.9rem; font-weight: 800; color: #000;
+            box-shadow: var(--brutal-shadow-sm); margin-bottom: 20px;
+        }
+        .success-badge .check {
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #2E7D32; color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 900;
+        }
+
+        h1 {
+            font-size: clamp(1.7rem, 5vw, 2.5rem);
+            font-weight: 900; line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        h1 .accent {
+            display: inline-block; background: var(--accent); color: #fff;
+            padding: 0.05em 0.4em; border-radius: 6px;
+            box-shadow: 4px 4px 0 #000; border: 2px solid #000;
+        }
+        .subtitle {
+            font-size: 1.05rem; line-height: 1.6;
+            color: #000; font-weight: 700; margin-bottom: 30px;
+        }
+
+        /* Main WhatsApp block */
+        .wa-block {
+            background: #000; color: #fff;
+            border: 2px solid #000; border-radius: var(--radius-lg);
+            padding: 28px 24px; box-shadow: 8px 8px 0 var(--accent);
+            margin-bottom: 26px; text-align: center;
+        }
+        .wa-block h2 {
+            color: #fff; font-size: 1.2rem; font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .wa-block p {
+            color: rgba(255,255,255,0.85); font-size: 0.95rem;
+            margin-bottom: 22px; font-weight: 700;
+        }
+        .wa-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            background: var(--wa); color: #fff;
+            padding: 18px 32px; border-radius: 12px;
+            font-family: inherit; font-size: 1.15rem; font-weight: 900;
+            text-decoration: none; border: 2px solid #fff;
+            box-shadow: 6px 6px 0 #fff;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            animation: wa-breathe 2.5s ease-in-out infinite;
+            width: 100%; max-width: 400px;
+        }
+        .wa-btn:hover {
+            animation: none;
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0 #fff;
+        }
+        .wa-btn svg { width: 22px; height: 22px; fill: #fff; }
+        @keyframes wa-breathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        /* Steps */
+        .steps {
+            background: #fff; border: 2px solid #000; border-radius: var(--radius-lg);
+            padding: 26px 24px; box-shadow: var(--brutal-shadow);
+            margin-bottom: 30px;
+        }
+        .steps h3 {
+            text-align: center; margin-bottom: 20px;
+            font-size: 1.05rem; font-weight: 900;
+        }
+        .step {
+            display: flex; align-items: flex-start; gap: 14px;
+            margin-bottom: 16px;
+        }
+        .step:last-child { margin-bottom: 0; }
+        .step-num {
+            flex-shrink: 0; width: 40px; height: 40px;
+            border-radius: 8px; background: var(--accent);
+            color: #fff; border: 2px solid #000;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1rem; font-weight: 900;
+            box-shadow: 3px 3px 0 #000;
+        }
+        .step-body { flex: 1; }
+        .step-body p { font-size: 0.98rem; line-height: 1.5; font-weight: 700; color: #000; }
+
+        /* Divider */
+        .divider {
+            width: 60px; height: 4px; background: var(--accent);
+            margin: 30px auto; border-radius: 0;
+        }
+
+        /* Coaching (secondary, muted) */
+        .coaching-section {
+            background: #fff; border: 2px solid #000; border-radius: var(--radius);
+            padding: 22px 20px; box-shadow: var(--brutal-shadow-sm);
+            text-align: center;
+        }
+        .coaching-section h3 {
+            font-size: 1rem; font-weight: 900; margin-bottom: 6px; color: #000;
+        }
+        .coaching-section p {
+            font-size: 0.9rem; color: #000; opacity: 0.75;
+            font-weight: 700; margin-bottom: 16px; line-height: 1.5;
+        }
+        .coaching-btn {
+            display: inline-block; background: #fff; color: #000;
+            border: 2px solid #000; padding: 10px 22px;
+            border-radius: 10px; font-family: inherit;
+            font-weight: 800; font-size: 0.9rem;
+            text-decoration: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 3px 3px 0 #000;
+        }
+        .coaching-btn:hover {
+            background: var(--accent); color: #fff;
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #000;
+        }
+
+        .back-link {
+            display: block; text-align: center;
+            margin-top: 28px; color: #000; opacity: 0.6;
+            font-size: 0.85rem; text-decoration: underline;
+            font-weight: 700;
+        }
+        .back-link:hover { opacity: 1; color: var(--accent); }
+
+        @media (max-width: 480px) {
+            body { padding: 24px 16px; }
+            .wa-block { padding: 24px 20px; box-shadow: 6px 6px 0 var(--accent); }
+            .steps { padding: 22px 18px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-badge">
+            <span class="check">✓</span>
+            <span>המקום שלך שמור</span>
+        </div>
+
+        <h1>עכשיו <span class="accent">שלב אחד אחרון</span></h1>
+        <p class="subtitle">כדי להשלים את התשלום ולסגור את המקום, לחץ על הכפתור ותפתח שיחה איתי בוואטסאפ.</p>
+
+        <div class="wa-block">
+            <h2>דבר איתי עכשיו</h2>
+            <p>אני עונה תוך זמן קצר, שולח פרטי תשלום ומאשר לך את המקום.</p>
+            <a class="wa-btn" id="waBtn" href="https://wa.me/972547854866?text=%D7%94%D7%99%D7%99%20%D7%92%D7%9C%2C%20%D7%A0%D7%A8%D7%A9%D7%9E%D7%AA%D7%99%20%D7%9C%D7%A1%D7%93%D7%A0%D7%AA%20%D7%A7%D7%A8%D7%99%D7%90%D7%99%D7%99%D7%98%D7%99%D7%91%20%D7%A1%D7%A7%D7%99%D7%99%D7%9C%2C%20%D7%9E%D7%95%D7%9B%D7%9F%20%D7%9C%D7%94%D7%A9%D7%9C%D7%99%D7%9D%20%D7%AA%D7%A9%D7%9C%D7%95%D7%9D" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                דבר איתי עכשיו
+            </a>
+        </div>
+
+        <div class="steps">
+            <h3>מה קורה עכשיו</h3>
+            <div class="step">
+                <div class="step-num">01</div>
+                <div class="step-body"><p>תלחץ על כפתור הוואטסאפ ותפתח שיחה איתי</p></div>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <div class="step-body"><p>אשלח לך פרטי תשלום ואאשר את המקום</p></div>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <div class="step-body"><p>ברגע שמשלמים, נכנסים לקבוצת הסדנה עם קישור הזום וחומרי הכנה</p></div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="coaching-section">
+            <h3>רוצה ללכת עם זה רחוק יותר?</h3>
+            <p>אני מלווה מספר מצומצם של מותגים באופן אישי.</p>
+            <a class="coaching-btn" id="coachingBtn" href="https://wa.me/972547854866?text=%D7%94%D7%99%D7%99%20%D7%92%D7%9C%2C%20%D7%9E%D7%A2%D7%95%D7%A0%D7%99%D7%99%D7%9F%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%9C%D7%99%D7%95%D7%95%D7%99%20%D7%90%D7%99%D7%A9%D7%99" target="_blank" rel="noopener">שלח לי הודעה על ליווי ←</a>
+        </div>
+
+        <a href="creative-scale.html" class="back-link">← חזרה לדף הראשי</a>
+    </div>
+
+    <script src="accessibility-widget.js" defer></script>
+    <script>
+        // Fire custom events on button clicks
+        var waBtn = document.getElementById('waBtn');
+        if (waBtn) {
+            waBtn.addEventListener('click', function() {
+                if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppPaymentClick');
+                if (typeof gtag === 'function') gtag('event', 'wa_payment_click', { source: 'thank_you_creative_scale' });
+            });
+        }
+        var coachBtn = document.getElementById('coachingBtn');
+        if (coachBtn) {
+            coachBtn.addEventListener('click', function() {
+                if (typeof fbq === 'function') fbq('trackCustom', 'Coaching_Interest');
+                if (typeof gtag === 'function') gtag('event', 'coaching_interest', { source: 'thank_you_creative_scale' });
+            });
+        }
+    </script>
+</body>
+</html>
