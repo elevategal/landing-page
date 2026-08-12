@@ -185,13 +185,7 @@
         .vsl-restart-link:hover { color: #fff; }
         [hidden] { display: none !important; }
 
-        /* ===== LOCKED SECTIONS (delayed CTA) ===== */
-        .locked-section { display: none; }
-        .locked-section.revealed { display: block; animation: revealFade 0.7s ease both; }
-        @keyframes revealFade {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        /* Delayed CTA disabled — all sections visible on load */
 
         /* ===== PROOF (screenshot sticker) ===== */
         .proof-section { padding: 40px 0 60px; }
@@ -1296,11 +1290,9 @@
             var form = document.getElementById('contact');
             function check() {
                 if (window.innerWidth > 768) { sticky.style.display = 'none'; return; }
-                // Form section is a locked-section — hidden until unlocked
-                if (form && !form.classList.contains('revealed')) { sticky.style.display = 'none'; return; }
                 var y = window.scrollY;
                 var vBottom = vsl ? vsl.offsetTop + vsl.offsetHeight : 600;
-                var fTop = form.offsetTop - window.innerHeight;
+                var fTop = form ? form.offsetTop - window.innerHeight : 99999;
                 sticky.style.display = (y > vBottom && y < fTop) ? 'block' : 'none';
             }
             window.addEventListener('scroll', check, { passive: true });
