@@ -28,6 +28,18 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="favicon.png">
 
+    <!-- =====================================================
+         הגדרות לעריכה ידנית - כל מה שמתעדכן ביד נמצא כאן
+         ===================================================== -->
+    <script>
+    window.PAGE_CONFIG = {
+        WHATSAPP_NUMBER: '972547854866',            // מספר וואטסאפ בפורמט בינלאומי, בלי + ובלי מקפים
+        DEADLINE: '2026-08-17T23:59:00+03:00',      // מועד סגירת ההרשמה (שעון ישראל)
+        SPOTS_TAKEN: 4,                             // כמה כבר נרשמו (לעדכן ידנית)
+        SPOTS_TOTAL: 15                             // סך המקומות בסדנה
+    };
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://player.mediadelivery.net">
@@ -186,6 +198,24 @@
         [hidden] { display: none !important; }
 
         /* Delayed CTA disabled — all sections visible on load */
+
+        /* ===== CONTEXT BOX (for scrollers who skipped the VSL) ===== */
+        .context-section { padding: 30px 0 0; }
+        .context-box {
+            max-width: 760px; margin: 0 auto;
+            background: #fff; border: 2px solid #000;
+            border-right: 8px solid var(--accent);
+            border-radius: 12px; padding: 22px 24px;
+            box-shadow: var(--brutal-shadow-sm);
+        }
+        .context-box p {
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            font-weight: 700; line-height: 1.85; color: #000;
+        }
+        .context-box strong {
+            font-weight: 900;
+            background: linear-gradient(transparent 62%, rgba(140,82,255,0.35) 62%, rgba(140,82,255,0.35) 92%, transparent 92%);
+        }
 
         /* ===== BRIDGE (post-VSL scroll pusher) ===== */
         .bridge-section { padding: 36px 0 44px; text-align: center; }
@@ -456,6 +486,9 @@
             .video-wrapper { border-radius: 14px; box-shadow: 5px 5px 0 #000; }
             .vsl-sound-btn { font-size: 0.82rem; padding: 8px 14px; bottom: 10px; gap: 6px; }
             .vsl-sound-btn svg { width: 14px; height: 14px; }
+            .context-section { padding: 20px 0 0; }
+            .context-box { padding: 18px 16px; border-right-width: 6px; }
+            .context-box p { font-size: 0.92rem; line-height: 1.75; }
             .bridge-section { padding: 26px 0 32px; }
             .bridge-l1 { font-size: 0.95rem; margin-bottom: 8px; }
             .bridge-l2 { font-size: 1.25rem; }
@@ -540,14 +573,14 @@
 <body>
     <main>
     <!-- =============================================================
-         COUNTER: to update spots taken, change data-taken in .spots-progress below
-         Deadline: 17.8 23:59 Asia/Jerusalem (set in JS below at DEADLINE_ISO)
+         כל הערכים לעדכון ידני (וואטסאפ, דדליין, מקומות) נמצאים
+         ב-PAGE_CONFIG בתוך ה-<head> בראש הקובץ
          ============================================================= -->
 
     <!-- ===== 1. HERO (small text above VSL) ===== -->
     <section class="hero">
         <div class="container">
-            <p class="hero-mini">המודעה הזאת הכניסה <span class="num">143,948 ₪</span> ברואס <span class="num">10.37</span>. עלות הפקה: <span class="zero">0 ₪</span>. בסרטון אני מראה לך בדיוק איך.</p>
+            <p class="hero-mini">המודעה הזאת הכניסה <span class="num">142,948 ₪</span> ברואס <span class="num">10.37</span>. עלות הפקה: <span class="zero">0 ₪</span>. בסרטון אני מראה לך בדיוק איך.</p>
             <span class="hero-arrow" aria-hidden="true">↓</span>
         </div>
     </section>
@@ -573,7 +606,16 @@
         </div>
     </section>
 
-    <!-- ===== 3. BRIDGE (keeps the scroll going) ===== -->
+    <!-- ===== 3a. CONTEXT (for visitors who skipped the video) ===== -->
+    <section class="context-section">
+        <div class="container">
+            <div class="context-box fade-up">
+                <p><strong>רגע, למי שלא צפה בסרטון:</strong> לקוח שלי - רשת חדרי בריחה - לא הצליח לפצח את קהל המשפחות. ניגשתי לעבודה עם עיקרון פסיכולוגי אחד: אמא לא קונה חוויה לילד. היא קונה את התחושה שהיא אמא טובה. בניתי מודעת UGC אחת סביב העיקרון הזה - היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 3b. BRIDGE (keeps the scroll going) ===== -->
     <section class="bridge-section">
         <div class="container">
             <p class="bridge-l1 fade-up">המודעה עשתה את שלה.</p>
@@ -739,11 +781,11 @@
     <!-- ===== 7. URGENCY ===== -->
     <section class="urgency locked-section">
         <div class="container">
-            <!-- CHANGE data-taken TO UPDATE THE COUNTER -->
-            <div class="spots-progress fade-up" id="spotsProgress" data-taken="4" data-total="15">
+            <!-- הקאונטר מתעדכן מ-PAGE_CONFIG (SPOTS_TAKEN / SPOTS_TOTAL) בראש הקובץ -->
+            <div class="spots-progress fade-up" id="spotsProgress">
                 <div class="label">
-                    <span>כבר שריינו מקום: <span class="count" id="spotsCount">4 / 15</span></span>
-                    <span id="spotsPct">27%</span>
+                    <span id="spotsCount">נותרו <span class="count">11</span> מקומות מתוך 15</span>
+                    <span id="spotsPct">4 כבר נרשמו</span>
                 </div>
                 <div class="bar"><div class="bar-fill" id="spotsBar"></div></div>
             </div>
@@ -769,34 +811,9 @@
                 <div class="price-note">קריאייטיב אחד שעובד מחזיר את זה. ראית למעלה.</div>
             </div>
 
-            <div class="inline-form-card fade-up">
-                <h3>השאירו פרטים ואצור איתכם קשר בוואטסאפ להשלמת התשלום</h3>
-                <form id="leadForm" novalidate>
-                    <div style="margin-bottom:16px;">
-                        <label for="leadName">שם מלא</label>
-                        <input type="text" id="leadName" name="name" placeholder="השם שלך" required autocomplete="name">
-                    </div>
-                    <div style="margin-bottom:16px;">
-                        <label for="leadPhone">טלפון</label>
-                        <input type="tel" id="leadPhone" name="phone" placeholder="050-0000000" required autocomplete="tel" dir="ltr" style="text-align:right;">
-                    </div>
-                    <div style="margin-bottom:16px;">
-                        <label for="leadEmail">אימייל</label>
-                        <input type="email" id="leadEmail" name="email" placeholder="your@email.com" required autocomplete="email" dir="ltr" style="text-align:right;">
-                    </div>
-                    <div style="margin-bottom:20px;">
-                        <label class="consent-label">
-                            <input type="checkbox" id="leadConsent" name="consent" style="width:18px; height:18px; margin-top:2px; accent-color:var(--accent); flex-shrink:0;">
-                            <span>אני מאשר/ת קבלת תוכן, עדכונים והצעות במייל ובוואטסאפ. ניתן לבטל בכל עת.</span>
-                        </label>
-                    </div>
-                    <input type="hidden" id="vsl_percent_field" name="vslPercent" value="0">
-                    <button type="submit" id="leadSubmitBtn" class="cta-btn wide">
-                        <span class="lead-btn-text">שריין לי מקום ←</span>
-                        <span class="lead-spinner" style="display:none; width:20px; height:20px; border:3px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 0.6s linear infinite; margin:0 auto;"></span>
-                    </button>
-                </form>
-                <p class="form-footer">🔒 הפרטים שלכם מאובטחים ולא יועברו לצד שלישי</p>
+            <div class="inline-form-card fade-up" style="text-align:center;">
+                <a id="waCtaBtn" class="cta-btn wide" href="#" target="_blank" rel="noopener">רוצה מקום - דברו איתי ←</a>
+                <p class="form-footer">🔒 בלי התחייבות - סוגרים הכל בשיחה קצרה בוואטסאפ</p>
             </div>
         </div>
     </section>
@@ -1141,138 +1158,77 @@
             }
         })();
 
-        // ===== COUNTDOWN (Asia/Jerusalem 17.8 23:59) =====
+        // ===== COUNTDOWN (deadline set in PAGE_CONFIG.DEADLINE, Israel time) =====
         (function() {
-            var DEADLINE_ISO = '2026-08-17T23:59:00+03:00';
-            var deadline = new Date(DEADLINE_ISO).getTime();
+            var deadline = new Date(PAGE_CONFIG.DEADLINE).getTime();
+            if (isNaN(deadline)) {
+                // Fallback parse for browsers that choke on ISO offsets: convert IL time (+03:00) to UTC manually
+                var m = PAGE_CONFIG.DEADLINE.match(/(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+                if (m) deadline = Date.UTC(+m[1], +m[2] - 1, +m[3], +m[4] - 3, +m[5]);
+            }
             var cdDays = document.getElementById('cdDays');
             var cdHours = document.getElementById('cdHours');
             var cdMins = document.getElementById('cdMins');
             var cdSecs = document.getElementById('cdSecs');
             var cd = document.getElementById('countdown');
-            if (!cd) return;
+            if (!cd || isNaN(deadline)) return;
+            var timerId = null;
             function pad(n) { return n < 10 ? '0' + n : n; }
             function tick() {
                 var diff = deadline - Date.now();
                 if (diff <= 0) {
                     cd.innerHTML = '<div class="countdown-expired">ההרשמה נסגרה</div>';
+                    if (timerId) clearInterval(timerId);
                     return;
                 }
-                var d = Math.floor(diff / 86400000);
-                var h = Math.floor((diff % 86400000) / 3600000);
-                var m = Math.floor((diff % 3600000) / 60000);
-                var s = Math.floor((diff % 60000) / 1000);
-                cdDays.textContent = d;
-                cdHours.textContent = pad(h);
-                cdMins.textContent = pad(m);
-                cdSecs.textContent = pad(s);
+                cdDays.textContent = Math.floor(diff / 86400000);
+                cdHours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+                cdMins.textContent = pad(Math.floor((diff % 3600000) / 60000));
+                cdSecs.textContent = pad(Math.floor((diff % 60000) / 1000));
             }
             tick();
-            setInterval(tick, 1000);
+            timerId = setInterval(tick, 1000);
         })();
 
-        // ===== SPOTS PROGRESS =====
+        // ===== SPOTS PROGRESS (values from PAGE_CONFIG) =====
         (function() {
             var el = document.getElementById('spotsProgress');
             if (!el) return;
-            var taken = Number(el.getAttribute('data-taken')) || 0;
-            var total = Number(el.getAttribute('data-total')) || 15;
+            var taken = Number(PAGE_CONFIG.SPOTS_TAKEN) || 0;
+            var total = Number(PAGE_CONFIG.SPOTS_TOTAL) || 15;
+            var left = Math.max(0, total - taken);
             var pct = Math.min(100, Math.round((taken / total) * 100));
             var bar = document.getElementById('spotsBar');
             var pctEl = document.getElementById('spotsPct');
             var countEl = document.getElementById('spotsCount');
-            countEl.textContent = taken + ' / ' + total;
-            pctEl.textContent = pct + '%';
+            countEl.innerHTML = 'נותרו <span class="count">' + left + '</span> מקומות מתוך ' + total;
+            pctEl.textContent = taken + ' כבר נרשמו';
             requestAnimationFrame(function() { bar.style.width = pct + '%'; });
-            if (taken >= total) {
+            if (left <= 0) {
                 el.classList.add('full');
                 countEl.textContent = 'הסדנה מלאה';
-                pctEl.textContent = '100%';
+                pctEl.textContent = '';
                 // Change all CTAs to waitlist text
                 document.querySelectorAll('.cta-btn').forEach(function(b) {
-                    if (b.textContent.trim().indexOf('אני בפנים') !== -1 || b.textContent.trim().indexOf('שריין') !== -1) {
-                        b.textContent = 'הסדנה מלאה - רשימת המתנה';
+                    var t = b.textContent.trim();
+                    if (t.indexOf('אני בפנים') !== -1 || t.indexOf('שריין') !== -1 || t.indexOf('רוצה מקום') !== -1) {
+                        b.textContent = 'הסדנה מלאה - רשימת המתנה ←';
                     }
                 });
-                var submit = document.getElementById('leadSubmitBtn');
-                if (submit) {
-                    submit.querySelector('.lead-btn-text').textContent = 'הצטרף לרשימת המתנה ←';
-                }
             } else if (pct >= 80) {
                 el.classList.add('hot');
             }
         })();
 
-        // ===== LEAD FORM =====
+        // ===== WHATSAPP CTA (replaces the lead form) =====
         (function() {
-            var form = document.getElementById('leadForm');
-            if (!form) return;
-            form.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                var name = document.getElementById('leadName').value.trim();
-                var phone = document.getElementById('leadPhone').value.trim();
-                var email = document.getElementById('leadEmail').value.trim();
-                var consent = document.getElementById('leadConsent').checked;
-                var vslPercent = Number(localStorage.getItem('vsl_percent')) || Number(document.getElementById('vsl_percent_field').value) || 0;
-
-                var urlParams = new URLSearchParams(window.location.search);
-                var utmSource = urlParams.get('utm_source') || '';
-                var utmMedium = urlParams.get('utm_medium') || '';
-                var utmCampaign = urlParams.get('utm_campaign') || 'creative_scale_vsl';
-                var utmContent = urlParams.get('utm_content') || '';
-
-                if (name.length < 2) { document.getElementById('leadName').style.borderColor = '#E53935'; return; }
-                if (phone.replace(/[\-\s\+\(\)]/g, '').length < 9) { document.getElementById('leadPhone').style.borderColor = '#E53935'; return; }
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { document.getElementById('leadEmail').style.borderColor = '#E53935'; return; }
-
-                var btn = document.getElementById('leadSubmitBtn');
-                btn.querySelector('.lead-btn-text').style.display = 'none';
-                btn.querySelector('.lead-spinner').style.display = 'block';
-                btn.disabled = true;
-
-                var eventId = 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
-                var getCookie = function(n) {
-                    var m = document.cookie.match('(^|;)\\s*' + n + '\\s*=\\s*([^;]+)');
-                    return m ? m.pop() : undefined;
-                };
-                var fbp = getCookie('_fbp');
-                var fbc = getCookie('_fbc');
-
-                try {
-                    var resp = await fetch('/.netlify/functions/submit-vsl-lead', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            name: name, phone: phone, email: email, consent: consent,
-                            vslPercent: vslPercent,
-                            utmSource: utmSource, utmMedium: utmMedium, utmCampaign: utmCampaign, utmContent: utmContent,
-                            eventId: eventId,
-                            eventSourceUrl: window.location.href,
-                            fbp: fbp, fbc: fbc
-                        })
-                    });
-                    var result = await resp.json();
-                    if (!resp.ok) throw new Error(result.error || 'Server error');
-
-                    if (typeof fbq !== 'undefined') {
-                        var parts = name.trim().split(' ');
-                        fbq('init', '1265390459065125', {
-                            em: email,
-                            ph: phone.replace(/[\-\s\+\(\)]/g, ''),
-                            fn: parts[0],
-                            ln: parts.length > 1 ? parts[parts.length - 1] : undefined,
-                            country: 'il',
-                            external_id: email
-                        });
-                        fbq('track', 'Lead', {}, { eventID: eventId });
-                    }
-                    window.location.href = 'thank-you-creative-scale.html';
-                } catch (err) {
-                    alert('שגיאה בשליחת הטופס. נסו שוב.');
-                    btn.querySelector('.lead-btn-text').style.display = '';
-                    btn.querySelector('.lead-spinner').style.display = 'none';
-                    btn.disabled = false;
-                }
+            var btn = document.getElementById('waCtaBtn');
+            if (!btn) return;
+            var msg = encodeURIComponent('היי גל, אני רוצה להירשם לסדנת קריאייטיב סקייל');
+            btn.href = 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
+            btn.addEventListener('click', function() {
+                if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppCTA');
+                if (typeof gtag === 'function') gtag('event', 'whatsapp_cta_click', { source: 'creative_scale' });
             });
         })();
 
