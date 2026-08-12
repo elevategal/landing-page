@@ -187,20 +187,17 @@
 
         /* Delayed CTA disabled — all sections visible on load */
 
-        /* ===== PROOF (screenshot sticker) ===== */
-        .proof-section { padding: 40px 0 60px; }
-        .proof-card {
-            max-width: 780px; margin: 0 auto;
-            background: #fff; border: 2px solid #000; border-radius: 16px;
-            padding: 20px; box-shadow: var(--brutal-shadow);
-            transform: rotate(-0.5deg);
+        /* ===== BRIDGE (post-VSL scroll pusher) ===== */
+        .bridge-section { padding: 36px 0 44px; text-align: center; }
+        .bridge-l1 {
+            font-size: clamp(1rem, 2.4vw, 1.25rem);
+            font-weight: 800; color: #000; margin-bottom: 10px;
         }
-        .proof-card img { width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(0,0,0,0.1); }
-        .proof-caption {
-            text-align: center; margin-top: 16px;
-            font-size: clamp(1rem, 2.4vw, 1.2rem); font-weight: 900; color: #000;
+        .bridge-l2 {
+            font-size: clamp(1.35rem, 3.6vw, 2rem);
+            font-weight: 900; color: #000; line-height: 1.3;
         }
-        .proof-caption .sep { color: var(--accent); margin: 0 8px; }
+        .bridge-section .hero-arrow { margin-top: 18px; }
 
         /* ===== TESTIMONIALS ===== */
         .testimonials { background: #000; color: #fff; padding: 70px 0; border-top: 2px solid #000; border-bottom: 2px solid #000; }
@@ -459,10 +456,10 @@
             .video-wrapper { border-radius: 14px; box-shadow: 5px 5px 0 #000; }
             .vsl-sound-btn { font-size: 0.82rem; padding: 8px 14px; bottom: 10px; gap: 6px; }
             .vsl-sound-btn svg { width: 14px; height: 14px; }
-            .proof-section { padding: 24px 0 40px; }
-            .proof-card { padding: 12px; margin: 0; transform: none; box-shadow: 5px 5px 0 #000; }
-            .proof-caption { font-size: 0.9rem; margin-top: 12px; }
-            .proof-caption .sep { margin: 0 4px; }
+            .bridge-section { padding: 26px 0 32px; }
+            .bridge-l1 { font-size: 0.95rem; margin-bottom: 8px; }
+            .bridge-l2 { font-size: 1.25rem; }
+            .bridge-section .hero-arrow { margin-top: 14px; }
             .testimonials { padding: 50px 0; }
             .testimonials h2 { font-size: 1.25rem; }
             .testimonials .sub { font-size: 0.95rem; margin-bottom: 24px; }
@@ -576,13 +573,12 @@
         </div>
     </section>
 
-    <!-- ===== 3. PROOF SCREENSHOT ===== -->
-    <section class="proof-section">
+    <!-- ===== 3. BRIDGE (keeps the scroll going) ===== -->
+    <section class="bridge-section">
         <div class="container">
-            <div class="proof-card fade-up">
-                <img src="case-study-dashboard.webp" alt="מנהל המודעות: 263 רכישות, 52.43 שח לרכישה, רואס 10.37" loading="lazy">
-                <p class="proof-caption">263 רכישות <span class="sep">|</span> 52.43 ₪ לרכישה <span class="sep">|</span> רואס 10.37</p>
-            </div>
+            <p class="bridge-l1 fade-up">המודעה עשתה את שלה.</p>
+            <p class="bridge-l2 fade-up"><span class="h-pill-lg">עכשיו לחלק שבאמת חשוב.</span></p>
+            <span class="hero-arrow" aria-hidden="true">↓</span>
         </div>
     </section>
 
