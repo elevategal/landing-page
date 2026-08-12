@@ -36,9 +36,14 @@
         WHATSAPP_NUMBER: '972547854866',            // מספר וואטסאפ בפורמט בינלאומי, בלי + ובלי מקפים
         DEADLINE: '2026-08-17T23:59:00+03:00',      // מועד סגירת ההרשמה (שעון ישראל)
         SPOTS_TAKEN: 4,                             // כמה כבר נרשמו (לעדכן ידנית)
-        SPOTS_TOTAL: 15                             // סך המקומות בסדנה
+        SPOTS_TOTAL: 15,                            // סך המקומות בסדנה
+        SHOW_CTA_ON_PROGRESS: false                 // true = גרסת קהל קר: הסתרת ה-CTA עד 50% צפייה אמיתית
     };
+    // Cold-audience gating class goes on <html> before paint so gated sections never flash
+    if (PAGE_CONFIG.SHOW_CTA_ON_PROGRESS) document.documentElement.className += ' gate-on';
     </script>
+    <!-- player.js loaded early so the Bunny bridge is connected by the time viewers hit the sound button -->
+    <script id="playerjsScript" src="https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js" async></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -197,7 +202,31 @@
         .vsl-restart-link:hover { color: #fff; }
         [hidden] { display: none !important; }
 
-        /* Delayed CTA disabled — all sections visible on load */
+        /* ===== VSL CTA (always-visible button under the player) ===== */
+        .vsl-cta-block { text-align: center; margin: 22px auto 0; }
+        .vsl-cta-block .cta-btn { font-size: 1.05rem; padding: 16px 34px; }
+        .vsl-cta-sub { margin-top: 10px; font-size: 0.9rem; font-weight: 800; color: #000; opacity: 0.8; }
+
+        /* ===== SAFETY NET (short pitch for non-watchers) ===== */
+        .safety-net { padding: 24px 0 4px; text-align: center; }
+        .safety-lines p {
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+            font-weight: 800; color: #000; margin-bottom: 6px; line-height: 1.6;
+        }
+        .safety-lines .strong-line {
+            font-weight: 900; margin-top: 4px;
+            background: linear-gradient(transparent 62%, rgba(140,82,255,0.35) 62%, rgba(140,82,255,0.35) 92%, transparent 92%);
+            display: inline-block; padding: 0 0.2em;
+        }
+
+        /* ===== COLD-AUDIENCE GATE (PAGE_CONFIG.SHOW_CTA_ON_PROGRESS = true) =====
+           When gate-on is set, .locked-section elements stay hidden until 50% real watch. */
+        .gate-on .locked-section { display: none; }
+        .gate-on .locked-section.revealed { display: block; animation: revealFade 0.7s ease both; }
+        @keyframes revealFade {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* ===== CONTEXT BOX (for scrollers who skipped the VSL) ===== */
         .context-section { padding: 30px 0 0; }
@@ -486,6 +515,11 @@
             .video-wrapper { border-radius: 14px; box-shadow: 5px 5px 0 #000; }
             .vsl-sound-btn { font-size: 0.82rem; padding: 8px 14px; bottom: 10px; gap: 6px; }
             .vsl-sound-btn svg { width: 14px; height: 14px; }
+            .vsl-cta-block { margin-top: 14px; }
+            .vsl-cta-block .cta-btn { width: 100%; max-width: 340px; font-size: 0.95rem; padding: 14px 20px; }
+            .vsl-cta-sub { font-size: 0.8rem; margin-top: 8px; }
+            .safety-net { padding: 18px 0 0; }
+            .safety-lines p { font-size: 0.9rem; margin-bottom: 5px; }
             .context-section { padding: 20px 0 0; }
             .context-box { padding: 18px 16px; border-right-width: 6px; }
             .context-box p { font-size: 0.92rem; line-height: 1.75; }
@@ -602,6 +636,24 @@
                     </button>
                     <button id="vslRestartLink" class="vsl-restart-link" type="button" hidden>התחל מההתחלה</button>
                 </div>
+            </div>
+
+            <!-- Always-visible CTA under the player (hidden only in cold-audience gate mode) -->
+            <div class="vsl-cta-block locked-section">
+                <a id="vslCtaBtn" class="cta-btn" href="#" target="_blank" rel="noopener">שריין מקום בסדנת קריאייטיב סקייל</a>
+                <p class="vsl-cta-sub">997 ₪ + מע"מ | 15 מקומות בלבד</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 2b. SAFETY NET (for visitors who never press play) ===== -->
+    <section class="safety-net locked-section">
+        <div class="container">
+            <div class="safety-lines fade-up">
+                <p>יומיים בזום, 18-19.8, שבהם לומדים לבנות קריאייטיב שמוכר.</p>
+                <p>למי שמוכר מוצר שפותר בעיה ורוצה להפסיק לנחש.</p>
+                <p>ההוכחה למעלה: 143 אלף ש"ח מקמפיין אחד, ברואס 10.</p>
+                <p class="strong-line">997 ₪ + מע"מ. 15 מקומות בלבד.</p>
             </div>
         </div>
     </section>
@@ -1055,6 +1107,12 @@
                 restartLink.hidden = false;
             }
 
+            var GATED = !!PAGE_CONFIG.SHOW_CTA_ON_PROGRESS;
+            var playerReady = false;
+            var pjsFailed = false;
+            var pendingStart = null;
+            var reloadTimer = null;
+
             soundBtn.addEventListener('click', function() { activateSound(isReturning ? savedResumeTime : 0); });
             restartLink.addEventListener('click', function(e) { e.stopPropagation(); activateSound(0); });
 
@@ -1066,31 +1124,40 @@
                 if (typeof fbq === 'function') fbq('trackCustom', 'VSL_SoundOn');
                 if (typeof gtag === 'function') gtag('event', 'vsl_sound_on');
 
-                var handled = false;
-                if (player && typeof player.setMuted === 'function') {
-                    try {
-                        player.setCurrentTime(startAt);
-                        player.setMuted(false);
-                        player.setVolume(100);
-                        player.play();
-                        handled = true;
-                    } catch (e) { handled = false; }
-                }
-                if (!handled) {
-                    var src = iframe.src.replace('muted=true', 'muted=false');
-                    src = src.replace(/[&?]t=\d+/, '');
-                    src += (src.indexOf('?') === -1 ? '?' : '&') + 't=' + Math.floor(startAt);
-                    iframe.src = src;
-                }
+                if (playerReady) { unmuteAndPlay(startAt); return; }
+                if (pjsFailed) { reloadUnmuted(startAt); return; }
+                // Bridge not connected yet: queue the action; 'ready' will execute it.
+                // NEVER reload the iframe while the bridge might still connect - a reload
+                // severs the player.js handshake and kills all progress tracking.
+                pendingStart = startAt;
+                reloadTimer = setTimeout(function() {
+                    if (!playerReady) reloadUnmuted(startAt);
+                }, 4000);
             }
 
-            // Fallback: reveal locked sections after 8s if player never becomes ready (network fail)
-            var revealTimer = setTimeout(function() {
+            function unmuteAndPlay(startAt) {
+                try {
+                    player.setCurrentTime(startAt);
+                    player.setMuted(false);
+                    player.setVolume(100);
+                    player.play();
+                } catch (e) {}
+            }
+
+            function reloadUnmuted(startAt) {
+                var src = iframe.src.replace('muted=true', 'muted=false');
+                src = src.replace(/[&?]t=\d+/, '');
+                src += (src.indexOf('?') === -1 ? '?' : '&') + 't=' + Math.floor(startAt);
+                iframe.src = src;
+            }
+
+            // Gate-mode fallback: reveal locked sections after 8s if player never becomes ready
+            var revealTimer = GATED ? setTimeout(function() {
                 if (!unlocked) {
                     console.warn('[VSL] player not ready after 8s — revealing sections as fallback');
                     revealLockedSections(true);
                 }
-            }, 8000);
+            }, 8000) : null;
 
             function revealLockedSections(save) {
                 if (save) localStorage.setItem(STORAGE_UNLOCK, '1');
@@ -1101,13 +1168,37 @@
                 if (typeof window._vslFadeObserver === 'function') window._vslFadeObserver();
             }
 
-            var pjs = document.createElement('script');
-            pjs.src = 'https://assets.mediadelivery.net/playerjs/player-0.1.0.min.js';
-            pjs.onload = function() {
-                if (typeof playerjs === 'undefined') { return; }
+            // player.js is loaded early via the async <script id="playerjsScript"> in <head>
+            function whenPlayerJs(cb) {
+                if (typeof playerjs !== 'undefined') return cb();
+                var s = document.getElementById('playerjsScript');
+                if (!s) { onPjsError(); return; }
+                s.addEventListener('load', cb);
+                s.addEventListener('error', onPjsError);
+            }
+            function onPjsError() {
+                pjsFailed = true;
+                console.error('[VSL] player.js failed to load');
+                // A queued sound click should not wait the full 4s once we know the bridge is dead
+                if (soundClicked && !playerReady && pendingStart !== null) {
+                    if (reloadTimer) clearTimeout(reloadTimer);
+                    reloadUnmuted(pendingStart);
+                    pendingStart = null;
+                }
+                if (GATED && !unlocked) revealLockedSections(true);
+            }
+
+            whenPlayerJs(function() {
                 player = new playerjs.Player(iframe);
                 player.on('ready', function() {
-                    clearTimeout(revealTimer);
+                    playerReady = true;
+                    if (revealTimer) clearTimeout(revealTimer);
+                    if (reloadTimer) clearTimeout(reloadTimer);
+                    // Execute a sound click that happened before the bridge connected
+                    if (pendingStart !== null) {
+                        unmuteAndPlay(pendingStart);
+                        pendingStart = null;
+                    }
                     player.getDuration(function(d) { duration = d; });
 
                     player.on('timeupdate', function(data) {
@@ -1137,20 +1228,15 @@
                             }
                         });
 
-                        if (pct >= 50 && !unlocked) revealLockedSections(true);
+                        if (GATED && pct >= 50 && !unlocked) revealLockedSections(true);
                     });
 
                     player.on('error', function() {
-                        console.error('[VSL] playback error — revealing sections');
-                        if (!unlocked) revealLockedSections(true);
+                        console.error('[VSL] playback error');
+                        if (GATED && !unlocked) revealLockedSections(true);
                     });
                 });
-            };
-            pjs.onerror = function() {
-                console.error('[VSL] player.js failed to load — revealing sections');
-                if (!unlocked) revealLockedSections(true);
-            };
-            document.head.appendChild(pjs);
+            });
 
             function syncHiddenField(v) {
                 var f = document.getElementById('vsl_percent_field');
@@ -1222,15 +1308,22 @@
             }
         })();
 
-        // ===== WHATSAPP CTA (replaces the lead form) =====
+        // ===== WHATSAPP CTAs (under-player button + price-section button) =====
+        // Both fire the same funnel event pair: WhatsAppPaymentClick (Pixel) + wa_payment_click (GA4)
         (function() {
-            var btn = document.getElementById('waCtaBtn');
-            if (!btn) return;
             var msg = encodeURIComponent('היי גל, אני רוצה להירשם לסדנת קריאייטיב סקייל');
-            btn.href = 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
-            btn.addEventListener('click', function() {
-                if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppCTA');
-                if (typeof gtag === 'function') gtag('event', 'whatsapp_cta_click', { source: 'creative_scale' });
+            var href = 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
+            [
+                { id: 'vslCtaBtn', source: 'under_player' },
+                { id: 'waCtaBtn', source: 'price_section' }
+            ].forEach(function(cfg) {
+                var btn = document.getElementById(cfg.id);
+                if (!btn) return;
+                btn.href = href;
+                btn.addEventListener('click', function() {
+                    if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppPaymentClick');
+                    if (typeof gtag === 'function') gtag('event', 'wa_payment_click', { source: cfg.source });
+                });
             });
         })();
 
