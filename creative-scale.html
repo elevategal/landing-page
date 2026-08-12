@@ -272,7 +272,7 @@
         .testimonials-extra.open { display: grid; }
 
         /* ===== STATEMENTS ===== */
-        .statements { padding: 80px 0; background: transparent; }
+        .statements { padding: 60px 0 20px; background: transparent; }
         .stmt {
             max-width: 760px; margin: 0 auto 56px;
             text-align: center;
@@ -300,7 +300,7 @@
         .who-section p { font-size: clamp(1rem, 2.4vw, 1.2rem); font-weight: 700; color: #000; }
 
         /* ===== WORKSHOP DETAILS ===== */
-        .workshop { padding: 70px 0; }
+        .workshop { padding: 20px 0 60px; }
         .workshop h2 { text-align: center; font-size: clamp(1.4rem, 3.6vw, 2rem); margin-bottom: 12px; }
         .workshop .sub { text-align: center; font-weight: 800; margin-bottom: 36px; font-size: 1.05rem; }
         .meeting-grid {
@@ -500,7 +500,7 @@
             .testimonial-label .name { font-size: 0.85rem; }
             .testimonial-label .niche { font-size: 0.75rem; }
             .video-testimonial { box-shadow: 4px 4px 0 #fff; }
-            .statements { padding: 50px 0; }
+            .statements { padding: 40px 0 12px; }
             .stmt { margin-bottom: 32px; }
             .stmt p { font-size: 1.15rem; line-height: 1.4; }
             .stmt-black, .stmt-purple { padding: 22px 18px; }
@@ -509,7 +509,7 @@
             .who-section { padding: 40px 0; }
             .who-section h2 { font-size: 1.15rem; }
             .who-section p { font-size: 1rem; }
-            .workshop { padding: 50px 0; }
+            .workshop { padding: 14px 0 44px; }
             .workshop h2 { font-size: 1.4rem; }
             .workshop .sub { font-size: 0.95rem; margin-bottom: 30px; }
             .meeting-grid { grid-template-columns: 1fr; gap: 26px; max-width: 100%; padding: 0; }
@@ -610,7 +610,7 @@
     <section class="context-section">
         <div class="container">
             <div class="context-box fade-up">
-                <p><strong>רגע, למי שלא צפה בסרטון:</strong> לקוח שלי - רשת חדרי בריחה - לא הצליח לפצח את קהל המשפחות. ניגשתי לעבודה עם עיקרון פסיכולוגי אחד: אמא לא קונה חוויה לילד. היא קונה את התחושה שהיא אמא טובה. בניתי מודעת UGC אחת סביב העיקרון הזה - היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
+                <p><strong>רגע, למי שלא צפה בסרטון:</strong> לקוח שלי, רשת חדרי בריחה, לא הצליח לפצח את קהל המשפחות. במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות - ובניתי סביבו מודעת UGC אחת. היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
             </div>
         </div>
     </section>
@@ -739,7 +739,7 @@
     <!-- ===== 6. WORKSHOP DETAILS ===== -->
     <section class="workshop locked-section">
         <div class="container">
-            <h2 class="fade-up">מה קורה בסדנה</h2>
+            <h2 class="fade-up">אז מה קורה בסדנה?</h2>
             <p class="sub fade-up">יומיים. בזום. 18:00 עד 20:00.</p>
 
             <div class="meeting-grid fade-up">
@@ -1197,13 +1197,15 @@
             var taken = Number(PAGE_CONFIG.SPOTS_TAKEN) || 0;
             var total = Number(PAGE_CONFIG.SPOTS_TOTAL) || 15;
             var left = Math.max(0, total - taken);
-            var pct = Math.min(100, Math.round((taken / total) * 100));
+            var takenPct = Math.min(100, Math.round((taken / total) * 100));
+            var leftPct = 100 - takenPct;
             var bar = document.getElementById('spotsBar');
             var pctEl = document.getElementById('spotsPct');
             var countEl = document.getElementById('spotsCount');
             countEl.innerHTML = 'נותרו <span class="count">' + left + '</span> מקומות מתוך ' + total;
             pctEl.textContent = taken + ' כבר נרשמו';
-            requestAnimationFrame(function() { bar.style.width = pct + '%'; });
+            // The bar mirrors the text: it shows what's LEFT, shrinking as spots fill
+            bar.style.width = leftPct + '%';
             if (left <= 0) {
                 el.classList.add('full');
                 countEl.textContent = 'הסדנה מלאה';
@@ -1215,7 +1217,7 @@
                         b.textContent = 'הסדנה מלאה - רשימת המתנה ←';
                     }
                 });
-            } else if (pct >= 80) {
+            } else if (takenPct >= 80) {
                 el.classList.add('hot');
             }
         })();
