@@ -1310,9 +1310,14 @@
 
         // ===== WHATSAPP CTAs (under-player button + price-section button) =====
         // Both fire the same funnel event pair: WhatsAppPaymentClick (Pixel) + wa_payment_click (GA4)
+        // Mobile gets the whatsapp:// deep link - opens the chat directly in the app,
+        // skipping wa.me's "Continue to chat" interstitial page. Desktop keeps wa.me.
         (function() {
             var msg = encodeURIComponent('היי גל, אני רוצה להירשם לסדנת קריאייטיב סקייל');
-            var href = 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
+            var isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+            var href = isMobile
+                ? 'whatsapp://send?phone=' + PAGE_CONFIG.WHATSAPP_NUMBER + '&text=' + msg
+                : 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
             [
                 { id: 'vslCtaBtn', source: 'under_player' },
                 { id: 'waCtaBtn', source: 'price_section' }
@@ -1320,9 +1325,19 @@
                 var btn = document.getElementById(cfg.id);
                 if (!btn) return;
                 btn.href = href;
+                if (isMobile) btn.removeAttribute('target');
                 btn.addEventListener('click', function() {
                     if (typeof fbq === 'function') fbq('trackCustom', 'WhatsAppPaymentClick');
                     if (typeof gtag === 'function') gtag('event', 'wa_payment_click', { source: cfg.source });
+                    // Safety net: if the app didn't take over within 2s (no WhatsApp installed),
+                    // fall through to the universal wa.me link
+                    if (isMobile) {
+                        setTimeout(function() {
+                            if (!document.hidden) {
+                                window.location.href = 'https://wa.me/' + PAGE_CONFIG.WHATSAPP_NUMBER + '?text=' + msg;
+                            }
+                        }, 2000);
+                    }
                 });
             });
         })();
