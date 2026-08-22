@@ -27,6 +27,9 @@ const CFG = {
   PROOF_IMAGE_URL: "proof-143k.webp",
   PROOF_IMAGE_ALT: "צילום מסך ממנהל המודעות: 142,948 ₪ הכנסה, רואס 10.37",
 
+  // --- תמונת הפרופיל בסקשן "מי אני" ---
+  PROFILE_IMAGE_URL: "gal-profile.webp",   // השאר ריק ("") כדי להסתיר את התמונה
+
   // --- קרוסלת הלוגואים בסקשן "מי אני" ---
   // רשימת קבצי הלוגו. הלוגואים לבנים ורצים על רקע כהה במראה מונוכרום.
   // להוסיף/להחליף - פשוט ערוך את הרשימה (מומלץ 10-12 פריטים).
@@ -138,21 +141,21 @@ h3{font-size:clamp(1.05rem,3.6vw,1.25rem)}
 }
 
 /* ---------- HERO ---------- */
-.hero{padding:34px 0 30px;text-align:center}
+.hero{padding:20px 0 14px;text-align:center}
 .badge{
   display:inline-flex;align-items:center;gap:8px;
   background:var(--dark);color:#fff;
   border:2px solid var(--ink);border-radius:999px;
   padding:8px 16px;font-size:.82rem;font-weight:800;
-  box-shadow:var(--shadow-sm);margin-bottom:22px;
+  box-shadow:var(--shadow-sm);margin-bottom:13px;
 }
 .badge .dot{width:8px;height:8px;border-radius:50%;background:#3DDC84;animation:pulse 1.6s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
 
-.hero h1{margin-bottom:16px}
+.hero h1{margin-bottom:11px}
 .hero-sub{
   font-size:clamp(.95rem,3.6vw,1.1rem);font-weight:800;line-height:1.6;
-  max-width:560px;margin:0 auto 26px;
+  max-width:560px;margin:0 auto 6px;
 }
 .hero-sub .sep{color:var(--accent);padding:0 4px;font-weight:900}
 
@@ -168,6 +171,17 @@ h3{font-size:clamp(1.05rem,3.6vw,1.25rem)}
 .cta:hover{background:var(--accent-dark)}
 .cta:active{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
 .cta-note{font-size:.82rem;font-weight:700;opacity:.7;margin-top:10px}
+
+/* כפתור אדום - הפעולה הראשית במסך הפתיחה */
+.cta-red{background:var(--red)}
+.cta-red:hover{background:#C62828}
+
+/* "נשימה" - הכפתור גדל ומתכווץ כדי למשוך את העין */
+.cta-breathe{display:inline-block;animation:breathe 2.4s ease-in-out infinite;will-change:transform}
+@keyframes breathe{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.055)}
+}
 
 /* ---------- SPOTS BAR ---------- */
 .spots{
@@ -207,7 +221,7 @@ h3{font-size:clamp(1.05rem,3.6vw,1.25rem)}
 .proof-kicker{
   display:inline-block;background:var(--dark);color:#fff;
   border:2px solid var(--ink);border-radius:999px;
-  padding:7px 16px;font-size:.85rem;font-weight:900;margin-bottom:18px;
+  padding:7px 16px;font-size:.85rem;font-weight:900;margin-bottom:12px;
   box-shadow:var(--shadow-sm);
 }
 .proof-card{
@@ -216,7 +230,7 @@ h3{font-size:clamp(1.05rem,3.6vw,1.25rem)}
 }
 .proof-card img{display:block;width:100%;height:auto;border-radius:8px}
 .proof-cap{
-  margin-top:14px;font-size:.88rem;font-weight:900;
+  margin-top:10px;font-size:.88rem;font-weight:900;
   color:var(--ink);opacity:.8;
 }
 .proof-ph{
@@ -226,15 +240,29 @@ h3{font-size:clamp(1.05rem,3.6vw,1.25rem)}
 
 /* ---------- מי אני ---------- */
 .about{text-align:center}
-.about h2{margin-bottom:20px}
+.about h2{margin-bottom:18px}
+
+/* שורה פנימית בכרטיס: התמונה מימין, הטקסט משמאל */
+.about-row{
+  display:flex;align-items:flex-end;gap:18px;
+  padding:20px 0 0 20px;text-align:right;
+}
+.about-photo{
+  width:clamp(112px,30vw,210px);height:auto;
+  flex-shrink:0;display:block;align-self:flex-end;
+  filter:
+    drop-shadow(0 0 1px rgba(255,255,255,.95))
+    drop-shadow(0 0 4px rgba(255,255,255,.65))
+    drop-shadow(0 0 16px rgba(255,255,255,.32));
+}
+.about-txt-col{flex:1;min-width:0;align-self:center;padding:14px 0}
 .about-box{
   background:var(--dark);color:#fff;border:2px solid var(--ink);
-  border-radius:var(--radius);padding:22px 0 0;box-shadow:var(--shadow);
+  border-radius:var(--radius);padding:0;box-shadow:var(--shadow);
   overflow:hidden;
 }
 .about-txt{
-  font-size:clamp(.95rem,3.6vw,1.08rem);font-weight:800;line-height:1.65;
-  padding:0 22px 20px;
+  font-size:clamp(.86rem,3.1vw,1.05rem);font-weight:800;line-height:1.6;
 }
 .about-box strong{color:#fff;background:var(--accent);padding:.04em .3em;border-radius:4px}
 
@@ -339,6 +367,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
   .badge .dot{animation:none}
   .marquee-track{animation:none;flex-wrap:wrap;justify-content:center;width:auto}
   .marquee{-webkit-mask-image:none;mask-image:none}
+  .cta-breathe{animation:none}
 }
 
 @media(max-width:520px){
@@ -403,8 +432,10 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
       </div>
       <p class="proof-cap up">142,948 ₪ ממודעה אחת &middot; רואס 10.37 &middot; 263 רכישות</p>
 
-      <div class="up" style="margin-top:26px">
-        <a href="#register" class="cta" data-cta>תרשום אותי &larr;</a>
+      <div class="up" style="margin-top:16px">
+        <span class="cta-breathe">
+          <a href="#register" class="cta cta-red" data-cta>תרשום אותי &larr;</a>
+        </span>
       </div>
     </div>
   </section>
@@ -449,8 +480,8 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
       <div class="card up">
         <div class="card-num">3</div>
         <div>
-          <h3>איך ליישם את זה על המותג שלך</h3>
-          <p>לא עוד תיאוריה - תראה בדיוק איך לוקחים את העיקרון הזה ומתחילים ליישם אותו על המוצר או השירות שלך.</p>
+          <h3>למה רוב המודעות שאתה מעלה לא ממירות</h3>
+          <p>ההבדל האמיתי בין מודעה שמוכרת למודעה ששורפת תקציב - ולמה זה לא קשור ל-AI, לתקציב או ליצירתיות.</p>
         </div>
       </div>
     </div>
@@ -461,10 +492,15 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     <div class="wrap">
       <h2 class="up">מי <span class="pill">אני</span></h2>
       <div class="about-box up">
-        <p class="about-txt">
-          <strong>גל כהן</strong> - בניתי אסטרטגיות שיווק ל-50+ מותגים.
-          בשנתיים האחרונות הקמפיינים שעבדתי עליהם הכניסו מעל 10 מיליון שקל.
-        </p>
+        <div class="about-row">
+          <img class="about-photo" id="aboutPhoto" src="" alt="גל כהן" width="440" height="498" loading="lazy" decoding="async">
+          <div class="about-txt-col">
+            <p class="about-txt">
+              <strong>גל כהן</strong> - בניתי אסטרטגיות שיווק ל-50+ מותגים.
+              בשנתיים האחרונות הקמפיינים שעבדתי עליהם הכניסו מעל 10 מיליון שקל.
+            </p>
+          </div>
+        </div>
 
         <!-- קרוסלת לוגואים - מתמלאת מ-LOGOS_ARRAY -->
         <div class="marquee" id="marquee" aria-label="מותגים שעבדתי איתם">
@@ -478,7 +514,7 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
   <section class="register" id="register">
     <div class="wrap">
       <div class="form-card up">
-        <h2>שריינו לי מקום <span class="pill">בוובינר</span></h2>
+        <h2>גל תשריין לי מקום <span class="pill">בוובינר</span></h2>
 
         <div class="form-err" id="formErr"></div>
 
@@ -578,6 +614,17 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     img.loading = 'lazy';
     img.decoding = 'async';
     if (ph) ph.replaceWith(img);
+  }
+
+  /* ---------- 2a. תמונת הפרופיל ---------- */
+  var photo = document.getElementById('aboutPhoto');
+  if (photo) {
+    if (CFG.PROFILE_IMAGE_URL) {
+      photo.src = CFG.PROFILE_IMAGE_URL;
+      photo.onerror = function(){ photo.remove(); };
+    } else {
+      photo.remove();
+    }
   }
 
   /* ---------- 2b. קרוסלת הלוגואים ---------- */
