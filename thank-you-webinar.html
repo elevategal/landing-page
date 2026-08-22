@@ -1,657 +1,238 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ההרשמה אושרה | לייב קריאייטיב 14.5</title>
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&family=Noto+Sans+Hebrew:wght@400;700;900&display=swap" rel="stylesheet"></noscript>
+<!-- ==========================================================================
+     ‼️  בלוק ההגדרות - זה המקום היחיד שצריך לערוך  ‼️
+     ========================================================================== -->
+<script>
+const CFG = {
+  // קבוצת הוואטסאפ של משתתפי הוובינר
+  WHATSAPP_GROUP_URL: "https://chat.whatsapp.com/Kk3EcCKnwFjBifOzMalL8q?mode=gi_t",
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SCLND9ZP6"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-8SCLND9ZP6');
-    </script>
+  // תאריך ושעה (חייב להיות זהה לדף ההרשמה)
+  WEBINAR_DAY:  "יום חמישי",
+  WEBINAR_DATE: "27.8",
+  WEBINAR_TIME: "20:00",
 
-    <!-- Meta Pixel -->
-    <script>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1265390459065125');
-        fbq('track', 'PageView');
-        // Lead event already fired on form submit (webinar.html) with eventID dedup + server CAPI.
-        // JoinWhatsAppGroup custom event fires on click of the WA button below.
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=1265390459065125&ev=PageView&noscript=1" /></noscript>
+  // פיקסלים
+  META_PIXEL_ID: "1265390459065125",
+  GA4_ID: "G-8SCLND9ZP6",
+  CLARITY_ID: "xgi43gtvpe"
+};
+</script>
+<!-- ===== סוף בלוק ההגדרות ===== -->
 
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<title>ההרשמה אושרה | נשאר שלב אחד</title>
+<meta name="robots" content="noindex, nofollow">
 
-        :root {
-            --bg-primary: #F3EFE7;
-            --bg-card: #1A1A2E;
-            --accent: #8C52FF;
-            --green-accent: #2E7D32;
-            --whatsapp: #25D366;
-            --whatsapp-dark: #1FAF53;
-            --red-accent: #E53935;
-            --radius: 12px;
-            --radius-lg: 20px;
-            --brutal-shadow: 6px 6px 0 #000;
-            --brutal-shadow-sm: 4px 4px 0 #000;
-        }
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="favicon.png">
 
-        html { scroll-behavior: smooth; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;700;800;900&display=swap" rel="stylesheet">
 
-        body {
-            font-family: 'Heebo', 'Noto Sans Hebrew', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-primary);
-            background-image:
-                linear-gradient(rgba(0,0,0,0.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px);
-            background-size: 40px 40px;
-            color: #000;
-            line-height: 1.6;
-            font-weight: 700;
-            min-height: 100vh;
-            padding: 32px 16px;
-        }
+<style>
+:root{
+  --accent:#8C52FF;
+  --bg:#F3EFE7;
+  --dark:#1A1A2E;
+  --ink:#000;
+  --red:#E53935;
+  --wa:#25D366;
+  --wa-dark:#1FAF53;
+  --radius:14px;
+  --shadow:6px 6px 0 var(--ink);
+  --shadow-sm:4px 4px 0 var(--ink);
+}
 
-        .ty-page {
-            max-width: 680px;
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-        }
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:hidden;-webkit-text-size-adjust:100%}
 
-        h1, h2, h3 {
-            font-family: 'Heebo', 'Noto Sans Hebrew', sans-serif;
-            color: #000;
-            font-weight: 900;
-            line-height: 1.2;
-        }
+body{
+  font-family:'Heebo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg);
+  background-image:
+    linear-gradient(rgba(0,0,0,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,0,0,.05) 1px,transparent 1px);
+  background-size:40px 40px;
+  color:var(--ink);
+  line-height:1.6;font-size:16px;font-weight:700;
+  overflow-x:hidden;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+}
 
-        /* ===== TOP BADGE ===== */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: 50px;
-            padding: 8px 18px;
-            font-size: 0.92rem;
-            color: #000;
-            font-weight: 800;
-            margin-bottom: 24px;
-            box-shadow: var(--brutal-shadow-sm);
-        }
-        .badge .check {
-            width: 22px; height: 22px;
-            border-radius: 50%;
-            background: var(--green-accent);
-            color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 0.85rem;
-            border: 2px solid #000;
-            animation: check-pop 0.5s ease;
-        }
-        @keyframes check-pop {
-            0% { transform: scale(0); }
-            70% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
+main{flex:1;max-width:620px;margin:0 auto;width:100%;padding:26px 20px 40px;text-align:center}
 
-        /* ===== H1 ===== */
-        h1 {
-            font-size: clamp(2rem, 5.4vw, 3rem);
-            margin-bottom: 14px;
-        }
-        .h-pill-grad {
-            display: inline-block;
-            background: var(--accent);
-            color: #fff;
-            padding: 0.05em 0.5em;
-            border-radius: 8px;
-            font-weight: 900;
-            box-shadow: 4px 4px 0 #000;
-            border: 2px solid #000;
-        }
-        .h1-sub {
-            font-size: clamp(1rem, 2.4vw, 1.2rem);
-            font-weight: 800;
-            color: #000;
-            margin-bottom: 36px;
-            line-height: 1.5;
-        }
+h1{font-size:clamp(1.9rem,7vw,2.7rem);font-weight:900;line-height:1.15;letter-spacing:-.02em}
+.pill{
+  display:inline-block;background:var(--accent);color:#fff;
+  padding:.06em .38em;border-radius:6px;font-weight:900;
+  box-shadow:4px 4px 0 var(--ink);
+}
 
-        /* ===== BLACK SECTION HEADER ===== */
-        .block-black {
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 12px 22px;
-            border: 2px solid #000;
-            border-radius: 8px;
-            font-weight: 900;
-            font-size: clamp(1rem, 2.6vw, 1.2rem);
-            line-height: 1.4;
-            box-shadow: 4px 4px 0 var(--accent);
-            margin-bottom: 22px;
-        }
+/* באדג' אישור */
+.badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#fff;border:2px solid var(--ink);border-radius:999px;
+  padding:9px 20px;font-size:.9rem;font-weight:900;
+  box-shadow:var(--shadow-sm);margin-bottom:20px;
+}
+.badge .tick{
+  width:22px;height:22px;border-radius:50%;background:#2E7D32;
+  color:#fff;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
 
-        /* ===== MAIN CARD (WhatsApp join) ===== */
-        .ty-card {
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--brutal-shadow);
-            padding: 34px 28px;
-            text-align: center;
-            margin-bottom: 22px;
-        }
+.sub{font-size:clamp(1rem,4vw,1.15rem);font-weight:800;margin-top:14px}
 
-        .check-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 26px;
-            text-align: right;
-            display: inline-block;
-        }
-        .check-list li {
-            position: relative;
-            padding: 8px 32px 8px 0;
-            font-size: 1rem;
-            color: #000;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-        .check-list li::before {
-            content: '\2713';
-            position: absolute;
-            right: 0;
-            top: 8px;
-            color: var(--green-accent);
-            font-weight: 900;
-            font-size: 1.25rem;
-        }
+/* אזהרה */
+.warn{
+  background:#FFF1F0;border:2px solid var(--red);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);
+  padding:15px 18px;margin:22px 0 24px;
+  font-size:clamp(.9rem,3.4vw,1rem);font-weight:800;line-height:1.55;color:#B71C1C;
+}
 
-        /* ===== WHATSAPP CTA ===== */
-        .btn-whatsapp {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--whatsapp);
-            color: #fff;
-            padding: 20px 40px;
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 1.15rem;
-            font-weight: 900;
-            text-decoration: none;
-            border: 2px solid #000;
-            box-shadow: var(--brutal-shadow);
-            transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-            animation: wa-breathe 2.5s ease-in-out infinite;
-            min-width: 280px;
-        }
-        @keyframes wa-breathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.04); }
-        }
-        .btn-whatsapp:hover {
-            animation: none;
-            background: var(--whatsapp-dark);
-            transform: translate(-2px, -2px);
-            box-shadow: 8px 8px 0 #000;
-        }
-        .btn-whatsapp:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
-        .btn-whatsapp svg { width: 26px; height: 26px; fill: #fff; flex-shrink: 0; }
+/* כרטיס הבולטים */
+.card{
+  background:#fff;border:2px solid var(--ink);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:8px 20px;margin-top:22px;
+}
+.list{list-style:none;text-align:right}
+.list li{
+  display:flex;gap:11px;align-items:flex-start;
+  font-size:clamp(.92rem,3.5vw,1.03rem);font-weight:800;line-height:1.5;
+  padding:9px 0;
+}
+.list li+li{border-top:1px solid rgba(0,0,0,.08)}
+.list .v{color:#2E7D32;font-size:1.15rem;line-height:1.2;flex-shrink:0}
 
-        /* ===== WARNING ===== */
-        .warning {
-            background: #FFF5F5;
-            border: 2px solid var(--red-accent);
-            border-radius: var(--radius);
-            padding: 14px 18px;
-            color: var(--red-accent);
-            font-weight: 900;
-            font-size: 0.92rem;
-            line-height: 1.55;
-            margin-bottom: 30px;
-            text-align: right;
-            box-shadow: var(--brutal-shadow-sm);
-        }
+/* כפתור וואטסאפ */
+.wa{
+  display:flex;align-items:center;justify-content:center;gap:11px;
+  width:100%;background:var(--wa);color:#fff;
+  border:2px solid var(--ink);border-radius:var(--radius);
+  padding:17px 20px;font-family:inherit;
+  font-size:clamp(1rem,4.2vw,1.18rem);font-weight:900;
+  text-decoration:none;box-shadow:var(--shadow);
+  transition:transform .12s ease,box-shadow .12s ease;
+  -webkit-tap-highlight-color:transparent;
+  animation:breathe 2.4s ease-in-out infinite;
+}
+.wa:hover{background:var(--wa-dark)}
+.wa:active{animation:none;transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+.wa svg{width:25px;height:25px;fill:#fff;flex-shrink:0}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 
-        /* ===== CALENDAR (secondary) ===== */
-        .calendar-section {
-            margin-bottom: 36px;
-        }
-        .calendar-section h3 {
-            font-size: 1rem;
-            color: #000;
-            opacity: 0.7;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .calendar-section .sub {
-            font-size: 1.05rem;
-            color: #000;
-            font-weight: 900;
-            margin-bottom: 14px;
-        }
-        .btn-calendar {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #fff;
-            color: #000;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-family: inherit;
-            font-size: 1rem;
-            font-weight: 900;
-            text-decoration: none;
-            border: 2px solid #000;
-            box-shadow: var(--brutal-shadow-sm);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-        }
-        .btn-calendar:hover {
-            transform: translate(-2px, -2px);
-            box-shadow: 6px 6px 0 #000;
-        }
-        .btn-calendar:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #000; }
+.when{margin-top:18px;font-size:.86rem;font-weight:800;opacity:.65}
 
-        /* ===== "WHAT HAPPENS NOW" - 3 horizontal blocks ===== */
-        .what-happens {
-            margin-bottom: 36px;
-        }
-        .what-happens-title {
-            font-size: 1rem;
-            font-weight: 900;
-            color: #000;
-            margin-bottom: 18px;
-            opacity: 0.85;
-        }
-        .what-happens-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 14px;
-            text-align: right;
-        }
-        .what-happens-card {
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius);
-            box-shadow: var(--brutal-shadow-sm);
-            padding: 18px 16px;
-        }
-        .what-happens-card .num {
-            font-family: 'Heebo', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--accent);
-            line-height: 1;
-            margin-bottom: 8px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #000;
-            display: inline-block;
-            min-width: 50px;
-        }
-        .what-happens-card h4 {
-            font-size: 0.95rem;
-            font-weight: 900;
-            color: #000;
-            margin-bottom: 6px;
-            line-height: 1.3;
-        }
-        .what-happens-card p {
-            font-size: 0.85rem;
-            color: #000;
-            font-weight: 700;
-            line-height: 1.5;
-        }
-        @media (max-width: 640px) {
-            .what-happens-grid { grid-template-columns: 1fr; }
-        }
+footer{
+  background:var(--dark);color:rgba(255,255,255,.7);
+  text-align:center;padding:18px 20px;font-size:.74rem;font-weight:600;line-height:1.9;
+}
+footer a{color:rgba(255,255,255,.9);text-decoration:underline}
 
-        /* ===== EVENT INFO BOX ===== */
-        .event-info {
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: var(--radius);
-            box-shadow: var(--brutal-shadow);
-            padding: 22px 24px;
-            margin-bottom: 30px;
-            text-align: right;
-        }
-        .event-info-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            color: #000;
-            font-weight: 800;
-            font-size: 0.97rem;
-        }
-        .event-info-row + .event-info-row { border-top: 1px dashed rgba(0,0,0,0.15); }
-        .event-info-row .ico { font-size: 1.2rem; flex-shrink: 0; }
-
-        /* ===== FINAL CTA - smaller WA button ===== */
-        .final-wa {
-            text-align: center;
-        }
-
-        @media (max-width: 480px) {
-            body { padding: 24px 12px; }
-            .ty-card { padding: 26px 20px; }
-            .btn-whatsapp { padding: 18px 28px; font-size: 1.05rem; min-width: 0; width: 100%; }
-            .check-list li { padding-right: 28px; font-size: 0.95rem; }
-            .check-list li::before { font-size: 1.1rem; }
-        }
-
-        /* ===== JOIN-GROUP MODAL ===== */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.78);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            z-index: 9999;
-            animation: modalFadeIn 0.25s ease-out;
-        }
-        @keyframes modalFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .modal-overlay.is-hidden { display: none; }
-        .modal-card {
-            position: relative;
-            background: #fff;
-            border: 3px solid #000;
-            border-radius: var(--radius-lg);
-            box-shadow: 8px 8px 0 #000;
-            padding: 36px 28px 28px;
-            max-width: 460px;
-            width: 100%;
-            text-align: center;
-            animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes modalSlideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            background: #fff;
-            border: 2px solid #000;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            box-shadow: 2px 2px 0 #000;
-            transition: transform 0.1s ease;
-        }
-        .modal-close:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 #000; }
-        .modal-close:active { transform: translate(2px, 2px); box-shadow: 0 0 0 #000; }
-        .modal-emoji {
-            font-size: 3rem;
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        .modal-title {
-            font-family: 'Heebo', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            line-height: 1.2;
-            color: #000;
-            margin-bottom: 8px;
-        }
-        .modal-sub {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #555;
-            margin-bottom: 18px;
-        }
-        .modal-warning {
-            background: #FFF3E0;
-            border: 2px solid var(--red-accent);
-            border-radius: var(--radius);
-            padding: 14px 18px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: #000;
-            line-height: 1.5;
-            margin-bottom: 22px;
-            text-align: right;
-        }
-        .modal-warning strong { color: var(--red-accent); }
-        .modal-cta {
-            width: 100%;
-            justify-content: center;
-            padding: 18px 24px;
-            font-size: 1.1rem;
-        }
-        .modal-foot {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #777;
-            margin-top: 12px;
-        }
-        @media (max-width: 480px) {
-            .modal-card { padding: 30px 20px 22px; }
-            .modal-emoji { font-size: 2.5rem; }
-            .modal-title { font-size: 1.3rem; }
-            .modal-sub { font-size: 0.95rem; }
-            .modal-warning { font-size: 0.88rem; padding: 12px 14px; }
-        }
-    </style>
+@media(prefers-reduced-motion:reduce){ .wa{animation:none} }
+@media(max-width:520px){ main{padding:20px 16px 32px} .card{padding:18px 15px} }
+</style>
 </head>
+
 <body>
+<main>
 
-    <!-- Join-group modal: shown automatically on page load -->
-    <div id="joinGroupModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <div class="modal-card">
-            <button type="button" class="modal-close" id="modalCloseBtn" aria-label="סגור">&times;</button>
-            <div class="modal-emoji">🎉</div>
-            <h2 id="modalTitle" class="modal-title">ההרשמה הושלמה!</h2>
-            <p id="modalSub" class="modal-sub">עכשיו - שלב אחרון לפני הוובינר:</p>
-            <div id="modalWarning" class="modal-warning">
-                &#9888;&#65039; <strong>הקישור לזום יישלח רק בקבוצת הוואטסאפ.</strong> אם לא תצטרף - לא תוכל להשתתף בוובינר.
-            </div>
-            <a
-              href="https://chat.whatsapp.com/Kk3EcCKnwFjBifOzMalL8q?mode=gi_t"
-              onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'thank_you_modal',webinar_date:'2026-05-14'});} document.getElementById('joinGroupModal').classList.add('is-hidden');"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-whatsapp modal-cta">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
-                <span>הצטרף לקבוצה עכשיו &larr;</span>
-            </a>
-            <p class="modal-foot">לחיצה תפתח את WhatsApp בלשונית חדשה</p>
-        </div>
-    </div>
+  <div class="badge"><span class="tick">&#10003;</span><span>ההרשמה אושרה</span></div>
 
-    <div class="ty-page">
+  <h1><span id="greet">איזה כיף!</span><br><span class="pill">ההרשמה שלך אושרה</span></h1>
 
-        <!-- Top badge -->
-        <div class="badge">
-            <span class="check">&#10003;</span>
-            <span id="badgeText">ההרשמה אושרה</span>
-        </div>
+  <p class="sub">נשאר שלב אחד בלבד.</p>
 
-        <!-- H1 + sub -->
-        <h1 id="pageH1">מעולה!<br><span class="h-pill-grad" id="pageH1Pill">המקום שלך נשמר</span></h1>
-        <p id="pageSub" class="h1-sub">נשאר שלב אחד בלבד.</p>
+  <div class="warn">
+    &#9888;&#65039; <strong>חשוב:</strong> הקישור לזום יישלח רק לחברי הקבוצה.<br>
+    מי שלא יצטרף - לא יוכל להשתתף בוובינר.
+  </div>
 
-        <!-- Main: Join WhatsApp -->
-        <div id="blockBlack" class="block-black">שלב אחרון:<br>הצטרף לקבוצת הוואטסאפ</div>
+  <a class="wa" id="waBtn" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.02h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.22 8.22 0 01-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg>
+    <span>לחץ כאן להצטרפות לקבוצה &larr;</span>
+  </a>
 
-        <div class="ty-card">
-            <ul id="checkList" class="check-list">
-                <li>הקישור לזום יישלח רק בקבוצה</li>
-                <li>תקבל תוכן הכנה לקראת הוובינר</li>
-                <li>תזכורת 24 שעות לפני האירוע</li>
-            </ul>
-            <div>
-                <a
-                  href="https://chat.whatsapp.com/Kk3EcCKnwFjBifOzMalL8q?mode=gi_t"
-                  onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'thank_you_page',webinar_date:'2026-05-14'});}"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn-whatsapp">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
-                  <span>לחץ כאן להצטרפות לקבוצה &larr;</span>
-                </a>
-            </div>
-        </div>
+  <div class="card">
+    <ul class="list">
+      <li><span class="v">&#10003;</span><span>הקישור לזום יישלח רק בקבוצה</span></li>
+      <li><span class="v">&#10003;</span><span>תקבל תוכן הכנה לקראת הוובינר</span></li>
+      <li><span class="v">&#10003;</span><span>תזכורת 24 שעות לפני האירוע</span></li>
+    </ul>
+  </div>
 
-        <!-- Warning -->
-        <div id="warningBox" class="warning">
-            &#9888;&#65039; <strong>חשוב:</strong> הקישור לזום יישלח רק לחברי הקבוצה. מי שלא יצטרף - לא יוכל להשתתף בוובינר.
-        </div>
+  <p class="when">
+    <span data-cfg="day"></span> <span data-cfg="date"></span> בשעה <span data-cfg="time"></span>
+  </p>
 
-        <!-- Calendar (secondary) -->
-        <div class="calendar-section">
-            <h3>שלב נוסף (אופציונלי):</h3>
-            <p class="sub">הוסף את האירוע ליומן</p>
-            <a
-              href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%9C%D7%99%D7%99%D7%91+%D7%A7%D7%A8%D7%99%D7%90%D7%99%D7%99%D7%98%D7%99%D7%91+-+%D7%9C%D7%9E%D7%94+%D7%94%D7%9E%D7%95%D7%93%D7%A2%D7%94+%D7%A9%D7%9C%D7%9A+%D7%9C%D7%90+%D7%9E%D7%9E%D7%99%D7%A8%D7%94&dates=20260505T170000Z/20260505T174000Z&details=%D7%9C%D7%99%D7%99%D7%91+%D7%91%D7%96%D7%95%D7%9D+%D7%A2%D7%9D+%D7%92%D7%9C+%D7%9B%D7%94%D7%9F.+%D7%94%D7%A7%D7%99%D7%A9%D7%95%D7%A8+%D7%99%D7%99%D7%A9%D7%9C%D7%97+%D7%91%D7%A7%D7%91%D7%95%D7%A6%D7%AA+%D7%94%D7%95%D7%95%D7%90%D7%98%D7%A1%D7%90%D7%A4.&location=%D7%96%D7%95%D7%9D"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-calendar">
-              &#128197; <span>הוסף לגוגל קלנדר</span>
-            </a>
-        </div>
+</main>
 
-        <!-- What happens now (3 blocks) -->
-        <div class="what-happens">
-            <h3 class="what-happens-title">מה קורה עכשיו?</h3>
-            <div class="what-happens-grid">
-                <div class="what-happens-card">
-                    <div class="num">01</div>
-                    <h4>תצטרף לקבוצה</h4>
-                    <p>לחיצה אחת על הכפתור למעלה.</p>
-                </div>
-                <div class="what-happens-card">
-                    <div class="num">02</div>
-                    <h4>תקבל הכנה לאירוע</h4>
-                    <p>תוכן שיעזור לך להפיק מקסימום מהוובינר.</p>
-                </div>
-                <div class="what-happens-card">
-                    <div class="num">03</div>
-                    <h4>תקבל את הקישור לזום</h4>
-                    <p>ביום הוובינר עם תזכורת.</p>
-                </div>
-            </div>
-        </div>
+<footer>
+  כל הזכויות שמורות &copy; 2026 Elev8 |
+  <a href="privacy.html">מדיניות פרטיות</a> |
+  <a href="accessibility.html">הצהרת נגישות</a> |
+  <a href="terms.html">תקנון האתר</a>
+</footer>
 
-        <!-- Event details (reminder) -->
-        <div class="event-info">
-            <div class="event-info-row"><span class="ico">&#128197;</span> <span>יום חמישי, 14.5.2026</span></div>
-            <div class="event-info-row"><span class="ico">&#128336;</span> <span>בשעה 20:00 בדיוק</span></div>
-            <div class="event-info-row"><span class="ico">&#9201;</span> <span>משך: 40 דקות</span></div>
-            <div class="event-info-row"><span class="ico">&#128187;</span> <span>בזום (קישור יישלח בקבוצה)</span></div>
-        </div>
+<script src="accessibility-widget.js" defer></script>
 
-        <!-- Final WA CTA -->
-        <div class="final-wa">
-            <a
-              href="https://chat.whatsapp.com/Kk3EcCKnwFjBifOzMalL8q?mode=gi_t"
-              onclick="if(typeof fbq!=='undefined'){fbq('trackCustom','JoinWhatsAppGroup',{event_source:'thank_you_page_final',webinar_date:'2026-05-14'});}"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn-whatsapp">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.6 6.32A7.85 7.85 0 0 0 12.05 4 7.94 7.94 0 0 0 4.1 11.94a7.83 7.83 0 0 0 1.06 3.96L4 20l4.2-1.1a7.94 7.94 0 0 0 3.84.98h.01a7.94 7.94 0 0 0 7.95-7.94 7.86 7.86 0 0 0-2.4-5.62Zm-5.55 12.21h-.01a6.6 6.6 0 0 1-3.36-.92l-.24-.14-2.49.65.66-2.43-.16-.25a6.59 6.59 0 0 1-1.01-3.5 6.6 6.6 0 0 1 11.27-4.66 6.55 6.55 0 0 1 1.94 4.66 6.6 6.6 0 0 1-6.6 6.59Zm3.62-4.94c-.2-.1-1.18-.58-1.36-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.62.78-.12.13-.23.15-.42.05a5.43 5.43 0 0 1-1.6-.99 6 6 0 0 1-1.1-1.38c-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.34.07-.13.03-.25-.02-.35-.05-.1-.45-1.08-.62-1.48-.16-.39-.33-.34-.45-.34l-.39-.01a.74.74 0 0 0-.54.25 2.26 2.26 0 0 0-.7 1.68c0 .99.72 1.95.82 2.08.1.13 1.4 2.13 3.4 2.99.47.2.84.32 1.13.41.48.15.91.13 1.25.08.38-.06 1.18-.48 1.35-.95.17-.46.17-.86.12-.95-.05-.08-.18-.13-.38-.23Z"/></svg>
-              <span>לחץ כאן להצטרפות לקבוצה &larr;</span>
-            </a>
-        </div>
+<script>
+(function(){
+  'use strict';
 
-    </div>
+  /* ---------- ערכים מההגדרות ---------- */
+  var map = { day: CFG.WEBINAR_DAY, date: CFG.WEBINAR_DATE, time: CFG.WEBINAR_TIME };
+  document.querySelectorAll('[data-cfg]').forEach(function(el){
+    var v = map[el.getAttribute('data-cfg')];
+    if (v !== undefined) el.textContent = v;
+  });
 
-    <script src="accessibility-widget.js" defer></script>
-    <script>
-        (function() {
-            var modal = document.getElementById('joinGroupModal');
-            var closeBtn = document.getElementById('modalCloseBtn');
-            if (!modal || !closeBtn) return;
-            function hide() { modal.classList.add('is-hidden'); }
-            closeBtn.addEventListener('click', hide);
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !modal.classList.contains('is-hidden')) hide();
-            });
-        })();
+  document.getElementById('waBtn').href = CFG.WHATSAPP_GROUP_URL;
 
-        // ===== WAITLIST MODE: adapt copy when ?waitlist=1 =====
-        (function() {
-            var params = new URLSearchParams(window.location.search);
-            if (params.get('waitlist') !== '1') return;
+  /* ---------- שם פרטי (נשמר ב-sessionStorage בדף ההרשמה) ---------- */
+  try {
+    var first = (sessionStorage.getItem('leadFirstName') || '').trim();
+    if (first && first.length <= 20) {
+      document.getElementById('greet').textContent = first + ', איזה כיף!';
+    }
+  } catch(e) {}
 
-            var sets = {
-                'modalTitle': 'נרשמת לרשימת המתנה!',
-                'modalSub': 'תקבל עדכון אם נפתחים מקומות. בינתיים -',
-                'badgeText': 'ברשימת המתנה',
-                'pageSub': 'הוובינר מלא — נעדכן אותך אם נפתחים מקומות.',
-                'pageH1Pill': 'אתה ברשימת המתנה'
-            };
-            Object.keys(sets).forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) el.textContent = sets[id];
-            });
+  /* ---------- פיקסלים ---------- */
+  if (localStorage.getItem('cookieConsent') === 'all') {
+    var gs = document.createElement('script');
+    gs.async = true;
+    gs.src = 'https://www.googletagmanager.com/gtag/js?id=' + CFG.GA4_ID;
+    document.head.appendChild(gs);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', CFG.GA4_ID);
 
-            var modalWarning = document.getElementById('modalWarning');
-            if (modalWarning) {
-                modalWarning.innerHTML = '⚠️ <strong>הצטרף לקבוצה</strong> כדי לקבל עדכון מיידי אם נפתחים מקומות, וגם תוכן וערך מהוובינר.';
-            }
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', CFG.META_PIXEL_ID);
+    fbq('track', 'PageView');
 
-            var blockBlack = document.getElementById('blockBlack');
-            if (blockBlack) {
-                blockBlack.innerHTML = 'הצטרף לקבוצה<br>לקבלת עדכונים';
-            }
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", CFG.CLARITY_ID);
+  }
 
-            var checkList = document.getElementById('checkList');
-            if (checkList) {
-                checkList.innerHTML =
-                    '<li>תקבל עדכון מיידי אם נפתחים מקומות</li>' +
-                    '<li>תקבל תוכן וערך מהוובינר</li>' +
-                    '<li>אם תיכנס - הקישור לזום יישלח בקבוצה</li>';
-            }
-
-            var warningBox = document.getElementById('warningBox');
-            if (warningBox) {
-                warningBox.innerHTML = '⚠️ <strong>חשוב:</strong> הקבוצה היא המקום היחיד שבו תקבל עדכון אם נפתחים מקומות בוובינר.';
-            }
-        })();
-    </script>
+  /* ---------- מדידה: כמה באמת לוחצים על הקבוצה ---------- */
+  document.getElementById('waBtn').addEventListener('click', function(){
+    if (typeof fbq !== 'undefined') fbq('trackCustom', 'JoinWhatsAppGroup');
+    if (typeof gtag !== 'undefined') gtag('event', 'join_whatsapp_group');
+  });
+})();
+</script>
 </body>
 </html>

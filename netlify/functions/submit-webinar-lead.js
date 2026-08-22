@@ -84,7 +84,7 @@ exports.handler = async (event) => {
 
     const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN;
     const BASE_ID = process.env.AIRTABLE_WEBINAR_BASE_ID;
-    const TABLE_NAME = 'tblc3YwRKf3OkS026';
+    const TABLE_NAME = 'tblypCn15pFWjRFzl';   // לידי הוובינר 27.8 (בייס appQuVbOLawaGAM7N)
 
     if (!BASE_ID) {
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'AIRTABLE_WEBINAR_BASE_ID env var not configured' }) };

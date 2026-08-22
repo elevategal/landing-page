@@ -774,6 +774,8 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
         fbq('track', 'Lead', {}, { eventID: eventId });
       }
 
+      // שם פרטי לדף התודה - ב-sessionStorage ולא ב-URL, כדי לא לחשוף שם בכתובת
+      try { sessionStorage.setItem('leadFirstName', name.split(' ')[0]); } catch(e) {}
       location.href = CFG.THANK_YOU_URL;
     } catch(err) {
       showErr('שגיאה בשליחת הטופס. נסו שוב בעוד רגע.');
