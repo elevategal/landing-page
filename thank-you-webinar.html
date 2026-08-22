@@ -130,6 +130,16 @@ h1{font-size:clamp(1.9rem,7vw,2.7rem);font-weight:900;line-height:1.15;letter-sp
 .wa svg{width:25px;height:25px;fill:#fff;flex-shrink:0}
 @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
 
+/* שורת עזרה - מוצגת רק בדפדפן פנימי של אינסטגרם/פייסבוק */
+.wa-help{
+  display:none;margin-top:10px;
+  font-size:.82rem;font-weight:800;line-height:1.5;color:#8a6d00;
+  background:#FFF8E1;border:2px solid #F0B400;border-radius:10px;
+  padding:10px 13px;text-align:center;
+}
+.wa-help.on{display:block}
+.wa-help b{color:#6b5400}
+
 .when{margin-top:18px;font-size:.86rem;font-weight:800;opacity:.65}
 
 footer{
@@ -161,6 +171,11 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.02h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.22 8.22 0 01-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg>
     <span>לחץ כאן להצטרפות לקבוצה &larr;</span>
   </a>
+
+  <p class="wa-help" id="waHelp">
+    לא נפתח? אתה גולש מתוך האפליקציה של <b id="waHelpApp">אינסטגרם</b>, והיא חוסמת מעבר לוואטסאפ.<br>
+    לחץ על <b id="waHelpMenu">&#8942;</b> בפינה ובחר <b id="waHelpAction">"פתח בדפדפן"</b> - ואז לחץ שוב על הכפתור.
+  </p>
 
   <div class="card">
     <ul class="list">
@@ -202,13 +217,44 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
      כשהוא נפתח בטאב חדש, ואז נוחתים על דף האינטרנט של וואטסאפ
      שמציע רק "Download" לאנדרואיד. בלי target הוא נכנס לאפליקציה.
      אם אין וואטסאפ מותקן - נופלים חזרה לקישור הרגיל אחרי 2 שניות. */
-  var waWeb = 'https://chat.whatsapp.com/' + CFG.WHATSAPP_GROUP_CODE;
-  var waApp = 'whatsapp://chat?code=' + CFG.WHATSAPP_GROUP_CODE;
-  var isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
-  var waBtn = document.getElementById('waBtn');
+  var code   = CFG.WHATSAPP_GROUP_CODE;
+  var waWeb  = 'https://chat.whatsapp.com/' + code;
+  var ua     = navigator.userAgent;
+  var waBtn  = document.getElementById('waBtn');
 
-  waBtn.href = isMobile ? waApp : waWeb;
+  var isIOS      = /iphone|ipad|ipod/i.test(ua);
+  var isAndroid  = /android/i.test(ua);
+  var isMobile   = isIOS || isAndroid;
+
+  /* דפדפן פנימי של אפליקציה - שם סכמות URL מותאמות נחסמות לעיתים קרובות */
+  var inApp = /FBAN|FBAV|FB_IAB|Instagram|Line\/|MicroMessenger|Twitter|TikTok|Snapchat/i.test(ua);
+
+  /* אנדרואיד: intent:// אמין יותר מ-whatsapp:// - הוא נושא בתוכו כתובת נפילה,
+     כך שאם וואטסאפ לא מותקן המערכת פותחת את דף האינטרנט לבד ולא נתקעת. */
+  var androidIntent = 'intent://chat?code=' + code +
+                      '#Intent;scheme=whatsapp;package=com.whatsapp;' +
+                      'S.browser_fallback_url=' + encodeURIComponent(waWeb) + ';end';
+
+  var target;
+  if (inApp)          target = waWeb;            // בתוך אפליקציה - לא לנסות deep link
+  else if (isAndroid) target = androidIntent;
+  else if (isIOS)     target = 'whatsapp://chat?code=' + code;
+  else                target = waWeb;            // דסקטופ
+
+  waBtn.href = target;
   if (isMobile) waBtn.removeAttribute('target');
+
+  /* שורת ההסבר - רק בדפדפן פנימי, עם הנוסח שמתאים לאפליקציה ולמערכת */
+  if (inApp && isMobile) {
+    var appName = /Instagram/i.test(ua) ? 'אינסטגרם'
+                : /FBAN|FBAV|FB_IAB/i.test(ua) ? 'פייסבוק'
+                : /TikTok/i.test(ua) ? 'טיקטוק'
+                : 'הרשת החברתית';
+    document.getElementById('waHelpApp').textContent = appName;
+    document.getElementById('waHelpMenu').innerHTML = isIOS ? '&#183;&#183;&#183;' : '&#8942;';
+    document.getElementById('waHelpAction').textContent = isIOS ? '"פתח בספארי"' : '"פתח בכרום"';
+    document.getElementById('waHelp').classList.add('on');
+  }
 
   /* ---------- שם פרטי (נשמר ב-sessionStorage בדף ההרשמה) ---------- */
   try {
@@ -245,8 +291,10 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     if (typeof fbq !== 'undefined') fbq('trackCustom', 'JoinWhatsAppGroup');
     if (typeof gtag !== 'undefined') gtag('event', 'join_whatsapp_group');
 
-    // רשת ביטחון: אם האפליקציה לא השתלטה תוך 2 שניות - כנראה אין וואטסאפ מותקן
-    if (isMobile) {
+    /* רשת ביטחון: אם האפליקציה לא השתלטה תוך 2 שניות - נופלים לדף האינטרנט.
+       לא רלוונטי בדפדפן פנימי (שם ממילא נשלחנו ישר ל-waWeb) ולא באנדרואיד,
+       כי ל-intent:// כבר יש browser_fallback_url מובנה. */
+    if (isIOS && !inApp) {
       setTimeout(function(){
         if (!document.hidden) window.location.href = waWeb;
       }, 2000);
