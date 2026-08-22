@@ -142,6 +142,17 @@ h1{font-size:clamp(1.9rem,7vw,2.7rem);font-weight:900;line-height:1.15;letter-sp
 .wa-help.on{display:block}
 .wa-help b{color:#6b5400}
 
+/* מוצא אחרון - העתקת הקישור. עוקף לגמרי את בחירת האפליקציה של מערכת ההפעלה */
+.wa-copy{
+  display:block;width:100%;margin-top:11px;
+  background:none;border:none;padding:6px;
+  font-family:inherit;font-size:.82rem;font-weight:800;
+  color:rgba(0,0,0,.5);text-decoration:underline;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.wa-copy:hover{color:rgba(0,0,0,.75)}
+.wa-copy.done{color:#2E7D32;text-decoration:none;font-weight:900}
+
 .when{margin-top:18px;font-size:.86rem;font-weight:800;opacity:.65}
 
 footer{
@@ -177,6 +188,10 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.02h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.22 8.22 0 01-1.26-4.39c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.41a8.18 8.18 0 012.41 5.83c0 4.54-3.7 8.23-8.23 8.23z"/></svg>
     <span>לחץ כאן להצטרפות לקבוצה &larr;</span>
   </a>
+
+  <button type="button" class="wa-copy" id="waCopy">
+    לא נפתח באפליקציה הנכונה? העתק את הקישור
+  </button>
 
   <p class="wa-help" id="waHelp">
     לא נפתח? אתה גולש מתוך האפליקציה של <b id="waHelpApp">אינסטגרם</b>, והיא חוסמת מעבר לוואטסאפ.<br>
@@ -289,6 +304,38 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
       y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", CFG.CLARITY_ID);
   }
+
+  /* ---------- מוצא אחרון: העתקת הקישור ----------
+     מי שמותקנות אצלו גם וואטסאפ רגיל וגם ביזנס - מערכת ההפעלה בוחרת
+     לבד איזו מהן תיפתח, ואין שום דרך להשפיע על זה מהדף. העתקה והדבקה
+     ידנית עוקפת את ההחלטה הזאת ועובדת בכל שילוב ובכל מערכת. */
+  var copyBtn = document.getElementById('waCopy');
+  copyBtn.addEventListener('click', function(){
+    function done(){
+      copyBtn.textContent = '\u2713 הקישור הועתק - הדבק אותו בוואטסאפ שלך';
+      copyBtn.classList.add('done');
+      if (typeof fbq !== 'undefined') fbq('trackCustom', 'CopyWhatsAppLink');
+      if (typeof gtag !== 'undefined') gtag('event', 'copy_whatsapp_link');
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(waWeb).then(done, fallback);
+    } else {
+      fallback();
+    }
+    function fallback(){
+      // דפדפנים ישנים / הקשר לא מאובטח - execCommand עדיין עובד שם
+      var ta = document.createElement('textarea');
+      ta.value = waWeb;
+      ta.setAttribute('readonly','');
+      ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+      document.body.appendChild(ta);
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      try { document.execCommand('copy'); done(); }
+      catch(e){ copyBtn.textContent = waWeb; copyBtn.classList.add('done'); }
+      document.body.removeChild(ta);
+    }
+  });
 
   /* ---------- מדידה: כמה באמת לוחצים על הקבוצה ---------- */
   waBtn.addEventListener('click', function(){
