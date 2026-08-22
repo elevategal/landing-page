@@ -227,24 +227,19 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
   /* דפדפן פנימי של אפליקציה - שם סכמות URL מותאמות נחסמות לעיתים קרובות */
   var inApp = /FBAN|FBAV|FB_IAB|Instagram|Line\/|MicroMessenger|Twitter|TikTok|Snapchat/i.test(ua);
 
-  /* אנדרואיד: intent:// אמין יותר מ-whatsapp:// - הוא נושא בתוכו כתובת נפילה,
-     כך שאם וואטסאפ לא מותקן המערכת פותחת את דף האינטרנט לבד ולא נתקעת. */
-  var androidIntent = 'intent://chat?code=' + code +
-                      '#Intent;scheme=whatsapp;package=com.whatsapp;' +
-                      'S.browser_fallback_url=' + encodeURIComponent(waWeb) + ';end';
+  /* בכל המכשירים משתמשים באותו קישור https, ובמובייל בלי target="_blank".
+     https://chat.whatsapp.com הוא Universal Link (iOS) / App Link (אנדרואיד),
+     ומערכת ההפעלה מעבירה אותו לאפליקציה בעצמה. שתי האפליקציות - וואטסאפ
+     הרגיל וגם וואטסאפ ביזנס - רשומות על הדומיין הזה, אז שתיהן נתפסות.
 
-  /* iOS: משתמשים דווקא בקישור ה-https הרגיל ולא ב-whatsapp://
-     https://chat.whatsapp.com הוא Universal Link - כשהוא נפתח בטאב הנוכחי
-     (בלי target="_blank") iOS מעביר אותו ישירות לאפליקציה, בלי דיאלוג ובלי
-     דף ביניים. הסכמה whatsapp:// דווקא מציגה דיאלוג אישור, ואם יש טיימר
-     נפילה הוא סוגר את הדיאלוג באמצע ומעיף לדף ההורדה. אם וואטסאפ לא מותקן,
-     iOS פשוט מציג את דף האינטרנט - נפילה נכונה בלי קוד בכלל. */
-  var target;
-  if (inApp)          target = waWeb;            // בתוך אפליקציה - לא לנסות deep link
-  else if (isAndroid) target = androidIntent;
-  else                target = waWeb;            // iOS + דסקטופ
-
-  waBtn.href = target;
+     מה שלא לעשות כאן:
+     - target="_blank" במובייל: iOS לא מכבד Universal Link בטאב חדש.
+     - whatsapp:// : מציג דיאלוג אישור מיותר באייפון.
+     - intent:// עם package=com.whatsapp : מקבע את האפליקציה הצרכנית,
+       ומי שיש לו רק וואטסאפ ביזנס (com.whatsapp.w4b) נשלח לחנות.
+     - טיימר נפילה: חותך את המעבר לאפליקציה באמצע.
+     אם אין שום וואטסאפ מותקן - נפתח דף ההזמנה באינטרנט, וזו הנפילה הנכונה. */
+  waBtn.href = waWeb;
   if (isMobile) waBtn.removeAttribute('target');
 
   /* שורת ההסבר - רק בדפדפן פנימי, עם הנוסח שמתאים לאפליקציה ולמערכת */
@@ -294,9 +289,9 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     if (typeof fbq !== 'undefined') fbq('trackCustom', 'JoinWhatsAppGroup');
     if (typeof gtag !== 'undefined') gtag('event', 'join_whatsapp_group');
 
-    /* אין טיימר נפילה: ל-intent:// באנדרואיד יש browser_fallback_url מובנה,
-       וב-iOS ה-Universal Link נופל לדף האינטרנט מעצמו. טיימר כזה היה
-       מבטל את המעבר לאפליקציה באמצע. */
+    /* אין טיימר נפילה: מערכת ההפעלה מטפלת בנפילה בעצמה - אם אין וואטסאפ
+       מותקן היא פשוט פותחת את דף ההזמנה. טיימר כזה היה מבטל את המעבר
+       לאפליקציה באמצע. */
   });
 })();
 </script>
