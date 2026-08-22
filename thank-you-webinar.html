@@ -212,11 +212,9 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
   });
 
   /* ---------- קישור הקבוצה ----------
-     במובייל שולחים ל-whatsapp://chat?code=... שפותח ישירות את האפליקציה.
-     חשוב: מסירים target="_blank" - באייפון Universal Link לא נתפס
-     כשהוא נפתח בטאב חדש, ואז נוחתים על דף האינטרנט של וואטסאפ
-     שמציע רק "Download" לאנדרואיד. בלי target הוא נכנס לאפליקציה.
-     אם אין וואטסאפ מותקן - נופלים חזרה לקישור הרגיל אחרי 2 שניות. */
+     חשוב מעל הכל: מסירים target="_blank" במובייל. באייפון Universal Link
+     לא נתפס כשהוא נפתח בטאב חדש, ואז נוחתים על דף האינטרנט של וואטסאפ
+     במקום באפליקציה. בלי target הוא נכנס ישר לאפליקציה. */
   var code   = CFG.WHATSAPP_GROUP_CODE;
   var waWeb  = 'https://chat.whatsapp.com/' + code;
   var ua     = navigator.userAgent;
@@ -235,11 +233,16 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
                       '#Intent;scheme=whatsapp;package=com.whatsapp;' +
                       'S.browser_fallback_url=' + encodeURIComponent(waWeb) + ';end';
 
+  /* iOS: משתמשים דווקא בקישור ה-https הרגיל ולא ב-whatsapp://
+     https://chat.whatsapp.com הוא Universal Link - כשהוא נפתח בטאב הנוכחי
+     (בלי target="_blank") iOS מעביר אותו ישירות לאפליקציה, בלי דיאלוג ובלי
+     דף ביניים. הסכמה whatsapp:// דווקא מציגה דיאלוג אישור, ואם יש טיימר
+     נפילה הוא סוגר את הדיאלוג באמצע ומעיף לדף ההורדה. אם וואטסאפ לא מותקן,
+     iOS פשוט מציג את דף האינטרנט - נפילה נכונה בלי קוד בכלל. */
   var target;
   if (inApp)          target = waWeb;            // בתוך אפליקציה - לא לנסות deep link
   else if (isAndroid) target = androidIntent;
-  else if (isIOS)     target = 'whatsapp://chat?code=' + code;
-  else                target = waWeb;            // דסקטופ
+  else                target = waWeb;            // iOS + דסקטופ
 
   waBtn.href = target;
   if (isMobile) waBtn.removeAttribute('target');
@@ -291,14 +294,9 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     if (typeof fbq !== 'undefined') fbq('trackCustom', 'JoinWhatsAppGroup');
     if (typeof gtag !== 'undefined') gtag('event', 'join_whatsapp_group');
 
-    /* רשת ביטחון: אם האפליקציה לא השתלטה תוך 2 שניות - נופלים לדף האינטרנט.
-       לא רלוונטי בדפדפן פנימי (שם ממילא נשלחנו ישר ל-waWeb) ולא באנדרואיד,
-       כי ל-intent:// כבר יש browser_fallback_url מובנה. */
-    if (isIOS && !inApp) {
-      setTimeout(function(){
-        if (!document.hidden) window.location.href = waWeb;
-      }, 2000);
-    }
+    /* אין טיימר נפילה: ל-intent:// באנדרואיד יש browser_fallback_url מובנה,
+       וב-iOS ה-Universal Link נופל לדף האינטרנט מעצמו. טיימר כזה היה
+       מבטל את המעבר לאפליקציה באמצע. */
   });
 })();
 </script>
