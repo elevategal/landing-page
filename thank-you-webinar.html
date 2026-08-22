@@ -9,8 +9,9 @@
      ========================================================================== -->
 <script>
 const CFG = {
-  // קבוצת הוואטסאפ של משתתפי הוובינר
-  WHATSAPP_GROUP_URL: "https://chat.whatsapp.com/Kk3EcCKnwFjBifOzMalL8q?mode=gi_t",
+  // קוד ההזמנה של קבוצת הוואטסאפ - רק מה שאחרי chat.whatsapp.com/
+  // (בלי https, בלי "?mode=gi_t" - הפרמטר הזה מגיע מהעתקה מתוך האפליקציה ולא נחוץ)
+  WHATSAPP_GROUP_CODE: "Kk3EcCKnwFjBifOzMalL8q",
 
   // תאריך ושעה (חייב להיות זהה לדף ההרשמה)
   WEBINAR_DAY:  "יום חמישי",
@@ -195,7 +196,19 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
     if (v !== undefined) el.textContent = v;
   });
 
-  document.getElementById('waBtn').href = CFG.WHATSAPP_GROUP_URL;
+  /* ---------- קישור הקבוצה ----------
+     במובייל שולחים ל-whatsapp://chat?code=... שפותח ישירות את האפליקציה.
+     חשוב: מסירים target="_blank" - באייפון Universal Link לא נתפס
+     כשהוא נפתח בטאב חדש, ואז נוחתים על דף האינטרנט של וואטסאפ
+     שמציע רק "Download" לאנדרואיד. בלי target הוא נכנס לאפליקציה.
+     אם אין וואטסאפ מותקן - נופלים חזרה לקישור הרגיל אחרי 2 שניות. */
+  var waWeb = 'https://chat.whatsapp.com/' + CFG.WHATSAPP_GROUP_CODE;
+  var waApp = 'whatsapp://chat?code=' + CFG.WHATSAPP_GROUP_CODE;
+  var isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+  var waBtn = document.getElementById('waBtn');
+
+  waBtn.href = isMobile ? waApp : waWeb;
+  if (isMobile) waBtn.removeAttribute('target');
 
   /* ---------- שם פרטי (נשמר ב-sessionStorage בדף ההרשמה) ---------- */
   try {
@@ -228,9 +241,16 @@ footer a{color:rgba(255,255,255,.9);text-decoration:underline}
   }
 
   /* ---------- מדידה: כמה באמת לוחצים על הקבוצה ---------- */
-  document.getElementById('waBtn').addEventListener('click', function(){
+  waBtn.addEventListener('click', function(){
     if (typeof fbq !== 'undefined') fbq('trackCustom', 'JoinWhatsAppGroup');
     if (typeof gtag !== 'undefined') gtag('event', 'join_whatsapp_group');
+
+    // רשת ביטחון: אם האפליקציה לא השתלטה תוך 2 שניות - כנראה אין וואטסאפ מותקן
+    if (isMobile) {
+      setTimeout(function(){
+        if (!document.hidden) window.location.href = waWeb;
+      }, 2000);
+    }
   });
 })();
 </script>
