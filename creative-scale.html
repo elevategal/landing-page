@@ -234,10 +234,13 @@
             margin-bottom: 14px;
         }
         .context-box p:last-child { margin-bottom: 0; }
-        /* The result is what a skimmer should catch, so it outweighs the setup lines. */
+        /* The result is what a skimmer should catch, so it outweighs the setup lines.
+           nowrap plus a vw-scaled size keeps it on one line down to the narrowest phone:
+           a wrap would split the purple highlight across two part-lines. */
         .case-numbers {
-            font-size: clamp(1.1rem, 2.8vw, 1.35rem) !important;
+            font-size: clamp(0.95rem, 4.4vw, 1.35rem) !important;
             font-weight: 900 !important;
+            white-space: nowrap;
             background: linear-gradient(transparent 62%, rgba(140,82,255,0.35) 62%, rgba(140,82,255,0.35) 92%, transparent 92%);
             display: inline-block; padding: 0 0.2em;
         }
@@ -425,6 +428,12 @@
 
         /* ===== PRICE + FORM ===== */
         .price-form-section { padding: 70px 0; }
+        /* Bare line, no card: it belongs to the price block, not beside it. */
+        .price-guarantee {
+            text-align: center; max-width: 520px; margin: 0 auto 12px;
+            font-size: 17px; font-weight: 500; line-height: 1.5; color: #000;
+            text-wrap: balance;
+        }
         .price-block { text-align: center; max-width: 720px; margin: 0 auto 30px; }
         .price-block .price-main {
             font-size: clamp(2.8rem, 8vw, 4.5rem); font-weight: 900; color: #000;
@@ -563,6 +572,7 @@
             .countdown-unit .num { font-size: 1.5rem; }
             .countdown-unit .lbl { font-size: 0.68rem; }
             .price-form-section { padding: 50px 0; }
+            .price-guarantee { font-size: 16px; max-width: 330px; }
             .price-block .price-main { font-size: 3rem; }
             .price-block .price-note { font-size: 1rem; }
             .inline-form-card { margin: 24px 0 0; padding: 22px 18px; box-shadow: 5px 5px 0 #000; }
@@ -822,7 +832,7 @@
                 <p>לקוח שלי - רשת חדרי בריחה - לא הצליח לפצח את קהל המשפחות.</p>
                 <p>במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות.</p>
                 <p>בניתי סביבו מודעת UGC אחת.</p>
-                <p class="case-numbers">143 אלף ₪ בחודש. רואס 10. הפקה: 0 ₪.</p>
+                <p class="case-numbers">143 אלף ₪. רואס 10. אפס הפקה.</p>
                 <p>בסדנה אני מלמד בדיוק את זה.</p>
             </div>
         </div>
@@ -1066,6 +1076,7 @@
     <!-- ===== 8. PRICE + FORM ===== -->
     <section class="price-form-section locked-section" id="contact">
         <div class="container">
+            <p class="price-guarantee fade-up">🛡 אפס סיכון: מפגש ראשון לא&nbsp;שכנע - קיבלת&nbsp;החזר, בלי&nbsp;שאלות.</p>
             <div class="price-block fade-up">
                 <div class="price-main"><span class="cur">₪</span>997</div>
                 <div class="price-vat">+ מע"מ</div>
