@@ -263,11 +263,15 @@
 
         /* ===== TESTIMONIALS ===== */
         .testimonials { background: #000; color: #fff; padding: 70px 0; border-top: 2px solid #000; border-bottom: 2px solid #000; }
+        /* Four cards across 980px leave the quote a 230px measure, where the longest one
+           runs to three lines. Widening the band to 1180 gets every quote to two lines
+           without shrinking the type or dropping a column. */
+        .testimonials .container { max-width: 1240px; }
         .testimonials h2 { text-align: center; margin-bottom: 8px; color: #fff; font-size: clamp(1.4rem, 3.6vw, 2rem); }
         .testimonials .sub { text-align: center; color: #fff; font-weight: 700; opacity: 0.85; margin-bottom: 36px; font-size: 1.05rem; }
         .testimonial-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 20px; max-width: 980px; margin: 0 auto;
+            gap: 20px; max-width: 1180px; margin: 0 auto;
         }
         .video-testimonial-wrap { display: flex; flex-direction: column; align-items: center; }
         .video-testimonial {
@@ -691,6 +695,16 @@
             color: #fff; text-align: center;
             background: none; border: 0; padding: 0;
         }
+        /* Four columns only hold a two-line quote while the card stays near 280px.
+           Between 1000 and 1230 one step down in type covers it; below 1000 the card
+           gets too narrow for that, so the grid drops to two columns instead. */
+        @media (min-width: 1000px) and (max-width: 1230px) {
+            .testimonial-quote { font-size: 16px; }
+        }
+        @media (min-width: 769px) and (max-width: 999px) {
+            .testimonial-grid { grid-template-columns: repeat(2, 1fr); max-width: 760px; }
+            .video-testimonial { max-width: 300px; margin: 0 auto; }
+        }
 
         /* ===== GUARANTEE ===== */
         .guarantee-section { padding: 10px 0 40px; }
@@ -892,56 +906,25 @@
 
             <div class="testimonial-grid fade-up">
                 <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">טל קרת</span><span class="niche">בעלים של חברת הפקות</span></div>
-                    <p class="testimonial-quote">"צ'אט ג'יפיטי היה חד כיווני. פה נפתח לי הראש לכל הכיוונים"</p>
-                </div>
-                <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="b329ae61-dd84-45f9-b85f-2379e418dacd">
                         <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/b329ae61-dd84-45f9-b85f-2379e418dacd/thumbnail.jpg')"></div>
                     </div>
                     <div class="testimonial-label"><span class="name">גיל</span><span class="niche">מוצרים לבית</span></div>
-                    <p class="testimonial-quote">"ממצב של דשדוש - לשתי מודעות שעושות מכירות"</p>
+                    <p class="testimonial-quote">"יש לי שתי מודעות מצליחות שעושות מכירות"</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb">
                         <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/e1a7090a-7a91-44ee-808d-59fe66c28dcb/thumbnail.jpg')"></div>
                     </div>
                     <div class="testimonial-label"><span class="name">יותם דהן</span><span class="niche">מוצרי שינה</span></div>
-                    <p class="testimonial-quote">"שרפתי המון כסף על קריאייטיבים שלא המירו. היום זה בלחיצת כפתור"</p>
-                </div>
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">אור כהן</span><span class="niche">כלי מטבח</span></div>
-                    <p class="testimonial-quote">"הפסקתי לנחש - יש מתמטיקה לדברים"</p>
-                </div>
-            </div>
-
-            <div class="testimonial-grid testimonials-extra" id="testimonialsExtra">
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="476521c1-5709-48c1-ac10-e2e5cd036e43">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/476521c1-5709-48c1-ac10-e2e5cd036e43/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">אושרי זנדני</span><span class="niche">מנהל קמפיינים</span></div>
-                    <p class="testimonial-quote">"בתור מנהל קמפיינים - המחיר מצחיק לעומת הערך"</p>
+                    <p class="testimonial-quote">"יש לי בלחיצת כפתור משהו שעושה את זה"</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="59f9a08b-65ab-4194-b5b8-a93ba10a964a">
                         <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/59f9a08b-65ab-4194-b5b8-a93ba10a964a/thumbnail.jpg')"></div>
                     </div>
                     <div class="testimonial-label"><span class="name">רועי גלבוע</span><span class="niche">ביוטי</span></div>
-                    <p class="testimonial-quote">"כבר ביום הראשון הבוט עשה לי דברים מדהימים"</p>
-                </div>
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">עידו וידל</span><span class="niche">Wellness</span></div>
-                    <p class="testimonial-quote">"סוף סוף אני מבין מה אני עושה - ולמה"</p>
+                    <p class="testimonial-quote">"כבר ביום הראשון שהשתמשתי בסוכן הוא עשה לי דברים מדהימים"</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9">
@@ -949,6 +932,37 @@
                     </div>
                     <div class="testimonial-label"><span class="name">רז תמם</span><span class="niche">מותג תכשיטים</span></div>
                     <p class="testimonial-quote">"חשבתי שזה עוד קורס. זה לא עוד קורס"</p>
+                </div>
+            </div>
+
+            <div class="testimonial-grid testimonials-extra" id="testimonialsExtra">
+                <div class="video-testimonial-wrap">
+                    <div class="video-testimonial" data-video="d59578e2-1aa1-4d52-a8b7-7a95da114b53">
+                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/d59578e2-1aa1-4d52-a8b7-7a95da114b53/thumbnail.jpg')"></div>
+                    </div>
+                    <div class="testimonial-label"><span class="name">אור כהן</span><span class="niche">כלי מטבח</span></div>
+                    <p class="testimonial-quote">"זה שיפר לי משמעותית את הביצועים"</p>
+                </div>
+                <div class="video-testimonial-wrap">
+                    <div class="video-testimonial" data-video="476521c1-5709-48c1-ac10-e2e5cd036e43">
+                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/476521c1-5709-48c1-ac10-e2e5cd036e43/thumbnail.jpg')"></div>
+                    </div>
+                    <div class="testimonial-label"><span class="name">אושרי זנדני</span><span class="niche">מנהל קמפיינים</span></div>
+                    <p class="testimonial-quote">"המחיר באמת מצחיק לעומת הערך"</p>
+                </div>
+                <div class="video-testimonial-wrap">
+                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7">
+                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div>
+                    </div>
+                    <div class="testimonial-label"><span class="name">טל קרת</span><span class="niche">בעלים של חברת הפקות</span></div>
+                    <p class="testimonial-quote">"זה פתח לי את הראש לכמה כיוונים אפשר לקחת קריאייטיב"</p>
+                </div>
+                <div class="video-testimonial-wrap">
+                    <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3">
+                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/fe70a730-f02f-4306-94fc-30f76dcec5a3/thumbnail.jpg')"></div>
+                    </div>
+                    <div class="testimonial-label"><span class="name">עידו וידל</span><span class="niche">Wellness</span></div>
+                    <p class="testimonial-quote">"שווה כל שקל. תעשו את זה בשביל העסק שלכם"</p>
                 </div>
             </div>
 
