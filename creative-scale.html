@@ -230,7 +230,16 @@
         }
         .context-box p {
             font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-            font-weight: 700; line-height: 1.85; color: #000;
+            font-weight: 700; line-height: 1.7; color: #000;
+            margin-bottom: 14px;
+        }
+        .context-box p:last-child { margin-bottom: 0; }
+        /* The result is what a skimmer should catch, so it outweighs the setup lines. */
+        .case-numbers {
+            font-size: clamp(1.1rem, 2.8vw, 1.35rem) !important;
+            font-weight: 900 !important;
+            background: linear-gradient(transparent 62%, rgba(140,82,255,0.35) 62%, rgba(140,82,255,0.35) 92%, transparent 92%);
+            display: inline-block; padding: 0 0.2em;
         }
         .context-box strong {
             font-weight: 900;
@@ -674,6 +683,26 @@
         /* Cards without a video keep the same running order, just no player. */
         .video-testimonial-wrap.no-video { justify-content: flex-start; }
 
+        /* ===== GUARANTEE ===== */
+        .guarantee-section { padding: 10px 0 40px; }
+        .guarantee-card {
+            max-width: 620px; margin: 0 auto; text-align: center;
+            background: #fff; border: 4px solid var(--accent);
+            border-radius: var(--radius-lg); box-shadow: var(--brutal-shadow);
+            padding: 28px 26px;
+        }
+        .guarantee-icon { font-size: 2.6rem; line-height: 1; margin-bottom: 10px; }
+        .guarantee-card h2 { font-size: clamp(1.3rem, 3.4vw, 1.8rem); margin-bottom: 14px; }
+        .guarantee-card p {
+            font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+            font-weight: 700; line-height: 1.7; margin-bottom: 4px;
+        }
+        .guarantee-card p:last-child { margin-bottom: 0; }
+        .register-guarantee {
+            font-size: 0.85rem; font-weight: 700; line-height: 1.5;
+            text-align: center; color: #000; opacity: 0.75; margin-bottom: 12px;
+        }
+
         /* ===== REGISTRATION FORM ===== */
         .register-section { padding: 60px 0; }
         .register-card {
@@ -730,6 +759,10 @@
             .includes-section { padding: 40px 0; }
             .includes-list li { font-size: 0.92rem; padding: 12px 14px; }
             .includes-close { font-size: 0.98rem; }
+            .guarantee-section { padding: 6px 0 30px; }
+            .guarantee-card { padding: 22px 16px; border-width: 3px; }
+            .guarantee-icon { font-size: 2.2rem; }
+            .register-guarantee { font-size: 0.8rem; }
             .register-section { padding: 40px 0; }
             .register-card { padding: 22px 16px; }
             .register-card input[type="text"],
@@ -778,7 +811,7 @@
             <div class="vsl-cta-block locked-section">
                 <p class="vsl-lead-line">יומיים בזום, 6-7.9, שבהם לומדים לבנות קריאייטיב שמוכר.</p>
                 <a id="vslCtaBtn" class="cta-btn" href="#register">שריינו לי מקום ←</a>
-                <p class="vsl-cta-sub">997 ₪ + מע"מ | 15 מקומות | ההרשמה נסגרת ב-5.9</p>
+                <p class="vsl-cta-sub">997 ₪ + מע"מ | 15 מקומות | אחריות החזר מלא</p>
             </div>
         </div>
     </section>
@@ -787,7 +820,11 @@
     <section class="context-section">
         <div class="container">
             <div class="context-box fade-up">
-                <p><strong>רגע, למי שלא צפה בסרטון:</strong> הסדנה מיועדת למי שמוכר מוצר שפותר בעיה ורוצה להפסיק לנחש. לקוח שלי, רשת חדרי בריחה, לא הצליח לפצח את קהל המשפחות. במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות - ובניתי סביבו מודעת UGC אחת. היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
+                <p>לקוח שלי - רשת חדרי בריחה - לא הצליח לפצח את קהל המשפחות.</p>
+                <p>במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות.</p>
+                <p>בניתי סביבו מודעת UGC אחת.</p>
+                <p class="case-numbers">143 אלף ₪ בחודש. רואס 10. הפקה: 0 ₪.</p>
+                <p>בסדנה אני מלמד בדיוק את זה.</p>
             </div>
         </div>
     </section>
@@ -1040,11 +1077,33 @@
         </div>
     </section>
 
+    <!-- ===== 8b. GUARANTEE ===== -->
+    <section class="guarantee-section locked-section">
+        <div class="container">
+            <div class="guarantee-card fade-up">
+                <div class="guarantee-icon" aria-hidden="true">🛡</div>
+                <h2>אחריות מפגש ראשון</h2>
+                <p>נכנסת למפגש הראשון והרגשת שזה לא בשבילך?</p>
+                <p>החזר מלא. בלי שאלות, בלי טפסים.</p>
+                <p>הודעה אחת בוואטסאפ וזה מטופל.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== 9. FAQ ===== -->
     <section class="faq-section locked-section">
         <div class="container">
             <h2 class="fade-up">שאלות נפוצות</h2>
             <div class="faq-list fade-up">
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+                        <span>ואם אני נרשם ומגלה שזה לא בשבילי?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">יש אחריות מפגש ראשון. נכנסת, הרגשת שזה לא זה - שולח לי הודעה אחת בוואטסאפ ומקבל החזר מלא. בלי שאלות. אני יכול להרשות את זה לעצמי כי זה כמעט לא קורה.</div>
+                    </div>
+                </div>
                 <div class="faq-item">
                     <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                         <span>למי הסדנה מתאימה?</span>
@@ -1157,6 +1216,7 @@
                         <span>אני מאשר/ת קבלת עדכונים בוואטסאפ ובמייל</span>
                     </label>
 
+                    <p class="register-guarantee">🛡 אחריות מפגש ראשון: לא בשבילך? החזר מלא בהודעה אחת.</p>
                     <button type="button" id="regSubmit" class="cta-btn wide">שריינו לי מקום ←</button>
                     <p class="register-error" id="regError" role="alert" hidden></p>
                     <p class="register-footer">🔒 בלי התחייבות - אני חוזר אליך בוואטסאפ לסגירת ההרשמה</p>
