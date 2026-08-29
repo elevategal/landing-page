@@ -615,12 +615,39 @@
         .about-text h2 { text-align: right; margin-bottom: 14px; }
         .about-text p { margin-bottom: 10px; font-size: 1rem; line-height: 1.75; font-weight: 600; }
         .about-text p:last-child { margin-bottom: 0; }
-        .about-logos { margin-top: 26px; background: var(--bg-card); border: 2px solid #000;
-            border-radius: var(--radius-lg); box-shadow: var(--brutal-shadow); padding: 20px 18px; }
-        .about-logos-label { text-align: center; color: rgba(255,255,255,0.7); font-size: 0.8rem;
-            font-weight: 800; letter-spacing: 0.04em; margin-bottom: 14px; }
-        .about-logos-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 26px; }
-        .about-logos-strip img { height: 34px; width: auto; opacity: 0.85; }
+        .about-logos { margin-top: 26px; background: #fff; border: 2px solid #000;
+            border-radius: var(--radius-lg); box-shadow: var(--brutal-shadow);
+            padding: 20px 0 22px; overflow: hidden; }
+        .about-logos-label { text-align: center; color: #000; opacity: 0.6; font-size: 0.8rem;
+            font-weight: 800; letter-spacing: 0.04em; margin-bottom: 16px; }
+        .carousel-track-wrapper {
+            position: relative; width: 100%; overflow: hidden;
+            mask-image: linear-gradient(to left, transparent, black 6%, black 94%, transparent);
+            -webkit-mask-image: linear-gradient(to left, transparent, black 6%, black 94%, transparent);
+        }
+        .carousel-track {
+            display: flex; gap: 56px; width: max-content; align-items: center;
+            animation: scroll-rtl 70s linear infinite;
+        }
+        .carousel-track:hover { animation-play-state: paused; }
+        @keyframes scroll-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        .carousel-item {
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            height: 100px; min-width: 200px; padding: 12px 16px; transition: transform 0.2s;
+        }
+        .carousel-item:hover { transform: scale(1.06); }
+        .carousel-item img {
+            max-height: 70px; max-width: 200px; object-fit: contain;
+            /* the source logos are white - flatten them to black for the light card */
+            filter: brightness(0) saturate(100%);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .carousel-track { animation: none; }
+            .carousel-track-wrapper { overflow-x: auto; }
+        }
 
         /* ===== WHAT YOU GET ===== */
         .includes-section { padding: 60px 0; }
@@ -702,8 +729,9 @@
             .about-card { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
             .about-photo { max-width: 200px; margin: 0 auto; }
             .about-text h2 { text-align: center; }
-            .about-logos-strip { gap: 18px; }
-            .about-logos-strip img { height: 26px; }
+            .carousel-track { gap: 36px; }
+            .carousel-item { height: 70px; min-width: 130px; padding: 10px 12px; }
+            .carousel-item img { max-height: 50px; max-width: 130px; }
             .includes-section { padding: 40px 0; }
             .includes-list li { font-size: 0.92rem; padding: 12px 14px; }
             .includes-close { font-size: 0.98rem; }
@@ -796,13 +824,21 @@
             </div>
             <div class="about-logos fade-up">
                 <p class="about-logos-label">מותגים שעבדתי איתם</p>
-                <div class="about-logos-strip">
-                    <img loading="lazy" src="logos-white/Foreground.png" alt="Megemeria">
-                    <img loading="lazy" src="logos-white/Group.png" alt="Escape Room">
-                    <img loading="lazy" src="logos-white/Harmony-1.png" alt="Harmony">
-                    <img loading="lazy" src="logos-white/image-2-1.png" alt="AMORpHICURE">
-                    <img loading="lazy" src="logos-white/image-removebg-preview-2-2.png" alt="Smoovee">
-                    <img loading="lazy" src="logos-white/Logo_Promise_site_3_410x.png" alt="Promise">
+                <div class="carousel-track-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/Foreground.png" alt="Megemeria"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/Group.png" alt="Escape Room"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/Harmony-1.png" alt="Harmony"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/image-2-1.png" alt="AMORpHICURE"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/image-removebg-preview-2-2.png" alt="Smoovee"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/Logo_Promise_site_3_410x.png" alt="Promise"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/logo-1.png" alt="לוגו מותג שותף"></div>
+                    <div class="carousel-item"><img width="220" height="80" src="logos-white/logos.png" alt="Bagir"></div>
+                    <div class="carousel-item"><img width="220" height="80" src="logos-white/LOGO-SOURCE-1-removebg-preview-1.png" alt="Source"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/trip-logo.svg" alt="Trip"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/Tieta-Logo.svg" alt="Tieta"></div>
+                    <div class="carousel-item"><img width="140" height="40" src="logos-white/logo.white_.blank_.svg" alt="מותג"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -992,7 +1028,6 @@
                 <li><span class="tick" aria-hidden="true">✓</span><span>הסוכן קריאייטיב שלי, מותקן אצלך - אותו סוכן שאני עובד איתו כל יום, בנוי על מאות תסריטים שכתבתי</span></li>
                 <li><span class="tick" aria-hidden="true">✓</span><span>פלייבוק מלא להכנת קריאייטיב מאפס - שלב אחרי שלב</span></li>
                 <li><span class="tick" aria-hidden="true">✓</span><span>קהילת וואטסאפ סגורה של בוגרי הסדנה - שממשיכה לרוץ גם אחרי</span></li>
-                <li><span class="tick" aria-hidden="true">✓</span><span>שיחת ייעוץ אישית של 30 דקות איתי - שיחת ייעוץ רגילה אצלי עולה ₪1,700 + מע"מ ל-90 דקות</span></li>
             </ul>
             <p class="includes-close fade-up">כל זה ב-997 ₪ + מע"מ. קריאייטיב אחד שעובד מחזיר את זה - ראית למעלה.</p>
         </div>
@@ -1089,29 +1124,11 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
-                        <span>אני עסק קטן. זה בשבילי או רק לגדולים?</span>
-                        <div class="faq-toggle">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">השיטה עובדת בכל גודל. דווקא לעסק קטן, שכל שקל מדיה קריטי לו, קריאייטיב מדויק שווה יותר, כי אין לו תקציב לשרוף על ניחושים.</div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
                         <span>מה ההבדל בין זה לקורסי שיווק אחרים?</span>
                         <div class="faq-toggle">+</div>
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-inner">רוב הקורסים מלמדים תיאוריה. פה אתה רואה אותי בונה קריאייטיב אמיתי מאפס, בזמן אמת, ואז עושה את זה בעצמך עם ליווי. פרקטיקה, לא הרצאה.</div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
-                        <span>כמה זמן ייקח לי לראות תוצאה?</span>
-                        <div class="faq-toggle">+</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-inner">את הקריאייטיב הראשון שלך אתה בונה כבר במפגש השני, על המוצר שלך. מה שקורה אחר כך תלוי בך, אבל אתה יוצא עם שיטה שאפשר להריץ שוב ושוב, לא עם השראה חד פעמית.</div>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1607,6 +1624,12 @@
             } else if (takenPct >= 80) {
                 el.classList.add('hot');
             }
+        })();
+
+        // ===== LOGO CAROUSEL (duplicate the row so the 50% translate loops seamlessly) =====
+        (function() {
+            var track = document.getElementById('carouselTrack');
+            if (track) track.innerHTML = track.innerHTML + track.innerHTML;
         })();
 
         // ===== REGISTRATION FORM =====
