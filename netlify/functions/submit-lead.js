@@ -70,7 +70,7 @@ exports.handler = async (event) => {
   try {
     const body = JSON.parse(event.body);
     const { name, phone, email, consent, utmSource, utmMedium, utmCampaign, utmContent,
-            eventId, eventSourceUrl, fbp, fbc, testEventCode } = body;
+            eventId, eventSourceUrl, fbp, fbc, testEventCode, vslPercent } = body;
 
     // Validate
     if (!name || name.length < 2) {
@@ -101,6 +101,11 @@ exports.handler = async (event) => {
                     || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
     const clientUserAgent = event.headers['user-agent'] || '';
 
+    // Max VSL watch percentage, read by the form page from localStorage 'vsl_percent'
+    // (written by creative-scale.html and pre-vsl.html on the same origin).
+    const vslPct = Number(vslPercent);
+    const safeVslPct = Number.isFinite(vslPct) ? Math.max(0, Math.min(100, Math.floor(vslPct))) : 0;
+
     const fields = {
       'Name': name,
       'Phone number': phone,
@@ -116,7 +121,8 @@ exports.handler = async (event) => {
       'FBC': fbc || '',
       'Client IP': clientIp || '',
       'User Agent': clientUserAgent || '',
-      'Event Source URL': eventSourceUrl || ''
+      'Event Source URL': eventSourceUrl || '',
+      'VSL %': safeVslPct
     };
 
     // Without these three the record is not a lead, so they are never dropped.

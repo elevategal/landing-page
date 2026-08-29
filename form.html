@@ -403,10 +403,15 @@
             };
 
             try {
+                // Max VSL watch % - written to localStorage by creative-scale/pre-vsl
+                // on this same origin, so it survives the hop to this page.
+                var vslPercent = 0;
+                try { vslPercent = Number(localStorage.getItem('vsl_percent')) || 0; } catch (e) {}
+
                 const response = await fetch('/.netlify/functions/submit-lead', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name: data.name, phone: data.phone, email: data.email, consent: false })
+                    body: JSON.stringify({ name: data.name, phone: data.phone, email: data.email, consent: false, vslPercent })
                 });
                 const result = await response.json();
                 if (!response.ok) throw new Error(result.error);
