@@ -1769,9 +1769,15 @@
                     // Same event_id as the CAPI Lead the function just sent, so Meta dedupes.
                     if (typeof fbq === 'function') fbq('track', 'Lead', {}, { eventID: eventId });
                     if (typeof gtag === 'function') gtag('event', 'generate_lead');
+                    // Shown behind the redirect: if navigation is blocked the visitor
+                    // still gets the confirmation instead of a form that did nothing.
                     box.hidden = true;
                     done.hidden = false;
-                    done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Small gap so the pixel beacon leaves before navigation cancels it.
+                    // The CAPI Lead already went server-side, so this is belt and braces.
+                    setTimeout(function() {
+                        window.location.href = 'thank-you-creative-scale.html';
+                    }, 400);
                 }).catch(function() {
                     showError('משהו השתבש - נסה שוב או כתוב לי באינסטגרם @gal_creativz');
                     sending = false;
