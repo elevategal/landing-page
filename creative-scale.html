@@ -203,20 +203,12 @@
 
         /* ===== VSL CTA (always-visible button under the player) ===== */
         .vsl-cta-block { text-align: center; margin: 22px auto 0; }
+        .vsl-lead-line {
+            font-size: clamp(0.95rem, 2.2vw, 1.1rem); font-weight: 800;
+            color: #000; line-height: 1.6; margin-bottom: 14px;
+        }
         .vsl-cta-block .cta-btn { font-size: 1.05rem; padding: 16px 34px; }
-        .vsl-cta-sub { margin-top: 10px; font-size: 0.9rem; font-weight: 800; color: #000; opacity: 0.8; }
-
-        /* ===== SAFETY NET (short pitch for non-watchers) ===== */
-        .safety-net { padding: 24px 0 4px; text-align: center; }
-        .safety-lines p {
-            font-size: clamp(0.95rem, 2.2vw, 1.1rem);
-            font-weight: 800; color: #000; margin-bottom: 6px; line-height: 1.6;
-        }
-        .safety-lines .strong-line {
-            font-weight: 900; margin-top: 4px;
-            background: linear-gradient(transparent 62%, rgba(140,82,255,0.35) 62%, rgba(140,82,255,0.35) 92%, transparent 92%);
-            display: inline-block; padding: 0 0.2em;
-        }
+        .vsl-cta-sub { margin-top: 10px; font-size: 0.85rem; font-weight: 700; color: #000; opacity: 0.65; }
 
         /* ===== COLD-AUDIENCE GATE (PAGE_CONFIG.SHOW_CTA_ON_PROGRESS = true) =====
            When gate-on is set, .locked-section elements stay hidden until 50% real watch. */
@@ -298,6 +290,11 @@
         .testimonial-more-btn:hover { background: var(--accent); border-color: #000; }
         .testimonials-extra { display: none; margin-top: 22px; }
         .testimonials-extra.open { display: grid; }
+        /* Cards in a row share a height even though the quotes differ in length. */
+        .testimonial-grid { align-items: stretch; }
+        .video-testimonial-wrap { height: 100%; }
+        /* A row that ends up short centres its leftovers instead of leaving a card-sized hole. */
+        .testimonial-grid > .video-testimonial-wrap:last-child:nth-child(4n + 1) { grid-column: 2 / span 2; }
 
         /* ===== STATEMENTS ===== */
         .statements { padding: 60px 0 20px; background: transparent; }
@@ -511,14 +508,13 @@
             .hero-mini .num { padding: 0.02em 0.3em; box-shadow: 2px 2px 0 #000; }
             .hero-arrow { font-size: 1rem; margin-top: 4px; }
             .vsl-section { padding: 6px 0 26px; }
-            .video-wrapper { border-radius: 14px; box-shadow: 5px 5px 0 #000; }
+            .video-wrapper { border-radius: 14px; box-shadow: 5px 5px 0 #000; max-height: 70vh; }
             .vsl-sound-btn { font-size: 0.82rem; padding: 8px 14px; bottom: 10px; gap: 6px; }
             .vsl-sound-btn svg { width: 14px; height: 14px; }
             .vsl-cta-block { margin-top: 14px; }
             .vsl-cta-block .cta-btn { width: 100%; max-width: 340px; font-size: 0.95rem; padding: 14px 20px; }
-            .vsl-cta-sub { font-size: 0.8rem; margin-top: 8px; }
-            .safety-net { padding: 18px 0 0; }
-            .safety-lines p { font-size: 0.9rem; margin-bottom: 5px; }
+            .vsl-cta-sub { font-size: 0.78rem; margin-top: 8px; }
+            .vsl-lead-line { font-size: 0.92rem; margin-bottom: 10px; }
             .context-section { padding: 20px 0 0; }
             .context-box { padding: 18px 16px; border-right-width: 6px; }
             .context-box p { font-size: 0.92rem; line-height: 1.75; }
@@ -667,17 +663,16 @@
             font-size: 1.05rem; font-weight: 900; line-height: 1.6;
         }
 
-        /* ===== TESTIMONIAL QUOTES ===== */
+        /* ===== TESTIMONIAL QUOTES =====
+           Secondary text under the name: the video stays the loudest element in the card
+           and the quote never gets a surface of its own. */
         .testimonial-quote {
-            margin-top: 8px; font-size: 0.88rem; line-height: 1.6; font-weight: 600;
-            color: #000; opacity: 0.85;
+            margin-top: 8px; font-size: 15px; line-height: 1.5; font-weight: 400;
+            color: rgba(255,255,255,0.75); text-align: center;
+            background: none; border: 0; padding: 0;
         }
-        .text-testimonial .quote-card {
-            background: #fff; border: 2px solid #000; border-radius: var(--radius);
-            box-shadow: var(--brutal-shadow-sm); padding: 18px 16px;
-            display: flex; align-items: center; min-height: 150px;
-        }
-        .text-testimonial .quote-card .testimonial-quote { margin-top: 0; font-size: 0.92rem; opacity: 1; }
+        /* Cards without a video keep the same running order, just no player. */
+        .video-testimonial-wrap.no-video { justify-content: flex-start; }
 
         /* ===== REGISTRATION FORM ===== */
         .register-section { padding: 60px 0; }
@@ -781,19 +776,9 @@
 
             <!-- Always-visible CTA under the player (hidden only in cold-audience gate mode) -->
             <div class="vsl-cta-block locked-section">
+                <p class="vsl-lead-line">יומיים בזום, 6-7.9, שבהם לומדים לבנות קריאייטיב שמוכר.</p>
                 <a id="vslCtaBtn" class="cta-btn" href="#register">שריינו לי מקום ←</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== 2b. SAFETY NET (for visitors who never press play) ===== -->
-    <section class="safety-net locked-section">
-        <div class="container">
-            <div class="safety-lines fade-up">
-                <p>יומיים בזום, 6-7.9, שבהם לומדים לבנות קריאייטיב שמוכר.</p>
-                <p>למי שמוכר מוצר שפותר בעיה ורוצה להפסיק לנחש.</p>
-                <p>ההוכחה למעלה: 143 אלף ש"ח מקמפיין אחד, ברואס 10.</p>
-                <p class="strong-line">997 ₪ + מע"מ. 15 מקומות בלבד.</p>
+                <p class="vsl-cta-sub">997 ₪ + מע"מ | 15 מקומות | ההרשמה נסגרת ב-5.9</p>
             </div>
         </div>
     </section>
@@ -802,7 +787,7 @@
     <section class="context-section">
         <div class="container">
             <div class="context-box fade-up">
-                <p><strong>רגע, למי שלא צפה בסרטון:</strong> לקוח שלי, רשת חדרי בריחה, לא הצליח לפצח את קהל המשפחות. במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות - ובניתי סביבו מודעת UGC אחת. היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
+                <p><strong>רגע, למי שלא צפה בסרטון:</strong> הסדנה מיועדת למי שמוכר מוצר שפותר בעיה ורוצה להפסיק לנחש. לקוח שלי, רשת חדרי בריחה, לא הצליח לפצח את קהל המשפחות. במקום לנחש, זיהיתי עיקרון פסיכולוגי אחד שגורם לקהל הזה לקנות - ובניתי סביבו מודעת UGC אחת. היא הכניסה 143 אלף שקל בחודש, ברואס 10, בעלות הפקה אפס. בסדנה של יומיים אני מלמד בדיוק את זה: איך למצוא את הטריגר שגורם לקהל שלך לקנות, ואיך להפוך אותו למודעה שעובדת.</p>
             </div>
         </div>
     </section>
@@ -861,16 +846,16 @@
 
             <div class="testimonial-grid fade-up">
                 <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="f242ae59-d597-46d2-b188-ee6f123060a2">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/f242ae59-d597-46d2-b188-ee6f123060a2/thumbnail.jpg')"></div>
+                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7">
+                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div>
                     </div>
-                    <div class="testimonial-label"><span class="name">נועם הולנדר</span><span class="niche">חיות מחמד</span></div>
+                    <div class="testimonial-label"><span class="name">טל קרת</span><span class="niche">בעלים של חברת הפקות</span></div>
+                    <p class="testimonial-quote">כן הייתי כותב קצת בצ'אט ג'יפיטי, אבל זה היה נורא חד כיווני. הסדנה פתחה לי את הראש לכמה כיוונים אפשר לקחת קריאייטיב איכותי.</p>
                 </div>
-                <div class="video-testimonial-wrap text-testimonial">
-                    <div class="quote-card">
-                        <p class="testimonial-quote">ממצב של דשדוש ומכירה פה מכירה שם - יש לי שתי מודעות מצליחות שעושות מכירות. הבנתי שהטעות שלי היתה בפרסום, לא בבחירת מוצר ולא בדף המוצר.</p>
-                    </div>
+                <div class="video-testimonial-wrap no-video">
+                    <!-- no video on file for this one yet -->
                     <div class="testimonial-label"><span class="name">גיל</span><span class="niche">מוצרים לבית</span></div>
+                    <p class="testimonial-quote">ממצב של דשדוש ומכירה פה מכירה שם - יש לי שתי מודעות מצליחות שעושות מכירות. הבנתי שהטעות שלי היתה בפרסום, לא בבחירת מוצר ולא בדף המוצר.</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="e1a7090a-7a91-44ee-808d-59fe66c28dcb">
@@ -886,26 +871,22 @@
                     <div class="testimonial-label"><span class="name">אור כהן</span><span class="niche">כלי מטבח</span></div>
                     <p class="testimonial-quote">לפני הסדנה הייתי מנחשת ומגששת באפלה. פתאום דברים התחילו להתחבר לי - יש מתמטיקה לדברים. זה שיפר לי משמעותית את הביצועים.</p>
                 </div>
+            </div>
+
+            <div class="testimonial-grid testimonials-extra" id="testimonialsExtra">
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="476521c1-5709-48c1-ac10-e2e5cd036e43">
                         <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/476521c1-5709-48c1-ac10-e2e5cd036e43/thumbnail.jpg')"></div>
                     </div>
                     <div class="testimonial-label"><span class="name">אושרי זנדני</span><span class="niche">מנהל קמפיינים</span></div>
-                </div>
-            </div>
-
-            <div class="testimonial-grid testimonials-extra" id="testimonialsExtra">
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="3f8b9eb3-b921-4685-9f27-1e0a13548403">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/3f8b9eb3-b921-4685-9f27-1e0a13548403/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">ע. (חסוי)</span><span class="niche">כלי מטבח</span></div>
+                    <p class="testimonial-quote">בתור מנהל קמפיינים היה לי חשוב להרים את רמת הקריאייטיב - ללקוחות ולעצמי ביום-יום. המחיר באמת מצחיק לעומת הערך.</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="59f9a08b-65ab-4194-b5b8-a93ba10a964a">
                         <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/59f9a08b-65ab-4194-b5b8-a93ba10a964a/thumbnail.jpg')"></div>
                     </div>
                     <div class="testimonial-label"><span class="name">רועי גלבוע</span><span class="niche">ביוטי</span></div>
+                    <p class="testimonial-quote">גל מלמד איך לחשוב על כל תמונה וכל סרטון - מה עומד מאחורי כל דבר מצליח. והבוט שהוא בנה בקלוד? כבר ביום הראשון שהשתמשתי בו הוא עשה לי דברים מדהימים.</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="fe70a730-f02f-4306-94fc-30f76dcec5a3">
@@ -913,19 +894,6 @@
                     </div>
                     <div class="testimonial-label"><span class="name">עידו וידל</span><span class="niche">Wellness</span></div>
                     <p class="testimonial-quote">סוף סוף אני מבין מה אני עושה. יש לי בהירות - אני כבר לא מנחש כל הזמן. שווה כל שקל.</p>
-                </div>
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="4bb5388c-6ed1-4ade-bc01-8cb276283f6c">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/4bb5388c-6ed1-4ade-bc01-8cb276283f6c/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">יהונתן דויד</span><span class="niche">סמנכ"ל שיווק</span></div>
-                </div>
-                <div class="video-testimonial-wrap">
-                    <div class="video-testimonial" data-video="567c1478-7051-4d4d-9028-23e2cb9b41c7">
-                        <div class="video-facade" style="background-image:url('https://vz-0868b1e7-e9f.b-cdn.net/567c1478-7051-4d4d-9028-23e2cb9b41c7/thumbnail.jpg')"></div>
-                    </div>
-                    <div class="testimonial-label"><span class="name">טל קרת</span><span class="niche">בעלים של חברת הפקות</span></div>
-                    <p class="testimonial-quote">כן הייתי כותב קצת בצ'אט ג'יפיטי, אבל זה היה נורא חד כיווני. הסדנה פתחה לי את הראש לכמה כיוונים אפשר לקחת קריאייטיב איכותי.</p>
                 </div>
                 <div class="video-testimonial-wrap">
                     <div class="video-testimonial" data-video="0abdb805-dc9d-46c5-97fe-8354116356e9">
@@ -1129,6 +1097,15 @@
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-inner">רוב הקורסים מלמדים תיאוריה. פה אתה רואה אותי בונה קריאייטיב אמיתי מאפס, בזמן אמת, ואז עושה את זה בעצמך עם ליווי. פרקטיקה, לא הרצאה.</div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" tabindex="0" aria-expanded="false">
+                        <span>מתי אני בונה קריאייטיב ראשון בעצמי?</span>
+                        <div class="faq-toggle">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">את הקריאייטיב הראשון שלך אתה בונה כבר במפגש השני, על המוצר שלך. מה שקורה אחר כך תלוי בך, אבל אתה יוצא עם שיטה שאפשר להריץ שוב ושוב, לא עם השראה חד פעמית.</div>
                     </div>
                 </div>
                 <div class="faq-item">
