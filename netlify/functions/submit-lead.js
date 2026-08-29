@@ -83,9 +83,15 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid email' }) };
     }
 
-    const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN;
-    const BASE_ID = 'app0wUm7hxJOq8DWG';
-    const TABLE_NAME = 'Table 1';
+    // Table ID, not the display name: renaming the table in Airtable no longer breaks this.
+    const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN || process.env.AIRTABLE_TOKEN;
+    const BASE_ID = process.env.AIRTABLE_LEADS_BASE_ID || 'app0wUm7hxJOq8DWG';
+    const TABLE_ID = process.env.AIRTABLE_LEADS_TABLE_ID || 'tblcB9WEcmSINKI2l';
+
+    if (!AIRTABLE_TOKEN) {
+      console.error('Airtable token missing: set AIRTABLE_API_TOKEN in Netlify env');
+      return { statusCode: 500, headers, body: JSON.stringify({ error: 'Server misconfigured' }) };
+    }
 
     // Capture client context now so Purchase events later can replay it for EMQ
     // CF-Connecting-IP is the real client IP when Cloudflare proxies the request;
@@ -95,38 +101,66 @@ exports.handler = async (event) => {
                     || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
     const clientUserAgent = event.headers['user-agent'] || '';
 
-    const response = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        records: [
-          {
-            fields: {
-              'Name': name,
-              'Phone number': phone,
-              'Email': email,
-              'אישר דיוור': consent || false,
-              'Purchase Status': 'Lead',
-              'Price': 1397,
-              'UTM Source': utmSource || '',
-              'UTM Medium': utmMedium || '',
-              'UTM Campaign': utmCampaign || '',
-              'UTM Content': utmContent || '',
-              'FBP': fbp || '',
-              'FBC': fbc || '',
-              'Client IP': clientIp || '',
-              'User Agent': clientUserAgent || '',
-              'Event Source URL': eventSourceUrl || ''
-            }
-          }
-        ]
-      })
-    });
+    const fields = {
+      'Name': name,
+      'Phone number': phone,
+      'Email': email,
+      'אישר דיוור': consent || false,
+      'Purchase Status': 'Lead',
+      'Price': 1397,
+      'UTM Source': utmSource || '',
+      'UTM Medium': utmMedium || '',
+      'UTM Campaign': utmCampaign || '',
+      'UTM Content': utmContent || '',
+      'FBP': fbp || '',
+      'FBC': fbc || '',
+      'Client IP': clientIp || '',
+      'User Agent': clientUserAgent || '',
+      'Event Source URL': eventSourceUrl || ''
+    };
 
-    const result = await response.json();
+    // Without these three the record is not a lead, so they are never dropped.
+    const CORE_FIELDS = ['Name', 'Phone number', 'Email'];
+
+    // Airtable rejects the WHOLE record when one field name does not exist in the
+    // destination table. A schema drift on an optional column (a renamed UTM field,
+    // say) would otherwise silently cost a paying lead, so drop the offending
+    // optional column and retry instead of losing the submission.
+    const postRecord = async (payloadFields) => {
+      const res = await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_ID}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        // typecast lets Airtable coerce values and create a missing single-select
+        // option (e.g. Purchase Status "Lead") instead of rejecting the record.
+        body: JSON.stringify({ records: [{ fields: payloadFields }], typecast: true })
+      });
+      return await res.json();
+    };
+
+    let result;
+    const droppedFields = [];
+    for (let attempt = 0; attempt <= Object.keys(fields).length; attempt++) {
+      result = await postRecord(fields);
+      if (!result.error) break;
+      if (result.error.type !== 'UNKNOWN_FIELD_NAME') break;
+
+      const match = /Unknown field name:\s*"(.+)"/.exec(result.error.message || '');
+      const badField = match && match[1];
+      if (!badField || !(badField in fields) || CORE_FIELDS.indexOf(badField) !== -1) break;
+
+      droppedFields.push(badField);
+      delete fields[badField];
+    }
+
+    if (droppedFields.length) {
+      console.error(
+        'Airtable schema drift - these columns are missing from table ' + TABLE_ID +
+        ' and were dropped from the record: ' + droppedFields.join(', ')
+      );
+    }
 
     if (result.error) {
       console.error('Airtable error:', JSON.stringify(result.error));
