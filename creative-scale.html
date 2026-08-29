@@ -1166,6 +1166,9 @@
             var pjsFailed = false;
             var pendingStart = null;
             var reloadTimer = null;
+            var playerGen = 0;          // invalidates listeners from a severed bridge
+            var reloadedOnce = false;   // the iframe is reloaded at most once
+            var trackingLostFired = false;
 
             soundBtn.addEventListener('click', function() { activateSound(isReturning ? savedResumeTime : 0); });
             restartLink.addEventListener('click', function(e) { e.stopPropagation(); activateSound(0); });
@@ -1199,10 +1202,37 @@
             }
 
             function reloadUnmuted(startAt) {
+                if (reloadedOnce) return;
+                reloadedOnce = true;
+
+                // The reload severs the player.js handshake. Everything below exists so the
+                // bridge is rebuilt on the new frame - without it VSL_25/50/75/95 never fire
+                // again for this session and the 50% gate can only open via the 8s fallback.
+                playerReady = false;
+                pendingStart = null;
+                if (reloadTimer) { clearTimeout(reloadTimer); reloadTimer = null; }
+
                 var src = iframe.src.replace('muted=true', 'muted=false');
                 src = src.replace(/[&?]t=\d+/, '');
                 src += (src.indexOf('?') === -1 ? '?' : '&') + 't=' + Math.floor(startAt);
+
+                // Late safety net: the new frame may emit 'ready' before we re-attach.
+                iframe.addEventListener('load', function onLoad() {
+                    iframe.removeEventListener('load', onLoad);
+                    if (!playerReady) attachPlayer();
+                });
+
                 iframe.src = src;
+                attachPlayer();
+
+                // Measure the population whose progress tracking is genuinely dead
+                // (player.js itself never loaded, so there is no bridge to rebuild).
+                setTimeout(function() {
+                    if (playerReady || trackingLostFired) return;
+                    trackingLostFired = true;
+                    if (typeof fbq === 'function') fbq('trackCustom', 'VSL_TrackingLost');
+                    if (typeof gtag === 'function') gtag('event', 'vsl_tracking_lost');
+                }, 5000);
             }
 
             // Gate-mode fallback: reveal locked sections after 8s if player never becomes ready
@@ -1242,9 +1272,12 @@
                 if (GATED && !unlocked) revealLockedSections(true);
             }
 
-            whenPlayerJs(function() {
+            function attachPlayer() {
+                if (typeof playerjs === 'undefined') return;
+                var gen = ++playerGen;
                 player = new playerjs.Player(iframe);
                 player.on('ready', function() {
+                    if (gen !== playerGen) return;
                     playerReady = true;
                     if (revealTimer) clearTimeout(revealTimer);
                     if (reloadTimer) clearTimeout(reloadTimer);
@@ -1256,6 +1289,7 @@
                     player.getDuration(function(d) { duration = d; });
 
                     player.on('timeupdate', function(data) {
+                        if (gen !== playerGen) return;
                         var dur = data.duration || duration;
                         if (!dur) return;
                         var t = data.seconds;
@@ -1286,11 +1320,14 @@
                     });
 
                     player.on('error', function() {
+                        if (gen !== playerGen) return;
                         console.error('[VSL] playback error');
                         if (GATED && !unlocked) revealLockedSections(true);
                     });
                 });
-            });
+            }
+
+            whenPlayerJs(attachPlayer);
 
             function syncHiddenField(v) {
                 var f = document.getElementById('vsl_percent_field');
