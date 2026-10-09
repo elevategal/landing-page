@@ -239,6 +239,7 @@
 
       <!-- הטמעת וידאו: החלף את התוכן הפנימי ב-<iframe src="..." allowfullscreen></iframe> -->
       <div class="video" id="video"></div>
+      <p class="cta-note" id="revealNote"></p>
      </div>
 
     </div>
@@ -467,11 +468,23 @@
   /* ---------- חשיפת הטופס אחרי דקה וחצי ---------- */
   var REVEAL_AFTER = 90; // שניות
   var after = document.getElementById('afterVideo');
+  var revealNote = document.getElementById('revealNote');
   var revealed = false;
+
+  // הודעה קבועה שמסבירה למה הטופס עוד לא מופיע - בלי זה נראה שהדף שבור
+  function formatWait(sec){
+    if (sec === 90) return 'דקה וחצי';
+    if (sec % 60 === 0) return (sec / 60) + ' דקות';
+    if (sec < 60) return sec + ' שניות';
+    return Math.floor(sec / 60) + ' דקות ו-' + (sec % 60) + ' שניות';
+  }
+  if (revealNote) revealNote.textContent = 'השארת פרטים נפתחת אחרי ' + formatWait(REVEAL_AFTER) + ' מתחילת הסרטון';
+
   function reveal(){
     if (revealed) return;
     revealed = true;
     after.style.display = 'block';
+    if (revealNote) revealNote.style.display = 'none';
   }
   // לבדיקה: הוסף ?preview=1 לכתובת
   if (param('preview') === '1') reveal();
