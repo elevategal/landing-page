@@ -338,7 +338,6 @@
         <a href="https://www.youtube.com/@Gal_creativz" target="_blank" rel="noopener">לערוץ המלא</a>
       </div>
       <div class="yt" id="ytGrid"></div>
-      <a class="cta" href="#form" id="bottomCta" style="margin-top:48px">שליחת פרטים</a>
     </div>
   </section>
 
@@ -346,7 +345,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Elev8 · כל הזכויות שמורות · <a href="accessibility.html">הצהרת נגישות</a></p>
+    <p>Elev8 · כל הזכויות שמורות · <a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a></p>
   </div>
 </footer>
 
@@ -474,13 +473,6 @@
   }
   // לבדיקה: הוסף ?preview=1 לכתובת
   if (param('preview') === '1') reveal();
-
-  // הכפתור שבתחתית: מי שלחץ רוצה להשאיר פרטים, אז חושפים את הטופס גם לפני 90 השניות
-  document.getElementById('bottomCta').addEventListener('click', function (e) {
-    e.preventDefault();
-    reveal();
-    document.getElementById('form').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
 
   var vid = document.querySelector('#video video');
   if (vid) {
