@@ -115,32 +115,45 @@ exports.handler = async (event) => {
       'Event Source URL': eventSourceUrl || ''
     };
 
+    // typecast: מאפשר לאיירטייבל להתאים את הערך לסוג העמודה,
+    // ולהוסיף אופציה ל-single select אם היא לא קיימת (למשל Status = Lead)
     const post = (f) => fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ records: [{ fields: f }] })
+      body: JSON.stringify({ records: [{ fields: f }], typecast: true })
     }).then(r => r.json());
 
-    let result = await post(fields);
+    // כותב, ואם עמודה לא קיימת בבייס - מוריד אותה, מעביר את הערך ל-Notes, ומנסה שוב.
+    // ככה ליד אף פעם לא הולך לאיבוד, גם אם הטבלה לא בנויה כמו שצריך.
+    const attempt = Object.assign({}, fields);
+    const dropped = {};
+    let result = null;
 
-    // אם עמודה חסרה בבייס - שולח שוב רק עם השדות ההכרחיים, כדי שליד לא ילך לאיבוד
-    if (result.error && result.error.type === 'UNKNOWN_FIELD_NAME') {
-      console.warn('Airtable missing column:', result.error.message);
-      const minimal = {
-        'Name': fields['Name'],
-        'Phone number': fields['Phone number'],
-        'Email': fields['Email']
-      };
-      const rest = Object.entries(fields)
-        .filter(([k]) => !(k in minimal))
-        .map(([k, v]) => `${k}: ${v}`)
-        .join('\n');
-      minimal['Notes'] = rest;
-      result = await post(minimal);
-      if (result.error && result.error.type === 'UNKNOWN_FIELD_NAME') {
-        delete minimal['Notes'];
-        result = await post(minimal);
+    for (let i = 0; i < 25; i++) {
+      if ('Notes' in attempt && Object.keys(dropped).length) {
+        attempt['Notes'] = Object.entries(dropped)
+          .filter(([, v]) => v !== '' && v !== undefined && v !== null)
+          .map(([k, v]) => `${k}: ${v}`)
+          .join('\n');
       }
+
+      result = await post(attempt);
+
+      if (!result.error || result.error.type !== 'UNKNOWN_FIELD_NAME') break;
+
+      const m = /Unknown field name:\s*"?([^"]+)"?/i.exec(result.error.message || '');
+      const bad = m && m[1];
+      if (!bad || !(bad in attempt)) break;
+
+      if (bad !== 'Notes') dropped[bad] = attempt[bad];
+      delete attempt[bad];
+      console.warn('Airtable column missing, dropped:', bad);
+
+      if (!Object.keys(attempt).length) break;
+    }
+
+    if (Object.keys(dropped).length) {
+      console.warn('Columns missing from the mirror table:', Object.keys(dropped).join(', '));
     }
 
     if (result.error) {
