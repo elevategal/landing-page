@@ -152,8 +152,30 @@ exports.handler = async (event) => {
       if (!Object.keys(attempt).length) break;
     }
 
+    // אם עמודות נפלו ו-Notes לא היה בכלל ברשימת השדות, מוסיפים אותו עכשיו
+    // על הרשומה שנוצרה, כדי שהטלפון והאימייל לא ילכו לאיבוד.
     if (Object.keys(dropped).length) {
       console.warn('Columns missing from the mirror table:', Object.keys(dropped).join(', '));
+
+      const dump = Object.entries(dropped)
+        .filter(([, v]) => v !== '' && v !== undefined && v !== null)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join('\n');
+
+      if (dump && !('Notes' in attempt) && result.records && result.records.length) {
+        const patch = await fetch(
+          `https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE_NAME)}/${result.records[0].id}`,
+          {
+            method: 'PATCH',
+            headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fields: { 'Notes': dump }, typecast: true })
+          }
+        ).then(r => r.json()).catch(e => ({ error: { message: e.message } }));
+
+        if (patch.error) {
+          console.error('Could not write the dropped values to Notes:', JSON.stringify(patch.error));
+        }
+      }
     }
 
     if (result.error) {
