@@ -15,6 +15,7 @@
 /diagnosis          /diagnosis.html          200
 /diagnosis-stats    /diagnosis-stats.html    200
 /pre-vsl            /pre-vsl.html            200
-/mirror             /mirror.html             200
+/miror              /mirror.html             200
+/mirror             /miror                   301!
 /mirror-thanks      /mirror-thanks.html      200
 /mirror-workshop    /mirror-workshop.html    200
