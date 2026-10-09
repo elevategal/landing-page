@@ -60,44 +60,35 @@ var VIDEOS = {
 
 ## טופס → Airtable
 
-`netlify/functions/submit-mirror-lead.js` - בייס **נפרד** משאר הדפים.
-הטופס מבקש רק שם, טלפון ואימייל. הפונקציה כותבת גם את העמודות הישנות (תחום העיסוק, תקציב חודשי, מי מריץ, מקליט שיחות, לידים בחודש האחרון) - הן פשוט יישארו ריקות.
+חי ומחובר. הבייס: `appxqFsIpeWSxwoHD`, הטבלה: `tbl72SNRTRAwIcC9g`.
+שניהם מוגדרים בנטליפיי כ-`AIRTABLE_MIRROR_BASE_ID` ו-`AIRTABLE_MIRROR_TABLE_NAME`
+(שם הטבלה הוא המזהה ולא השם, כדי שלא יישבר אם משנים את השם).
 
-`qualifies()` מחזירה כרגע `true` תמיד, כך שכולם נשמרים עם `Status = Lead`.
+הטוקן `lp_airtable` קיבל גישה לבייס. `AIRTABLE_API_TOKEN` ו-`FB_CAPI_TOKEN` כבר היו מוגדרים.
 
-Env vars בנטליפיי:
-```
-AIRTABLE_MIRROR_BASE_ID     appXXXXXXXXXXXX
-AIRTABLE_MIRROR_TABLE_NAME  שם הטבלה
-```
-`AIRTABLE_API_TOKEN` ו-`FB_CAPI_TOKEN` כבר מוגדרים באתר.
+### העמודות שחסרות בטבלה
 
-עמודות בבייס (שמות מדויקים):
+נכון לעכשיו בטבלה יש רק `Name`, `Status`, `Notes`, `Assignee`.
+**אין `Phone number` ואין `Email`** - ולכן כל ליד נכנס עם השם בלבד, וכל השאר נדחס כטקסט לתוך `Notes`.
+
+כדאי להוסיף לטבלה:
 
 | עמודה | סוג |
 |---|---|
-| Name | Single line text |
 | Phone number | Single line text |
 | Email | Email |
-| Status | Single select ("Lead" / "Not qualified") |
 | UTM Source / UTM Medium / UTM Campaign / UTM Content | Single line text |
 | FBP / FBC / Client IP / User Agent / Event Source URL | Single line text |
-| Notes | Long text |
-| תחום העיסוק / תקציב חודשי / מי מריץ / מקליט שיחות / לידים בחודש האחרון | אופציונליות, יישארו ריקות |
 
-אם עמודה חסרה, הפונקציה שולחת שוב עם שם/טלפון/מייל בלבד ודוחפת את השאר ל-Notes, כדי שליד לא ילך לאיבוד.
+ברגע שעמודה קיימת, הערך נכנס אליה ולא ל-Notes. אין צורך לגעת בקוד.
 
-## אחרי שליחת הטופס
+### איך הפונקציה מתגוננת
 
-הטופס נעלם, מופיע במקומו "קיבלתי את הפרטים", ואחרי **3 שניות** הדפדפן עובר לאינסטגרם.
-שני הקבועים בתחתית `mirror.html`:
+1. שולחת עם `typecast`, כך שאיירטייבל מתאים את הערך לסוג העמודה ומוסיף אופציה ל-single select (ככה `Status = Lead` נוצר לבד).
+2. אם עמודה לא קיימת, היא קוראת את שמה מתוך הודעת השגיאה, מורידה אותה, ומנסה שוב - עד שהכתיבה עוברת.
+3. בסוף, כל מה שנפל נכתב ל-`Notes` ברשומה שנוצרה.
 
-```js
-var INSTAGRAM = 'https://www.instagram.com/gal_creativz';
-var REDIRECT_AFTER = 3; // שניות
-```
-
-במסך התודה יש גם קישור ידני לאינסטגרם, למקרה שההפניה נחסמת.
+כלומר ליד לא הולך לאיבוד גם אם הטבלה לא בנויה נכון.
 
 ## לא בשימוש כרגע
 
