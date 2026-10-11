@@ -65,7 +65,7 @@ exports.handler = async (event) => {
     const body = JSON.parse(event.body || '{}');
     const {
       name, phone, email, industry, budget, whoRuns, records, leads, qualified,
-      utmSource, utmMedium, utmCampaign, utmContent,
+      utmSource, utmMedium, utmCampaign, utmContent, videoPercent,
       eventId, eventSourceUrl, fbp, fbc, testEventCode
     } = body;
 
@@ -108,6 +108,7 @@ exports.handler = async (event) => {
       'UTM Medium': utmMedium || '',
       'UTM Campaign': utmCampaign || 'mirror',
       'UTM Content': utmContent || '',
+      'אחוז צפיית VSL': Number.isFinite(Number(videoPercent)) ? Math.max(0, Math.min(100, Math.round(Number(videoPercent)))) : 0,
       'FBP': fbp || '',
       'FBC': fbc || '',
       'Client IP': clientIp || '',

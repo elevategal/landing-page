@@ -195,6 +195,27 @@
   footer p{font-size:14px;color:var(--muted);text-align:center}
   footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 
+  /* ---------- אישור עוגיות ---------- */
+  .ck-ov{position:fixed;inset:0;background:rgba(17,17,17,.45);z-index:9990;opacity:0;pointer-events:none;transition:opacity .3s}
+  .ck-ov.on{opacity:1;pointer-events:auto}
+  .ck{
+    position:fixed;z-index:9991;left:50%;bottom:16px;transform:translate(-50%,140%);
+    width:min(440px,calc(100% - 32px));background:#FFFFFF;border:1px solid var(--line);
+    border-radius:8px;box-shadow:0 12px 32px rgba(17,17,17,.14);padding:22px;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  }
+  .ck.on{transform:translate(-50%,0)}
+  .ck.hide{display:none}
+  .ck h2{font-size:17px;font-weight:800;margin:0 0 4px}
+  .ck p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;text-align:right}
+  .ck-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .ck-btn{flex:1;min-width:130px;text-align:center;padding:11px;border:1px solid var(--line);border-radius:8px;
+    background:#FFFFFF;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;color:var(--ink);text-decoration:none}
+  .ck-btn.pri{background:var(--blue);border-color:var(--blue);color:#FFFFFF}
+  .ck-btn.pri:hover{background:var(--blue-dark)}
+  .ck-x{position:absolute;top:10px;left:14px;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){ .ck,.ck-ov{transition:none} }
+
   /* ---------- מובייל ---------- */
   @media (max-width:700px){
     section{padding:44px 0}
@@ -300,7 +321,7 @@
 
 <footer>
   <div class="wrap">
-    <p>Elev8 · כל הזכויות שמורות · <a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a></p>
+    <p>Elev8 · כל הזכויות שמורות · <a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a> · <a href="#" id="ckSettings">הגדרות קוקיז</a></p>
   </div>
 </footer>
 
@@ -414,6 +435,45 @@
     ytGrid.appendChild(card);
   });
 
+  /* ---------- מעקב אחוזי צפייה בוידאו הראשי (0/25/50/75/100) ---------- */
+  var TRACK_ENDPOINT = '/.netlify/functions/track-mirror-view';
+  var sessionId = 's' + Date.now() + Math.random().toString(36).slice(2);
+  var seenMilestones = {};
+  var maxPctWatched = 0; // האחוז הגבוה ביותר שנצפה - מצטרף לרשומת הליד עצמה בשליחת הטופס
+
+  function sendMilestone(pct){
+    var payload = JSON.stringify({
+      milestone: pct,
+      sessionId: sessionId,
+      utmSource: param('utm_source'),
+      utmMedium: param('utm_medium'),
+      utmCampaign: param('utm_campaign') || 'mirror',
+      utmContent: param('utm_content'),
+      pageUrl: window.location.href
+    });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(TRACK_ENDPOINT, new Blob([payload], { type: 'application/json' }));
+        return;
+      }
+    } catch (e) {}
+    // גיבוי לדפדפנים שלא תומכים ב-sendBeacon, או אם זה נכשל
+    fetch(TRACK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function(){});
+  }
+
+  // 0% = נפתח הדף, לא משנה אם הוידאו בכלל התנגן
+  sendMilestone(0);
+
+  function checkMilestones(pct){
+    if (pct > maxPctWatched) maxPctWatched = Math.min(pct, 100);
+    [25, 50, 75, 100].forEach(function (m) {
+      if (pct >= m && !seenMilestones[m]) {
+        seenMilestones[m] = true;
+        sendMilestone(m);
+      }
+    });
+  }
+
   /* ---------- חשיפת הטופס אחרי דקה וחצי ---------- */
   var REVEAL_AFTER = 90; // שניות
   var after = document.getElementById('afterVideo');
@@ -440,8 +500,11 @@
 
   var vid = document.querySelector('#video video');
   if (vid) {
-    // וידאו HTML5: זמן צפייה אמיתי
-    vid.addEventListener('timeupdate', function(){ if (vid.currentTime >= REVEAL_AFTER) reveal(); });
+    // וידאו HTML5: זמן צפייה אמיתי, גם לחשיפת הטופס וגם לאחוזי הצפייה
+    vid.addEventListener('timeupdate', function(){
+      if (vid.currentTime >= REVEAL_AFTER) reveal();
+      if (vid.duration) checkMilestones(Math.round((vid.currentTime / vid.duration) * 100));
+    });
   } else if (vslFrame && vslFrame.src.indexOf('player.vimeo.com') > -1) {
     // Vimeo: זמן צפייה אמיתי דרך ה-API של הנגן
     var sdk = document.createElement('script');
@@ -449,7 +512,10 @@
     sdk.onload = function () {
       try {
         var player = new Vimeo.Player(vslFrame);
-        player.on('timeupdate', function (e) { if (e.seconds >= REVEAL_AFTER) reveal(); });
+        player.on('timeupdate', function (e) {
+          if (e.seconds >= REVEAL_AFTER) reveal();
+          checkMilestones(Math.round((e.percent || 0) * 100));
+        });
       } catch (err) {
         setTimeout(reveal, REVEAL_AFTER * 1000);
       }
@@ -460,6 +526,15 @@
   } else {
     // נגן אחר (יוטיוב/באני) או שעוד אין סרטון: טיימר מרגע טעינת הדף
     setTimeout(reveal, REVEAL_AFTER * 1000);
+
+    // Bunny Stream משדר timeupdate דרך postMessage - תופסים את זה לאחוזי הצפייה.
+    // זהירות: לא מאומת אמפירית מול הנגן האמיתי (ראה mirror-setup.md).
+    window.addEventListener('message', function (ev) {
+      var d = ev.data;
+      if (d && typeof d === 'object' && d.event === 'timeupdate' && d.duration) {
+        checkMilestones(Math.round((d.currentTime / d.duration) * 100));
+      }
+    });
   }
 
   /* ---------- טופס ---------- */
@@ -493,7 +568,8 @@
       fbp: cookie('_fbp'),
       fbc: cookie('_fbc'),
       eventId: 'mirror-' + Date.now() + '-' + Math.floor(Math.random() * 1e6),
-      eventSourceUrl: window.location.href
+      eventSourceUrl: window.location.href,
+      videoPercent: maxPctWatched
     };
 
     if (data.name.length < 2) return fail('צריך שם מלא');
@@ -518,7 +594,28 @@
   });
 </script>
 
+<div class="ck-ov" id="ckOv"></div>
+<div class="ck hide" id="ck" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
+  <button class="ck-x" id="ckX" aria-label="סגירה">&times;</button>
+  <h2 id="ckTitle">יש אצלנו עוגיות!</h2>
+  <p>באתר נעשה שימוש בעוגיות כדי לשפר את החוויה ולנתח את התנועה. אפשר לשנות את זה בכל רגע דרך "הגדרות קוקיז" בפוטר.</p>
+  <div class="ck-btns">
+    <button class="ck-btn pri" id="ckOk">אישור וסגירה</button>
+    <a class="ck-btn" href="privacy.html" target="_blank" rel="noopener">למידע נוסף</a>
+  </div>
+</div>
+
 <script src="accessibility-widget.js" defer></script>
+
+<script>
+  var ck = document.getElementById('ck'), ckOv = document.getElementById('ckOv');
+  function openCk(){ ck.classList.remove('hide'); requestAnimationFrame(function(){ ck.classList.add('on'); ckOv.classList.add('on'); }); }
+  function closeCk(){ ck.classList.remove('on'); ckOv.classList.remove('on'); setTimeout(function(){ ck.classList.add('hide'); }, 400); }
+  if (!localStorage.getItem('cookieConsent')) setTimeout(openCk, 900);
+  document.getElementById('ckOk').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'all'); closeCk(); });
+  document.getElementById('ckX').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'essential'); closeCk(); });
+  document.getElementById('ckSettings').addEventListener('click', function (e) { e.preventDefault(); openCk(); });
+</script>
 
 </body>
 </html>
