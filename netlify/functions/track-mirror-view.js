@@ -57,13 +57,36 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid milestone' }) };
     }
 
+    // ViewContent ל-Meta רק ב-50%, עצמאי לגמרי מטבלת הצפיות באיירטייבל - אסור שחוסר
+    // הגדרה של הטבלה ימנע מהאירוע הזה לצאת.
+    let capiResult = null;
+    if (pct === 50) {
+      const clientIp = (event.headers['cf-connecting-ip']
+                      || event.headers['x-nf-client-connection-ip']
+                      || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
+      const clientUserAgent = event.headers['user-agent'] || '';
+      try {
+        capiResult = await sendCapiViewContent({
+          eventId: eventId || (sessionId + '-50'),
+          pageUrl: pageUrl || '',
+          clientIp,
+          clientUserAgent,
+          fbp: body.fbp || '',
+          fbc: body.fbc || ''
+        });
+      } catch (capiErr) {
+        console.error('CAPI ViewContent error:', capiErr.message);
+        capiResult = { error: capiErr.message };
+      }
+    }
+
     const AIRTABLE_TOKEN = process.env.AIRTABLE_API_TOKEN;
     const BASE_ID = process.env.AIRTABLE_MIRROR_BASE_ID;
     const TABLE_NAME = process.env.AIRTABLE_MIRROR_VIEWS_TABLE_NAME;
 
     if (!AIRTABLE_TOKEN || !BASE_ID || !TABLE_NAME) {
-      // אין לאן לכתוב - לא נכשל בקול, זה לא קריטי כמו ליד. פשוט מדלגים.
-      return { statusCode: 200, headers, body: JSON.stringify({ skipped: true, reason: 'Views table not configured' }) };
+      // אין לאן לכתוב ב-Airtable - לא נכשל בקול, זה לא קריטי כמו ליד. ה-CAPI כבר נשלח למעלה בכל מקרה.
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: true, reason: 'Views table not configured', capi: capiResult }) };
     }
 
     const fields = {
@@ -101,27 +124,7 @@ exports.handler = async (event) => {
       // לא מחזיר שגיאה ללקוח - זה מעקב סטטיסטי, לא רוצים retry-storm מהדפדפן
     }
 
-    // ViewContent ל-Meta רק ב-50%, בלי לחסום את התגובה אם זה נכשל
-    if (pct === 50) {
-      const clientIp = (event.headers['cf-connecting-ip']
-                      || event.headers['x-nf-client-connection-ip']
-                      || event.headers['x-forwarded-for'] || '').split(',')[0].trim();
-      const clientUserAgent = event.headers['user-agent'] || '';
-      try {
-        await sendCapiViewContent({
-          eventId: eventId || (sessionId + '-50'),
-          pageUrl: pageUrl || '',
-          clientIp,
-          clientUserAgent,
-          fbp: body.fbp || '',
-          fbc: body.fbc || ''
-        });
-      } catch (capiErr) {
-        console.error('CAPI ViewContent error:', capiErr.message);
-      }
-    }
-
-    return { statusCode: 200, headers, body: JSON.stringify({ ok: !result.error }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ ok: !result.error, capi: capiResult }) };
 
   } catch (error) {
     console.error('Server error (view tracking):', error);
