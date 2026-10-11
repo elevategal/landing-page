@@ -56,6 +56,26 @@ https://elev8.co.il/miror?utm_source=instagram&utm_medium=organic&utm_campaign=m
 https://elev8.co.il/miror?utm_source=tiktok&utm_medium=bio&utm_campaign=mirror_organic
 ```
 
+### 📺 תיאור סרטון ביוטיוב (תחליף את שם/מזהה הסרטון)
+```
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=description&utm_campaign=mirror_organic&utm_content=roas7
+```
+
+### ביו/אודות הערוץ
+```
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=bio&utm_campaign=mirror_organic
+```
+
+### פוסט בקהילה (Community tab)
+```
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=community&utm_campaign=mirror_organic
+```
+
+### תגובה נעוצה בסרטון (תחליף את שם/מזהה הסרטון)
+```
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=comment&utm_campaign=mirror_organic&utm_content=roas7
+```
+
 ### חתימת מייל
 ```
 https://elev8.co.il/miror?utm_source=email&utm_medium=signature&utm_campaign=mirror_organic
