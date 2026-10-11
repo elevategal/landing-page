@@ -422,7 +422,7 @@
 
   // הודעה קבועה שמסבירה למה הטופס עוד לא מופיע - בלי זה נראה שהדף שבור
   function formatWait(sec){
-    if (sec === 90) return 'דקה וחצי';
+    if (sec === 90) return '90 שניות';
     if (sec % 60 === 0) return (sec / 60) + ' דקות';
     if (sec < 60) return sec + ' שניות';
     return Math.floor(sec / 60) + ' דקות ו-' + (sec % 60) + ' שניות';
