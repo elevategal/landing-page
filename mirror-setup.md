@@ -68,19 +68,21 @@ var VIDEOS = {
 
 ### העמודות שחסרות בטבלה
 
-נכון לעכשיו בטבלה יש רק `Name`, `Status`, `Notes`, `Assignee`.
-**אין `Phone number` ואין `Email`** - ולכן כל ליד נכנס עם השם בלבד, וכל השאר נדחס כטקסט לתוך `Notes`.
+**קיים:** `Name`, `Phone number`, `Email`, `Status`, `Notes`, `Assignee`.
 
-כדאי להוסיף לטבלה:
+**חסר עדיין** - נופל כטקסט לתוך `Notes` עד שיתווסף:
 
 | עמודה | סוג |
 |---|---|
-| Phone number | Single line text |
-| Email | Email |
-| UTM Source / UTM Medium / UTM Campaign / UTM Content | Single line text |
+| UTM Source | Single line text |
+| UTM Medium | Single line text |
+| UTM Campaign | Single line text |
+| UTM Content | Single line text |
 | FBP / FBC / Client IP / User Agent / Event Source URL | Single line text |
 
 ברגע שעמודה קיימת, הערך נכנס אליה ולא ל-Notes. אין צורך לגעת בקוד.
+
+**מערך התיוג המלא** (אילו קישורים להשתמש בכל ערוץ - אינסטגרם אורגני, וואטסאפ, מודעות ממומנות) נמצא ב-[`utm-links-mirror.md`](utm-links-mirror.md).
 
 ### איך הפונקציה מתגוננת
 
