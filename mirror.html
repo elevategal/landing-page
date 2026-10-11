@@ -227,6 +227,25 @@
     .yt{grid-template-columns:1fr;max-width:420px;margin-inline:auto}
   }
 </style>
+<script>
+  // פיקסל Meta - נטען רק אחרי הסכמה לעוגיות (cookieConsent === 'all')
+  var META_PIXEL_ID = '1061473126906613';
+  var metaPixelLoaded = false;
+  function loadMetaPixel(){
+    if (metaPixelLoaded || typeof fbq !== 'undefined') { metaPixelLoaded = true; return; }
+    metaPixelLoaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+  try {
+    if (localStorage.getItem('cookieConsent') === 'all') loadMetaPixel();
+  } catch (e) {}
+</script>
 </head>
 <body>
 
@@ -589,6 +608,9 @@
       body: JSON.stringify(data)
     }).then(function (r) {
       if (!r.ok) return fail('משהו השתבש בשליחה. נסה שוב.');
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', {}, { eventID: data.eventId }); // אותו event_id כמו ה-CAPI, כדי שמטא ימזג ולא יספור פעמיים
+      }
       window.location.href = '/mirror-thanks';
     }).catch(function () {
       fail('אין חיבור לשרת. נסה שוב.');
@@ -614,7 +636,7 @@
   function openCk(){ ck.classList.remove('hide'); requestAnimationFrame(function(){ ck.classList.add('on'); ckOv.classList.add('on'); }); }
   function closeCk(){ ck.classList.remove('on'); ckOv.classList.remove('on'); setTimeout(function(){ ck.classList.add('hide'); }, 400); }
   if (!localStorage.getItem('cookieConsent')) setTimeout(openCk, 900);
-  document.getElementById('ckOk').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'all'); closeCk(); });
+  document.getElementById('ckOk').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'all'); loadMetaPixel(); closeCk(); });
   document.getElementById('ckX').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'essential'); closeCk(); });
   document.getElementById('ckSettings').addEventListener('click', function (e) { e.preventDefault(); openCk(); });
 </script>
