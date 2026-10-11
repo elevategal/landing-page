@@ -56,9 +56,9 @@ https://elev8.co.il/miror?utm_source=instagram&utm_medium=organic&utm_campaign=m
 https://elev8.co.il/miror?utm_source=tiktok&utm_medium=bio&utm_campaign=mirror_organic
 ```
 
-### 📺 תיאור סרטון ביוטיוב (תחליף את שם_הסרטון בשם הסרטון האמיתי)
+### 📺 תיאור סרטון ביוטיוב - casestudy
 ```
-https://elev8.co.il/miror?utm_source=youtube&utm_medium=description&utm_campaign=mirror_organic&utm_content=שם_הסרטון
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=description&utm_campaign=mirror_organic&utm_content=casestudy
 ```
 
 ### ביו/אודות הערוץ
@@ -71,9 +71,9 @@ https://elev8.co.il/miror?utm_source=youtube&utm_medium=bio&utm_campaign=mirror_
 https://elev8.co.il/miror?utm_source=youtube&utm_medium=community&utm_campaign=mirror_organic
 ```
 
-### תגובה נעוצה בסרטון (תחליף את שם_הסרטון בשם הסרטון האמיתי)
+### תגובה נעוצה בסרטון - casestudy
 ```
-https://elev8.co.il/miror?utm_source=youtube&utm_medium=comment&utm_campaign=mirror_organic&utm_content=שם_הסרטון
+https://elev8.co.il/miror?utm_source=youtube&utm_medium=comment&utm_campaign=mirror_organic&utm_content=casestudy
 ```
 
 ### חתימת מייל
