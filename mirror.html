@@ -302,6 +302,11 @@
           <input type="email" id="email" name="email" inputmode="email" autocomplete="email" required>
         </div>
 
+        <div class="field">
+          <label for="industry">מה השירות שאתה נותן?</label>
+          <input type="text" id="industry" name="industry" required>
+        </div>
+
         <button type="submit" class="cta" id="submitBtn">שליחת בקשה</button>
         <p class="error" id="formError"></p>
       </form>
@@ -594,6 +599,7 @@
       name: form.name.value.trim(),
       phone: form.phone.value.trim(),
       email: form.email.value.trim(),
+      industry: form.industry.value.trim(),
       utmSource: param('utm_source'),
       utmMedium: param('utm_medium'),
       utmCampaign: param('utm_campaign') || 'mirror',
@@ -608,6 +614,7 @@
     if (data.name.length < 2) return fail('צריך שם מלא');
     if (data.phone.replace(/[^0-9]/g, '').length < 9) return fail('צריך מספר טלפון תקין');
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return fail('צריך כתובת אימייל תקינה');
+    if (!data.industry) return fail('צריך למלא מה השירות שאתה נותן');
 
     data.qualified = qualifies(data);
 
