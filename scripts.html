@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>איך כותבים תסריט שאי אפשר לגלול מעליו</title>
+<meta name="description" content="מדריך קצר, 3 צעדים: מהסיפור שלכם לתסריט מוכן לצילום. בלי עריכה מסובכת, תוך עשר דקות.">
+<meta name="robots" content="index, follow">
+
+<meta property="og:url" content="https://elev8.co.il/scripts">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="איך כותבים תסריט שאי אפשר לגלול מעליו">
+<meta property="og:description" content="מדריך קצר, 3 צעדים: מהסיפור שלכם לתסריט מוכן לצילום. בלי עריכה מסובכת, תוך עשר דקות.">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --ink:#111111;
+    --muted:#6B7280;
+    --blue:#2563EB;
+    --blue-dark:#1D4ED8;
+    --line:#E5E7EB;
+    --wrap:560px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+
+  body{
+    margin:0;
+    background:#FFFFFF;
+    color:var(--ink);
+    font-family:"Heebo",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    font-weight:400;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  section{padding:40px 0}
+  section.hero{padding:56px 0 16px}
+
+  h1,h2,h3,p,ol{margin:0}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
+
+  .rule{height:1px;background:var(--line);border:0;max-width:var(--wrap);margin:0 auto}
+
+  h1{
+    font-weight:800;
+    font-size:clamp(26px, 7vw, 34px);
+    line-height:1.2;
+    letter-spacing:-0.02em;
+    text-wrap:balance;
+  }
+  .subtitle{
+    font-size:16px;
+    color:var(--muted);
+    margin-top:12px;
+  }
+
+  h2{
+    font-weight:800;
+    font-size:clamp(22px, 5.5vw, 26px);
+    line-height:1.3;
+    letter-spacing:-0.01em;
+  }
+
+  /* ---------- צעדים ---------- */
+  .steps{list-style:none;padding:0;margin-top:8px;display:flex;flex-direction:column;gap:14px}
+  .step{border:1px solid var(--line);border-radius:8px;padding:20px}
+  .step-num{font-weight:800;font-size:13px;color:var(--blue)}
+  .step h3{font-weight:800;font-size:17px;line-height:1.4;margin-top:6px}
+  .step p{font-size:15px;line-height:1.65;color:var(--muted);margin-top:8px}
+
+  .step-actions{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+
+  /* ---------- כפתורים ---------- */
+  .cta{
+    display:block;width:100%;max-width:420px;margin:0 auto;
+    background:var(--blue);color:#FFFFFF;font-family:inherit;font-weight:800;
+    font-size:17px;line-height:1.3;text-align:center;text-decoration:none;
+    border:0;border-radius:8px;padding:16px 20px;cursor:pointer;
+    transition:background .15s ease;
+  }
+  .cta:hover{background:var(--blue-dark)}
+
+  .btn-sec{
+    display:block;width:100%;text-align:center;text-decoration:none;
+    background:#FFFFFF;color:var(--ink);font-family:inherit;font-weight:800;
+    font-size:15px;border:1px solid var(--line);border-radius:8px;
+    padding:13px 18px;cursor:pointer;transition:border-color .15s ease;
+  }
+  .btn-sec:hover{border-color:#D1D5DB}
+
+  /* ---------- בלוק הפנייה ---------- */
+  .pitch p{font-size:16px;line-height:1.7;color:var(--muted);margin-top:14px;max-width:480px;margin-inline:auto}
+
+  footer{border-top:1px solid var(--line);padding:32px 0 48px;margin-top:16px}
+  footer p{font-size:14px;color:var(--muted);text-align:center}
+  footer a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+  /* ---------- אישור עוגיות ---------- */
+  .ck-ov{position:fixed;inset:0;background:rgba(17,17,17,.45);z-index:9990;opacity:0;pointer-events:none;transition:opacity .3s}
+  .ck-ov.on{opacity:1;pointer-events:auto}
+  .ck{
+    position:fixed;z-index:9991;left:50%;bottom:16px;transform:translate(-50%,140%);
+    width:min(440px,calc(100% - 32px));background:#FFFFFF;border:1px solid var(--line);
+    border-radius:8px;box-shadow:0 12px 32px rgba(17,17,17,.14);padding:22px;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1);
+  }
+  .ck.on{transform:translate(-50%,0)}
+  .ck.hide{display:none}
+  .ck h2{font-size:17px;font-weight:800;margin:0 0 4px}
+  .ck p{font-size:14px;color:var(--muted);line-height:1.6;margin:0 0 16px;text-align:right}
+  .ck-btns{display:flex;gap:10px;flex-wrap:wrap}
+  .ck-btn{flex:1;min-width:130px;text-align:center;padding:11px;border:1px solid var(--line);border-radius:8px;
+    background:#FFFFFF;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;color:var(--ink);text-decoration:none}
+  .ck-btn.pri{background:var(--blue);border-color:var(--blue);color:#FFFFFF}
+  .ck-btn.pri:hover{background:var(--blue-dark)}
+  .ck-x{position:absolute;top:10px;left:14px;background:none;border:0;font-size:22px;line-height:1;cursor:pointer;color:var(--muted)}
+  @media (prefers-reduced-motion: reduce){ .ck,.ck-ov{transition:none} }
+
+  @media (min-width:640px){
+    section.hero{padding:72px 0 20px}
+    .step{padding:24px}
+  }
+</style>
+<script>
+  // פיקסל Meta - אותו פיקסל שכבר מותקן ב-/miror, לא פיקסל חדש.
+  // נטען רק אחרי הסכמה לעוגיות (cookieConsent === 'all')
+  var META_PIXEL_ID = '1061473126906613';
+  var metaPixelLoaded = false;
+  function loadMetaPixel(){
+    if (metaPixelLoaded || typeof fbq !== 'undefined') { metaPixelLoaded = true; return; }
+    metaPixelLoaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+  try {
+    if (localStorage.getItem('cookieConsent') === 'all') loadMetaPixel();
+  } catch (e) {}
+</script>
+</head>
+<body>
+
+<main>
+
+  <section class="hero center">
+    <div class="wrap">
+      <h1>איך הופכים סיפור לתסריט שאי אפשר לגלול מעליו</h1>
+      <p class="subtitle">3 צעדים, עשר דקות, ואתם מצלמים</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <ol class="steps">
+
+        <li class="step">
+          <p class="step-num">צעד 1</p>
+          <h3>כתבו את הסיפור</h3>
+          <p>כתבו את הסיפור או הרעיון לתוכן. כמה משפטים, בלי לעבד.</p>
+        </li>
+
+        <li class="step">
+          <p class="step-num">צעד 2</p>
+          <h3>תנו למדריך לעבוד</h3>
+          <p>העלו את המדריך ל-Claude או הדביקו אותו בצ'אט חדש, וכתבו מתחתיו את הסיפור.</p>
+          <div class="step-actions">
+            <a class="btn-sec" id="downloadBtn" href="scripts-assets/unskippable-scripts-guide.md" download>הורידו את המדריך</a>
+            <button class="btn-sec" id="copyBtn" type="button">העתיקו את הפרומפט</button>
+          </div>
+        </li>
+
+        <li class="step">
+          <p class="step-num">צעד 3</p>
+          <h3>צלמו</h3>
+          <p>צלמו את התסריט. תקראו אותו בקול לפני הצילום, ומה שנשמע מסורבל בפה - תבקשו לפשט.</p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section class="pitch center">
+    <div class="wrap">
+      <h2>רוצים שאני אעבוד איתכם על המודעות?</h2>
+      <p>אני יושב איתכם על הקלטות שיחות המכירה שלכם, מוציא מהן את ההתנגדויות שחוזרות על עצמן, ובונה מהן מודעות. כל התנגדות נענית פעם אחת מול כולם, ושיחת המכירה נהיית קלה יותר.</p>
+      <a class="cta" id="mirrorCta" href="https://elev8.co.il/miror?utm_source=elev8-site&utm_medium=free-guide&utm_campaign=script-guide&utm_content=bottom-cta" style="margin-top:24px">בואו נדבר על זה</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Elev8 · כל הזכויות שמורות · <a href="accessibility.html">הצהרת נגישות</a> · <a href="privacy.html">מדיניות פרטיות</a> · <a href="#" id="ckSettings">הגדרות קוקיז</a></p>
+  </div>
+</footer>
+
+<div class="ck-ov" id="ckOv"></div>
+<div class="ck hide" id="ck" role="dialog" aria-modal="true" aria-labelledby="ckTitle">
+  <button class="ck-x" id="ckX" aria-label="סגירה">&times;</button>
+  <h2 id="ckTitle">יש אצלנו עוגיות!</h2>
+  <p>באתר נעשה שימוש בעוגיות כדי לשפר את החוויה ולנתח את התנועה. אפשר לשנות את זה בכל רגע דרך "הגדרות קוקיז" בפוטר.</p>
+  <div class="ck-btns">
+    <button class="ck-btn pri" id="ckOk">אישור וסגירה</button>
+    <a class="ck-btn" href="privacy.html" target="_blank" rel="noopener">למידע נוסף</a>
+  </div>
+</div>
+
+<script src="accessibility-widget.js" defer></script>
+
+<script>
+  /* ---------- UTM: מעבירים ?src= הנכנס הלאה בתור utm_term בקישור ל-/miror ---------- */
+  var mirrorCta = document.getElementById('mirrorCta');
+  (function () {
+    var src = new URLSearchParams(window.location.search).get('src');
+    if (src) {
+      var url = new URL(mirrorCta.href);
+      url.searchParams.set('utm_term', src);
+      mirrorCta.href = url.toString();
+    }
+  })();
+  mirrorCta.addEventListener('click', function () {
+    if (typeof fbq !== 'undefined') fbq('trackCustom', 'ClickMirrorCTA', { content_name: 'scripts-guide-bottom-cta' });
+  });
+
+  /* ---------- הורדת המדריך ---------- */
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    if (typeof fbq !== 'undefined') fbq('trackCustom', 'DownloadGuide', { content_name: 'unskippable-scripts-guide' });
+  });
+
+  /* ---------- העתקת הפרומפט ---------- */
+  var PROMPT_TEXT = 'השתמש במדריך המצורף כדי לכתוב לי תסריט לסרטון קצר של 45-60 שניות, בעברית מדוברת של ישראלי. הסיפור או הרעיון שלי: [הדביקו כאן]';
+  var copyBtn = document.getElementById('copyBtn');
+  var copyBtnOriginal = copyBtn.textContent;
+  var copyResetTimer = null;
+
+  function showCopied() {
+    clearTimeout(copyResetTimer);
+    copyBtn.textContent = 'הועתק';
+    copyResetTimer = setTimeout(function () { copyBtn.textContent = copyBtnOriginal; }, 1500);
+  }
+
+  copyBtn.addEventListener('click', function () {
+    function done() { showCopied(); }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(PROMPT_TEXT).then(done).catch(function () { fallbackCopy(); });
+    } else {
+      fallbackCopy();
+    }
+    function fallbackCopy() {
+      var ta = document.createElement('textarea');
+      ta.value = PROMPT_TEXT;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  });
+
+  /* ---------- עוגיות ---------- */
+  var ck = document.getElementById('ck'), ckOv = document.getElementById('ckOv');
+  function openCk(){ ck.classList.remove('hide'); requestAnimationFrame(function(){ ck.classList.add('on'); ckOv.classList.add('on'); }); }
+  function closeCk(){ ck.classList.remove('on'); ckOv.classList.remove('on'); setTimeout(function(){ ck.classList.add('hide'); }, 400); }
+  if (!localStorage.getItem('cookieConsent')) setTimeout(openCk, 900);
+  document.getElementById('ckOk').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'all'); loadMetaPixel(); closeCk(); });
+  document.getElementById('ckX').addEventListener('click', function(){ localStorage.setItem('cookieConsent', 'essential'); closeCk(); });
+  document.getElementById('ckSettings').addEventListener('click', function (e) { e.preventDefault(); openCk(); });
+</script>
+
+</body>
+</html>
