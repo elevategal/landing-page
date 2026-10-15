@@ -49,7 +49,7 @@ exports.handler = async (event) => {
 
   try {
     const body = JSON.parse(event.body || '{}');
-    const { milestone, sessionId, eventId, utmSource, utmMedium, utmCampaign, utmContent, pageUrl } = body;
+    const { milestone, sessionId, eventId, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, pageUrl } = body;
 
     const validMilestones = [0, 25, 50, 75, 100];
     const pct = Number(milestone);
@@ -96,6 +96,7 @@ exports.handler = async (event) => {
       'UTM Medium': utmMedium || '',
       'UTM Campaign': utmCampaign || 'mirror',
       'UTM Content': utmContent || '',
+      'UTM Term': utmTerm || '',
       'Page URL': pageUrl || ''
     };
 

@@ -480,6 +480,7 @@
       utmMedium: param('utm_medium'),
       utmCampaign: param('utm_campaign') || 'mirror',
       utmContent: param('utm_content'),
+      utmTerm: param('utm_term'),
       fbp: cookie('_fbp'),
       fbc: cookie('_fbc'),
       pageUrl: window.location.href
@@ -604,6 +605,7 @@
       utmMedium: param('utm_medium'),
       utmCampaign: param('utm_campaign') || 'mirror',
       utmContent: param('utm_content'),
+      utmTerm: param('utm_term'),
       fbp: cookie('_fbp'),
       fbc: cookie('_fbc'),
       eventId: 'mirror-' + Date.now() + '-' + Math.floor(Math.random() * 1e6),
